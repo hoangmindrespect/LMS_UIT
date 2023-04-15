@@ -26,8 +26,6 @@ E:\C++\LibraryManagementSystem\LibraryManagementSystem\bin\Debug\Microsoft.Xaml.
 E:\C++\LibraryManagementSystem\LibraryManagementSystem\bin\Debug\Microsoft.Xaml.Behaviors.xml
 E:\C++\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\LibraryManagementSystem.csproj.CopyComplete
 E:\C++\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\GeneratedInternalTypeHelper.g.cs
-E:\C++\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\View\Login.g.cs
-E:\C++\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\View\Login.baml
 E:\C++\LibraryManagementSystem\LibraryManagementSystem\bin\Debug\EntityFramework.dll
 E:\C++\LibraryManagementSystem\LibraryManagementSystem\bin\Debug\EntityFramework.SqlServer.dll
 E:\C++\LibraryManagementSystem\LibraryManagementSystem\bin\Debug\Haley.Abstractions.dll
@@ -77,3 +75,17 @@ E:\C++\LibraryManagementSystem\LibraryManagementSystem\bin\Debug\System.Threadin
 E:\C++\LibraryManagementSystem\LibraryManagementSystem\bin\Debug\System.ValueTuple.xml
 E:\C++\LibraryManagementSystem\LibraryManagementSystem\bin\Debug\System.Windows.Interactivity.xml
 E:\C++\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\LibraryManagementSystem.exe.config
+E:\C++\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\View\Login\loginpage.g.cs
+E:\C++\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\View\Login\loginwindow.g.cs
+E:\C++\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\View\Login\loginpage.baml
+E:\C++\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\View\Login\loginwindow.baml
+E:\C++\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\View\Login\ForgotPasswordPage.g.cs
+E:\C++\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\View\Login\ForgotPasswordPage.baml
+E:\C++\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\View\Login\VertificationPage.g.cs
+E:\C++\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\View\Login\VertificationPage.baml
+E:\C++\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\View\Login\CreateNewPass.g.cs
+E:\C++\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\View\Login\CreateNewPass.baml
+E:\C++\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\View\MessageBoxCus\MessageBoxLMS.g.cs
+E:\C++\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\View\MessageBoxCus\MessageBoxLMS.baml
+E:\C++\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\View\Login\RegisterWindow.g.cs
+E:\C++\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\View\Login\RegisterWindow.baml

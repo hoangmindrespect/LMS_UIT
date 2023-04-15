@@ -1,0 +1,106 @@
+﻿<Window x:Class="LibraryManagementSystem.View.Login.loginwindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LibraryManagementSystem.View.Login"
+        mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i = "http://schemas.microsoft.com/expression/2010/interactivity"
+        DataContext="{StaticResource LoginRegisVM}"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Normal"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Icon="/Resource/LMS.ico"
+        Title="LMS" Height="550" Width="900">
+    <Window.Clip>
+        <RectangleGeometry Rect="0,0,900,550" RadiusX="5" RadiusY="5" x:Name="boGoc">
+        </RectangleGeometry>
+    </Window.Clip>
+    <Border CornerRadius="20" Margin="2 2 2 2">
+        <Grid>
+            <Image 
+                   Source="/Resource/loginbackground.png" 
+                   Stretch="Fill"
+                   />
+            
+            
+            
+            <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Right"
+                            Grid.Row="0">
+
+                <Button     Click="btnMinimize"
+                            ToolBar.OverflowMode="AsNeeded"
+                            Margin="0,0,5,0"
+                            BorderThickness="0"
+                            Background="White"
+                            Foreground="Black"
+                            BorderBrush="Transparent"
+                            MouseEnter="btnMinimizeMouseEnter"
+                            MouseLeave="btnMinimizeMouseLeave">
+                    <materialDesign:PackIcon Kind="WindowMinimize" />
+                </Button>
+
+                <Button     Click="btnClose"
+                            ToolBar.OverflowMode="AsNeeded"
+                            Background="White"
+                            Foreground="Black"
+                            BorderBrush="Transparent"
+                            MouseEnter="btnCloseMouseEnter"
+                            MouseLeave="btnCloseMouseLeave"
+                            materialDesign:ButtonAssist.CornerRadius="0,10,0,0">
+                    <materialDesign:PackIcon Kind="WindowClose"
+                                             Padding="0" />
+                </Button>
+            </StackPanel>
+            <materialDesign:Card Margin="333,78,320,78"
+                                 Grid.Row="0"
+                                 Background="Transparent"
+                                 BorderBrush="Black"
+                                 BorderThickness="10"
+                                 x:Name="card"
+                                 UniformCornerRadius="8">
+                <Frame x:Name="login_frame"
+                       NavigationUIVisibility="Hidden"/>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Loaded">
+                        <i:InvokeCommandAction Command="{Binding LoadLoginPage}"
+                                               CommandParameter="{Binding ElementName=login_frame}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </materialDesign:Card>
+
+            <!--this make the screen become blur-->
+            <materialDesign:Card Visibility="Hidden"
+                                 Grid.Row="0"
+                                 x:Name="blur_card"
+                                 Background="#0000"
+                                 BorderBrush="Black"
+                                 BorderThickness="10"
+                                 UniformCornerRadius="8">
+                <Grid>
+                    <Rectangle Fill="#FFF" Opacity="0.34">
+                        <Rectangle.Effect>
+                            <BlurEffect Radius="5"/>
+                        </Rectangle.Effect>
+                    </Rectangle>
+                    <!-- Nội dung của Card -->
+                </Grid>
+
+            </materialDesign:Card>
+            
+            
+        </Grid>
+    </Border>
+</Window>
+

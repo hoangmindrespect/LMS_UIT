@@ -94,6 +94,7 @@
       <HintPath>..\packages\System.Collections.Immutable.1.7.1\lib\net461\System.Collections.Immutable.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing.Common, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Drawing.Common.6.0.0\lib\net461\System.Drawing.Common.dll</HintPath>
@@ -153,11 +154,31 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DTOs\BookDTO.cs" />
+    <Compile Include="Utils\ConverterValue\BoolValueConverter.cs" />
     <Compile Include="Validtations\NotNullValidation.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\LoginRegisViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="View\Login.xaml.cs">
-      <DependentUpon>Login.xaml</DependentUpon>
+    <Compile Include="View\Login\CreateNewPass.xaml.cs">
+      <DependentUpon>CreateNewPass.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Login\ForgotPasswordPage.xaml.cs">
+      <DependentUpon>ForgotPasswordPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Login\loginpage.xaml.cs">
+      <DependentUpon>loginpage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Login\loginwindow.xaml.cs">
+      <DependentUpon>loginwindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Login\RegisterWindow.xaml.cs">
+      <DependentUpon>RegisterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Login\VertificationPage.xaml.cs">
+      <DependentUpon>VertificationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MessageBoxCus\MessageBoxLMS.xaml.cs">
+      <DependentUpon>MessageBoxLMS.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -175,7 +196,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Login.xaml">
+    <Page Include="View\Login\CreateNewPass.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Login\ForgotPasswordPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Login\loginpage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Login\loginwindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Login\RegisterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Login\VertificationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MessageBoxCus\MessageBoxLMS.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -209,11 +254,27 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\DataProvider\" />
-    <Folder Include="Resource\" />
     <Folder Include="UserControl\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Notes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\LMS.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\loginbackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\LMS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\AcceptBackground.png" />
+    <Resource Include="Resource\ErrorBackground.png" />
+    <Resource Include="Resource\ExitBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\WaittingBackground.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.8.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.8.0\build\MaterialDesignThemes.targets')" />
