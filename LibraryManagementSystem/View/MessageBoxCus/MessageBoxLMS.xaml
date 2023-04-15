@@ -1,0 +1,141 @@
+﻿<Window x:Class="LibraryManagementSystem.View.MessageBoxCus.MessageBoxLMS"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LibraryManagementSystem.View.MessageBoxCus"
+        mc:Ignorable="d"
+        Title="MessageBoxLMS" Height="200" Width="350"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent">
+    <Border CornerRadius="5"
+            BorderBrush="Black"
+            BorderThickness="1.2">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="8*" />
+                <RowDefinition Height="4*" />
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0"
+                    x:Name="BackGroundTittle"
+                    Grid.ColumnSpan="2"
+                    Background="#8B7355"
+                    CornerRadius="5,5,0,0">
+                <materialDesign:Card 
+                                     Background="Transparent"
+                                     Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center">
+                        <Image Source="/Resource/LMS.png"
+                               Width="25"
+                               Height="25"
+                               Margin="5,0,0,0"/>
+                        <TextBlock x:Name="txtTitle"
+                                   Height="20"
+                                   Margin="5,0,0,0"
+                                   TextAlignment="Center"
+                                   FontSize="16">Title</TextBlock>
+                    </StackPanel>
+                </materialDesign:Card>
+            </Border>
+
+            <StackPanel  Grid.Row="0"
+                         HorizontalAlignment="Right"
+                         Margin="0,0,0,0"
+                         VerticalAlignment="Top">
+                <Button Width="28" Height="28"
+                        Background="Transparent"
+                        Name="btnClose"
+                        MouseEnter="btnClose_MouseEnter"
+                        MouseLeave="btnClose_MouseLeave"
+                        Click="btnClose_Click"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                        Style="{StaticResource MaterialDesignIconButton}"
+                        ToolTip="MaterialDesignIconButton">
+                    <materialDesign:PackIcon
+                        Kind="CloseThick" 
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Foreground="#ffffff"
+                        BorderBrush="Transparent"
+                        />
+                </Button>
+            </StackPanel>
+
+            <Grid Grid.Row="1">
+                <materialDesign:TransitioningContent VerticalAlignment="Center"
+                                                     MaxHeight="80">
+                    <materialDesign:TransitioningContent.OpeningEffects>
+                        <materialDesign:TransitionEffect Kind="FadeIn" />
+                        <materialDesign:TransitionEffect Kind="SlideInFromBottom" />
+                    </materialDesign:TransitioningContent.OpeningEffects>
+                    <TextBlock x:Name="txtMessage"
+                               TextWrapping="Wrap"
+                               Width="250"
+                               MaxHeight="80"
+                               Text="Hệ thống bị lỗi "
+                               VerticalAlignment="Center"
+                               TextAlignment="Center"
+                               FontSize="20" />
+                </materialDesign:TransitioningContent>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="btnOk"
+                                Click="btnOk_Click"
+                                Grid.Column="1"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                Background="#8B795E"
+                                BorderBrush="Transparent"
+                                Margin="20 2 20 0"
+                                Width="95"
+                                Content="Xác nhận"
+                                />
+                <Button x:Name="btnCancel"
+                                Background="#a6a6a6"
+                                Click="btnCancel_Click"
+                                Grid.Column="2"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                BorderBrush="Black"
+                                Margin="20 2 20 0"
+                                Width="75"
+                                Content="Đóng"
+                                />
+                <Button x:Name="btnYes"
+                                Click="btnYes_Click"
+                                Background="#8B795E"
+                                Grid.Column="1"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                BorderBrush="Transparent"
+                                Margin="20 2 20 0"
+                                Width="80"
+                                Content="Đồng ý"
+                               />
+                <Button x:Name="btnNo"
+                                Background="#a6a6a6"
+                                Click="btnNo_Click"
+                                Grid.Column="2"
+                                Style="{StaticResource MaterialDesignRaisedButton}"
+                                BorderBrush="Black"
+                                Margin="20 2 20 0"
+                                Width="80"
+                                Content="Không"/>
+            </Grid>
+        </Grid>
+        <Border.Background>
+            <ImageBrush x:Name="BackgroundBorder" Stretch="None"/>
+        </Border.Background>
+    </Border>
+</Window>
