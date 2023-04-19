@@ -131,6 +131,7 @@ namespace LibraryManagementSystem.ViewModel
         public ICommand LoadLoginPage { get; set; }
         public ICommand LoadForgotPassPage { get; set; }
         public ICommand BackLoginPage { get; set; }
+        public ICommand BackLoginPageFromRegis {  get; set; }
         public ICommand SendCode { get; set; }
         public ICommand ConfirmVerCode { get; set; }
         public ICommand CreatePassWord { get; set; }
@@ -155,6 +156,7 @@ namespace LibraryManagementSystem.ViewModel
                 p.Content = new loginpage();
                 login_frame = p;
                 blur_card = loginwindow.a;
+                blur_card.Visibility = Visibility.Hidden;
             });
 
             LoadForgotPassPage = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -166,6 +168,13 @@ namespace LibraryManagementSystem.ViewModel
             BackLoginPage = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 login_frame.Content = new loginpage();
+            });
+
+            BackLoginPageFromRegis = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                p.Close();
+                blur_card.Visibility = Visibility.Hidden;
+                
             });
 
             SendCode = new RelayCommand<Frame>((p) => { return true; }, (p) =>
@@ -233,8 +242,7 @@ namespace LibraryManagementSystem.ViewModel
 
             LoginLMS = new RelayCommand<Label>((p) => { return true; }, (p) =>
             {
-                MessageBoxLMS msb = new MessageBoxLMS("Thông báo", "Thay đổi mật khẩu thành công!", MessageType.Accept, MessageButtons.OK);
-                msb.ShowDialog();
+                
             });
 
             RegisterAccount = new RelayCommand<object>((p) => { return true; }, (p) =>
