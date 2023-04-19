@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="LMSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ACCOUNTs" EntityType="LMSModel.ACCOUNT" />
+  </EntityContainer>
+  <EntityType Name="ACCOUNT">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="USERNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FULLNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EMAILADDRESS" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="USERPASS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

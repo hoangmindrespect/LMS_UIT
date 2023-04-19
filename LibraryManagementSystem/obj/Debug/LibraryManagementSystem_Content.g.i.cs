@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resource/waittingbackground.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("models/dataprovider/librarymanagementsystemmodels.context.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("models/dataprovider/librarymanagementsystemmodels.tt")]
 
 

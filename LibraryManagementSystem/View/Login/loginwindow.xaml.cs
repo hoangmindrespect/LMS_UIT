@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,7 +22,19 @@ namespace LibraryManagementSystem.View.Login
     public partial class loginwindow : Window
     {
         public static Card a;
-
+        private static loginwindow _instance;
+        public static loginwindow Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new loginwindow();
+                }
+                return _instance;
+            }
+            private set => _instance = value;
+        }
         public loginwindow()
         {
             InitializeComponent();
@@ -66,5 +79,9 @@ namespace LibraryManagementSystem.View.Login
             this.Close();
         }
 
+        public static loginwindow GetIns()
+        {
+            return Instance;
+        }
     }
 }

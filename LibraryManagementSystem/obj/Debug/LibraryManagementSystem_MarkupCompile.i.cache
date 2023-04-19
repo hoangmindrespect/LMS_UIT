@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-E:\C++\LibraryManagementSystem\LibraryManagementSystem\obj\Debug\
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\
 LibraryManagementSystem
 none
 false
 DEBUG;TRACE
-E:\C++\LibraryManagementSystem\LibraryManagementSystem\App.xaml
-9-1802078580
-
-19-590460012
-49-192342348
-MainWindow.xaml;ResourceXAML\MainResource.xaml;View\Login\CreateNewPass.xaml;View\Login\ForgotPasswordPage.xaml;View\Login\loginpage.xaml;View\Login\loginwindow.xaml;View\Login\RegisterWindow.xaml;View\Login\VertificationPage.xaml;View\MessageBoxCus\MessageBoxLMS.xaml;
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\App.xaml
+10-1076907965
+2-1406958253
+25-1878217459
+50234442567
+MainWindow.xaml;ResourceXAML\MainResource.xaml;View\Login\CreateNewPass.xaml;View\Login\ForgotPasswordPage.xaml;View\Login\loginpage.xaml;View\Login\loginwindow.xaml;View\Login\RegisterWindow.xaml;View\Login\VertificationPage.xaml;View\MainWindow\MainWindow.xaml;View\MessageBoxCus\MessageBoxLMS.xaml;
 
 True
 

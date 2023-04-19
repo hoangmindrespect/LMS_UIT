@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows;
 using MaterialDesignThemes.Wpf;
 using System.Text.RegularExpressions;
+using LibraryManagementSystem.Models.DataProvider;
+using LibraryManagementSystem.DTOs;
 
 namespace LibraryManagementSystem.ViewModel
 {
@@ -219,7 +221,7 @@ namespace LibraryManagementSystem.ViewModel
 
             CreatePassWord = new RelayCommand<Label>((p) => { return true; }, (p) =>
             {
-                if (NewPass == null || NewPass.Length == 0 || ConfirmNewPass == null || ConfirmNewPass.Length == 0 || NewPass != ConfirmNewPass)
+                if (string.IsNullOrEmpty(NewPass) || string.IsNullOrEmpty(ConfirmNewPass) || NewPass != ConfirmNewPass)
                 {
                     p.Visibility = Visibility.Visible;
                     return;
@@ -228,10 +230,26 @@ namespace LibraryManagementSystem.ViewModel
                 {
                     p.Visibility = Visibility.Hidden;
 
+                    //write new password into database
+                    using (var context = new LMSEntities())
+                    {
+                        foreach(var acc in context.ACCOUNTs)
+                        {
+                            if(acc.EMAILADDRESS.Equals(Email))
+                                acc.USERPASS = ConfirmNewPass;
+                        }
+                        context.SaveChanges();
+                    }    
+                    
                     MessageBoxLMS msb = new MessageBoxLMS("Thông báo", "Thay đổi mật khẩu thành công!", MessageType.Accept, MessageButtons.OK);
                     msb.ShowDialog();
                     login_frame.Content = new loginpage();
                 }
+                else
+                {
+                    MessageBoxLMS msb = new MessageBoxLMS("Lỗi", "Mất kết nối cơ sở dữ liệu", MessageType.Error, MessageButtons.OK);
+                    msb.ShowDialog();
+                }    
 
             });
 
@@ -242,7 +260,33 @@ namespace LibraryManagementSystem.ViewModel
 
             LoginLMS = new RelayCommand<Label>((p) => { return true; }, (p) =>
             {
-                
+                if(string.IsNullOrEmpty(this.Password) || string.IsNullOrEmpty(UserName))  
+                {
+                    p.Visibility= Visibility.Visible;
+                }
+                else
+                {
+                    LMSEntities context = new LMSEntities();
+                    string pas = (from s in context.ACCOUNTs where s.USERNAME == UserName select s.USERPASS).FirstOrDefault();
+                    if (Password == pas)
+                    {
+                        MainWindow w = new MainWindow();
+                        w.Show();
+
+                        loginwindow login = Application.Current.Windows.OfType<loginwindow>().FirstOrDefault();
+                        login.Close();
+                        
+                    }
+                    else if (Password != pas)
+                    { 
+                        p.Visibility = Visibility.Visible; 
+                    }
+                    else
+                    {
+                        MessageBoxLMS msb = new MessageBoxLMS("Lỗi", "Mất kết nối cơ sở dữ liệu!", MessageType.Error, MessageButtons.OK);
+                        msb.ShowDialog();
+                    }
+                }
             });
 
             RegisterAccount = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -274,6 +318,25 @@ namespace LibraryManagementSystem.ViewModel
                     ms.ShowDialog();
                     return;
                 }
+                else
+                {
+                    using (var context = new LMSEntities())
+                    {
+                        ACCOUNT a = new ACCOUNT();
+                        a.USERNAME = UsernameReg;
+                        a.USERPASS = PasswordReg;
+                        a.EMAILADDRESS = EmailReg;
+                        a.FULLNAME = FullNameReg;
+                        context.ACCOUNTs.Add(a);
+                        context.SaveChanges();
+
+                        RegisterWindow r = Application.Current.Windows.OfType<RegisterWindow>().FirstOrDefault();
+                        r.Close();
+
+                        MessageBoxLMS ms = new MessageBoxLMS("Thông báo", "Đăng ký thành công", MessageType.Accept, MessageButtons.OK);
+                        ms.ShowDialog();
+                    }    
+                }    
                 
             });
 
@@ -311,5 +374,6 @@ namespace LibraryManagementSystem.ViewModel
 
             smtpClient.Send(mailMessage);
         }
+        
     }
 }

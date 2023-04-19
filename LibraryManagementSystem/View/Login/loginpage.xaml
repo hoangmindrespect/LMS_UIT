@@ -39,7 +39,7 @@
                         SelectionBrush="#8B4513"
                         Width="180"
                         Name="txbUsername"
-                        Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding UserName}"
                         HorizontalAlignment="Center"
                         FontStyle="Normal"
                         CaretBrush="#8B4513"
@@ -71,7 +71,7 @@
                     </materialDesign:HintAssist.Hint>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="PasswordChanged">
-                            <i:InvokeCommandAction Command="{Binding NewPasswordChangedLogin}"
+                            <i:InvokeCommandAction Command="{Binding PasswordChangedLogin}"
                                                    CommandParameter="{Binding ElementName=pwbLogin}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
@@ -81,14 +81,14 @@
 
         <Grid Grid.Row="3">
 
-            <Label Margin="80 -225 0 0"
+            <Label Margin="50 -225 0 0"
                        x:Name="Error"
                        Height="28"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        FontSize="10"
                        Visibility="Hidden"
-                       Content="*Không được bỏ trống*"
+                       Content="*Sai tài khoản hoặc mật khẩu*"
                        Foreground="Red" />
 
             <Button Content="Quên mật khẩu?"
