@@ -181,5 +181,7 @@ C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\LibraryManageme
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\LibraryManagementSystem.exe
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\LibraryManagementSystem.pdb
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\LibraryManagementSystem_Content.g.cs
-C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\MainWindow.g.cs
-C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\MainWindow.baml
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\MainWindowSystem.g.cs
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\MainWindowSystem.baml
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\ControlBar\UserControl1.g.cs
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\ControlBar\UserControl1.baml

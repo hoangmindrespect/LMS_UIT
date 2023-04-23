@@ -154,6 +154,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ControlBar\UserControl1.xaml.cs">
+      <DependentUpon>UserControl1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DTOs\BookDTO.cs" />
     <Compile Include="DTOs\UserDTO.cs" />
     <Compile Include="Models\DataProvider\ACCOUNT.cs">
@@ -177,6 +180,7 @@
     <Compile Include="Utils\ConverterValue\BoolValueConverter.cs" />
     <Compile Include="Validtations\NotNullValidation.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\ControlBarViewModel.cs" />
     <Compile Include="ViewModel\LoginRegisViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\Login\CreateNewPass.xaml.cs">
@@ -197,12 +201,16 @@
     <Compile Include="View\Login\VertificationPage.xaml.cs">
       <DependentUpon>VertificationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MainWindow\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="View\MainWindow\MainWindowSystem.xaml.cs">
+      <DependentUpon>MainWindowSystem.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MessageBoxCus\MessageBoxLMS.xaml.cs">
       <DependentUpon>MessageBoxLMS.xaml</DependentUpon>
     </Compile>
+    <Page Include="ControlBar\UserControl1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -243,7 +251,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainWindow\MainWindow.xaml">
+    <Page Include="View\MainWindow\MainWindowSystem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -320,6 +328,7 @@
       <DependentUpon>LibraryManagementSystemModels.edmx</DependentUpon>
       <LastGenOutput>LibraryManagementSystemModels.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resource\main.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

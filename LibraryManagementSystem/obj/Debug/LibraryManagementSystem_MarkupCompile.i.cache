@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\App.xaml
-10-1076907965
+11-897204609
 2-1406958253
-25-1878217459
+27-479457043
 50234442567
-MainWindow.xaml;ResourceXAML\MainResource.xaml;View\Login\CreateNewPass.xaml;View\Login\ForgotPasswordPage.xaml;View\Login\loginpage.xaml;View\Login\loginwindow.xaml;View\Login\RegisterWindow.xaml;View\Login\VertificationPage.xaml;View\MainWindow\MainWindow.xaml;View\MessageBoxCus\MessageBoxLMS.xaml;
+ControlBar\UserControl1.xaml;MainWindow.xaml;ResourceXAML\MainResource.xaml;View\Login\CreateNewPass.xaml;View\Login\ForgotPasswordPage.xaml;View\Login\loginpage.xaml;View\Login\loginwindow.xaml;View\Login\RegisterWindow.xaml;View\Login\VertificationPage.xaml;View\MainWindow\MainWindowSystem.xaml;View\MessageBoxCus\MessageBoxLMS.xaml;
 
-True
+False
 

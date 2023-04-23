@@ -13,6 +13,55 @@
                 <ResourceDictionary Source="/ResourceXAML/MainResource.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
 
+            <Style x:Key="menuButton" TargetType="Button">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Foreground" Value="#FFF3E5" />
+                <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                <Setter Property="Height" Value="35" />
+                <Setter Property="Margin" Value="15 3" />
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="Template" >
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="7">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#968A7C" />
+                        <Setter Property="Foreground" Value="#ffffff" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="topButton" TargetType="Button">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Foreground" Value="#6E7783" />
+                <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                <Setter Property="Height" Value="30" />
+                <Setter Property="Width" Value="30" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="Template" >
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="50">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#dcdcdc" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

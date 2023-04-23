@@ -1,5 +1,6 @@
 ﻿
 FC:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\App.xaml;;
+FC:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\ControlBar\UserControl1.xaml;;
 FC:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\MainWindow.xaml;;
 FC:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\ResourceXAML\MainResource.xaml;;
 FC:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\View\Login\CreateNewPass.xaml;;
@@ -8,6 +9,6 @@ FC:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\View\Login\loginpage.xam
 FC:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\View\Login\loginwindow.xaml;;
 FC:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\View\Login\RegisterWindow.xaml;;
 FC:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\View\Login\VertificationPage.xaml;;
+FC:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\View\MainWindow\MainWindowSystem.xaml;;
 FC:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\View\MessageBoxCus\MessageBoxLMS.xaml;;
-FC:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\View\MainWindow\MainWindow.xaml;;
 

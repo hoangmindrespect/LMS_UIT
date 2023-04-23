@@ -36,5 +36,10 @@ namespace LibraryManagementSystem.View.Login
             if (Error != null)
                 Error.Visibility = Visibility.Hidden;
         }
+
+        private void btnLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
     }
 }

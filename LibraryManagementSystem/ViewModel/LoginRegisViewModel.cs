@@ -14,6 +14,8 @@ using MaterialDesignThemes.Wpf;
 using System.Text.RegularExpressions;
 using LibraryManagementSystem.Models.DataProvider;
 using LibraryManagementSystem.DTOs;
+using LibraryManagementSystem.View.MainWindow;
+using System.ComponentModel;
 
 namespace LibraryManagementSystem.ViewModel
 {
@@ -127,6 +129,19 @@ namespace LibraryManagementSystem.ViewModel
             set { _usernamereg = value; OnPropertyChanged(); }
         }
 
+        private Visibility _status;
+        public Visibility Status
+        {
+            get { return _status; }
+            set { _status = value; OnPropertyChanged(nameof(Status));}
+        }
+
+        private bool _IsSaving;
+        public bool IsSaving
+        {
+            get { return _IsSaving; }
+            set { _IsSaving = value; OnPropertyChanged(); }
+        }
         #endregion
 
         #region ICommand
@@ -153,6 +168,9 @@ namespace LibraryManagementSystem.ViewModel
         #endregion
         public LoginRegisViewModel()
         {
+
+            ///Status = Visibility.Hidden;
+
             LoadLoginPage = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
                 p.Content = new loginpage();
@@ -260,7 +278,9 @@ namespace LibraryManagementSystem.ViewModel
 
             LoginLMS = new RelayCommand<Label>((p) => { return true; }, (p) =>
             {
-                if(string.IsNullOrEmpty(this.Password) || string.IsNullOrEmpty(UserName))  
+                IsSaving =  true;
+
+                if (string.IsNullOrEmpty(this.Password) || string.IsNullOrEmpty(UserName))  
                 {
                     p.Visibility= Visibility.Visible;
                 }
@@ -270,8 +290,10 @@ namespace LibraryManagementSystem.ViewModel
                     string pas = (from s in context.ACCOUNTs where s.USERNAME == UserName select s.USERPASS).FirstOrDefault();
                     if (Password == pas)
                     {
-                        MainWindow w = new MainWindow();
+
+                        MainWindowSystem w = new MainWindowSystem();
                         w.Show();
+
 
                         loginwindow login = Application.Current.Windows.OfType<loginwindow>().FirstOrDefault();
                         login.Close();
@@ -286,6 +308,9 @@ namespace LibraryManagementSystem.ViewModel
                         MessageBoxLMS msb = new MessageBoxLMS("Lỗi", "Mất kết nối cơ sở dữ liệu!", MessageType.Error, MessageButtons.OK);
                         msb.ShowDialog();
                     }
+
+                    IsSaving = false;
+
                 }
             });
 

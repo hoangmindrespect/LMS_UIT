@@ -1,4 +1,5 @@
-﻿using MaterialDesignThemes.Wpf;
+﻿using LibraryManagementSystem.ViewModel;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,21 +24,11 @@ namespace LibraryManagementSystem.View.Login
     {
         public static Card a;
         private static loginwindow _instance;
-        public static loginwindow Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new loginwindow();
-                }
-                return _instance;
-            }
-            private set => _instance = value;
-        }
+
         public loginwindow()
         {
             InitializeComponent();
+            DataContext = new LoginRegisViewModel();
             a = blur_card;
         }
 
@@ -79,9 +70,5 @@ namespace LibraryManagementSystem.View.Login
             this.Close();
         }
 
-        public static loginwindow GetIns()
-        {
-            return Instance;
-        }
     }
 }
