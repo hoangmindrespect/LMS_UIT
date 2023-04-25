@@ -129,19 +129,6 @@ namespace LibraryManagementSystem.ViewModel
             set { _usernamereg = value; OnPropertyChanged(); }
         }
 
-        private Visibility _status;
-        public Visibility Status
-        {
-            get { return _status; }
-            set { _status = value; OnPropertyChanged(nameof(Status));}
-        }
-
-        private bool _IsSaving;
-        public bool IsSaving
-        {
-            get { return _IsSaving; }
-            set { _IsSaving = value; OnPropertyChanged(); }
-        }
         #endregion
 
         #region ICommand
@@ -162,39 +149,37 @@ namespace LibraryManagementSystem.ViewModel
         #endregion
 
         #region temVar
-        Frame login_frame;
-        ForgotPasswordPage fgpp;
-        Card blur_card;
+        public ForgotPasswordPage fgpp;
         #endregion
+
         public LoginRegisViewModel()
         {
-
-            ///Status = Visibility.Hidden;
-
             LoadLoginPage = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
                 p.Content = new loginpage();
-                login_frame = p;
-                blur_card = loginwindow.a;
-                blur_card.Visibility = Visibility.Hidden;
             });
 
             LoadForgotPassPage = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 fgpp = new ForgotPasswordPage();
-                login_frame.Content = fgpp;
+                loginwindow login = Application.Current.Windows.OfType<loginwindow>().FirstOrDefault();
+                Frame a = login.FindName("login_frame") as Frame;
+                a.Content = fgpp;
             });
 
             BackLoginPage = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                login_frame.Content = new loginpage();
+                loginwindow login = Application.Current.Windows.OfType<loginwindow>().FirstOrDefault();
+                Frame a = login.FindName("login_frame") as Frame;
+
+                a.Content = new loginpage();
             });
 
             BackLoginPageFromRegis = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                 p.Close();
-                blur_card.Visibility = Visibility.Hidden;
-                
+                loginwindow login = Application.Current.Windows.OfType<loginwindow>().FirstOrDefault();
+                login.blur_card.Visibility = Visibility.Collapsed;                
             });
 
             SendCode = new RelayCommand<Frame>((p) => { return true; }, (p) =>
@@ -223,7 +208,11 @@ namespace LibraryManagementSystem.ViewModel
                 else if (VertificationCode == Authcode.ToString())
                 {
                     p.Visibility = Visibility.Hidden;
-                    login_frame.Content = new CreateNewPass();
+
+                    loginwindow login = Application.Current.Windows.OfType<loginwindow>().FirstOrDefault();
+                    Frame a = login.FindName("login_frame") as Frame;
+
+                    a.Content = new CreateNewPass();
                 }
             });
 
@@ -261,7 +250,11 @@ namespace LibraryManagementSystem.ViewModel
                     
                     MessageBoxLMS msb = new MessageBoxLMS("Thông báo", "Thay đổi mật khẩu thành công!", MessageType.Accept, MessageButtons.OK);
                     msb.ShowDialog();
-                    login_frame.Content = new loginpage();
+
+                    loginwindow login = Application.Current.Windows.OfType<loginwindow>().FirstOrDefault();
+                    Frame a = login.FindName("login_frame") as Frame;
+
+                    a.Content = new loginpage();
                 }
                 else
                 {
@@ -278,7 +271,6 @@ namespace LibraryManagementSystem.ViewModel
 
             LoginLMS = new RelayCommand<Label>((p) => { return true; }, (p) =>
             {
-                IsSaving =  true;
 
                 if (string.IsNullOrEmpty(this.Password) || string.IsNullOrEmpty(UserName))  
                 {
@@ -290,14 +282,15 @@ namespace LibraryManagementSystem.ViewModel
                     string pas = (from s in context.ACCOUNTs where s.USERNAME == UserName select s.USERPASS).FirstOrDefault();
                     if (Password == pas)
                     {
+                        loginwindow login = Application.Current.Windows.OfType<loginwindow>().FirstOrDefault();
 
+                        //login.blur_card.Visibility = Visibility.Visible;
                         MainWindowSystem w = new MainWindowSystem();
                         w.Show();
 
 
-                        loginwindow login = Application.Current.Windows.OfType<loginwindow>().FirstOrDefault();
                         login.Close();
-                        
+                        //login.blur_card.Visibility= Visibility.Collapsed;
                     }
                     else if (Password != pas)
                     { 
@@ -309,18 +302,18 @@ namespace LibraryManagementSystem.ViewModel
                         msb.ShowDialog();
                     }
 
-                    IsSaving = false;
-
                 }
             });
 
             RegisterAccount = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                blur_card.Visibility = Visibility.Visible;
+                loginwindow login = Application.Current.Windows.OfType<loginwindow>().FirstOrDefault();
+
+                login.blur_card.Visibility = Visibility.Visible;
                 RegisterWindow w = new RegisterWindow();
                 w.ShowDialog();
 
-                blur_card.Visibility = Visibility.Hidden;
+                login.blur_card.Visibility = Visibility.Hidden;
             });
 
             RegisterLMS = new RelayCommand<Label>((p) => { return true; }, async (p) =>

@@ -35,12 +35,15 @@
                 <uc:UserControl1 Tag="{Binding Title, ElementName=mainwindow}"/>
             </Grid>
 
+            <!--Nội dung-->
             <Grid Grid.Row="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
+                    
+                    <!--Menu-->
                     <Grid Grid.Column="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="35"/>
@@ -77,6 +80,12 @@
 
                                     <!--Menu Buttons-->
                                     <StackPanel DockPanel.Dock="Top" >
+                                        <Button Style="{StaticResource menuButton}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <materialDesign:PackIcon Kind="Finance" Margin="5 0 0 0"/>
+                                                <TextBlock Text="Statistical" Margin="10 0 0 0" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Button>
                                         <Button Style="{StaticResource menuButton}">
                                             <StackPanel Orientation="Horizontal">
                                                 <materialDesign:PackIcon Kind="BookOpenPageVariant" Margin="5 0 0 0"/>
@@ -130,26 +139,44 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
-                            <RowDefinition Height="30"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
+                        <!--decoline-->
                         <Grid Grid.Row="0">
                             <Separator Background="#4E443A" Height="1" />
                         </Grid>
-
+                        <!--decoline-->
                         <Grid Grid.Row="1" Height="30">
                             <Separator Background="#4E443A" Height="1" VerticalAlignment="Bottom" Margin="0 1 0 0"/>
-
                         </Grid>
 
                         <Grid Grid.Row="2">
                             <Rectangle VerticalAlignment="Stretch" Fill="#4E443A" Width="1" HorizontalAlignment="Left" Margin="0 -1 0 0"/>
                             <Rectangle VerticalAlignment="Stretch" Fill="#4E443A" Width="1" HorizontalAlignment="Left" Margin="31 -1 0 0"/>
-
                         </Grid>
 
                         <Grid Grid.Row="3">
+                            
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="33"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!--card load nội dung của từng chức năng-->
+                            <Grid Grid.Column="1">
+                                <Frame x:Name="mainFrame"
+                                       NavigationUIVisibility="Hidden" Grid.Row="1">
+
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Loaded">
+                                            <i:InvokeCommandAction Command="{Binding LoadStatisticalPageML}"
+                                                       CommandParameter="{Binding ElementName=mainFrame}" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </Frame>
+                            </Grid>
+                            <!--decoline-->
                             <Rectangle VerticalAlignment="Stretch" Fill="#4E443A" Width="1" HorizontalAlignment="Left" Margin="0 -1 0 0"/>
                             <Rectangle VerticalAlignment="Stretch" Fill="#4E443A" Width="1" HorizontalAlignment="Left" Margin="31 -1 0 0"/>
 
@@ -158,7 +185,13 @@
                 </Grid>
             </Grid>
 
-
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Loaded">
+                    <i:InvokeCommandAction Command="{Binding LoadStatisticalFirst}"
+                                           CommandParameter="{Binding ElementName=mainFrame}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            
         </Grid>
     </Border>
 </Window>

@@ -150,7 +150,6 @@ C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\System.ValueTup
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\System.Windows.Interactivity.xml
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\LibraryManagementSystem.csproj.AssemblyReference.cache
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\LibraryManagementSystem.csproj.SuggestedBindingRedirects.cache
-C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\LibraryManagementSystem.exe.config
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\MainWindow.g.cs
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\Login\CreateNewPass.g.cs
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\Login\ForgotPasswordPage.g.cs
@@ -185,3 +184,13 @@ C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\MainWindowSystem.baml
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\ControlBar\UserControl1.g.cs
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\ControlBar\UserControl1.baml
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\Statistical\StatisticalPage.g.cs
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\Statistical\StatisticalPage.baml
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\LiveCharts.dll
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\LiveCharts.Wpf.dll
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\LiveCharts.pdb
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\LiveCharts.xml
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\LiveCharts.Wpf.pdb
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\LiveCharts.Wpf.xml
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\ControlBar\ControlBar__NoneResize.g.cs
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\ControlBar\ControlBar__NoneResize.baml

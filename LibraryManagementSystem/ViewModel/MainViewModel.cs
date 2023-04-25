@@ -13,6 +13,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using LibraryManagementSystem.View.MessageBoxCus;
 using System.Threading;
+using LibraryManagementSystem.View.MainWindow.Statistical;
 
 namespace LibraryManagementSystem.ViewModel
 {
@@ -27,12 +28,19 @@ namespace LibraryManagementSystem.ViewModel
         }
         #endregion
 
+        public ICommand LoadStatisticalFirst { get; set; }
+
         public MainViewModel()
         {
             System.Windows.Threading.DispatcherTimer Timer = new System.Windows.Threading.DispatcherTimer();
             Timer.Tick += new EventHandler(Timer_Click);
             Timer.Interval = new TimeSpan(0, 0, 1);
             Timer.Start();
+
+            LoadStatisticalFirst = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            {
+                p.Content = new StatisticalPage();
+            });
         }
 
         public void Timer_Click(object sender, EventArgs e)

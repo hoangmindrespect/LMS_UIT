@@ -1,0 +1,282 @@
+﻿<Page x:Class="LibraryManagementSystem.View.MainWindow.Statistical.StatisticalPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LibraryManagementSystem.View.MainWindow.Statistical"
+      mc:Ignorable="d" 
+      Name="statistical"
+      DataContext="{StaticResource StatisticalVM}"
+      xmlns:Wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:i = "http://schemas.microsoft.com/expression/2010/interactivity"
+      d:DesignHeight="496" d:DesignWidth="767" SizeChanged="statistical_SizeChanged"
+      Title="StatisticalPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+        <!--Card store revenue-->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--2 comboBox to filter-->
+            <Grid Grid.Column="0">
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox Margin="10 -200 0 0"
+                          Width="107"
+                          Name="filter1"
+                          FontSize="14"
+                          BorderBrush="#604B3A"
+                          Foreground="#604B3A"
+                          Height="auto"
+                          VerticalContentAlignment="Center"
+                          HorizontalContentAlignment="Center"
+                          Padding="5"   
+                          Text="{Binding Year}"
+                          SelectedItem="{Binding Year}"
+                          ItemsSource="{Binding CollectionYear}"
+                          HorizontalAlignment="Left"
+                    materialDesign:TextFieldAssist.UnderlineBrush="#604B3A">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding LoadMonth}"
+                                               CommandParameter="{Binding ElementName=filter1}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+
+                    <ComboBox Margin="10 -200 0 0"
+                          Width="auto"
+                          Height="auto"
+                          Name="filter2"
+                          HorizontalContentAlignment="Center"
+                          VerticalContentAlignment="Center"
+                          BorderBrush="#604B3A"
+                          Foreground="#604B3A"
+                          FontSize="14"
+                          Text= "{Binding Month}"
+                          SelectedItem="{Binding Month}"
+                          ItemsSource="{Binding CollectionMonth}"
+                          materialDesign:TextFieldAssist.UnderlineBrush="#604B3A"
+                          Padding="5"
+                          materialDesign:HintAssist.Hint="Choose month"
+                          HorizontalAlignment="Left">
+                    </ComboBox>
+                </StackPanel>
+                
+                <!--Card for display total income-->
+                <materialDesign:Card 
+                    Height="auto" Foreground="{x:Null}" Width="auto" Margin="10 10 10 10">
+                    <materialDesign:Card.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF7D27FF" Offset="1"/>
+                            <GradientStop Color="#FFBB2086"/>
+                        </LinearGradientBrush>
+                    </materialDesign:Card.Background>
+                    <StackPanel>
+                        <Label x:Name="label"
+                           Content="Total income:" 
+                           HorizontalAlignment="Left" 
+                           Height="auto" 
+                           Margin="10 10 0 0"
+                           VerticalAlignment="Top" 
+                           Width="147" FontSize="14" 
+                           Foreground="#DDF9F9F9"/>
+                        
+                        <Label 
+                            Name="income"
+                            Content="" 
+                            HorizontalAlignment="Left" 
+                            Width="100" 
+                            Height="100" 
+                            Margin="140 -10 0 0">
+                            <Label.Background>
+                                <ImageBrush ImageSource="/Resource/Statistical/income.png" Stretch="Uniform"/>
+                            </Label.Background>
+                        </Label>
+
+                        <Label x:Name="label3"
+                           Content="450 000 000 VNĐ" 
+                           HorizontalAlignment="Left" 
+                           Height="auto"
+                           Margin="10 -95 0 0"
+                           VerticalAlignment="Top" 
+                           Width="auto" FontSize="17" 
+                           Foreground="#DDF9F9F9"/>
+                        
+                        <Border CornerRadius="15"
+                                Width="80"
+                                Height="32"
+                                Name="border1"
+                                Margin="10 -27 0 0"
+                                HorizontalAlignment="Left"
+                                BorderBrush="White"
+                                BorderThickness="1">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon 
+                                    Kind="ArrowUpThick" 
+                                    Foreground="White"
+                                    Margin="08 0 0 0"
+                                    Width="28"
+                                    Height="28"
+                                    />
+                                <Label Content="5%"
+                                   FontSize="17"
+                                   Margin="-7 0 0 0"
+                                   VerticalContentAlignment="Center"
+                                   HorizontalContentAlignment="Center"
+                                   Foreground="White"
+                                   />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </materialDesign:Card>
+            </Grid>
+
+            <!--Card for display total spending-->
+            <Grid Grid.Column="1">
+                <materialDesign:Card
+                    Height="auto" Foreground="{x:Null}" Width="auto" Margin="10 10 10 10">
+                    <materialDesign:Card.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFF51C40"/>
+                            <GradientStop Color="#FFD89B65" Offset="1"/>
+                        </LinearGradientBrush>
+                    </materialDesign:Card.Background>
+                    <StackPanel>
+                        <Label x:Name="label1"
+                           Content="Total spending:" 
+                           HorizontalAlignment="Left" 
+                           Height="auto" 
+                           Margin="10 10 0 0"
+                           VerticalAlignment="Top" 
+                           Width="147" FontSize="14" 
+                           Foreground="#DDF9F9F9"/>
+                        <Label Name="spending" Content="" HorizontalAlignment="Left" Height="64.328" VerticalAlignment="Top" Width="93" Margin="150 0 0 0">
+                            <Label.Background>
+                                <ImageBrush ImageSource="/Resource/Statistical/spending.png" Stretch="Uniform"/>
+                            </Label.Background>
+                        </Label>
+
+                        <Label x:Name="label4"
+                           Content="450 000 000 VNĐ" 
+                           HorizontalAlignment="Left" 
+                           Height="auto"
+                           Margin="10 -70 0 0"
+                           VerticalAlignment="Top" 
+                           Width="auto" FontSize="17" 
+                           Foreground="#DDF9F9F9"/>
+                        
+                        <Border CornerRadius="15"
+                                Width="80"
+                                Height="32"
+                                Margin="10 -0 0 0"
+                                HorizontalAlignment="Left"
+                                BorderBrush="White"
+                                BorderThickness="1">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon 
+                                    Kind="ArrowUpThick" 
+                                    Foreground="White"
+                                    Margin="08 0 0 0"
+                                    Width="28"
+                                    Height="28"
+                                    />
+                                <Label Content="10%"
+                                   FontSize="17"
+                                   Margin="-7 0 0 0"
+                                   VerticalContentAlignment="Center"
+                                   HorizontalContentAlignment="Center"
+                                   Foreground="White"
+                                   />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </materialDesign:Card>
+            </Grid>
+
+            
+            <!--Card for display total profit-->
+            <Grid Grid.Column="2">
+                <materialDesign:Card
+                    Height="auto" Foreground="{x:Null}" Width="auto" Margin="10 10 15 10">
+                    <materialDesign:Card.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF016CFD" Offset="1"/>
+                            <GradientStop Color="#FF00E4FF"/>
+                        </LinearGradientBrush>
+                    </materialDesign:Card.Background>
+                    <StackPanel>
+                        <Label x:Name="label2"
+                           Content="Total profit:" 
+                           HorizontalAlignment="Left" 
+                           Height="auto" 
+                           Margin="10 10 0 0"
+                           VerticalAlignment="Top" 
+                           Width="147" FontSize="14" 
+                           Foreground="#DDF9F9F9"/>
+                        <Label Name="profit" Content="" HorizontalAlignment="Left" Height="64.328" VerticalAlignment="Top" Width="93" Margin="150 0 0 0">
+                            <Label.Background>
+                                <ImageBrush ImageSource="/Resource/Statistical/profit.png" Stretch="Uniform"/>
+                            </Label.Background>
+                        </Label>
+
+                        <Label x:Name="label5"
+                           Content="450 000 000 VNĐ" 
+                           HorizontalAlignment="Left" 
+                           Height="auto"
+                           Margin="10 -70 0 0"
+                           VerticalAlignment="Top" 
+                           Width="auto" FontSize="17" 
+                           Foreground="#DDF9F9F9"/>
+                        <Border CornerRadius="15"
+                                Width="80"
+                                Height="32"
+                                Margin="10 -0 0 0"
+                                HorizontalAlignment="Left"
+                                BorderBrush="White"
+                                BorderThickness="1">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon 
+                                    Kind="ArrowDownThick" 
+                                    Foreground="White"
+                                    Margin="8 0 0 0"
+                                    Width="28"
+                                    Height="28"
+                                    />
+                                <Label Content="10%"
+                                   FontSize="17"
+                                   Margin="-7 0 0 0"
+                                   VerticalContentAlignment="Center"
+                                   HorizontalContentAlignment="Center"
+                                   Foreground="White"
+                                   />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </materialDesign:Card>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1">
+            <materialDesign:Card Margin="10 0 15 15">
+                <Wpf:CartesianChart Series="{Binding SeriesCollection}"  LegendLocation="Right" Width="auto" >
+                    <Wpf:CartesianChart.AxisY>
+                        <Wpf:Axis Title="triệu đồng" LabelFormatter="{Binding YFormatter}"/>
+                    </Wpf:CartesianChart.AxisY>
+                    <Wpf:CartesianChart.AxisX>
+                        <Wpf:Axis Title="" Labels="{Binding Labels}"/>
+                    </Wpf:CartesianChart.AxisX>
+                </Wpf:CartesianChart>
+            </materialDesign:Card>
+        </Grid>
+    </Grid>
+
+</Page>
