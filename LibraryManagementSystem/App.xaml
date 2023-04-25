@@ -13,6 +13,11 @@
                 <ResourceDictionary Source="/ResourceXAML/MainResource.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
 
+            <Style x:Key="StarStyle" TargetType="{x:Type Path}">
+                <Setter Property="Fill" Value="Gray"/>
+                <Setter Property="Data" Value="M 0,10 L 3.5,6.5 8,10 6,5 10,0 5,0 3.5,3.5 2,0 0,0 4,5 Z"/>
+            </Style>
+            
             <Style x:Key="menuButton" TargetType="Button">
                 <Setter Property="Background" Value="Transparent" />
                 <Setter Property="Foreground" Value="#FFF3E5" />

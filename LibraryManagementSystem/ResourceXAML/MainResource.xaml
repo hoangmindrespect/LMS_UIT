@@ -6,5 +6,6 @@
     <viewmodel:MainViewModel x:Key="MainVM" />
     <viewmodel:LoginRegisViewModel x:Key="LoginRegisVM"/>
     <viewmodel:ControlBarViewModel x:Key="ControlBarVM"/>
+    <viewmodel:StatisticalViewModel x:Key="StatisticalVM"/>
     <as:BoolValueConverter x:Key="ConverterBoolValue"/>
 </ResourceDictionary>

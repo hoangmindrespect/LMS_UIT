@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibraryManagementSystem.View.Login"
         mc:Ignorable="d"
+        xmlns:uc="clr-namespace:LibraryManagementSystem.ControlBar"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -17,85 +18,23 @@
         WindowStartupLocation="CenterScreen"
         WindowState="Normal"
         WindowStyle="None"
+        Name="login"
         ResizeMode="NoResize"
         AllowsTransparency="True"
-       
         Icon="/Resource/LMS.ico"
-        Title="LMS" Height="550" Width="900">
-    <Window.Clip>
-        <RectangleGeometry Rect="0,0,900,550" RadiusX="5" RadiusY="5" x:Name="boGoc">
-        </RectangleGeometry>
-    </Window.Clip>
-    <Border CornerRadius="20" Margin="2 2 2 2">
-        <Grid>
-            <Image 
-                   Source="/Resource/loginbackground.png" 
-                   Stretch="Fill"
-                   />
+        Title=" " Height="550" Width="900">
 
-            <!--Hiện lên đang đăng nhập-->
-            <materialDesign:Card Height="100"
-                             Width="150"
-                             UniformCornerRadius="5"
-                             Background="Transparent">
-                <StackPanel>
-                    <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
-                                 IsIndeterminate="True"
-                                 Foreground="#743100"
-                                 Margin="0,30,0,0"
-                                 x:Name="prg" />
-                    <Label HorizontalContentAlignment="Center"
-                           FontSize="15"
-                           Content="Đang đăng nhập..."
-                           Margin="0,10,0,0"
-                       Foreground="#743100">
-                    </Label>
-                </StackPanel>
-                <materialDesign:Card.Style>
-                    <Style TargetType="materialDesign:Card">
-                        <Setter Property="Visibility"
-                                Value="Collapsed" />
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsSaving}"
-                                         Value="true">
-                                <Setter Property="Visibility"
-                                        Value="Visible" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </materialDesign:Card.Style>
-            </materialDesign:Card>
+    <Window.Background>
+        <ImageBrush ImageSource="/Resource/loginbackground.png"/>
+    </Window.Background>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="143*"/>
+            <ColumnDefinition Width="37*"/>
+        </Grid.ColumnDefinitions>
 
-            <StackPanel Orientation="Horizontal"
-                            VerticalAlignment="Top"
-                            HorizontalAlignment="Right"
-                            Grid.Row="0">
-
-                <Button     Click="btnMinimize"
-                            ToolBar.OverflowMode="AsNeeded"
-                            Margin="0,0,5,0"
-                            BorderThickness="0"
-                            Background="White"
-                            Foreground="Black"
-                            BorderBrush="Transparent"
-                            MouseEnter="btnMinimizeMouseEnter"
-                            MouseLeave="btnMinimizeMouseLeave">
-                    <materialDesign:PackIcon Kind="WindowMinimize" />
-                </Button>
-
-                <Button     Click="btnClose"
-                            ToolBar.OverflowMode="AsNeeded"
-                            Background="White"
-                            Foreground="Black"
-                            BorderBrush="Transparent"
-                            MouseEnter="btnCloseMouseEnter"
-                            MouseLeave="btnCloseMouseLeave"
-                            materialDesign:ButtonAssist.CornerRadius="0,3,0,0">
-                    <materialDesign:PackIcon Kind="WindowClose"
-                                             Padding="0" />
-                </Button>
-            </StackPanel>
-            <materialDesign:Card Margin="333,78,320,78"
+        <Grid Grid.Column="0">
+            <materialDesign:Card Margin="333,74,135,78"
                                  Grid.Row="0"
                                  Background="Transparent"
                                  BorderBrush="Black"
@@ -111,26 +50,55 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </materialDesign:Card>
+        </Grid>
 
-            <!--this make the screen become blur-->
-            <materialDesign:Card Visibility="Hidden"
+        <Grid Grid.Column="1">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <!--Button minimize-->
+                <Button Width="20" Height="20" Margin="7 7 7 0"
+                                MouseEnter="Button_MouseEnter"
+                                MouseLeave="Button_MouseLeave"
+                                Background="Transparent"
+                                BorderBrush="Black"
+                                Click="Button_Click"
+                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                ToolTip="MaterialDesignFloatingActionMiniLightButton">
+                    <materialDesign:PackIcon
+                                Kind="WindowMinimize" />
+                </Button>
+
+                <!--Button Close-->
+                <Button Width="20" Height="20" Margin="7 7 17 0"
+                                Background="Transparent"
+                                BorderBrush="Black"
+                                MouseEnter="Button_MouseEnter_1"
+                                MouseLeave="Button_MouseLeave_1"
+                                Click="Button_Click_1"
+                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                ToolTip="MaterialDesignFloatingActionMiniLightButton">
+                    <materialDesign:PackIcon
+                                Kind="WindowClose" />
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <materialDesign:Card Visibility="Hidden"
                                  Grid.Row="0"
                                  x:Name="blur_card"
                                  Background="#0000"
                                  BorderBrush="Black"
                                  BorderThickness="10"
-                                 UniformCornerRadius="8">
-                <Grid>
-                    <Rectangle Fill="#FFF" Opacity="0.34">
-                        <Rectangle.Effect>
-                            <BlurEffect Radius="5"/>
-                        </Rectangle.Effect>
-                    </Rectangle>
-                    <!-- Nội dung của Card -->
-                </Grid>
-
-            </materialDesign:Card>
-        </Grid>
-    </Border>
+                                 UniformCornerRadius="10" Grid.ColumnSpan="2">
+            <Grid>
+                <Rectangle Fill="#FFF" Opacity="0.34">
+                    <Rectangle.Effect>
+                        <BlurEffect Radius="5"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+            </Grid>
+        </materialDesign:Card>
+    </Grid>
 </Window>
 
