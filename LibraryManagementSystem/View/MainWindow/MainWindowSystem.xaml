@@ -23,7 +23,7 @@
         AllowsTransparency="True"
         WindowStyle="None"
         ResizeMode="CanResize"
-        Height="600" Width="1000">
+        Height="700" Width="1200">
     <Border CornerRadius="20" Background="#EFF2F7" >
         <Grid>
             <Grid.RowDefinitions >
@@ -80,13 +80,13 @@
 
                                     <!--Menu Buttons-->
                                     <StackPanel DockPanel.Dock="Top" >
-                                        <Button Style="{StaticResource menuButton}">
+                                        <Button Style="{StaticResource menuButton}" Command="{Binding LoadStatisticalFirst}" CommandParameter="{Binding ElementName=mainFrame}">
                                             <StackPanel Orientation="Horizontal">
                                                 <materialDesign:PackIcon Kind="Finance" Margin="5 0 0 0"/>
                                                 <TextBlock Text="Statistical" Margin="10 0 0 0" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button>
-                                        <Button Style="{StaticResource menuButton}">
+                                        <Button Style="{StaticResource menuButton}" Command="{Binding LoadManageBook}" CommandParameter="{Binding ElementName=mainFrame}">
                                             <StackPanel Orientation="Horizontal">
                                                 <materialDesign:PackIcon Kind="BookOpenPageVariant" Margin="5 0 0 0"/>
                                                 <TextBlock Text="Manage book" Margin="10 0 0 0" VerticalAlignment="Center"/>

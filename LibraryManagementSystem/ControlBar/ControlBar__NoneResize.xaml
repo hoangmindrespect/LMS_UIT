@@ -34,7 +34,7 @@
             <Grid>
                 <DockPanel>
 
-                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Background="Transparent">
+                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Background="Transparent" Margin="0 0 0 5">
                         <!--Button close-->
                         <Button Width="20" Height="20" Margin="7 7 7 0"
                                 MouseEnter="Button_MouseEnter"

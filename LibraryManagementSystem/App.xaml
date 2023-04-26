@@ -13,11 +13,20 @@
                 <ResourceDictionary Source="/ResourceXAML/MainResource.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
 
+            <Style TargetType="{x:Type DataGridRow}" x:Key="IncompleteRowStyle">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsIncomplete}" Value="True">
+                        <Setter Property="Background" Value="#FA8072"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+            
             <Style x:Key="StarStyle" TargetType="{x:Type Path}">
                 <Setter Property="Fill" Value="Gray"/>
                 <Setter Property="Data" Value="M 0,10 L 3.5,6.5 8,10 6,5 10,0 5,0 3.5,3.5 2,0 0,0 4,5 Z"/>
             </Style>
-            
+
+
             <Style x:Key="menuButton" TargetType="Button">
                 <Setter Property="Background" Value="Transparent" />
                 <Setter Property="Foreground" Value="#FFF3E5" />
@@ -37,36 +46,120 @@
 
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" Value="#968A7C" />
+                        <Setter Property="Background" Value="#948F89" />
                         <Setter Property="Foreground" Value="#ffffff" />
                     </Trigger>
                 </Style.Triggers>
             </Style>
-
-            <Style x:Key="topButton" TargetType="Button">
-                <Setter Property="Background" Value="Transparent" />
-                <Setter Property="Foreground" Value="#6E7783" />
+            
+            <Style x:Key="gridEditButton" TargetType="Button">
+                <Setter Property="Background" Value="#512DA8" />
+                <Setter Property="BorderBrush" Value="#4A148C" />
+                <Setter Property="Foreground" Value="#ffffff" />
                 <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-                <Setter Property="Height" Value="30" />
-                <Setter Property="Width" Value="30" />
-                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="VerticalAlignment" Value="Center" />
                 <Setter Property="Template" >
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}" CornerRadius="50">
+                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" Padding="5" BorderThickness="1" CornerRadius="5">
                                 <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
-
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" Value="#dcdcdc" />
+                        <Setter Property="Background" Value="#673AB7" />
                     </Trigger>
                 </Style.Triggers>
             </Style>
-            
+
+
+            <Style x:Key="gridRemoveButton" TargetType="Button" BasedOn="{StaticResource gridEditButton}">
+                <Setter Property="Background" Value="#D32F2F" />
+                <Setter Property="BorderBrush" Value="#B71C1C" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#F44336" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+
+            <!--#region DataGrid Style-->
+
+            <Style x:Key="DataGridStyle1" TargetType="{x:Type DataGrid}">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="#222528"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected"/>
+                <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+                <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+                <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+                <Setter Property="AutoGenerateColumns" Value="False" />
+                <Setter Property="HeadersVisibility" Value="Column" />
+                <Setter Property="Margin" Value="0 10 0 0" />
+                <Setter Property="Grid.Row" Value="5" />
+                <Setter Property="SelectionMode" Value="Single" />
+                <Setter Property="SelectionUnit" Value="FullRow" />
+                <Setter Property="CanUserAddRows" Value="False" />
+                <Setter Property="CanUserDeleteRows" Value="False" />
+                <Setter Property="CanUserReorderColumns" Value="False" />
+                <Setter Property="CanUserResizeRows" Value="False" />
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="GridLinesVisibility" Value="None" />
+                <Setter Property="ColumnWidth" Value="*" />
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type DataGrid}">
+                            <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                                <ScrollViewer x:Name="DG_ScrollViewer" Focusable="false">
+                                    <ScrollViewer.Template>
+                                        <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Button Command="{x:Static DataGrid.SelectAllCommand}" Focusable="false" Style="{DynamicResource {ComponentResourceKey ResourceId=DataGridSelectAllButtonStyle, TypeInTargetAssembly={x:Type DataGrid}}}" Visibility="{Binding HeadersVisibility, Converter={x:Static DataGrid.HeadersVisibilityConverter}, ConverterParameter={x:Static DataGridHeadersVisibility.All}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" Width="{Binding CellsPanelHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                                                <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter" Grid.Column="1" Visibility="{Binding HeadersVisibility, Converter={x:Static DataGrid.HeadersVisibilityConverter}, ConverterParameter={x:Static DataGridHeadersVisibility.Column}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                                                <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" Grid.ColumnSpan="2" CanContentScroll="{TemplateBinding CanContentScroll}" Grid.Row="1"/>
+                                                <ScrollBar x:Name="PART_VerticalScrollBar" Grid.Column="2" Maximum="{TemplateBinding ScrollableHeight}" Orientation="Vertical" Grid.Row="1" ViewportSize="{TemplateBinding ViewportHeight}" Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
+                                                <Grid Grid.Column="1" Grid.Row="2">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="{Binding NonFrozenColumnsViewportHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <ScrollBar x:Name="PART_HorizontalScrollBar" Grid.Column="1" Maximum="{TemplateBinding ScrollableWidth}" Orientation="Horizontal" ViewportSize="{TemplateBinding ViewportWidth}" Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"/>
+                                                </Grid>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </ScrollViewer.Template>
+                                    <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </ScrollViewer>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <MultiTrigger>
+                        <MultiTrigger.Conditions>
+                            <Condition Property="IsGrouping" Value="true"/>
+                            <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                        </MultiTrigger.Conditions>
+                        <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                    </MultiTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <!--#endregion-->
         </ResourceDictionary>
     </Application.Resources>
 </Application>

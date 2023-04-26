@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\App.xaml
-131904725192
+1522730192
 2-1406958253
-41-1552918763
-52-1563444351
-ControlBar\ControlBar__NoneResize.xaml;ControlBar\UserControl1.xaml;MainWindow.xaml;ResourceXAML\MainResource.xaml;View\Login\CreateNewPass.xaml;View\Login\ForgotPasswordPage.xaml;View\Login\loginpage.xaml;View\Login\loginwindow.xaml;View\Login\RegisterWindow.xaml;View\Login\VertificationPage.xaml;View\MainWindow\MainWindowSystem.xaml;View\MainWindow\Statistical\StatisticalPage.xaml;View\MessageBoxCus\MessageBoxLMS.xaml;
+331389902473
+55276248030
+ControlBar\ControlBar__NoneResize.xaml;ControlBar\UserControl1.xaml;MainWindow.xaml;ResourceXAML\MainResource.xaml;View\Login\CreateNewPass.xaml;View\Login\ForgotPasswordPage.xaml;View\Login\loginpage.xaml;View\Login\loginwindow.xaml;View\Login\RegisterWindow.xaml;View\Login\VertificationPage.xaml;View\MainWindow\MainWindowSystem.xaml;View\MainWindow\ManageBook\EdittingBookWindow.xaml;View\MainWindow\ManageBook\ManageBookPage.xaml;View\MainWindow\Statistical\StatisticalPage.xaml;View\MessageBoxCus\MessageBoxLMS.xaml;
 
 False
 
