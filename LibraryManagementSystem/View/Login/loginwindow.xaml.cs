@@ -27,7 +27,6 @@ namespace LibraryManagementSystem.View.Login
         public loginwindow()
         {
             InitializeComponent();
-            DataContext = new LoginRegisViewModel();
             a = blur_card;
         }
 

@@ -23,7 +23,7 @@
                     Margin="0 20 0 0"
                     FontWeight="DemiBold"
                     Foreground="#391c00"
-                    Content="Mật khẩu mới"
+                    Content="New password"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     />
@@ -60,7 +60,7 @@
                        Margin="0 10 0 0"
                     FontWeight="DemiBold"
                     Foreground="#391c00"
-                    Content="Xác nhận mật khẩu"
+                    Content="Confirm new password"
                     HorizontalAlignment="Center"
                     
                     />
@@ -90,10 +90,10 @@
                    x:Name="ErrorNewPass" 
                    Foreground="Red"
                    FontSize="11"
-                   Content="*Mật khẩu xác nhận không chính xác*"
+                   Content="*Confirm password is incorrect*"
                    Width="259"
                    Visibility="Hidden"
-                   Margin="27, -0, 0, 0"
+                   Margin="50, -10, 0, 0"
                    Height="45"
                 />
 

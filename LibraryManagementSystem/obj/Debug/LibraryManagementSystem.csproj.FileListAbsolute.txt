@@ -194,3 +194,11 @@ C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\LiveCharts.Wpf.
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\LiveCharts.Wpf.xml
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\ControlBar\ControlBar__NoneResize.g.cs
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\ControlBar\ControlBar__NoneResize.baml
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\ManageBook\ManageBookPage.g.cs
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\ManageBook\ManageBookPage.baml
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\ManageBook\EdittingBookWindow.g.cs
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\ManageBook\EdittingBookWindow.baml
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\CloudinaryDotNet.dll
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\CloudinaryDotNet.xml
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\Newtonsoft.Json.xml

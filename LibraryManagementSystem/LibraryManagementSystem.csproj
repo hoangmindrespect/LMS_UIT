@@ -17,6 +17,7 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -27,6 +28,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -38,6 +40,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CloudinaryDotNet, Version=1.20.0.0, Culture=neutral, PublicKeyToken=c8234dc617ae7841, processorArchitecture=MSIL">
+      <HintPath>..\packages\CloudinaryDotNet.1.20.0\lib\net452\CloudinaryDotNet.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -83,6 +88,9 @@
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="protobuf-net, Version=3.0.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
       <HintPath>..\packages\protobuf-net.3.1.17\lib\net461\protobuf-net.dll</HintPath>
     </Reference>
@@ -115,6 +123,11 @@
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -171,19 +184,7 @@
     <Compile Include="Models\DataProvider\ACCOUNT.cs">
       <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataProvider\Address.cs">
-      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataProvider\BuildVersion.cs">
-      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataProvider\Customer.cs">
-      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataProvider\CustomerAddress.cs">
-      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataProvider\ErrorLog.cs">
+    <Compile Include="Models\DataProvider\BOOK.cs">
       <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataProvider\LibraryManagementSystemModels.Context.cs">
@@ -201,34 +202,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LibraryManagementSystemModels.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataProvider\Product.cs">
-      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataProvider\ProductCategory.cs">
-      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataProvider\ProductDescription.cs">
-      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataProvider\ProductModel.cs">
-      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataProvider\ProductModelProductDescription.cs">
-      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataProvider\SalesOrderDetail.cs">
-      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataProvider\SalesOrderHeader.cs">
-      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
-    </Compile>
     <Compile Include="Utils\ConverterValue\BoolValueConverter.cs" />
     <Compile Include="Validtations\NotNullValidation.cs" />
+    <Compile Include="ViewModel\AdminVM\MainAdminViewModel.cs" />
+    <Compile Include="ViewModel\AdminVM\ManageBookVM\ManageBookViewModel.cs" />
+    <Compile Include="ViewModel\AdminVM\StatisticalVM\StatisticalViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
-    <Compile Include="ViewModel\LoginRegisViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\StatisticalViewModel.cs" />
+    <Compile Include="ViewModel\LoginVM\LoginRegisViewModel.cs" />
     <Compile Include="View\Login\CreateNewPass.xaml.cs">
       <DependentUpon>CreateNewPass.xaml</DependentUpon>
     </Compile>
@@ -249,6 +230,12 @@
     </Compile>
     <Compile Include="View\MainWindow\MainWindowSystem.xaml.cs">
       <DependentUpon>MainWindowSystem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainWindow\ManageBook\EdittingBookWindow.xaml.cs">
+      <DependentUpon>EdittingBookWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainWindow\ManageBook\ManageBookPage.xaml.cs">
+      <DependentUpon>ManageBookPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow\Statistical\StatisticalPage.xaml.cs">
       <DependentUpon>StatisticalPage.xaml</DependentUpon>
@@ -308,6 +295,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\MainWindow\ManageBook\EdittingBookWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainWindow\ManageBook\ManageBookPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow\Statistical\StatisticalPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -351,9 +346,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\MainWindow\ManageBook\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Notes.txt" />
   </ItemGroup>

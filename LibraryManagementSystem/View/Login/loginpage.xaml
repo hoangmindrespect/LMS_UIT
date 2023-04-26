@@ -25,7 +25,7 @@
                FontSize="20"
                FontWeight="UltraBlack"
                Foreground="#391c00"
-               Content="Đăng nhập"
+               Content="Welcome Back!"
                VerticalAlignment="Top"
                HorizontalAlignment="Center"
                Height="50"
@@ -37,7 +37,9 @@
             <TextBox    VerticalAlignment="Top"
                         BorderBrush="#8B4513"
                         SelectionBrush="#8B4513"
+                        Foreground="#7D5227"
                         Width="180"
+                        FontWeight="Medium"
                         Name="txbUsername"
                         Text="{Binding UserName}"
                         HorizontalAlignment="Center"
@@ -61,14 +63,17 @@
                 <PasswordBox    Name="pwbLogin"
                                 BorderBrush="#8B4513"
                                 CaretBrush="#8B4513"
+                                Foreground="#7D5227"
+                                FontWeight="Medium"
                                 SelectionBrush="#8B4513"
                                 PasswordChanged="pwbLogin_PasswordChanged"
                                 materialDesign:TextFieldAssist.HasClearButton="True"
                                 IsEnabled="{Binding ElementName=RevealPasswordOutlinedEnabled, Path=IsChecked}"
                                 Style="{StaticResource MaterialDesignOutlinedRevealPasswordBox}">
                     <materialDesign:HintAssist.Hint>
-                        <TextBlock Foreground="#8B4513">Password</TextBlock>
+                        <TextBlock Background="Transparent" Foreground="#8B4513">Password</TextBlock>
                     </materialDesign:HintAssist.Hint>
+                  
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="PasswordChanged">
                             <i:InvokeCommandAction Command="{Binding PasswordChangedLogin}"
@@ -88,15 +93,15 @@
                        HorizontalAlignment="Center"
                        FontSize="10"
                        Visibility="Hidden"
-                       Content="*Sai tài khoản hoặc mật khẩu*"
+                       Content="*Wrong user name or password*"
                        Foreground="Red" />
 
-            <Button Content="Quên mật khẩu?"
+            <Button Content="Forgot your password?"
                         Foreground="#b29e84"
                         FontSize="12"
                         FontWeight="Normal"
                         HorizontalAlignment="Center"
-                        Margin="90 -197 0 0"
+                        Margin="60 -197 0 0"
                         Background="Transparent"
                         BorderBrush="Transparent"
                         HorizontalContentAlignment="Right"
@@ -111,7 +116,7 @@
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0">
-                <Button Content="Đăng ký"
+                <Button Content="Register"
                                 Margin="20 -120 0 0"
                                 IsDefault="True"
                                 Width="90"
@@ -127,7 +132,7 @@
             </Grid>
 
             <Grid Grid.Column="1">
-                <Button Content="Đăng nhập"
+                <Button Content="Login"
                                 IsDefault="True"
                                 Width="90"
                                 Margin="0 -120 20 0"

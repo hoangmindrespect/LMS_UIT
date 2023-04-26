@@ -23,5 +23,6 @@ namespace LibraryManagementSystem.View.MainWindow
         {
             InitializeComponent();
         }
+
     }
 }

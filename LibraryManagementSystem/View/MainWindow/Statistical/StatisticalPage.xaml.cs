@@ -75,8 +75,8 @@ namespace LibraryManagementSystem.View.MainWindow.Statistical
                 label3.Margin = new Thickness(10, -95, 0, 0);
                 label4.Margin = new Thickness(10, -70, 0, 0);
                 label5.Margin = new Thickness(10, -70, 0, 0);
-                filter1.Margin = new Thickness(10, -212, 0, 0);
-                filter2.Margin = new Thickness(10, -212, 0, 0);
+                filter1.Margin = new Thickness(10, -245, 0, 0);
+                filter2.Margin = new Thickness(10, -245, 0, 0);
                 border1.Margin = new Thickness(10, -27, 0, 0);
             }
 

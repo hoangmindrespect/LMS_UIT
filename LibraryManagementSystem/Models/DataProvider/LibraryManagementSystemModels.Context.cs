@@ -26,17 +26,6 @@ namespace LibraryManagementSystem.Models.DataProvider
         }
     
         public virtual DbSet<ACCOUNT> ACCOUNTs { get; set; }
-        public virtual DbSet<BuildVersion> BuildVersions { get; set; }
-        public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
-        public virtual DbSet<Address> Addresses { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<CustomerAddress> CustomerAddresses { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<ProductCategory> ProductCategories { get; set; }
-        public virtual DbSet<ProductDescription> ProductDescriptions { get; set; }
-        public virtual DbSet<ProductModel> ProductModels { get; set; }
-        public virtual DbSet<ProductModelProductDescription> ProductModelProductDescriptions { get; set; }
-        public virtual DbSet<SalesOrderDetail> SalesOrderDetails { get; set; }
-        public virtual DbSet<SalesOrderHeader> SalesOrderHeaders { get; set; }
+        public virtual DbSet<BOOK> BOOKs { get; set; }
     }
 }
