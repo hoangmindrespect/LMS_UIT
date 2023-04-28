@@ -3,14 +3,20 @@
                     xmlns:viewmodel="clr-namespace:LibraryManagementSystem.ViewModel"
                     xmlns:viewmodel1.1="clr-namespace:LibraryManagementSystem.ViewModel.AdminVM.StatisticalVM"
                     xmlns:viewmodel1.2="clr-namespace:LibraryManagementSystem.ViewModel.AdminVM.ManageBookVM"
+                    xmlns:viewmodel1.3="clr-namespace:LibraryManagementSystem.ViewModel.AdminVM.ImportBookVM"
                     xmlns:viewmodel2="clr-namespace:LibraryManagementSystem.ViewModel.LoginVM"
                     xmlns:viewmodel1="clr-namespace:LibraryManagementSystem.ViewModel.AdminVM"
+                    xmlns:viewmodel3="clr-namespace:LibraryManagementSystem.ViewModel.ClientVM"
+                    xmlns:viewmodel3.1="clr-namespace:LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM"
                     xmlns:as="clr-namespace:LibraryManagementSystem.Utils.ConverterValue"
                     >
     <viewmodel1:MainAdminViewModel x:Key="MainVM" />
     <viewmodel2:LoginRegisViewModel x:Key="LoginRegisVM"/>
+    <viewmodel3:MainClientViewModel x:Key="ClientVM"/>
     <viewmodel:ControlBarViewModel x:Key="ControlBarVM"/>
     <viewmodel1.1:StatisticalViewModel x:Key="StatisticalVM"/>
     <viewmodel1.2:ManageBookViewModel  x:Key="ManageBookVM"/>
+    <viewmodel1.3:ImportViewModel x:Key="ImportVM"/>
+    <viewmodel3.1:BuyBookViewModel x:Key="BuyBookVM"/>
     <as:BoolValueConverter x:Key="ConverterBoolValue"/>
 </ResourceDictionary>

@@ -19,5 +19,6 @@ namespace LibraryManagementSystem.Models.DataProvider
         public string FULLNAME { get; set; }
         public string EMAILADDRESS { get; set; }
         public string USERPASS { get; set; }
+        public Nullable<int> ROLE { get; set; }
     }
 }

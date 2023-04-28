@@ -43,6 +43,9 @@
     <Reference Include="CloudinaryDotNet, Version=1.20.0.0, Culture=neutral, PublicKeyToken=c8234dc617ae7841, processorArchitecture=MSIL">
       <HintPath>..\packages\CloudinaryDotNet.1.20.0\lib\net452\CloudinaryDotNet.dll</HintPath>
     </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.20.0.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.20.0\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -180,6 +183,7 @@
       <DependentUpon>UserControl1.xaml</DependentUpon>
     </Compile>
     <Compile Include="DTOs\BookDTO.cs" />
+    <Compile Include="DTOs\ImportBook.cs" />
     <Compile Include="DTOs\UserDTO.cs" />
     <Compile Include="Models\DataProvider\ACCOUNT.cs">
       <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
@@ -204,10 +208,13 @@
     </Compile>
     <Compile Include="Utils\ConverterValue\BoolValueConverter.cs" />
     <Compile Include="Validtations\NotNullValidation.cs" />
+    <Compile Include="ViewModel\AdminVM\ImportBookVM\ImportViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\MainAdminViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\ManageBookVM\ManageBookViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\StatisticalVM\StatisticalViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\ClientVM\BuyBookVM\BuyBookViewModel.cs" />
+    <Compile Include="ViewModel\ClientVM\MainClientViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
     <Compile Include="ViewModel\LoginVM\LoginRegisViewModel.cs" />
     <Compile Include="View\Login\CreateNewPass.xaml.cs">
@@ -227,6 +234,21 @@
     </Compile>
     <Compile Include="View\Login\VertificationPage.xaml.cs">
       <DependentUpon>VertificationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainClientWindow\BuyBookPage\BuyBookPage.xaml.cs">
+      <DependentUpon>BuyBookPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainClientWindow\MainClientWindow.xaml.cs">
+      <DependentUpon>MainClientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainWindow\BorrowBook\BorrowBookPage.xaml.cs">
+      <DependentUpon>BorrowBookPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainWindow\ImportBook\AddingWindow.xaml.cs">
+      <DependentUpon>AddingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainWindow\ImportBook\ImportBookPage.xaml.cs">
+      <DependentUpon>ImportBookPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow\MainWindowSystem.xaml.cs">
       <DependentUpon>MainWindowSystem.xaml</DependentUpon>
@@ -288,6 +310,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Login\VertificationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainClientWindow\BuyBookPage\BuyBookPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainClientWindow\MainClientWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainWindow\BorrowBook\BorrowBookPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainWindow\ImportBook\AddingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainWindow\ImportBook\ImportBookPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -385,6 +427,14 @@
       <DependentUpon>LibraryManagementSystemModels.edmx</DependentUpon>
       <LastGenOutput>LibraryManagementSystemModels.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resource\BuyBook\6.png" />
+    <Resource Include="Resource\BuyBook\3.jpeg" />
+    <Resource Include="Resource\BuyBook\2.jpg" />
+    <Resource Include="Resource\BuyBook\1.jpg" />
+    <Resource Include="Resource\BuyBook\4.png" />
+    <Resource Include="Resource\BuyBook\5.jpeg" />
+    <Resource Include="Resource\tag.png" />
+    <Resource Include="Resource\Import\Bills.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.8.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.8.0\build\MaterialDesignThemes.targets')" />

@@ -93,17 +93,17 @@
                                             </StackPanel>
                                         </Button>
 
-                                        <Button Style="{StaticResource menuButton}">
+                                        <Button Style="{StaticResource menuButton}" >
                                             <StackPanel Orientation="Horizontal">
                                                 <materialDesign:PackIcon Kind="AccountMultiple"  Margin="5 0 0 0"/>
                                                 <TextBlock Text="Manage user" Margin="10 0 0 0" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button>
 
-                                        <Button Style="{StaticResource menuButton}">
+                                        <Button Style="{StaticResource menuButton}" Command="{Binding LoadImportPage}" CommandParameter="{Binding ElementName=mainFrame}">
                                             <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="AccountGroup"  Margin="5 0 0 0"/>
-                                                <TextBlock Text="Members" Margin="10 0 0 0" VerticalAlignment="Center"/>
+                                                <materialDesign:PackIcon Kind="Import"  Margin="5 0 0 0"/>
+                                                <TextBlock Text="Import book" Margin="10 0 0 0" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button>
 
@@ -166,7 +166,7 @@
                             <!--card load nội dung của từng chức năng-->
                             <Grid Grid.Column="1">
                                 <Frame x:Name="mainFrame"
-                                       NavigationUIVisibility="Hidden" Grid.Row="1">
+                                       NavigationUIVisibility="Hidden">
 
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Loaded">

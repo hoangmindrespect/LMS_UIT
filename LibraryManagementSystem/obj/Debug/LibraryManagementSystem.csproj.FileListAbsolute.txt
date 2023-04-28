@@ -202,3 +202,15 @@ C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\CloudinaryDotNe
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\CloudinaryDotNet.xml
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\ImportBook\ImportBookPage.g.cs
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\ImportBook\ImportBookPage.baml
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\ImportBook\AddingWindow.g.cs
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\ImportBook\AddingWindow.baml
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainClientWindow\MainClientWindow.g.cs
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\BorrowBook\BorrowBookPage.g.cs
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainClientWindow\MainClientWindow.baml
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\BorrowBook\BorrowBookPage.baml
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainClientWindow\BuyBookPage\BuyBookPage.g.cs
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainClientWindow\BuyBookPage\BuyBookPage.baml
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\DocumentFormat.OpenXml.xml

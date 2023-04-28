@@ -13,6 +13,7 @@
     <Property Name="FULLNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="EMAILADDRESS" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
     <Property Name="USERPASS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ROLE" Type="Int32" />
   </EntityType>
   <EntityType Name="BOOK">
     <Key>

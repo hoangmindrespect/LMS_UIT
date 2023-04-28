@@ -1,4 +1,5 @@
-﻿using LibraryManagementSystem.View.MainWindow.ManageBook;
+﻿using LibraryManagementSystem.View.MainWindow.ImportBook;
+using LibraryManagementSystem.View.MainWindow.ManageBook;
 using LibraryManagementSystem.View.MainWindow.Statistical;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM
 
         public ICommand LoadStatisticalFirst { get; set; }
         public ICommand LoadManageBook { get; set; }
+        public ICommand LoadImportPage { get; set; }
         public MainAdminViewModel()
         {
             System.Windows.Threading.DispatcherTimer Timer = new System.Windows.Threading.DispatcherTimer();
@@ -38,6 +40,11 @@ namespace LibraryManagementSystem.ViewModel.AdminVM
             LoadManageBook = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
                 p.Content = new ManageBookPage();
+            });
+
+            LoadImportPage = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            {
+                p.Content = new ImportBookPage();
             });
         }
 
