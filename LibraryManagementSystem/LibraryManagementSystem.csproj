@@ -238,6 +238,12 @@
     <Compile Include="View\MainClientWindow\BuyBookPage\BuyBookPage.xaml.cs">
       <DependentUpon>BuyBookPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\MainClientWindow\BuyBookPage\Item.xaml.cs">
+      <DependentUpon>Item.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainClientWindow\BuyBookPage\ShoppingCartPage.xaml.cs">
+      <DependentUpon>ShoppingCartPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainClientWindow\MainClientWindow.xaml.cs">
       <DependentUpon>MainClientWindow.xaml</DependentUpon>
     </Compile>
@@ -314,6 +320,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainClientWindow\BuyBookPage\BuyBookPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainClientWindow\BuyBookPage\Item.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainClientWindow\BuyBookPage\ShoppingCartPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -427,6 +441,11 @@
       <DependentUpon>LibraryManagementSystemModels.edmx</DependentUpon>
       <LastGenOutput>LibraryManagementSystemModels.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resource\BuyBook\add.png" />
+    <Resource Include="Resource\BuyBook\left.png" />
+    <Content Include="Resource\BuyBook\lib.mp4" />
+    <Resource Include="Resource\BuyBook\low.png" />
+    <Resource Include="Resource\BuyBook\remove.png" />
     <Resource Include="Resource\BuyBook\6.png" />
     <Resource Include="Resource\BuyBook\3.jpeg" />
     <Resource Include="Resource\BuyBook\2.jpg" />

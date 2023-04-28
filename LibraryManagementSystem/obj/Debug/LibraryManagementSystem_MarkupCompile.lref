@@ -1,4 +1,4 @@
-﻿C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\GeneratedInternalTypeHelper.g.cs
+﻿
 FC:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\App.xaml;;
 FC:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\ControlBar\ControlBar__NoneResize.xaml;;
 FC:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\ControlBar\UserControl1.xaml;;
@@ -11,6 +11,8 @@ FC:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\View\Login\loginwindow.x
 FC:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\View\Login\RegisterWindow.xaml;;
 FC:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\View\Login\VertificationPage.xaml;;
 FC:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\View\MainClientWindow\BuyBookPage\BuyBookPage.xaml;;
+FC:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\View\MainClientWindow\BuyBookPage\Item.xaml;;
+FC:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\View\MainClientWindow\BuyBookPage\ShoppingCartPage.xaml;;
 FC:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\View\MainClientWindow\MainClientWindow.xaml;;
 FC:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\View\MainWindow\BorrowBook\BorrowBookPage.xaml;;
 FC:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\View\MainWindow\ImportBook\AddingWindow.xaml;;
