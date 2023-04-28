@@ -27,59 +27,10 @@ namespace LibraryManagementSystem.View.MainClientWindow.BuyBookPage
     /// Interaction logic for BuyBookPage.xaml
     /// </summary>
     public partial class BuyBookPage : System.Windows.Controls.Page
-    {
-        private List<string> imagePaths;
-        private int currentImageIndex = 0;
-    private DispatcherTimer timer;
-
-        public BuyBookPage()
+    {        public BuyBookPage()
         {
 
             InitializeComponent();
-            imagePaths = new List<string>()
-            {
-                "/Resource/BuyBook/1.jpg",
-                "/Resource/BuyBook/2.jpg",
-                "/Resource/BuyBook/3.jpeg",
-                "/Resource/BuyBook/4.png",
-                "/Resource/BuyBook/5.jpeg"
-            };
-
-            int imageIndex = 0;
-
-            // Set the source of the Image control to the first image
-            imageControl.Source = new BitmapImage(new Uri(imagePaths[imageIndex], UriKind.RelativeOrAbsolute));
-
-            // Start a timer to change the image every 5 seconds
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(5);
-            timer.Tick += (s, e) =>
-            {
-                // Increment the image index and loop back to the start if at the end
-                imageIndex++;
-                if (imageIndex >= imagePaths.Count)
-                {
-                    imageIndex = 0;
-                }
-
-                // Apply transition effect
-                DoubleAnimation fadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(1));
-                Storyboard.SetTarget(fadeIn, imageControl);
-                Storyboard.SetTargetProperty(fadeIn, new PropertyPath(UIElement.OpacityProperty));
-
-                DoubleAnimation fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(1));
-                Storyboard.SetTarget(fadeOut, imageControl);
-                Storyboard.SetTargetProperty(fadeOut, new PropertyPath(UIElement.OpacityProperty));
-
-                Storyboard storyboard = new Storyboard();
-                storyboard.Children.Add(fadeOut);
-                storyboard.Children.Add(fadeIn);
-                storyboard.Begin();
-
-                // Set the source of the Image control to the next image
-                imageControl.Source = new BitmapImage(new Uri(imagePaths[imageIndex], UriKind.RelativeOrAbsolute));
-            };
-            timer.Start();
         }
 
         private void StackPanel_MouseEnter(object sender, MouseEventArgs e)
@@ -97,62 +48,7 @@ namespace LibraryManagementSystem.View.MainClientWindow.BuyBookPage
             a.Cursor = Cursors.None;
             a.RenderTransform = new TranslateTransform(0, 2);
 
-        }
-
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            // Show next image
-            currentImageIndex++;
-            if (currentImageIndex >= imagePaths.Count)
-            {
-                currentImageIndex = 0;
-            }
-            ShowImage(currentImageIndex);
-        }
-
-        private void ShowImage(int i)
-        {
-            // Load image from file and show in imageControl
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            image.UriSource = new Uri(imagePaths[i], UriKind.RelativeOrAbsolute);
-            image.EndInit();
-            imageControl.Source = image;
-        }
-
-        private void PlayButton_Click(object sender, RoutedEventArgs e)
-        {
-            //mediaPlayer.Play();
-        }
-
-        private void PreviousImageButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (currentImageIndex == 0)
-            {
-                ShowImage(2);
-                currentImageIndex = 2;
-            }
-            else if (currentImageIndex > 0)
-            {
-                ShowImage(currentImageIndex - 1);
-                currentImageIndex--;
-            }
-        }
-
-        private void NextImageButton_Click(object sender, RoutedEventArgs e)
-        {
-            if(currentImageIndex < 2)
-            {
-                ShowImage(currentImageIndex + 1);
-                currentImageIndex++;
-            }
-            else if(currentImageIndex == 2)
-            {
-                ShowImage(0);
-                currentImageIndex = 0;
-            }    
-
-        }
+        }       
 
         #region Search
         private bool Filter(object item)
