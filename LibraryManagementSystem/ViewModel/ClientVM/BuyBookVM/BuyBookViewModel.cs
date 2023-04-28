@@ -26,6 +26,8 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
         public ICommand LoadNews { get; set; }
         public ICommand PreImage { get; set; }
         public ICommand NextImage { get; set; }
+        public ICommand LoadShoppingCart { get; set; }
+        public ICommand BackToShopping { get; set; }
         #region tempVar
         private List<string> imagePaths;
         private int currentImageIndex = 0;
@@ -143,6 +145,16 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                     ShowImage(0, p);
                     currentImageIndex = 0;
                 }
+            });
+
+            LoadShoppingCart = new RelayCommand<object>((p) => { return p != null; }, (p) =>
+            {
+                MainClientViewModel.main_frame_client.Content = new ShoppingCartPage();
+            });
+
+            BackToShopping = new RelayCommand<object>((p) => { return p != null; }, (p) =>
+            {
+                MainClientViewModel.main_frame_client.Content = new BuyBookPage();
             });
         }
         private void ShowImage(int i, Image imageControl)

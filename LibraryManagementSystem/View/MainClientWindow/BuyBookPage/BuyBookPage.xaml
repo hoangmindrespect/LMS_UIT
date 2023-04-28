@@ -76,7 +76,7 @@
                     <StackPanel>
                         <Border Background="#DFDCD7"  Width="auto" Height="150" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
                             <materialDesign:Card  Background="Transparent" >
-                                <MediaElement Source="C:\Users\Hoang\Downloads\lib.mp4"
+                                <MediaElement Source="/Resource/BuyBook/lib.mp4"
                                       IsMuted="True"
                                       Margin="10 -0 10 0"
                                       />
@@ -144,21 +144,14 @@
                     </Grid>
                 </materialDesign:ColorZone>
 
-                <Button HorizontalAlignment="Right" Margin="0 0 470 0"
+                <Button HorizontalAlignment="Right" Margin="0 0 470 0" Command="{Binding LoadShoppingCart}"
                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                        Style="{StaticResource MaterialDesignIconForegroundButton}"
+                        Style="{StaticResource MaterialDesignIconForegroundButton}" CommandParameter="{Binding ElementName=imageControl}"
                         ToolTip="MaterialDesignIconForegroundButton">
                     <materialDesign:PackIcon
                         Kind="CartOutline" />
                 </Button>
 
-                <!--<Button HorizontalAlignment="Right" Margin="0 0 420 0"
-                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                        Style="{StaticResource MaterialDesignIconForegroundButton}"
-                        ToolTip="MaterialDesignIconForegroundButton">
-                    <materialDesign:PackIcon
-                        Kind="Bell" />
-                </Button>-->
                 <Separator  Height="1" Background="#4E443A"  VerticalAlignment="Bottom" Margin="0 0 0 0"/>
 
             </Grid>

@@ -20,11 +20,16 @@ namespace LibraryManagementSystem.ViewModel.ClientVM
         #region ICommand
         public ICommand LoadBuyBookFirst { get; set; }
         #endregion
+
+        #region tempVar
+        public static Frame main_frame_client;
+        #endregion
         public MainClientViewModel()
         {
             LoadBuyBookFirst = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
             {
                 p.Content = new BuyBookPage();
+                main_frame_client = p;
             });
 
         }
