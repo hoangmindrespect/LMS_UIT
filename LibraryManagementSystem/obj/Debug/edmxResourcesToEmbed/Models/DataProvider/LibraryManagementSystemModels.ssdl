@@ -9,6 +9,7 @@
     <Property Name="FULLNAME" Type="nvarchar" MaxLength="50" />
     <Property Name="EMAILADDRESS" Type="nvarchar" MaxLength="70" />
     <Property Name="USERPASS" Type="varchar" MaxLength="50" />
+    <Property Name="ROLE" Type="int" />
   </EntityType>
   <EntityType Name="BOOK">
     <Key>

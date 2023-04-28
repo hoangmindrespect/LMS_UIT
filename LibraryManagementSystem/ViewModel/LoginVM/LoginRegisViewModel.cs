@@ -13,12 +13,18 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows;
+using System.Collections.ObjectModel;
+using LibraryManagementSystem.DTOs;
+using LibraryManagementSystem.View.MainClientWindow;
 
 namespace LibraryManagementSystem.ViewModel.LoginVM
 {
     public class LoginRegisViewModel : BaseViewModel
     {
         #region Property
+        public static DataGrid import_dtg;
+        public static ObservableCollection<ImportBook> listbook = new ObservableCollection<ImportBook>();
+
         private string _userName;
         public string UserName
         {
@@ -280,14 +286,22 @@ namespace LibraryManagementSystem.ViewModel.LoginVM
                     if (Password == pas)
                     {
                         loginwindow login = Application.Current.Windows.OfType<loginwindow>().FirstOrDefault();
+                        int role = (int)(from s in context.ACCOUNTs where s.USERNAME == UserName select s.ROLE).FirstOrDefault();
+                        if(role == 0)
+                        {
+                            MainWindowSystem w = new MainWindowSystem();
+                            w.Show();
 
-                        //login.blur_card.Visibility = Visibility.Visible;
-                        MainWindowSystem w = new MainWindowSystem();
-                        w.Show();
+                            login.Close();
+                        }  
+                        else if(role == 1)
+                        {
+                            MainClientWindow w = new MainClientWindow();
+                            w.Show();
 
-
-                        login.Close();
-                        //login.blur_card.Visibility= Visibility.Collapsed;
+                            login.Close();
+                        }
+                        
                     }
                     else if (Password != pas)
                     {
@@ -342,6 +356,7 @@ namespace LibraryManagementSystem.ViewModel.LoginVM
                         a.USERPASS = PasswordReg;
                         a.EMAILADDRESS = EmailReg;
                         a.FULLNAME = FullNameReg;
+                        a.ROLE = 1;
                         context.ACCOUNTs.Add(a);
                         context.SaveChanges();
 

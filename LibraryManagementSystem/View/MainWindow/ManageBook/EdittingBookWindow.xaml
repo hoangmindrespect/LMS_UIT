@@ -298,7 +298,6 @@
 
                             <Image Height="349"
                                     x:Name="image_img"
-                           
                                     Stretch="Fill" StretchDirection="Both" Width="251">
                             </Image>
 

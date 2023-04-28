@@ -4,6 +4,7 @@
     <EntitySetMapping Name="ACCOUNTs">
       <EntityTypeMapping TypeName="LMSModel.ACCOUNT">
         <MappingFragment StoreEntitySet="ACCOUNT">
+          <ScalarProperty Name="ROLE" ColumnName="ROLE" />
           <ScalarProperty Name="USERPASS" ColumnName="USERPASS" />
           <ScalarProperty Name="EMAILADDRESS" ColumnName="EMAILADDRESS" />
           <ScalarProperty Name="FULLNAME" ColumnName="FULLNAME" />
