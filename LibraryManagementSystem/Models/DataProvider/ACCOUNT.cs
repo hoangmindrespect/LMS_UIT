@@ -14,11 +14,31 @@ namespace LibraryManagementSystem.Models.DataProvider
     
     public partial class ACCOUNT
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ACCOUNT()
+        {
+            this.BBFORMs = new HashSet<BBFORM>();
+            this.BILLs = new HashSet<BILL>();
+            this.CARTs = new HashSet<CART>();
+            this.IMPORTs = new HashSet<IMPORT>();
+        }
+    
         public int ID { get; set; }
         public string USERNAME { get; set; }
         public string FULLNAME { get; set; }
         public string EMAILADDRESS { get; set; }
         public string USERPASS { get; set; }
+        public string MSSV { get; set; }
         public Nullable<int> ROLE { get; set; }
+        public string IDCLASS { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BBFORM> BBFORMs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BILL> BILLs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CART> CARTs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<IMPORT> IMPORTs { get; set; }
     }
 }

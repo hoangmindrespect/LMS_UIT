@@ -1,4 +1,5 @@
-﻿using LibraryManagementSystem.DTOs;
+﻿using DocumentFormat.OpenXml.Presentation;
+using LibraryManagementSystem.DTOs;
 using LibraryManagementSystem.Models.DataProvider;
 using LibraryManagementSystem.View.MainClientWindow.BuyBookPage;
 using System;
@@ -15,6 +16,15 @@ namespace LibraryManagementSystem.ViewModel.ClientVM
     public class MainClientViewModel:BaseViewModel
     {
         #region Property
+        private static ClientDTO _CurrentCustomer;
+        public static ClientDTO CurrentCustomer
+        {
+            get { return _CurrentCustomer; }
+            set
+            {
+                _CurrentCustomer = value;
+            }
+        }
         #endregion
 
         #region ICommand

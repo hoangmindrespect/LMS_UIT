@@ -241,7 +241,7 @@ namespace LibraryManagementSystem.ViewModel.LoginVM
                     p.Visibility = Visibility.Hidden;
 
                     //write new password into database
-                    using (var context = new LMSEntities())
+                    using (var context = new LMSEntities1())
                     {
                         foreach (var acc in context.ACCOUNTs)
                         {
@@ -281,7 +281,7 @@ namespace LibraryManagementSystem.ViewModel.LoginVM
                 }
                 else
                 {
-                    LMSEntities context = new LMSEntities();
+                    LMSEntities1 context = new LMSEntities1();
                     string pas = (from s in context.ACCOUNTs where s.USERNAME == UserName select s.USERPASS).FirstOrDefault();
                     if (Password == pas)
                     {
@@ -349,7 +349,7 @@ namespace LibraryManagementSystem.ViewModel.LoginVM
                 }
                 else
                 {
-                    using (var context = new LMSEntities())
+                    using (var context = new LMSEntities1())
                     {
                         ACCOUNT a = new ACCOUNT();
                         a.USERNAME = UsernameReg;

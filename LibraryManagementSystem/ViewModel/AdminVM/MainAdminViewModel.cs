@@ -1,4 +1,8 @@
-﻿using LibraryManagementSystem.View.MainWindow.ImportBook;
+﻿using DocumentFormat.OpenXml.ExtendedProperties;
+using LibraryManagementSystem.View.Login;
+using LibraryManagementSystem.View.MainWindow;
+using LibraryManagementSystem.View.MainWindow.BorrowBook;
+using LibraryManagementSystem.View.MainWindow.ImportBook;
 using LibraryManagementSystem.View.MainWindow.ManageBook;
 using LibraryManagementSystem.View.MainWindow.Statistical;
 using System;
@@ -6,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -25,6 +30,9 @@ namespace LibraryManagementSystem.ViewModel.AdminVM
         public ICommand LoadStatisticalFirst { get; set; }
         public ICommand LoadManageBook { get; set; }
         public ICommand LoadImportPage { get; set; }
+        public ICommand LoadBorrowBookPage { get; set; }
+        public ICommand LoadManageBorrowBookPage { get; set; }
+        public ICommand Logout { get; set; }
         public MainAdminViewModel()
         {
             System.Windows.Threading.DispatcherTimer Timer = new System.Windows.Threading.DispatcherTimer();
@@ -45,6 +53,28 @@ namespace LibraryManagementSystem.ViewModel.AdminVM
             LoadImportPage = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
                 p.Content = new ImportBookPage();
+            });
+
+            LoadBorrowBookPage = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            {
+                p.Content = new BorrowBookPage();
+            });
+
+            LoadManageBorrowBookPage = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            {
+                p.Content = new ManageBorrowBookPage();
+            });
+            Logout = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+
+                loginwindow w = new loginwindow();
+                w.Show();
+
+
+                MainWindowSystem pk = System.Windows.Application.Current.Windows.OfType<MainWindowSystem>().FirstOrDefault();
+                pk.Close();
+                
+
             });
         }
 

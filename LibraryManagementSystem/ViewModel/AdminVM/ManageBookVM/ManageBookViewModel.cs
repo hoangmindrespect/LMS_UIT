@@ -145,7 +145,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageBookVM
             {
                 BookDTO item = p.Items[p.SelectedIndex] as BookDTO;
                 string masach = item.MaSach.ToString();
-                using (var context = new LMSEntities())
+                using (var context = new LMSEntities1())
                 {
                     string connectionStr = context.Database.Connection.ConnectionString;
                     SqlConnection connect = new SqlConnection(connectionStr);
@@ -245,7 +245,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageBookVM
             Updating = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                 string ID = EdittingBookWindow.masach;
-                using (var context = new LMSEntities())
+                using (var context = new LMSEntities1())
                 {
                     foreach(var book in context.BOOKs)
                     {
@@ -283,7 +283,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageBookVM
         public void Loaded(DataGrid p)
         {
             Listbookmanage = new ObservableCollection<BookDTO>();
-            using (var context = new LMSEntities())
+            using (var context = new LMSEntities1())
             {
                 foreach (var item in context.BOOKs)
                 {

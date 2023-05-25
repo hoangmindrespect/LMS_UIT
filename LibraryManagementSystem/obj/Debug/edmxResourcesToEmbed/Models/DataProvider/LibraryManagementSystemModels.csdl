@@ -1,9 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="LMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityContainer Name="LMSEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="ACCOUNTs" EntityType="LMSModel.ACCOUNT" />
-    <EntitySet Name="BOOKs" EntityType="LMSModel.BOOK" />
-  </EntityContainer>
+<Schema Namespace="lmsDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="ACCOUNT">
     <Key>
       <PropertyRef Name="ID" />
@@ -13,7 +9,37 @@
     <Property Name="FULLNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="EMAILADDRESS" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
     <Property Name="USERPASS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MSSV" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="ROLE" Type="Int32" />
+    <Property Name="IDCLASS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="BBFORMs" Relationship="Self.FK__BBFORM__MAKH__55009F39" FromRole="ACCOUNT" ToRole="BBFORM" />
+    <NavigationProperty Name="BILLs" Relationship="Self.FK__BILL__MAKH__44CA3770" FromRole="ACCOUNT" ToRole="BILL" />
+    <NavigationProperty Name="CARTs" Relationship="Self.FK__CART__MAKH__5224328E" FromRole="ACCOUNT" ToRole="CART" />
+    <NavigationProperty Name="IMPORTs" Relationship="Self.FK__IMPORT__MANV__4B7734FF" FromRole="ACCOUNT" ToRole="IMPORT" />
+  </EntityType>
+  <EntityType Name="BBFORM">
+    <Key>
+      <PropertyRef Name="MAPHIEUMUON" />
+    </Key>
+    <Property Name="MAPHIEUMUON" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MAKH" Type="Int32" />
+    <Property Name="MASACH" Type="Int32" />
+    <Property Name="SOLUONG" Type="Int32" />
+    <Property Name="NGAYMUON" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="NGAYHETHAN" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="ACCOUNT" Relationship="Self.FK__BBFORM__MAKH__55009F39" FromRole="BBFORM" ToRole="ACCOUNT" />
+    <NavigationProperty Name="BOOK" Relationship="Self.FK__BBFORM__MASACH__55F4C372" FromRole="BBFORM" ToRole="BOOK" />
+  </EntityType>
+  <EntityType Name="BILL">
+    <Key>
+      <PropertyRef Name="MAHD" />
+    </Key>
+    <Property Name="MAHD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NGHD" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="MAKH" Type="Int32" />
+    <Property Name="TRIGIA" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="ACCOUNT" Relationship="Self.FK__BILL__MAKH__44CA3770" FromRole="BILL" ToRole="ACCOUNT" />
+    <NavigationProperty Name="CTHDs" Relationship="Self.FK__CTHD__MAHD__47A6A41B" FromRole="BILL" ToRole="CTHD" />
   </EntityType>
   <EntityType Name="BOOK">
     <Key>
@@ -29,5 +55,236 @@
     <Property Name="GIA" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="MOTA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="IMAGESOURCE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="BBFORMs" Relationship="Self.FK__BBFORM__MASACH__55F4C372" FromRole="BOOK" ToRole="BBFORM" />
+    <NavigationProperty Name="CARTs" Relationship="Self.FK__CART__MASACH__51300E55" FromRole="BOOK" ToRole="CART" />
+    <NavigationProperty Name="CTHDs" Relationship="Self.FK__CTHD__MASACH__489AC854" FromRole="BOOK" ToRole="CTHD" />
   </EntityType>
+  <EntityType Name="BuildVersion">
+    <Key>
+      <PropertyRef Name="SystemInformationID" />
+    </Key>
+    <Property Name="SystemInformationID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Database_Version" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="VersionDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="CART">
+    <Key>
+      <PropertyRef Name="MASACH" />
+      <PropertyRef Name="MAKH" />
+    </Key>
+    <Property Name="MASACH" Type="Int32" Nullable="false" />
+    <Property Name="MAKH" Type="Int32" Nullable="false" />
+    <Property Name="SOLUONGHT" Type="Int32" />
+    <NavigationProperty Name="ACCOUNT" Relationship="Self.FK__CART__MAKH__5224328E" FromRole="CART" ToRole="ACCOUNT" />
+    <NavigationProperty Name="BOOK" Relationship="Self.FK__CART__MASACH__51300E55" FromRole="CART" ToRole="BOOK" />
+  </EntityType>
+  <EntityType Name="CTHD">
+    <Key>
+      <PropertyRef Name="MAHD" />
+      <PropertyRef Name="MASACH" />
+    </Key>
+    <Property Name="MAHD" Type="Int32" Nullable="false" />
+    <Property Name="MASACH" Type="Int32" Nullable="false" />
+    <Property Name="SOLUONG" Type="Int32" />
+    <NavigationProperty Name="BILL" Relationship="Self.FK__CTHD__MAHD__47A6A41B" FromRole="CTHD" ToRole="BILL" />
+    <NavigationProperty Name="BOOK" Relationship="Self.FK__CTHD__MASACH__489AC854" FromRole="CTHD" ToRole="BOOK" />
+  </EntityType>
+  <EntityType Name="DETAIIMPORT">
+    <Key>
+      <PropertyRef Name="SOHD" />
+      <PropertyRef Name="TENSACH" />
+      <PropertyRef Name="NXB" />
+      <PropertyRef Name="TACGIA" />
+    </Key>
+    <Property Name="SOHD" Type="Int32" Nullable="false" />
+    <Property Name="TENSACH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NXB" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TACGIA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SL" Type="Int32" />
+    <Property Name="GIANHAP" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="GIABAN" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="IMPORT" Relationship="Self.FK__DETAIIMPOR__SOHD__4E53A1AA" FromRole="DETAIIMPORT" ToRole="IMPORT" />
+  </EntityType>
+  <EntityType Name="ErrorLog">
+    <Key>
+      <PropertyRef Name="ErrorLogID" />
+    </Key>
+    <Property Name="ErrorLogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ErrorTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UserName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ErrorNumber" Type="Int32" Nullable="false" />
+    <Property Name="ErrorSeverity" Type="Int32" />
+    <Property Name="ErrorState" Type="Int32" />
+    <Property Name="ErrorProcedure" Type="String" MaxLength="126" FixedLength="false" Unicode="true" />
+    <Property Name="ErrorLine" Type="Int32" />
+    <Property Name="ErrorMessage" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IMPORT">
+    <Key>
+      <PropertyRef Name="SOHD" />
+    </Key>
+    <Property Name="SOHD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MANV" Type="Int32" />
+    <Property Name="NGNHAP" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="TRIGIA" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="ACCOUNT" Relationship="Self.FK__IMPORT__MANV__4B7734FF" FromRole="IMPORT" ToRole="ACCOUNT" />
+    <NavigationProperty Name="DETAIIMPORTs" Relationship="Self.FK__DETAIIMPOR__SOHD__4E53A1AA" FromRole="IMPORT" ToRole="DETAIIMPORT" />
+  </EntityType>
+  <Association Name="FK__BBFORM__MAKH__55009F39">
+    <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
+    <End Role="BBFORM" Type="Self.BBFORM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ACCOUNT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BBFORM">
+        <PropertyRef Name="MAKH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BILL__MAKH__44CA3770">
+    <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
+    <End Role="BILL" Type="Self.BILL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ACCOUNT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BILL">
+        <PropertyRef Name="MAKH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CART__MAKH__5224328E">
+    <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="1" />
+    <End Role="CART" Type="Self.CART" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ACCOUNT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CART">
+        <PropertyRef Name="MAKH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__IMPORT__MANV__4B7734FF">
+    <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
+    <End Role="IMPORT" Type="Self.IMPORT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ACCOUNT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="IMPORT">
+        <PropertyRef Name="MANV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BBFORM__MASACH__55F4C372">
+    <End Role="BOOK" Type="Self.BOOK" Multiplicity="0..1" />
+    <End Role="BBFORM" Type="Self.BBFORM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BOOK">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BBFORM">
+        <PropertyRef Name="MASACH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CTHD__MAHD__47A6A41B">
+    <End Role="BILL" Type="Self.BILL" Multiplicity="1" />
+    <End Role="CTHD" Type="Self.CTHD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BILL">
+        <PropertyRef Name="MAHD" />
+      </Principal>
+      <Dependent Role="CTHD">
+        <PropertyRef Name="MAHD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CART__MASACH__51300E55">
+    <End Role="BOOK" Type="Self.BOOK" Multiplicity="1" />
+    <End Role="CART" Type="Self.CART" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BOOK">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CART">
+        <PropertyRef Name="MASACH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CTHD__MASACH__489AC854">
+    <End Role="BOOK" Type="Self.BOOK" Multiplicity="1" />
+    <End Role="CTHD" Type="Self.CTHD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BOOK">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CTHD">
+        <PropertyRef Name="MASACH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DETAIIMPOR__SOHD__4E53A1AA">
+    <End Role="IMPORT" Type="Self.IMPORT" Multiplicity="1" />
+    <End Role="DETAIIMPORT" Type="Self.DETAIIMPORT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IMPORT">
+        <PropertyRef Name="SOHD" />
+      </Principal>
+      <Dependent Role="DETAIIMPORT">
+        <PropertyRef Name="SOHD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LMSEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ACCOUNTs" EntityType="Self.ACCOUNT" />
+    <EntitySet Name="BBFORMs" EntityType="Self.BBFORM" />
+    <EntitySet Name="BILLs" EntityType="Self.BILL" />
+    <EntitySet Name="BOOKs" EntityType="Self.BOOK" />
+    <EntitySet Name="BuildVersions" EntityType="Self.BuildVersion" />
+    <EntitySet Name="CARTs" EntityType="Self.CART" />
+    <EntitySet Name="CTHDs" EntityType="Self.CTHD" />
+    <EntitySet Name="DETAIIMPORTs" EntityType="Self.DETAIIMPORT" />
+    <EntitySet Name="ErrorLogs" EntityType="Self.ErrorLog" />
+    <EntitySet Name="IMPORTs" EntityType="Self.IMPORT" />
+    <AssociationSet Name="FK__BBFORM__MAKH__55009F39" Association="Self.FK__BBFORM__MAKH__55009F39">
+      <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+      <End Role="BBFORM" EntitySet="BBFORMs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BILL__MAKH__44CA3770" Association="Self.FK__BILL__MAKH__44CA3770">
+      <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+      <End Role="BILL" EntitySet="BILLs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CART__MAKH__5224328E" Association="Self.FK__CART__MAKH__5224328E">
+      <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+      <End Role="CART" EntitySet="CARTs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__IMPORT__MANV__4B7734FF" Association="Self.FK__IMPORT__MANV__4B7734FF">
+      <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+      <End Role="IMPORT" EntitySet="IMPORTs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BBFORM__MASACH__55F4C372" Association="Self.FK__BBFORM__MASACH__55F4C372">
+      <End Role="BOOK" EntitySet="BOOKs" />
+      <End Role="BBFORM" EntitySet="BBFORMs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CTHD__MAHD__47A6A41B" Association="Self.FK__CTHD__MAHD__47A6A41B">
+      <End Role="BILL" EntitySet="BILLs" />
+      <End Role="CTHD" EntitySet="CTHDs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CART__MASACH__51300E55" Association="Self.FK__CART__MASACH__51300E55">
+      <End Role="BOOK" EntitySet="BOOKs" />
+      <End Role="CART" EntitySet="CARTs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CTHD__MASACH__489AC854" Association="Self.FK__CTHD__MASACH__489AC854">
+      <End Role="BOOK" EntitySet="BOOKs" />
+      <End Role="CTHD" EntitySet="CTHDs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DETAIIMPOR__SOHD__4E53A1AA" Association="Self.FK__DETAIIMPOR__SOHD__4E53A1AA">
+      <End Role="IMPORT" EntitySet="IMPORTs" />
+      <End Role="DETAIIMPORT" EntitySet="DETAIIMPORTs" />
+    </AssociationSet>
+  </EntityContainer>
 </Schema>

@@ -5,8 +5,9 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LibraryManagementSystem.View.MainWindow.BorrowBook"
       mc:Ignorable="d" 
-      DataContext="{StaticResource ManageBookVM}"
-      xmlns:uc="clr-namespace:LibraryManagementSystem.ControlBar"
+      xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+      xmlns:uc="clr-namespace:LibraryManagementSystem.View.MainWindow.BorrowBook"
+      DataContext="{StaticResource BorrowVM}"
       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
       TextElement.FontWeight="Regular"
       TextElement.FontSize="13"
@@ -16,52 +17,291 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:i = "http://schemas.microsoft.com/expression/2010/interactivity"
       Background="Transparent"
+      Name="BookBorrow"
       d:DesignHeight="626" d:DesignWidth="967"
       Title="BorrowBookPage">
-
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="170"/>
+            <ColumnDefinition Width="1.7*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.RowSpan="2">
-            <TextBlock Text="Shoes Store" HorizontalAlignment="Center" Margin="10" FontSize="28"/>
+
+        <Grid Grid.Column="0">
+            <ScrollViewer Grid.Row="1">
+                <ItemsControl  ItemsSource="{Binding Books}" x:Name="ListViewProducts" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <uc:Item2 Source ="{Binding ImageSource}" Title="{Binding TenSach}" Ref="available" Count="{Binding SoLuong}" Price="{Binding Gia}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </ScrollViewer>
         </Grid>
-        <ScrollViewer Grid.Column="1" Grid.Row="1" Background="#FFF1F1F1">
-            <StackPanel>
-                <TextBlock Text="Items" Margin="10" FontSize="22" FontWeight="Medium"/>
-                <StackPanel Margin="20 0">
-                    <ItemsControl x:Name="ListViewProducts" ItemsSource="{Binding Product}">
-                        <ItemsControl.ItemTemplate>
+
+        <Border Grid.Column="1" 
+                BorderBrush="#4E443A" 
+                BorderThickness="3"
+                CornerRadius="0 0 20 0" 
+                Margin="5" Background="#D6D1CC"
+                >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="170"/>
+                    <RowDefinition Height="34"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="34"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Label Content="Book order form"
+                           BorderBrush="#4E443A"
+                           FontFamily="Montserrat"
+                           VerticalAlignment="Center"
+                           FontSize="30"
+                           HorizontalAlignment="Center"
+                           />
+
+                    <Rectangle VerticalAlignment="Bottom" Fill="#4E443A" Height="1"  Margin="10 0 10 0"/>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--Thông tin bên trái-->
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+
+                        </Grid.RowDefinitions>
+                       
+                        <Grid Grid.Row="0">
+                            <Label Content="ID student: "
+                                    BorderBrush="#4E443A"
+                                    FontFamily="Montserrat"
+                                    VerticalAlignment="Center"
+                                    FontSize="15"
+                                   Margin="30 0 0 0"
+                                    HorizontalAlignment="Left"
+                           />
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Label Content="Name: "
+                                    BorderBrush="#4E443A"
+                                    FontFamily="Montserrat"
+                                    VerticalAlignment="Center"
+                                    FontSize="15"
+                                    Margin="30 0 0 0"
+                                    HorizontalAlignment="Left"
+                           />
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Label Content="ID class: "
+                                    BorderBrush="#4E443A"
+                                    FontFamily="Montserrat"
+                                    VerticalAlignment="Center"
+                                    FontSize="15"
+                                    Margin="30 0 0 0"
+                                    HorizontalAlignment="Left"
+                           />
+                        </Grid>
+
+                        <Grid Grid.Row="3">
+                            <Label Content="Book borrow day: "
+                                    BorderBrush="#4E443A"
+                                    FontFamily="Montserrat"
+                                    VerticalAlignment="Center"
+                                    FontSize="15"
+                                    Margin="30 0 0 0"
+                                    HorizontalAlignment="Left"
+                           />
+                        </Grid>
+
+                        <Grid Grid.Row="4">
+                            <Label Content="Book return day: "
+                                    BorderBrush="#4E443A"
+                                    FontFamily="Montserrat"
+                                    VerticalAlignment="Center"
+                                    FontSize="15"
+                                    Margin="30 0 0 0"
+                                    HorizontalAlignment="Left"
+                           />
+                        </Grid>
+                    </Grid>
+                    
+                    <!--Thông tin bên phải-->
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <StackPanel Orientation="Horizontal" Margin="23 0 0 0"
+                                    HorizontalAlignment="Left">
+                                <TextBox Width="100"
+                                    BorderBrush="#4E443A"
+                                    Text="{Binding ID}"
+                                    SelectionBrush="#4E443A"
+                                    materialDesign:TextFieldAssist.UnderlineBrush="#4E443A"
+                                    FontFamily="Montserrat"
+                                    VerticalAlignment="Center"
+                                    FontSize="15"
+                                />
+                                <Button
+                                    Width="35" 
+                                    Foreground="#4E443A"
+                                    Padding="5" 
+                                    Command="{Binding CheckID}" 
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Page}}"
+                                    Style="{StaticResource MaterialDesignFlatSecondaryButton}"
+                                    ToolTip="MaterialDesignFlatButton" >
+                                    <materialDesign:PackIcon Kind="CheckOutline" />
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Label Content="{Binding Name}"
+                                    BorderBrush="#4E443A"
+                                    FontFamily="Montserrat"
+                                    VerticalAlignment="Center"
+                                    FontSize="15"
+                                    Margin="20 0 0 0"
+                                    HorizontalAlignment="Left"
+                           />
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Label Content="{Binding IDClass}"
+                                    BorderBrush="#4E443A"
+                                    FontFamily="Montserrat"
+                                    VerticalAlignment="Center"
+                                    FontSize="15"
+                                    Margin="20 0 0 0"
+                                    HorizontalAlignment="Left"
+                           />
+                        </Grid>
+
+                        <Grid Grid.Row="3">
+                            <Label Content="{Binding StartDay}"
+                                    BorderBrush="#4E443A"
+                                    FontFamily="Montserrat"
+                                    VerticalAlignment="Center"
+                                    FontSize="15"
+                                    Margin="20 0 0 0"
+                                    HorizontalAlignment="Left"
+                           />
+                        </Grid>
+
+                        <Grid Grid.Row="4">
+                            <Label Content="{Binding DueDay}"
+                                    BorderBrush="#4E443A"
+                                    FontFamily="Montserrat"
+                                    VerticalAlignment="Center"
+                                    FontSize="15"
+                                    Margin="20 0 0 0"
+                                    HorizontalAlignment="Left"
+                           />
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Label Content="Details: "
+                                    BorderBrush="#4E443A"
+                                    FontFamily="Montserrat"
+                                    VerticalAlignment="Center"
+                                    FontSize="15"
+                                    FontWeight="DemiBold"
+                                    FontStyle="Italic"
+                                    Margin="30 0 0 0"
+                                    HorizontalAlignment="Left"
+                           />
+                    <Rectangle VerticalAlignment="Bottom" Fill="#4E443A" Height="1"  Margin="10 0 10 0"/>
+
+                </Grid>
+
+                <Grid Grid.Row="2" Margin="0,29,0,5" Grid.RowSpan="2">
+                    <Rectangle VerticalAlignment="Bottom" Fill="#4E443A" Height="2"  Margin="10 1 10 0"/>
+                    <ListView ItemsSource="{Binding ListBookBorrow}" Name="xy" Margin="10">
+
+                        <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Border Margin="10" Width="110" Height="160">
-                                    <StackPanel>
-                                        <Border Width="100" Height="100" CornerRadius="5" Margin="5">
-                                            <Border.Effect>
-                                                <DropShadowEffect ShadowDepth="1"/>
-                                            </Border.Effect>
-                                            <Border.Background>
-                                                <ImageBrush ImageSource="{Binding Image}"/>
-                                            </Border.Background>
-                                        </Border>
-                                        <TextBlock Margin="5" Text="{Binding Value, StringFormat={}{0:C}}" FontSize="17" FontFamily="Franklin Gothic Medium"/>
-                                        <TextBlock Margin="5 0" Text="{Binding Name}" FontSize="15"/>
-                                    </StackPanel>
-                                </Border>
+                                <StackPanel Orientation="Horizontal">
+                                    <!-- Các thành phần khác trong mỗi dòng của ListView -->
+                                    <TextBlock Text="{Binding TenSach}" Width="178" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                    <Button Margin="25 0 0 0"
+                                            Width="20" 
+                                            Height="20"
+                                            Foreground="#4E443A"
+                                            Padding="0" 
+                                            VerticalAlignment="Center"
+                                            Command="{Binding CheckID}" 
+                                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Page}}"
+                                            Style="{StaticResource MaterialDesignFlatSecondaryButton}"
+                                            ToolTip="MaterialDesignFlatButton" >
+                                        <materialDesign:PackIcon Kind="PlusThick" />
+                                    </Button>
+                                    <Label Content="{Binding SoLuong}" Width="25" BorderBrush="#4E443A" BorderThickness="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10 0 0 0"/>
+                                    <!-- Button -->
+                                    <Button Margin="10 0 0 0"
+                                            Width="20" Height="20"
+                                            Foreground="#4E443A"
+                                            Padding="0" 
+                                            VerticalAlignment="Center"
+                                            Command="{Binding CheckID}" 
+                                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Page}}"
+                                            Style="{StaticResource MaterialDesignFlatSecondaryButton}"
+                                            ToolTip="MaterialDesignFlatButton" >
+                                        <materialDesign:PackIcon Kind="MinusThick" />
+                                    </Button>
+                                </StackPanel>
                             </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </StackPanel>
-            </StackPanel>
-          </ScrollViewer>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+
+                <Grid Grid.Row="4">
+                    <Button VerticalAlignment="Top"
+                        Width="100"
+                        
+                        BorderBrush="#4E443A"
+                        Foreground="#4E443A"
+                        Content="Confirm"
+                        
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                        Style="{StaticResource MaterialDesignOutlinedDarkButton}"
+                        ToolTip="MaterialDesignOutlinedButton" />
+                </Grid>
+            </Grid>
+            
+            
+        </Border>
     </Grid>
+
+   
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadBook}"
+                                       CommandParameter="{Binding ElementName=ListViewProducts}" />
+            <i:InvokeCommandAction Command="{Binding LoadBookBorrow}"
+                                       CommandParameter="{Binding ElementName=xy}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 </Page>
