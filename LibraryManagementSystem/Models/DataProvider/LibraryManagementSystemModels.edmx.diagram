@@ -4,9 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="01518167588d4eac9e7f7be3bae78d03" Name="Diagram1">
-        <EntityTypeShape EntityType="LMSModel.ACCOUNT" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="LMSModel.BOOK" Width="1.5" PointX="2.75" PointY="0.75" />
+      <Diagram DiagramId="d1012c04adf2467d8dd61c9086b8d370" Name="Diagram1">
+        <EntityTypeShape EntityType="lmsDatabaseModel.ACCOUNT" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.BBFORM" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.BILL" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.BOOK" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.BuildVersion" Width="1.5" PointX="2.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.CART" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.CTHD" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.DETAIIMPORT" Width="1.5" PointX="5.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.ErrorLog" Width="1.5" PointX="7.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.IMPORT" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
+        <AssociationConnector Association="lmsDatabaseModel.FK__BBFORM__MAKH__55009F39" ManuallyRouted="false" />
+        <AssociationConnector Association="lmsDatabaseModel.FK__BILL__MAKH__44CA3770" ManuallyRouted="false" />
+        <AssociationConnector Association="lmsDatabaseModel.FK__CART__MAKH__5224328E" ManuallyRouted="false" />
+        <AssociationConnector Association="lmsDatabaseModel.FK__IMPORT__MANV__4B7734FF" ManuallyRouted="false" />
+        <AssociationConnector Association="lmsDatabaseModel.FK__BBFORM__MASACH__55F4C372" ManuallyRouted="false" />
+        <AssociationConnector Association="lmsDatabaseModel.FK__CTHD__MAHD__47A6A41B" ManuallyRouted="false" />
+        <AssociationConnector Association="lmsDatabaseModel.FK__CART__MASACH__51300E55" ManuallyRouted="false" />
+        <AssociationConnector Association="lmsDatabaseModel.FK__CTHD__MASACH__489AC854" ManuallyRouted="false" />
+        <AssociationConnector Association="lmsDatabaseModel.FK__DETAIIMPOR__SOHD__4E53A1AA" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

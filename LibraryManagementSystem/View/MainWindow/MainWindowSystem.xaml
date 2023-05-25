@@ -107,23 +107,23 @@
                                             </StackPanel>
                                         </Button>
 
-                                        <Button Style="{StaticResource menuButton}">
+                                        <Button Style="{StaticResource menuButton}" Command="{Binding LoadBorrowBookPage}" CommandParameter="{Binding ElementName=mainFrame}">
                                             <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="CreditCard"  Margin="5 0 0 0"/>
-                                                <TextBlock Text="Wallet" Margin="10 0 0 0" VerticalAlignment="Center"/>
+                                                <materialDesign:PackIcon Kind="Bookshelf"  Margin="5 0 0 0"/>
+                                                <TextBlock Text="Borrow book" Margin="10 0 0 0" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button>
 
-                                        <Button Style="{StaticResource menuButton}">
+                                        <Button Style="{StaticResource menuButton}" Command="{Binding LoadManageBorrowBookPage}" CommandParameter="{Binding ElementName=mainFrame}" >
                                             <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="MessageText"  Margin="5 0 0 0"/>
-                                                <TextBlock Text="Messages" Margin="10 0 0 0" VerticalAlignment="Center"/>
+                                                <materialDesign:PackIcon Kind="BookCheck"  Margin="5 0 0 0"/>
+                                                <TextBlock Text="Borrowing and returning" Margin="10 0 0 0" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button>
 
                                     </StackPanel>
 
-                                    <Button Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20">
+                                    <Button Style="{StaticResource menuButton}" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Margin="15 0 15 20" Command="{Binding Logout}">
                                         <StackPanel Orientation="Horizontal">
                                             <materialDesign:PackIcon  Margin="5 0 0 0" Kind="Logout"/>
                                             <TextBlock Text="Logout"/>

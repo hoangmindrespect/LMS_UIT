@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="LMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="lmsDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="ACCOUNT">
     <Key>
       <PropertyRef Name="ID" />
@@ -9,7 +9,29 @@
     <Property Name="FULLNAME" Type="nvarchar" MaxLength="50" />
     <Property Name="EMAILADDRESS" Type="nvarchar" MaxLength="70" />
     <Property Name="USERPASS" Type="varchar" MaxLength="50" />
+    <Property Name="MSSV" Type="varchar" MaxLength="20" />
     <Property Name="ROLE" Type="int" />
+    <Property Name="IDCLASS" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="BBFORM">
+    <Key>
+      <PropertyRef Name="MAPHIEUMUON" />
+    </Key>
+    <Property Name="MAPHIEUMUON" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MAKH" Type="int" />
+    <Property Name="MASACH" Type="int" />
+    <Property Name="SOLUONG" Type="int" />
+    <Property Name="NGAYMUON" Type="smalldatetime" Nullable="false" />
+    <Property Name="NGAYHETHAN" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="BILL">
+    <Key>
+      <PropertyRef Name="MAHD" />
+    </Key>
+    <Property Name="MAHD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NGHD" Type="smalldatetime" Nullable="false" />
+    <Property Name="MAKH" Type="int" />
+    <Property Name="TRIGIA" Type="money" />
   </EntityType>
   <EntityType Name="BOOK">
     <Key>
@@ -26,8 +48,225 @@
     <Property Name="MOTA" Type="nvarchar" MaxLength="50" />
     <Property Name="IMAGESOURCE" Type="nvarchar" MaxLength="100" />
   </EntityType>
-  <EntityContainer Name="LMSModelStoreContainer">
+  <EntityType Name="BuildVersion">
+    <Key>
+      <PropertyRef Name="SystemInformationID" />
+    </Key>
+    <Property Name="SystemInformationID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Database Version" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="VersionDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CART">
+    <Key>
+      <PropertyRef Name="MASACH" />
+      <PropertyRef Name="MAKH" />
+    </Key>
+    <Property Name="MASACH" Type="int" Nullable="false" />
+    <Property Name="MAKH" Type="int" Nullable="false" />
+    <Property Name="SOLUONGHT" Type="int" />
+  </EntityType>
+  <EntityType Name="CTHD">
+    <Key>
+      <PropertyRef Name="MAHD" />
+      <PropertyRef Name="MASACH" />
+    </Key>
+    <Property Name="MAHD" Type="int" Nullable="false" />
+    <Property Name="MASACH" Type="int" Nullable="false" />
+    <Property Name="SOLUONG" Type="int" />
+  </EntityType>
+  <EntityType Name="DETAIIMPORT">
+    <Key>
+      <PropertyRef Name="SOHD" />
+      <PropertyRef Name="TENSACH" />
+      <PropertyRef Name="NXB" />
+      <PropertyRef Name="TACGIA" />
+    </Key>
+    <Property Name="SOHD" Type="int" Nullable="false" />
+    <Property Name="TENSACH" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NXB" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TACGIA" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SL" Type="int" />
+    <Property Name="GIANHAP" Type="money" />
+    <Property Name="GIABAN" Type="money" />
+  </EntityType>
+  <EntityType Name="ErrorLog">
+    <Key>
+      <PropertyRef Name="ErrorLogID" />
+    </Key>
+    <Property Name="ErrorLogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ErrorTime" Type="datetime" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ErrorNumber" Type="int" Nullable="false" />
+    <Property Name="ErrorSeverity" Type="int" />
+    <Property Name="ErrorState" Type="int" />
+    <Property Name="ErrorProcedure" Type="nvarchar" MaxLength="126" />
+    <Property Name="ErrorLine" Type="int" />
+    <Property Name="ErrorMessage" Type="nvarchar" MaxLength="4000" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IMPORT">
+    <Key>
+      <PropertyRef Name="SOHD" />
+    </Key>
+    <Property Name="SOHD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MANV" Type="int" />
+    <Property Name="NGNHAP" Type="smalldatetime" Nullable="false" />
+    <Property Name="TRIGIA" Type="money" />
+  </EntityType>
+  <Association Name="FK__BBFORM__MAKH__55009F39">
+    <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
+    <End Role="BBFORM" Type="Self.BBFORM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ACCOUNT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BBFORM">
+        <PropertyRef Name="MAKH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BBFORM__MASACH__55F4C372">
+    <End Role="BOOK" Type="Self.BOOK" Multiplicity="0..1" />
+    <End Role="BBFORM" Type="Self.BBFORM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BOOK">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BBFORM">
+        <PropertyRef Name="MASACH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BILL__MAKH__44CA3770">
+    <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
+    <End Role="BILL" Type="Self.BILL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ACCOUNT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BILL">
+        <PropertyRef Name="MAKH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CART__MAKH__5224328E">
+    <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="1" />
+    <End Role="CART" Type="Self.CART" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ACCOUNT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CART">
+        <PropertyRef Name="MAKH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CART__MASACH__51300E55">
+    <End Role="BOOK" Type="Self.BOOK" Multiplicity="1" />
+    <End Role="CART" Type="Self.CART" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BOOK">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CART">
+        <PropertyRef Name="MASACH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CTHD__MAHD__47A6A41B">
+    <End Role="BILL" Type="Self.BILL" Multiplicity="1" />
+    <End Role="CTHD" Type="Self.CTHD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BILL">
+        <PropertyRef Name="MAHD" />
+      </Principal>
+      <Dependent Role="CTHD">
+        <PropertyRef Name="MAHD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CTHD__MASACH__489AC854">
+    <End Role="BOOK" Type="Self.BOOK" Multiplicity="1" />
+    <End Role="CTHD" Type="Self.CTHD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BOOK">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CTHD">
+        <PropertyRef Name="MASACH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DETAIIMPOR__SOHD__4E53A1AA">
+    <End Role="IMPORT" Type="Self.IMPORT" Multiplicity="1" />
+    <End Role="DETAIIMPORT" Type="Self.DETAIIMPORT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IMPORT">
+        <PropertyRef Name="SOHD" />
+      </Principal>
+      <Dependent Role="DETAIIMPORT">
+        <PropertyRef Name="SOHD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__IMPORT__MANV__4B7734FF">
+    <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
+    <End Role="IMPORT" Type="Self.IMPORT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ACCOUNT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="IMPORT">
+        <PropertyRef Name="MANV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="lmsDatabaseModelStoreContainer">
     <EntitySet Name="ACCOUNT" EntityType="Self.ACCOUNT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BBFORM" EntityType="Self.BBFORM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BILL" EntityType="Self.BILL" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BOOK" EntityType="Self.BOOK" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BuildVersion" EntityType="Self.BuildVersion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CART" EntityType="Self.CART" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CTHD" EntityType="Self.CTHD" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DETAIIMPORT" EntityType="Self.DETAIIMPORT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IMPORT" EntityType="Self.IMPORT" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__BBFORM__MAKH__55009F39" Association="Self.FK__BBFORM__MAKH__55009F39">
+      <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+      <End Role="BBFORM" EntitySet="BBFORM" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BBFORM__MASACH__55F4C372" Association="Self.FK__BBFORM__MASACH__55F4C372">
+      <End Role="BOOK" EntitySet="BOOK" />
+      <End Role="BBFORM" EntitySet="BBFORM" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BILL__MAKH__44CA3770" Association="Self.FK__BILL__MAKH__44CA3770">
+      <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+      <End Role="BILL" EntitySet="BILL" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CART__MAKH__5224328E" Association="Self.FK__CART__MAKH__5224328E">
+      <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+      <End Role="CART" EntitySet="CART" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CART__MASACH__51300E55" Association="Self.FK__CART__MASACH__51300E55">
+      <End Role="BOOK" EntitySet="BOOK" />
+      <End Role="CART" EntitySet="CART" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CTHD__MAHD__47A6A41B" Association="Self.FK__CTHD__MAHD__47A6A41B">
+      <End Role="BILL" EntitySet="BILL" />
+      <End Role="CTHD" EntitySet="CTHD" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CTHD__MASACH__489AC854" Association="Self.FK__CTHD__MASACH__489AC854">
+      <End Role="BOOK" EntitySet="BOOK" />
+      <End Role="CTHD" EntitySet="CTHD" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DETAIIMPOR__SOHD__4E53A1AA" Association="Self.FK__DETAIIMPOR__SOHD__4E53A1AA">
+      <End Role="IMPORT" EntitySet="IMPORT" />
+      <End Role="DETAIIMPORT" EntitySet="DETAIIMPORT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__IMPORT__MANV__4B7734FF" Association="Self.FK__IMPORT__MANV__4B7734FF">
+      <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+      <End Role="IMPORT" EntitySet="IMPORT" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

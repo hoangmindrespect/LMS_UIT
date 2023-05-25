@@ -183,12 +183,38 @@
       <DependentUpon>UserControl1.xaml</DependentUpon>
     </Compile>
     <Compile Include="DTOs\BookDTO.cs" />
+    <Compile Include="DTOs\BookInBorrowDTO.cs" />
+    <Compile Include="DTOs\ClientDTO.cs" />
     <Compile Include="DTOs\ImportBook.cs" />
     <Compile Include="DTOs\UserDTO.cs" />
     <Compile Include="Models\DataProvider\ACCOUNT.cs">
       <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataProvider\BBFORM.cs">
+      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataProvider\BILL.cs">
+      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DataProvider\BOOK.cs">
+      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataProvider\BuildVersion.cs">
+      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataProvider\CART.cs">
+      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataProvider\CTHD.cs">
+      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataProvider\DETAIIMPORT.cs">
+      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataProvider\ErrorLog.cs">
+      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataProvider\IMPORT.cs">
       <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataProvider\LibraryManagementSystemModels.Context.cs">
@@ -207,7 +233,9 @@
       <DependentUpon>LibraryManagementSystemModels.edmx</DependentUpon>
     </Compile>
     <Compile Include="Utils\ConverterValue\BoolValueConverter.cs" />
+    <Compile Include="Utils\Default.cs" />
     <Compile Include="Validtations\NotNullValidation.cs" />
+    <Compile Include="ViewModel\AdminVM\BorrowBookVM\BorrowBookViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\ImportBookVM\ImportViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\MainAdminViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\ManageBookVM\ManageBookViewModel.cs" />
@@ -238,6 +266,9 @@
     <Compile Include="View\MainClientWindow\BuyBookPage\BuyBookPage.xaml.cs">
       <DependentUpon>BuyBookPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\MainClientWindow\BuyBookPage\DetailsBook.xaml.cs">
+      <DependentUpon>DetailsBook.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainClientWindow\BuyBookPage\Item.xaml.cs">
       <DependentUpon>Item.xaml</DependentUpon>
     </Compile>
@@ -249,6 +280,12 @@
     </Compile>
     <Compile Include="View\MainWindow\BorrowBook\BorrowBookPage.xaml.cs">
       <DependentUpon>BorrowBookPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainWindow\BorrowBook\Item2.xaml.cs">
+      <DependentUpon>Item2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainWindow\BorrowBook\ManageBorrowBookPage.xaml.cs">
+      <DependentUpon>ManageBorrowBookPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow\ImportBook\AddingWindow.xaml.cs">
       <DependentUpon>AddingWindow.xaml</DependentUpon>
@@ -323,6 +360,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\MainClientWindow\BuyBookPage\DetailsBook.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainClientWindow\BuyBookPage\Item.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -336,6 +377,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainWindow\BorrowBook\BorrowBookPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainWindow\BorrowBook\Item2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainWindow\BorrowBook\ManageBorrowBookPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -431,6 +480,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resource\BuyBook\add.png" />
+    <Resource Include="Resource\BuyBook\left.png" />
+    <Resource Include="Resource\BorrowBook\borrow.png" />
+    <Resource Include="Resource\BorrowBook\paper.png" />
     <Content Include="Models\DataProvider\LibraryManagementSystemModels.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>LibraryManagementSystemModels.edmx</DependentUpon>
@@ -441,8 +494,7 @@
       <DependentUpon>LibraryManagementSystemModels.edmx</DependentUpon>
       <LastGenOutput>LibraryManagementSystemModels.cs</LastGenOutput>
     </Content>
-    <Resource Include="Resource\BuyBook\add.png" />
-    <Resource Include="Resource\BuyBook\left.png" />
+    <Resource Include="Resource\BorrowBook\icon.png" />
     <Content Include="Resource\BuyBook\lib.mp4" />
     <Resource Include="Resource\BuyBook\low.png" />
     <Resource Include="Resource\BuyBook\remove.png" />

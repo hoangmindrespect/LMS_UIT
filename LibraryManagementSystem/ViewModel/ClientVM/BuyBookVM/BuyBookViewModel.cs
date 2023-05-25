@@ -19,6 +19,21 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
 {
     public class BuyBookViewModel:BaseViewModel
     {
+        #region Property
+        private BookDTO _SelectedItem;
+        public BookDTO SelectedItem
+        {
+            get { return _SelectedItem; }
+            set { _SelectedItem = value; OnPropertyChanged(); }
+        }
+        private int _quantity;
+        public int Quantity
+        {
+            get { return this._quantity; }
+            set { this._quantity = value; OnPropertyChanged(); }
+        }
+        #endregion
+
         public ObservableCollection<BookDTO> Books = new ObservableCollection<BookDTO>();
 
         public ICommand LoadBuyBookPage { get; set; }
@@ -28,6 +43,9 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
         public ICommand NextImage { get; set; }
         public ICommand LoadShoppingCart { get; set; }
         public ICommand BackToShopping { get; set; }
+        public ICommand LoadDetails { get; set; }
+        public ICommand PlusCommand { get; set; }
+        public ICommand MinusCommand { get; set; }
         #region tempVar
         private List<string> imagePaths;
         private int currentImageIndex = 0;
@@ -36,6 +54,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
         #endregion
         public BuyBookViewModel()
         {
+            Quantity = 1;
             LoadBuyBookPage = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
             {
                 p.Content = new BuyBookPage();
@@ -44,7 +63,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
             LoadBook = new RelayCommand<ItemsControl>((p) => { return p != null; }, (p) =>
             {
                 #region Load book to card
-                using (var context = new LMSEntities())
+                using (var context = new LMSEntities1())
                 {
                     
                     foreach (var item in context.BOOKs)
@@ -62,6 +81,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                 }
 
                 p.ItemsSource = Books;
+                
 
             #endregion
             
@@ -155,6 +175,23 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
             BackToShopping = new RelayCommand<object>((p) => { return p != null; }, (p) =>
             {
                 MainClientViewModel.main_frame_client.Content = new BuyBookPage();
+            });
+
+            LoadDetails = new RelayCommand<ListBox>((p) => { return p != null; }, (p) =>
+            {
+                DetailsBook w = new DetailsBook(SelectedItem);
+                w.Show();
+            });
+
+            PlusCommand = new RelayCommand<object>((p) => { return p != null; }, (p) =>
+            {
+                MessageBox.Show("CC");
+                Quantity++;
+            });
+
+            MinusCommand = new RelayCommand<object>((p) => { return p != null; }, (p) =>
+            {
+                Quantity--;
             });
         }
         private void ShowImage(int i, Image imageControl)

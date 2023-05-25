@@ -74,16 +74,17 @@
 
                 <Grid Grid.Column="1">
                     <StackPanel>
-                        <Border Background="#DFDCD7"  Width="auto" Height="150" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
-                            <materialDesign:Card  Background="Transparent" >
-                                <MediaElement Source="/Resource/BuyBook/lib.mp4"
+                        <Border Name="vid" Background="#DFDCD7"  Width="317" Height="150" HorizontalAlignment="Center" Margin="-10 10 10 10">
+                            <materialDesign:Card  Background="Transparent">
+                                <MediaElement Source="C:\Users\Hoang\Downloads\lib.mp4"
                                       IsMuted="True"
-                                      Margin="10 -0 10 0"
+                                      Name="media" 
+                                              Margin="10"
                                       />
                             </materialDesign:Card>
                         </Border>
 
-                        <Image x:Name="imageControl1"  Stretch="Uniform" Height="100" Source="/Resource/BuyBook/6.png"/>
+                        <Image Stretch="Uniform" Height="100" Source="/Resource/BuyBook/6.png" Name="light"/>
                         <TextBlock 
                             Text="Shopping everywhere" 
                             TextWrapping="Wrap" 
@@ -91,7 +92,7 @@
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             FontSize="28"
-                            
+                            Name="tex"
                             FontWeight="Light"/>
                     </StackPanel>
 
@@ -147,7 +148,9 @@
                 <Button HorizontalAlignment="Right" Margin="0 0 470 0" Command="{Binding LoadShoppingCart}"
                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                         Style="{StaticResource MaterialDesignIconForegroundButton}" CommandParameter="{Binding ElementName=imageControl}"
-                        ToolTip="MaterialDesignIconForegroundButton">
+                        ToolTip="MaterialDesignIconForegroundButton"
+                        Name="cart"
+                        >
                     <materialDesign:PackIcon
                         Kind="CartOutline" />
                 </Button>
@@ -159,15 +162,21 @@
             <Grid Grid.Row="2">
                 <Separator  Height="1" Background="#4E443A"  VerticalAlignment="Top" Margin="0 0 0 0"/>
 
-                <ItemsControl x:Name="ListViewProducts" ItemsSource="{Binding Books}" VerticalAlignment="Center" HorizontalAlignment="Center" >
-                    <ItemsControl.ItemTemplate>
+                <ListBox 
+                    x:Name="ListViewProducts" 
+                    ItemsSource="{Binding Books}" 
+                    IsSynchronizedWithCurrentItem="True"
+                    SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}"
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center">
+                    <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="11 10 10 10" >
+                            <StackPanel Orientation="Horizontal"  >
 
                                 <materialDesign:Card MouseEnter="StackPanel_MouseEnter" MouseLeave="Card_MouseLeave"
                                         Background="#ffffff" 
                                         Width="280" Height="370"
-                                        Margin="5 0 10 0 "
+                                        Margin="10"
                                         >
                                     <StackPanel>
                                         <Image Source="{Binding ImageSource}" Stretch="Uniform"  Width="240" Height="265" Margin="0 10 0 0"/>
@@ -225,18 +234,24 @@
                                        HorizontalAlignment="Left" 
                                        VerticalAlignment="Top"/>
                             </StackPanel>
+
                         </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                    <ItemsControl.ItemsPanel>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel/>
                         </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
+                    </ListBox.ItemsPanel>
+                </ListBox>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Loaded">
                         <i:InvokeCommandAction Command="{Binding LoadBook}"
                                        CommandParameter="{Binding ElementName=ListViewProducts}" />
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="PreviewMouseDown">
+                        <i:InvokeCommandAction Command="{Binding LoadDetails}"
+                                       CommandParameter="{Binding ElementName=ListViewProducts}" />
+
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Grid>

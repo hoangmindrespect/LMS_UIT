@@ -14,6 +14,14 @@ namespace LibraryManagementSystem.Models.DataProvider
     
     public partial class BOOK
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public BOOK()
+        {
+            this.BBFORMs = new HashSet<BBFORM>();
+            this.CARTs = new HashSet<CART>();
+            this.CTHDs = new HashSet<CTHD>();
+        }
+    
         public int ID { get; set; }
         public string TENSACH { get; set; }
         public string TACGIA { get; set; }
@@ -24,5 +32,12 @@ namespace LibraryManagementSystem.Models.DataProvider
         public Nullable<decimal> GIA { get; set; }
         public string MOTA { get; set; }
         public string IMAGESOURCE { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BBFORM> BBFORMs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CART> CARTs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CTHD> CTHDs { get; set; }
     }
 }

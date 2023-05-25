@@ -20,6 +20,7 @@ using DocumentFormat.OpenXml.Presentation;
 using System.Windows.Media.Animation;
 using DocumentFormat.OpenXml.Spreadsheet;
 using LibraryManagementSystem.DTOs;
+using CloudinaryDotNet;
 
 namespace LibraryManagementSystem.View.MainClientWindow.BuyBookPage
 {
@@ -27,16 +28,15 @@ namespace LibraryManagementSystem.View.MainClientWindow.BuyBookPage
     /// Interaction logic for BuyBookPage.xaml
     /// </summary>
     public partial class BuyBookPage : System.Windows.Controls.Page
-    {        public BuyBookPage()
+    {   public BuyBookPage()
         {
-
             InitializeComponent();
         }
 
         private void StackPanel_MouseEnter(object sender, MouseEventArgs e)
         {
             Card a = sender as Card;
-            a.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#DFDCD7");
+            //a.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#DFDCD7");
             a.Cursor = Cursors.Hand;
             a.RenderTransform = new TranslateTransform(0, -2);
         }
@@ -44,7 +44,7 @@ namespace LibraryManagementSystem.View.MainClientWindow.BuyBookPage
         private void Card_MouseLeave(object sender, MouseEventArgs e)
         {
             Card a = sender as Card;
-            a.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#ffffff");
+            //a.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#ffffff");
             a.Cursor = Cursors.None;
             a.RenderTransform = new TranslateTransform(0, 2);
 
@@ -84,6 +84,12 @@ namespace LibraryManagementSystem.View.MainClientWindow.BuyBookPage
 
                 imageControl.Margin = new Thickness(-140, 10 ,10, 10);
                 st1.Margin = new Thickness(0, 0, 180, 18);
+                vid.Margin = new Thickness(-120, 10, 50, 10);
+                vid.Width += 400;
+                vid.Height += 50;
+                light.Margin = new Thickness(-150, 0, 0, 0);
+                tex.Margin = new Thickness(-150, 0, 0, 0);
+                cart.Margin = new Thickness(0, 0, 820, 0);
             }
             else if(w.WindowState == WindowState.Normal) {
                 imageControl.Width = 580;
@@ -91,6 +97,13 @@ namespace LibraryManagementSystem.View.MainClientWindow.BuyBookPage
 
                 st1.Margin = new Thickness(0, 0, 32, 18);
                 imageControl.Margin = new Thickness(10, 10, 10, 10);
+
+                vid.Margin = new Thickness(-10, 10, 10, 10);
+                vid.Width = 317;
+                vid.Height = 150;
+                light.Margin = new Thickness(0, 0, 0, 0);
+                tex.Margin = new Thickness(0, 0, 0, 0);
+                cart.Margin = new Thickness(0, 0, 470, 0);
 
             }
         }
