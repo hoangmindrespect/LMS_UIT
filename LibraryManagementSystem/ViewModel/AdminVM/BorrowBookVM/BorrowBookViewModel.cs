@@ -2,6 +2,7 @@
 using LibraryManagementSystem.Models.DataProvider;
 using LibraryManagementSystem.View.Login;
 using LibraryManagementSystem.View.MainClientWindow.BuyBookPage;
+using LibraryManagementSystem.View.MessageBoxCus;
 using LibraryManagementSystem.ViewModel.ClientVM;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM
     {
         #region Property
         public ObservableCollection<BookDTO> Books = new ObservableCollection<BookDTO>();
-        public ObservableCollection<BookInBorrowDTO> ListBookBorrow = new ObservableCollection<BookInBorrowDTO>();
+        public static ObservableCollection<BookInBorrowDTO> ListBookBorrow = new ObservableCollection<BookInBorrowDTO>();
         private string _iD;
         public string ID
         {
@@ -60,6 +61,12 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM
         public ICommand LoadBook { get; set; }
         public ICommand CheckID { get; set; }
         public ICommand LoadBookBorrow { get; set; }
+        public ICommand PlusOne {  get; set; }
+        public ICommand MinusOne { get; set; }
+        public ICommand CreateBookOrder { get; set; }
+        #endregion
+
+        #region TempVar
         #endregion
         public BorrowBookViewModel()
         {
@@ -80,6 +87,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM
                         book.Gia = (decimal)item.GIA;
                         book.ImageSource = item.IMAGESOURCE;
                         book.NamXB = (int)item.NAMXUATBAN;
+                        book.MaSach = (int)item.ID;
                         Books.Add(book);                    }
                 }
 
@@ -103,20 +111,96 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM
 
             LoadBookBorrow = new RelayCommand<ListView>((p) => { return true; }, (p) =>
             {
-                using (var context = new LMSEntities1())
-                {
-
-                    foreach (var item in context.BOOKs)
-                    {
-                        BookInBorrowDTO b = new BookInBorrowDTO();
-                        b.TenSach = item.TENSACH;
-                        b.SoLuong = 1;
-                        ListBookBorrow.Add(b);
-                    }
-                }
-
                 p.ItemsSource = ListBookBorrow;
             });
+
+            PlusOne = new RelayCommand<int>((p) => { return true; }, (p) =>
+            {
+                foreach (var item in ListBookBorrow)
+                {
+                    if (p == item.MaSach)
+                    {
+                        if(item.SoLuong + 1 > getMaxCount(p))
+                        {
+                            MessageBoxLMS msb = new MessageBoxLMS("Notice", "Exceed the max count", MessageType.Accept, MessageButtons.OK);
+                            msb.ShowDialog();
+                        }
+                        else
+                            item.SoLuong += 1;
+                    }
+                        
+                }
+            });
+
+            MinusOne = new RelayCommand<int>((p) => { return true; }, (p) =>
+            {
+                foreach (var item in ListBookBorrow)
+                {
+                    if (p == item.MaSach)
+                    {
+                        item.SoLuong -= 1;
+                    }
+
+                }
+            });
+
+            CreateBookOrder = new RelayCommand<ListView>((p) => { return true; }, (p) =>
+            {
+                //tạo phiếu mượn => tạo chi tiết phiếu mượn 
+                if(!string.IsNullOrEmpty(ID) )
+                {
+                    if (p.Items.Count > 0)
+                    {
+                        using (var context = new LMSEntities1())
+                        {
+                            var Form = new BBFORM();
+                            Form.MAKH = GetMAKH(ID);
+                            Form.NGAYMUON = DateTime.Now;
+                            Form.NGAYHETHAN = DateTime.Now.AddDays(30);
+                            context.BBFORMs.Add(Form);
+                            context.SaveChanges();
+
+                            foreach (var book in ListBookBorrow)
+                            {
+                                DETAIL_BBFORM a = new DETAIL_BBFORM();
+                                a.MAPHIEUMUON = Form.MAPHIEUMUON;
+                                a.MASACH = book.MaSach;
+                                a.SOLUONG = book.SoLuong;
+                                context.DETAIL_BBFORM.Add(a);
+                            }
+                            context.SaveChanges();
+                            MessageBoxLMS msb = new MessageBoxLMS("Notice", "Create successfully!", MessageType.Accept, MessageButtons.OK);
+                            msb.ShowDialog();
+                        }
+                    }
+                    else
+                    {
+                        MessageBoxLMS msb = new MessageBoxLMS("Error", "Please fill into field ID!", MessageType.Accept, MessageButtons.OK);
+                        msb.ShowDialog();
+                    }
+                }
+                else
+                {
+                    MessageBoxLMS msb = new MessageBoxLMS("Error", "Choose any book you want!", MessageType.Accept, MessageButtons.OK);
+                    msb.ShowDialog();
+                }
+            });
+        }
+
+        int getMaxCount(int id)
+        {
+            using (var context = new LMSEntities1())
+            {
+                return (int)(from s in context.BOOKs where s.ID == id select s.SOLUONG).FirstOrDefault();
+            }
+        }
+
+        int GetMAKH(string MSSV)
+        {
+            using (var context = new LMSEntities1())
+            {
+                return (int)(from s in context.ACCOUNTs where MSSV == s.MSSV select s.ID).FirstOrDefault();
+            }    
         }
     }
 }

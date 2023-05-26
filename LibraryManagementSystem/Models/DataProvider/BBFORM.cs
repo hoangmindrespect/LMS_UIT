@@ -14,14 +14,19 @@ namespace LibraryManagementSystem.Models.DataProvider
     
     public partial class BBFORM
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public BBFORM()
+        {
+            this.DETAIL_BBFORM = new HashSet<DETAIL_BBFORM>();
+        }
+    
         public int MAPHIEUMUON { get; set; }
         public Nullable<int> MAKH { get; set; }
-        public Nullable<int> MASACH { get; set; }
-        public Nullable<int> SOLUONG { get; set; }
         public System.DateTime NGAYMUON { get; set; }
         public Nullable<System.DateTime> NGAYHETHAN { get; set; }
     
         public virtual ACCOUNT ACCOUNT { get; set; }
-        public virtual BOOK BOOK { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DETAIL_BBFORM> DETAIL_BBFORM { get; set; }
     }
 }

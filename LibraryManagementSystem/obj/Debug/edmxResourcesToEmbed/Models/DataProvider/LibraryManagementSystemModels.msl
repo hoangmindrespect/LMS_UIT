@@ -4,118 +4,125 @@
     <EntitySetMapping Name="ACCOUNTs">
       <EntityTypeMapping TypeName="lmsDatabaseModel.ACCOUNT">
         <MappingFragment StoreEntitySet="ACCOUNT">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
-          <ScalarProperty Name="FULLNAME" ColumnName="FULLNAME" />
-          <ScalarProperty Name="EMAILADDRESS" ColumnName="EMAILADDRESS" />
-          <ScalarProperty Name="USERPASS" ColumnName="USERPASS" />
-          <ScalarProperty Name="MSSV" ColumnName="MSSV" />
-          <ScalarProperty Name="ROLE" ColumnName="ROLE" />
           <ScalarProperty Name="IDCLASS" ColumnName="IDCLASS" />
+          <ScalarProperty Name="ROLE" ColumnName="ROLE" />
+          <ScalarProperty Name="MSSV" ColumnName="MSSV" />
+          <ScalarProperty Name="USERPASS" ColumnName="USERPASS" />
+          <ScalarProperty Name="EMAILADDRESS" ColumnName="EMAILADDRESS" />
+          <ScalarProperty Name="FULLNAME" ColumnName="FULLNAME" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="BBFORMs">
       <EntityTypeMapping TypeName="lmsDatabaseModel.BBFORM">
         <MappingFragment StoreEntitySet="BBFORM">
-          <ScalarProperty Name="MAPHIEUMUON" ColumnName="MAPHIEUMUON" />
-          <ScalarProperty Name="MAKH" ColumnName="MAKH" />
-          <ScalarProperty Name="MASACH" ColumnName="MASACH" />
-          <ScalarProperty Name="SOLUONG" ColumnName="SOLUONG" />
-          <ScalarProperty Name="NGAYMUON" ColumnName="NGAYMUON" />
           <ScalarProperty Name="NGAYHETHAN" ColumnName="NGAYHETHAN" />
+          <ScalarProperty Name="NGAYMUON" ColumnName="NGAYMUON" />
+          <ScalarProperty Name="MAKH" ColumnName="MAKH" />
+          <ScalarProperty Name="MAPHIEUMUON" ColumnName="MAPHIEUMUON" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="BILLs">
       <EntityTypeMapping TypeName="lmsDatabaseModel.BILL">
         <MappingFragment StoreEntitySet="BILL">
-          <ScalarProperty Name="MAHD" ColumnName="MAHD" />
-          <ScalarProperty Name="NGHD" ColumnName="NGHD" />
-          <ScalarProperty Name="MAKH" ColumnName="MAKH" />
           <ScalarProperty Name="TRIGIA" ColumnName="TRIGIA" />
+          <ScalarProperty Name="MAKH" ColumnName="MAKH" />
+          <ScalarProperty Name="NGHD" ColumnName="NGHD" />
+          <ScalarProperty Name="MAHD" ColumnName="MAHD" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="BOOKs">
       <EntityTypeMapping TypeName="lmsDatabaseModel.BOOK">
         <MappingFragment StoreEntitySet="BOOK">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="TENSACH" ColumnName="TENSACH" />
-          <ScalarProperty Name="TACGIA" ColumnName="TACGIA" />
-          <ScalarProperty Name="NHAXUATBAN" ColumnName="NHAXUATBAN" />
-          <ScalarProperty Name="NAMXUATBAN" ColumnName="NAMXUATBAN" />
-          <ScalarProperty Name="SOLUONG" ColumnName="SOLUONG" />
-          <ScalarProperty Name="THELOAI" ColumnName="THELOAI" />
-          <ScalarProperty Name="GIA" ColumnName="GIA" />
-          <ScalarProperty Name="MOTA" ColumnName="MOTA" />
           <ScalarProperty Name="IMAGESOURCE" ColumnName="IMAGESOURCE" />
+          <ScalarProperty Name="MOTA" ColumnName="MOTA" />
+          <ScalarProperty Name="GIA" ColumnName="GIA" />
+          <ScalarProperty Name="THELOAI" ColumnName="THELOAI" />
+          <ScalarProperty Name="SOLUONG" ColumnName="SOLUONG" />
+          <ScalarProperty Name="NAMXUATBAN" ColumnName="NAMXUATBAN" />
+          <ScalarProperty Name="NHAXUATBAN" ColumnName="NHAXUATBAN" />
+          <ScalarProperty Name="TACGIA" ColumnName="TACGIA" />
+          <ScalarProperty Name="TENSACH" ColumnName="TENSACH" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="BuildVersions">
       <EntityTypeMapping TypeName="lmsDatabaseModel.BuildVersion">
         <MappingFragment StoreEntitySet="BuildVersion">
-          <ScalarProperty Name="SystemInformationID" ColumnName="SystemInformationID" />
-          <ScalarProperty Name="Database_Version" ColumnName="Database Version" />
-          <ScalarProperty Name="VersionDate" ColumnName="VersionDate" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="VersionDate" ColumnName="VersionDate" />
+          <ScalarProperty Name="Database_Version" ColumnName="Database Version" />
+          <ScalarProperty Name="SystemInformationID" ColumnName="SystemInformationID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CARTs">
       <EntityTypeMapping TypeName="lmsDatabaseModel.CART">
         <MappingFragment StoreEntitySet="CART">
-          <ScalarProperty Name="MASACH" ColumnName="MASACH" />
-          <ScalarProperty Name="MAKH" ColumnName="MAKH" />
           <ScalarProperty Name="SOLUONGHT" ColumnName="SOLUONGHT" />
+          <ScalarProperty Name="MAKH" ColumnName="MAKH" />
+          <ScalarProperty Name="MASACH" ColumnName="MASACH" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CTHDs">
       <EntityTypeMapping TypeName="lmsDatabaseModel.CTHD">
         <MappingFragment StoreEntitySet="CTHD">
-          <ScalarProperty Name="MAHD" ColumnName="MAHD" />
-          <ScalarProperty Name="MASACH" ColumnName="MASACH" />
           <ScalarProperty Name="SOLUONG" ColumnName="SOLUONG" />
+          <ScalarProperty Name="MASACH" ColumnName="MASACH" />
+          <ScalarProperty Name="MAHD" ColumnName="MAHD" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DETAIIMPORTs">
       <EntityTypeMapping TypeName="lmsDatabaseModel.DETAIIMPORT">
         <MappingFragment StoreEntitySet="DETAIIMPORT">
-          <ScalarProperty Name="SOHD" ColumnName="SOHD" />
-          <ScalarProperty Name="TENSACH" ColumnName="TENSACH" />
-          <ScalarProperty Name="NXB" ColumnName="NXB" />
-          <ScalarProperty Name="TACGIA" ColumnName="TACGIA" />
-          <ScalarProperty Name="SL" ColumnName="SL" />
-          <ScalarProperty Name="GIANHAP" ColumnName="GIANHAP" />
           <ScalarProperty Name="GIABAN" ColumnName="GIABAN" />
+          <ScalarProperty Name="GIANHAP" ColumnName="GIANHAP" />
+          <ScalarProperty Name="SL" ColumnName="SL" />
+          <ScalarProperty Name="TACGIA" ColumnName="TACGIA" />
+          <ScalarProperty Name="NXB" ColumnName="NXB" />
+          <ScalarProperty Name="TENSACH" ColumnName="TENSACH" />
+          <ScalarProperty Name="SOHD" ColumnName="SOHD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DETAIL_BBFORM">
+      <EntityTypeMapping TypeName="lmsDatabaseModel.DETAIL_BBFORM">
+        <MappingFragment StoreEntitySet="DETAIL_BBFORM">
+          <ScalarProperty Name="SOLUONG" ColumnName="SOLUONG" />
+          <ScalarProperty Name="MASACH" ColumnName="MASACH" />
+          <ScalarProperty Name="MAPHIEUMUON" ColumnName="MAPHIEUMUON" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ErrorLogs">
       <EntityTypeMapping TypeName="lmsDatabaseModel.ErrorLog">
         <MappingFragment StoreEntitySet="ErrorLog">
-          <ScalarProperty Name="ErrorLogID" ColumnName="ErrorLogID" />
-          <ScalarProperty Name="ErrorTime" ColumnName="ErrorTime" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
-          <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
-          <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
-          <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
-          <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
           <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+          <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+          <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+          <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+          <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+          <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="ErrorTime" ColumnName="ErrorTime" />
+          <ScalarProperty Name="ErrorLogID" ColumnName="ErrorLogID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="IMPORTs">
       <EntityTypeMapping TypeName="lmsDatabaseModel.IMPORT">
         <MappingFragment StoreEntitySet="IMPORT">
-          <ScalarProperty Name="SOHD" ColumnName="SOHD" />
-          <ScalarProperty Name="MANV" ColumnName="MANV" />
-          <ScalarProperty Name="NGNHAP" ColumnName="NGNHAP" />
           <ScalarProperty Name="TRIGIA" ColumnName="TRIGIA" />
+          <ScalarProperty Name="NGNHAP" ColumnName="NGNHAP" />
+          <ScalarProperty Name="MANV" ColumnName="MANV" />
+          <ScalarProperty Name="SOHD" ColumnName="SOHD" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

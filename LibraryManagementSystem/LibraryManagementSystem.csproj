@@ -211,6 +211,9 @@
     <Compile Include="Models\DataProvider\DETAIIMPORT.cs">
       <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataProvider\DETAIL_BBFORM.cs">
+      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DataProvider\ErrorLog.cs">
       <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
     </Compile>

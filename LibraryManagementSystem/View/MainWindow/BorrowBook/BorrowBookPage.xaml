@@ -31,7 +31,7 @@
                 <ItemsControl  ItemsSource="{Binding Books}" x:Name="ListViewProducts" VerticalAlignment="Center" HorizontalAlignment="Center" >
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <uc:Item2 Source ="{Binding ImageSource}" Title="{Binding TenSach}" Ref="available" Count="{Binding SoLuong}" Price="{Binding Gia}"/>
+                            <uc:Item2 ID ="{Binding MaSach}" Source ="{Binding ImageSource}" Title="{Binding TenSach}" Ref="available" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                     <ItemsControl.ItemsPanel>
@@ -236,22 +236,24 @@
 
                 </Grid>
 
-                <Grid Grid.Row="2" Margin="0,29,0,5" Grid.RowSpan="2">
+                <Grid Grid.Row="2" Margin="0,29,0,5" Grid.RowSpan="2" >
                     <Rectangle VerticalAlignment="Bottom" Fill="#4E443A" Height="2"  Margin="10 1 10 0"/>
-                    <ListView ItemsSource="{Binding ListBookBorrow}" Name="xy" Margin="10">
+                    <ListView ItemsSource="{Binding ListBookBorrow}" Name="xy" Margin="10" >
 
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <!-- Các thành phần khác trong mỗi dòng của ListView -->
-                                    <TextBlock Text="{Binding TenSach}" Width="178" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding MaSach}" Width="30" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding TenSach}" Width="168" VerticalAlignment="Center" TextWrapping="Wrap"/>
                                     <Button Margin="25 0 0 0"
                                             Width="20" 
                                             Height="20"
                                             Foreground="#4E443A"
                                             Padding="0" 
-                                            VerticalAlignment="Center"
-                                            Command="{Binding CheckID}" 
+                                            VerticalAlignment="Center"                                            
+                                            Command="{Binding DataContext.PlusOne,RelativeSource={RelativeSource AncestorType=ListView}}"
+                                            CommandParameter="{Binding MaSach}"
                                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Page}}"
                                             Style="{StaticResource MaterialDesignFlatSecondaryButton}"
                                             ToolTip="MaterialDesignFlatButton" >
@@ -264,7 +266,8 @@
                                             Foreground="#4E443A"
                                             Padding="0" 
                                             VerticalAlignment="Center"
-                                            Command="{Binding CheckID}" 
+                                            Command="{Binding DataContext.MinusOne,RelativeSource={RelativeSource AncestorType=ListView}}"
+                                            CommandParameter="{Binding MaSach}"
                                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Page}}"
                                             Style="{StaticResource MaterialDesignFlatSecondaryButton}"
                                             ToolTip="MaterialDesignFlatButton" >
@@ -283,7 +286,8 @@
                         BorderBrush="#4E443A"
                         Foreground="#4E443A"
                         Content="Confirm"
-                        
+                        Command="{Binding CreateBookOrder}"
+                        CommandParameter="{Binding ElementName=xy}"
                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                         Style="{StaticResource MaterialDesignOutlinedDarkButton}"
                         ToolTip="MaterialDesignOutlinedButton" />

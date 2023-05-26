@@ -1,4 +1,7 @@
-﻿using System;
+﻿using LibraryManagementSystem.DTOs;
+using LibraryManagementSystem.Models.DataProvider;
+using LibraryManagementSystem.View.MessageBoxCus;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,31 +53,73 @@ namespace LibraryManagementSystem.View.MainWindow.BorrowBook
 
         public static readonly DependencyProperty RefProperty = DependencyProperty.Register("Ref", typeof(string), typeof(Item2));
 
-
-        public string Color
+        public string ID
         {
-            get { return (string)GetValue(ColorProperty); }
-            set { SetValue(ColorProperty, value); }
+            get { return (string)GetValue(IDProperty); }
+            set { SetValue(IDProperty, value); }
         }
 
-        public static readonly DependencyProperty ColorProperty = DependencyProperty.Register("Color", typeof(string), typeof(Item2));
+        public static readonly DependencyProperty IDProperty = DependencyProperty.Register("ID", typeof(string), typeof(Item2));
 
-
-        public string Count
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            get { return (string)GetValue(CountProperty); }
-            set { SetValue(CountProperty, value); }
+            int _id = int.Parse(txb.Text);
+            BookInBorrowDTO a = new BookInBorrowDTO();
+            using(var context = new LMSEntities1())
+            {
+                a.TenSach = (from s in context.BOOKs where s.ID == _id select s.TENSACH).FirstOrDefault();
+                a.MaSach = _id;
+                if (!IsInList(_id))
+                {
+                    a.SoLuong = 1;
+                }
+            }
+            if (!IsInList(_id))
+            {
+                LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM.BorrowBookViewModel.ListBookBorrow.Add(a);
+            }
+            else
+            {
+                PlusOneUnit(_id);
+            }   
         }
 
-        public static readonly DependencyProperty CountProperty = DependencyProperty.Register("Count", typeof(string), typeof(Item2));
-
-
-        public string Price
+        public bool IsInList(int id)
         {
-            get { return (string)GetValue(PriceProperty); }
-            set { SetValue(PriceProperty, value); }
+            foreach(var item in LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM.BorrowBookViewModel.ListBookBorrow)
+            {
+                if(id == item.MaSach)
+                {
+                    return true;
+                }    
+            }
+            return false;
         }
 
-        public static readonly DependencyProperty PriceProperty = DependencyProperty.Register("Price", typeof(string), typeof(Item2));
+        public void PlusOneUnit(int id)
+        {
+            foreach(var item in LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM.BorrowBookViewModel.ListBookBorrow)
+            {
+                if (id == item.MaSach)
+                {
+                    if(item.SoLuong + 1 > getMaxCount(id))
+                    {
+                        MessageBoxLMS msb = new MessageBoxLMS("Notice", "Exceed the max count", MessageType.Accept, MessageButtons.OK);
+                        msb.ShowDialog();
+                    }
+                    else
+                        item.SoLuong += 1;
+                }   
+            }    
+        }
+
+        int getMaxCount(int id)
+        {
+            using (var context = new LMSEntities1())
+            {
+                return (int)(from s in context.BOOKs where s.ID == id select s.SOLUONG).FirstOrDefault();
+            }
+        }
     }
+
 }

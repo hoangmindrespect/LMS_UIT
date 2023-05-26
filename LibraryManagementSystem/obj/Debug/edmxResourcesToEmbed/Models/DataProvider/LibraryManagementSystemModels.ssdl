@@ -19,8 +19,6 @@
     </Key>
     <Property Name="MAPHIEUMUON" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MAKH" Type="int" />
-    <Property Name="MASACH" Type="int" />
-    <Property Name="SOLUONG" Type="int" />
     <Property Name="NGAYMUON" Type="smalldatetime" Nullable="false" />
     <Property Name="NGAYHETHAN" Type="smalldatetime" />
   </EntityType>
@@ -90,6 +88,15 @@
     <Property Name="GIANHAP" Type="money" />
     <Property Name="GIABAN" Type="money" />
   </EntityType>
+  <EntityType Name="DETAIL_BBFORM">
+    <Key>
+      <PropertyRef Name="MAPHIEUMUON" />
+      <PropertyRef Name="MASACH" />
+    </Key>
+    <Property Name="MAPHIEUMUON" Type="int" Nullable="false" />
+    <Property Name="MASACH" Type="int" Nullable="false" />
+    <Property Name="SOLUONG" Type="int" />
+  </EntityType>
   <EntityType Name="ErrorLog">
     <Key>
       <PropertyRef Name="ErrorLogID" />
@@ -113,7 +120,7 @@
     <Property Name="NGNHAP" Type="smalldatetime" Nullable="false" />
     <Property Name="TRIGIA" Type="money" />
   </EntityType>
-  <Association Name="FK__BBFORM__MAKH__55009F39">
+  <Association Name="FK__BBFORM__MAKH__5F7E2DAC">
     <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
     <End Role="BBFORM" Type="Self.BBFORM" Multiplicity="*" />
     <ReferentialConstraint>
@@ -122,18 +129,6 @@
       </Principal>
       <Dependent Role="BBFORM">
         <PropertyRef Name="MAKH" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__BBFORM__MASACH__55F4C372">
-    <End Role="BOOK" Type="Self.BOOK" Multiplicity="0..1" />
-    <End Role="BBFORM" Type="Self.BBFORM" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="BOOK">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="BBFORM">
-        <PropertyRef Name="MASACH" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -209,6 +204,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__DETAIL_BB__MAPHI__625A9A57">
+    <End Role="BBFORM" Type="Self.BBFORM" Multiplicity="1" />
+    <End Role="DETAIL_BBFORM" Type="Self.DETAIL_BBFORM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BBFORM">
+        <PropertyRef Name="MAPHIEUMUON" />
+      </Principal>
+      <Dependent Role="DETAIL_BBFORM">
+        <PropertyRef Name="MAPHIEUMUON" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DETAIL_BB__MASAC__634EBE90">
+    <End Role="BOOK" Type="Self.BOOK" Multiplicity="1" />
+    <End Role="DETAIL_BBFORM" Type="Self.DETAIL_BBFORM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BOOK">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DETAIL_BBFORM">
+        <PropertyRef Name="MASACH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__IMPORT__MANV__4B7734FF">
     <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
     <End Role="IMPORT" Type="Self.IMPORT" Multiplicity="*" />
@@ -230,14 +249,11 @@
     <EntitySet Name="CART" EntityType="Self.CART" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CTHD" EntityType="Self.CTHD" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DETAIIMPORT" EntityType="Self.DETAIIMPORT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DETAIL_BBFORM" EntityType="Self.DETAIL_BBFORM" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IMPORT" EntityType="Self.IMPORT" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__BBFORM__MAKH__55009F39" Association="Self.FK__BBFORM__MAKH__55009F39">
+    <AssociationSet Name="FK__BBFORM__MAKH__5F7E2DAC" Association="Self.FK__BBFORM__MAKH__5F7E2DAC">
       <End Role="ACCOUNT" EntitySet="ACCOUNT" />
-      <End Role="BBFORM" EntitySet="BBFORM" />
-    </AssociationSet>
-    <AssociationSet Name="FK__BBFORM__MASACH__55F4C372" Association="Self.FK__BBFORM__MASACH__55F4C372">
-      <End Role="BOOK" EntitySet="BOOK" />
       <End Role="BBFORM" EntitySet="BBFORM" />
     </AssociationSet>
     <AssociationSet Name="FK__BILL__MAKH__44CA3770" Association="Self.FK__BILL__MAKH__44CA3770">
@@ -263,6 +279,14 @@
     <AssociationSet Name="FK__DETAIIMPOR__SOHD__4E53A1AA" Association="Self.FK__DETAIIMPOR__SOHD__4E53A1AA">
       <End Role="IMPORT" EntitySet="IMPORT" />
       <End Role="DETAIIMPORT" EntitySet="DETAIIMPORT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DETAIL_BB__MAPHI__625A9A57" Association="Self.FK__DETAIL_BB__MAPHI__625A9A57">
+      <End Role="BBFORM" EntitySet="BBFORM" />
+      <End Role="DETAIL_BBFORM" EntitySet="DETAIL_BBFORM" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DETAIL_BB__MASAC__634EBE90" Association="Self.FK__DETAIL_BB__MASAC__634EBE90">
+      <End Role="BOOK" EntitySet="BOOK" />
+      <End Role="DETAIL_BBFORM" EntitySet="DETAIL_BBFORM" />
     </AssociationSet>
     <AssociationSet Name="FK__IMPORT__MANV__4B7734FF" Association="Self.FK__IMPORT__MANV__4B7734FF">
       <End Role="ACCOUNT" EntitySet="ACCOUNT" />
