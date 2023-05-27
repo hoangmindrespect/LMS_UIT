@@ -24,6 +24,8 @@
           </Key>
           <Property Name="MAPHIEUMUON" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MAKH" Type="int" />
+          <Property Name="MSSV" Type="varchar" MaxLength="50" />
+          <Property Name="TENKH" Type="nvarchar" MaxLength="50" />
           <Property Name="NGAYMUON" Type="smalldatetime" Nullable="false" />
           <Property Name="NGAYHETHAN" Type="smalldatetime" />
         </EntityType>
@@ -100,6 +102,7 @@
           </Key>
           <Property Name="MAPHIEUMUON" Type="int" Nullable="false" />
           <Property Name="MASACH" Type="int" Nullable="false" />
+          <Property Name="TENSACH" Type="nvarchar" MaxLength="50" />
           <Property Name="SOLUONG" Type="int" />
         </EntityType>
         <EntityType Name="ErrorLog">
@@ -125,7 +128,7 @@
           <Property Name="NGNHAP" Type="smalldatetime" Nullable="false" />
           <Property Name="TRIGIA" Type="money" />
         </EntityType>
-        <Association Name="FK__BBFORM__MAKH__5F7E2DAC">
+        <Association Name="FK__BBFORM__MAKH__6CD828CA">
           <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
           <End Role="BBFORM" Type="Self.BBFORM" Multiplicity="*" />
           <ReferentialConstraint>
@@ -209,7 +212,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DETAIL_BB__MAPHI__625A9A57">
+        <Association Name="FK__DETAIL_BB__MAPHI__6FB49575">
           <End Role="BBFORM" Type="Self.BBFORM" Multiplicity="1" />
           <End Role="DETAIL_BBFORM" Type="Self.DETAIL_BBFORM" Multiplicity="*" />
           <ReferentialConstraint>
@@ -221,7 +224,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DETAIL_BB__MASAC__634EBE90">
+        <Association Name="FK__DETAIL_BB__MASAC__70A8B9AE">
           <End Role="BOOK" Type="Self.BOOK" Multiplicity="1" />
           <End Role="DETAIL_BBFORM" Type="Self.DETAIL_BBFORM" Multiplicity="*" />
           <ReferentialConstraint>
@@ -257,7 +260,7 @@
           <EntitySet Name="DETAIL_BBFORM" EntityType="Self.DETAIL_BBFORM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IMPORT" EntityType="Self.IMPORT" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__BBFORM__MAKH__5F7E2DAC" Association="Self.FK__BBFORM__MAKH__5F7E2DAC">
+          <AssociationSet Name="FK__BBFORM__MAKH__6CD828CA" Association="Self.FK__BBFORM__MAKH__6CD828CA">
             <End Role="ACCOUNT" EntitySet="ACCOUNT" />
             <End Role="BBFORM" EntitySet="BBFORM" />
           </AssociationSet>
@@ -285,11 +288,11 @@
             <End Role="IMPORT" EntitySet="IMPORT" />
             <End Role="DETAIIMPORT" EntitySet="DETAIIMPORT" />
           </AssociationSet>
-          <AssociationSet Name="FK__DETAIL_BB__MAPHI__625A9A57" Association="Self.FK__DETAIL_BB__MAPHI__625A9A57">
+          <AssociationSet Name="FK__DETAIL_BB__MAPHI__6FB49575" Association="Self.FK__DETAIL_BB__MAPHI__6FB49575">
             <End Role="BBFORM" EntitySet="BBFORM" />
             <End Role="DETAIL_BBFORM" EntitySet="DETAIL_BBFORM" />
           </AssociationSet>
-          <AssociationSet Name="FK__DETAIL_BB__MASAC__634EBE90" Association="Self.FK__DETAIL_BB__MASAC__634EBE90">
+          <AssociationSet Name="FK__DETAIL_BB__MASAC__70A8B9AE" Association="Self.FK__DETAIL_BB__MASAC__70A8B9AE">
             <End Role="BOOK" EntitySet="BOOK" />
             <End Role="DETAIL_BBFORM" EntitySet="DETAIL_BBFORM" />
           </AssociationSet>
@@ -314,7 +317,7 @@
           <EntitySet Name="DETAIL_BBFORM" EntityType="lmsDatabaseModel.DETAIL_BBFORM" />
           <EntitySet Name="ErrorLogs" EntityType="lmsDatabaseModel.ErrorLog" />
           <EntitySet Name="IMPORTs" EntityType="lmsDatabaseModel.IMPORT" />
-          <AssociationSet Name="FK__BBFORM__MAKH__5F7E2DAC" Association="lmsDatabaseModel.FK__BBFORM__MAKH__5F7E2DAC">
+          <AssociationSet Name="FK__BBFORM__MAKH__6CD828CA" Association="lmsDatabaseModel.FK__BBFORM__MAKH__6CD828CA">
             <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
             <End Role="BBFORM" EntitySet="BBFORMs" />
           </AssociationSet>
@@ -330,7 +333,7 @@
             <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
             <End Role="IMPORT" EntitySet="IMPORTs" />
           </AssociationSet>
-          <AssociationSet Name="FK__DETAIL_BB__MAPHI__625A9A57" Association="lmsDatabaseModel.FK__DETAIL_BB__MAPHI__625A9A57">
+          <AssociationSet Name="FK__DETAIL_BB__MAPHI__6FB49575" Association="lmsDatabaseModel.FK__DETAIL_BB__MAPHI__6FB49575">
             <End Role="BBFORM" EntitySet="BBFORMs" />
             <End Role="DETAIL_BBFORM" EntitySet="DETAIL_BBFORM" />
           </AssociationSet>
@@ -346,7 +349,7 @@
             <End Role="BOOK" EntitySet="BOOKs" />
             <End Role="CTHD" EntitySet="CTHDs" />
           </AssociationSet>
-          <AssociationSet Name="FK__DETAIL_BB__MASAC__634EBE90" Association="lmsDatabaseModel.FK__DETAIL_BB__MASAC__634EBE90">
+          <AssociationSet Name="FK__DETAIL_BB__MASAC__70A8B9AE" Association="lmsDatabaseModel.FK__DETAIL_BB__MASAC__70A8B9AE">
             <End Role="BOOK" EntitySet="BOOKs" />
             <End Role="DETAIL_BBFORM" EntitySet="DETAIL_BBFORM" />
           </AssociationSet>
@@ -367,7 +370,7 @@
           <Property Name="MSSV" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="ROLE" Type="Int32" />
           <Property Name="IDCLASS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="BBFORMs" Relationship="lmsDatabaseModel.FK__BBFORM__MAKH__5F7E2DAC" FromRole="ACCOUNT" ToRole="BBFORM" />
+          <NavigationProperty Name="BBFORMs" Relationship="lmsDatabaseModel.FK__BBFORM__MAKH__6CD828CA" FromRole="ACCOUNT" ToRole="BBFORM" />
           <NavigationProperty Name="BILLs" Relationship="lmsDatabaseModel.FK__BILL__MAKH__44CA3770" FromRole="ACCOUNT" ToRole="BILL" />
           <NavigationProperty Name="CARTs" Relationship="lmsDatabaseModel.FK__CART__MAKH__5224328E" FromRole="ACCOUNT" ToRole="CART" />
           <NavigationProperty Name="IMPORTs" Relationship="lmsDatabaseModel.FK__IMPORT__MANV__4B7734FF" FromRole="ACCOUNT" ToRole="IMPORT" />
@@ -378,10 +381,12 @@
           </Key>
           <Property Name="MAPHIEUMUON" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MAKH" Type="Int32" />
+          <Property Name="MSSV" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TENKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NGAYMUON" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="NGAYHETHAN" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="ACCOUNT" Relationship="lmsDatabaseModel.FK__BBFORM__MAKH__5F7E2DAC" FromRole="BBFORM" ToRole="ACCOUNT" />
-          <NavigationProperty Name="DETAIL_BBFORM" Relationship="lmsDatabaseModel.FK__DETAIL_BB__MAPHI__625A9A57" FromRole="BBFORM" ToRole="DETAIL_BBFORM" />
+          <NavigationProperty Name="ACCOUNT" Relationship="lmsDatabaseModel.FK__BBFORM__MAKH__6CD828CA" FromRole="BBFORM" ToRole="ACCOUNT" />
+          <NavigationProperty Name="DETAIL_BBFORM" Relationship="lmsDatabaseModel.FK__DETAIL_BB__MAPHI__6FB49575" FromRole="BBFORM" ToRole="DETAIL_BBFORM" />
         </EntityType>
         <EntityType Name="BILL">
           <Key>
@@ -410,7 +415,7 @@
           <Property Name="IMAGESOURCE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CARTs" Relationship="lmsDatabaseModel.FK__CART__MASACH__51300E55" FromRole="BOOK" ToRole="CART" />
           <NavigationProperty Name="CTHDs" Relationship="lmsDatabaseModel.FK__CTHD__MASACH__489AC854" FromRole="BOOK" ToRole="CTHD" />
-          <NavigationProperty Name="DETAIL_BBFORM" Relationship="lmsDatabaseModel.FK__DETAIL_BB__MASAC__634EBE90" FromRole="BOOK" ToRole="DETAIL_BBFORM" />
+          <NavigationProperty Name="DETAIL_BBFORM" Relationship="lmsDatabaseModel.FK__DETAIL_BB__MASAC__70A8B9AE" FromRole="BOOK" ToRole="DETAIL_BBFORM" />
         </EntityType>
         <EntityType Name="BuildVersion">
           <Key>
@@ -466,9 +471,10 @@
           </Key>
           <Property Name="MAPHIEUMUON" Type="Int32" Nullable="false" />
           <Property Name="MASACH" Type="Int32" Nullable="false" />
+          <Property Name="TENSACH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SOLUONG" Type="Int32" />
-          <NavigationProperty Name="BBFORM" Relationship="lmsDatabaseModel.FK__DETAIL_BB__MAPHI__625A9A57" FromRole="DETAIL_BBFORM" ToRole="BBFORM" />
-          <NavigationProperty Name="BOOK" Relationship="lmsDatabaseModel.FK__DETAIL_BB__MASAC__634EBE90" FromRole="DETAIL_BBFORM" ToRole="BOOK" />
+          <NavigationProperty Name="BBFORM" Relationship="lmsDatabaseModel.FK__DETAIL_BB__MAPHI__6FB49575" FromRole="DETAIL_BBFORM" ToRole="BBFORM" />
+          <NavigationProperty Name="BOOK" Relationship="lmsDatabaseModel.FK__DETAIL_BB__MASAC__70A8B9AE" FromRole="DETAIL_BBFORM" ToRole="BOOK" />
         </EntityType>
         <EntityType Name="ErrorLog">
           <Key>
@@ -495,7 +501,7 @@
           <NavigationProperty Name="ACCOUNT" Relationship="lmsDatabaseModel.FK__IMPORT__MANV__4B7734FF" FromRole="IMPORT" ToRole="ACCOUNT" />
           <NavigationProperty Name="DETAIIMPORTs" Relationship="lmsDatabaseModel.FK__DETAIIMPOR__SOHD__4E53A1AA" FromRole="IMPORT" ToRole="DETAIIMPORT" />
         </EntityType>
-        <Association Name="FK__BBFORM__MAKH__5F7E2DAC">
+        <Association Name="FK__BBFORM__MAKH__6CD828CA">
           <End Type="lmsDatabaseModel.ACCOUNT" Role="ACCOUNT" Multiplicity="0..1" />
           <End Type="lmsDatabaseModel.BBFORM" Role="BBFORM" Multiplicity="*" />
           <ReferentialConstraint>
@@ -543,7 +549,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DETAIL_BB__MAPHI__625A9A57">
+        <Association Name="FK__DETAIL_BB__MAPHI__6FB49575">
           <End Type="lmsDatabaseModel.BBFORM" Role="BBFORM" Multiplicity="1" />
           <End Type="lmsDatabaseModel.DETAIL_BBFORM" Role="DETAIL_BBFORM" Multiplicity="*" />
           <ReferentialConstraint>
@@ -591,7 +597,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DETAIL_BB__MASAC__634EBE90">
+        <Association Name="FK__DETAIL_BB__MASAC__70A8B9AE">
           <End Type="lmsDatabaseModel.BOOK" Role="BOOK" Multiplicity="1" />
           <End Type="lmsDatabaseModel.DETAIL_BBFORM" Role="DETAIL_BBFORM" Multiplicity="*" />
           <ReferentialConstraint>
@@ -640,6 +646,8 @@
               <MappingFragment StoreEntitySet="BBFORM">
                 <ScalarProperty Name="NGAYHETHAN" ColumnName="NGAYHETHAN" />
                 <ScalarProperty Name="NGAYMUON" ColumnName="NGAYMUON" />
+                <ScalarProperty Name="TENKH" ColumnName="TENKH" />
+                <ScalarProperty Name="MSSV" ColumnName="MSSV" />
                 <ScalarProperty Name="MAKH" ColumnName="MAKH" />
                 <ScalarProperty Name="MAPHIEUMUON" ColumnName="MAPHIEUMUON" />
               </MappingFragment>
@@ -716,6 +724,7 @@
             <EntityTypeMapping TypeName="lmsDatabaseModel.DETAIL_BBFORM">
               <MappingFragment StoreEntitySet="DETAIL_BBFORM">
                 <ScalarProperty Name="SOLUONG" ColumnName="SOLUONG" />
+                <ScalarProperty Name="TENSACH" ColumnName="TENSACH" />
                 <ScalarProperty Name="MASACH" ColumnName="MASACH" />
                 <ScalarProperty Name="MAPHIEUMUON" ColumnName="MAPHIEUMUON" />
               </MappingFragment>

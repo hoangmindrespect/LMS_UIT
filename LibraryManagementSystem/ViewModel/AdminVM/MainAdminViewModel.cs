@@ -31,7 +31,6 @@ namespace LibraryManagementSystem.ViewModel.AdminVM
         public ICommand LoadManageBook { get; set; }
         public ICommand LoadImportPage { get; set; }
         public ICommand LoadBorrowBookPage { get; set; }
-        public ICommand LoadManageBorrowBookPage { get; set; }
         public ICommand Logout { get; set; }
         public MainAdminViewModel()
         {
@@ -57,13 +56,9 @@ namespace LibraryManagementSystem.ViewModel.AdminVM
 
             LoadBorrowBookPage = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
-                p.Content = new BorrowBookPage();
-            });
-
-            LoadManageBorrowBookPage = new RelayCommand<Frame>((p) => { return true; }, (p) =>
-            {
                 p.Content = new ManageBorrowBookPage();
             });
+
             Logout = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
 

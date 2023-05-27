@@ -359,3 +359,5 @@ D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\obj\Debug\Library
 D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\obj\Debug\LibraryManagementSystem.csproj.CopyComplete
 D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\obj\Debug\LibraryManagementSystem.exe
 D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\obj\Debug\LibraryManagementSystem.pdb
+D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\BorrowBook\ReturnBookPage.g.cs
+D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\BorrowBook\ReturnBookPage.baml

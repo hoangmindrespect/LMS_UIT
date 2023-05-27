@@ -120,9 +120,10 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <Button Background="#512da8"  BorderBrush="#4a148c" Foreground="#ffffff"
-                                                    Style="{StaticResource gridEditButton}"
+                                                    Style="{StaticResource MaterialDesignPaperButton}"
                                                     HorizontalAlignment="Left"
                                                     Width="30" Height="30"
+                                            Padding="0"
                                                     Margin="-25 0 0 0"
                                                     Command="{Binding DataContext.EditingBook,RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                                     CommandParameter="{Binding ElementName=dtg_manage}"
@@ -131,8 +132,9 @@
                                     </Button>
 
                                     <Button Background="#d32f2f"  BorderBrush="#b71c1c" Foreground="#ffffff"
-                                                    Style="{StaticResource gridRemoveButton}"
+                                                    Style="{StaticResource MaterialDesignPaperButton}"
                                                     HorizontalAlignment="Left"
+                                            Padding="0"
                                                     Width="30" Height="30"
                                                     Command="{Binding DataContext.DeletingBook ,RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                                     CommandParameter="{Binding ElementName=dtg_manage}"

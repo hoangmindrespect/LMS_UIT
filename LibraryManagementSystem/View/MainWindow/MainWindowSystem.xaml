@@ -116,8 +116,8 @@
 
                                         <Button Style="{StaticResource menuButton}" Command="{Binding LoadManageBorrowBookPage}" CommandParameter="{Binding ElementName=mainFrame}" >
                                             <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="BookCheck"  Margin="5 0 0 0"/>
-                                                <TextBlock Text="Borrowing and returning" Margin="10 0 0 0" VerticalAlignment="Center"/>
+                                                <materialDesign:PackIcon Kind="Settings"  Margin="5 0 0 0"/>
+                                                <TextBlock Text="Settings" Margin="10 0 0 0" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button>
 

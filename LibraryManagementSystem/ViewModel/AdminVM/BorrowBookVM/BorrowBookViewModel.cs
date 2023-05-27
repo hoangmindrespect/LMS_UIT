@@ -2,11 +2,13 @@
 using LibraryManagementSystem.Models.DataProvider;
 using LibraryManagementSystem.View.Login;
 using LibraryManagementSystem.View.MainClientWindow.BuyBookPage;
+using LibraryManagementSystem.View.MainWindow.BorrowBook;
 using LibraryManagementSystem.View.MessageBoxCus;
 using LibraryManagementSystem.ViewModel.ClientVM;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,8 +21,16 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM
     public  class BorrowBookViewModel:BaseViewModel
     {
         #region Property
-        public ObservableCollection<BookDTO> Books = new ObservableCollection<BookDTO>();
-        public static ObservableCollection<BookInBorrowDTO> ListBookBorrow = new ObservableCollection<BookInBorrowDTO>();
+        public ObservableCollection<BookDTO> Books;
+        public static ObservableCollection<BookInBorrowDTO> ListBookBorrow;
+        public static ObservableCollection<BookBorrowForm> ListReturnBook;
+
+        private string _colorBack;
+        public string ColorBack
+        {
+            get { return _colorBack; }
+            set { _colorBack = value; OnPropertyChanged(); }
+        }
         private string _iD;
         public string ID
         {
@@ -64,6 +74,10 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM
         public ICommand PlusOne {  get; set; }
         public ICommand MinusOne { get; set; }
         public ICommand CreateBookOrder { get; set; }
+        public ICommand LoadBorrowBookPage { get; set; }
+        public ICommand LoadReturnBookPage { get; set; }
+        public ICommand LoadReturnBook { get; set; }
+        public ICommand ReturnBook { get; set; }
         #endregion
 
         #region TempVar
@@ -74,6 +88,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM
 
             LoadBook = new RelayCommand<ItemsControl>((p) => { return p != null; }, (p) =>
             {
+                Books = new ObservableCollection<BookDTO>();
                 using (var context = new LMSEntities1())
                 {
 
@@ -111,6 +126,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM
 
             LoadBookBorrow = new RelayCommand<ListView>((p) => { return true; }, (p) =>
             {
+                ListBookBorrow = new ObservableCollection<BookInBorrowDTO>();
                 p.ItemsSource = ListBookBorrow;
             });
 
@@ -138,7 +154,13 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM
                 {
                     if (p == item.MaSach)
                     {
-                        item.SoLuong -= 1;
+                        if(item.SoLuong == 1)
+                        {
+                            ListBookBorrow.Remove(item);
+                            return;
+                        }    
+                        else
+                            item.SoLuong -= 1;
                     }
 
                 }
@@ -155,6 +177,8 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM
                         {
                             var Form = new BBFORM();
                             Form.MAKH = GetMAKH(ID);
+                            Form.MSSV = ID;
+                            Form.TENKH = Name;
                             Form.NGAYMUON = DateTime.Now;
                             Form.NGAYHETHAN = DateTime.Now.AddDays(30);
                             context.BBFORMs.Add(Form);
@@ -165,25 +189,89 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM
                                 DETAIL_BBFORM a = new DETAIL_BBFORM();
                                 a.MAPHIEUMUON = Form.MAPHIEUMUON;
                                 a.MASACH = book.MaSach;
+                                a.TENSACH = book.TenSach;
                                 a.SOLUONG = book.SoLuong;
+                                MinusBook(book.MaSach, book.SoLuong);
                                 context.DETAIL_BBFORM.Add(a);
                             }
                             context.SaveChanges();
+                            ListBookBorrow.Clear();
+                            ID = IDClass = Name = StartDay = DueDay = null;
                             MessageBoxLMS msb = new MessageBoxLMS("Notice", "Create successfully!", MessageType.Accept, MessageButtons.OK);
                             msb.ShowDialog();
                         }
                     }
                     else
                     {
-                        MessageBoxLMS msb = new MessageBoxLMS("Error", "Please fill into field ID!", MessageType.Accept, MessageButtons.OK);
+                        MessageBoxLMS msb = new MessageBoxLMS("Error", "Please choose at least 1 book to borrow", MessageType.Accept, MessageButtons.OK);
                         msb.ShowDialog();
                     }
                 }
                 else
                 {
-                    MessageBoxLMS msb = new MessageBoxLMS("Error", "Choose any book you want!", MessageType.Accept, MessageButtons.OK);
+                    MessageBoxLMS msb = new MessageBoxLMS("Error", " Please fill into field ID!", MessageType.Accept, MessageButtons.OK);
                     msb.ShowDialog();
                 }
+            });
+
+            LoadBorrowBookPage = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            {
+                p.Content = new BorrowBookPage();
+            });
+
+            LoadReturnBookPage = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            {
+                p.Content = new ReturnBookPage();
+            });
+
+            LoadReturnBook = new RelayCommand<ListView>((p) => { return true; }, (p) =>
+            {
+                ListReturnBook = new ObservableCollection<BookBorrowForm>();
+                using (var context = new LMSEntities1())
+                {
+                    foreach (var item in context.BBFORMs)
+                    {
+                        BookBorrowForm a = new BookBorrowForm();
+                        a.ID = item.MAPHIEUMUON;
+                        a.IDCus = (int)item.MAKH;
+                        a.Name = item.TENKH;
+                        a.MSSV = item.MSSV;
+                        a.DayStart = item.NGAYMUON.ToShortDateString();
+                        a.DayEnd = ((DateTime)item.NGAYHETHAN).ToShortDateString();
+                        a.list = new ObservableCollection<DetailBookBorrowForm>();
+                        if (item.NGAYHETHAN > item.NGAYMUON)
+                        {
+                            a.Status = "Being borrowed";
+                            a.ColorBack = "#E1E1E2";
+                        }
+                        else
+                        {
+                            a.Status = "Out of date";
+                            a.ColorBack = "#E89895";
+                        }
+                        foreach (var item2 in context.DETAIL_BBFORM)
+                        {
+                            if(item2.MAPHIEUMUON == a.ID)
+                            {
+                                DetailBookBorrowForm b = new DetailBookBorrowForm();
+                                b.IDBook = item2.MASACH;
+                                b.ID = item2.MAPHIEUMUON;
+                                b.Title = item2.TENSACH;
+                                b.Count = (int)item2.SOLUONG;
+                                a.list.Add(b);
+                            }    
+                        }  
+                        ListReturnBook.Add(a);
+                    }
+                }
+
+                p.ItemsSource = ListReturnBook;
+            });
+
+            ReturnBook = new RelayCommand<ListView>((p) => { return true; }, (p) =>
+            {
+                BookBorrowForm a =p.SelectedItems[p.SelectedIndex] as BookBorrowForm;
+                
             });
         }
 
@@ -201,6 +289,48 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM
             {
                 return (int)(from s in context.ACCOUNTs where MSSV == s.MSSV select s.ID).FirstOrDefault();
             }    
+        }
+        
+        // trừ đi số lượng sách đã mượn
+        void MinusBook(int id, int count)
+        {
+            using (var context = new LMSEntities1())
+            {
+                foreach(var item in context.BOOKs)
+                {
+                    if(item.ID == id)
+                    {
+                        item.SOLUONG -= count;
+                    }
+                }
+                context.SaveChanges();
+            }
+        }
+        void PlusBook(int id, int count)
+        {
+            using (var context = new LMSEntities1())
+            {
+                foreach (var item in context.BOOKs)
+                {
+                    if (item.ID == id)
+                    {
+                        item.SOLUONG += count;
+                    }
+                }
+                context.SaveChanges();
+            }
+        }
+        string GetNameBook(int id)
+        {
+            using(var context = new LMSEntities1())
+            {
+                foreach(var  item in context.BOOKs)
+                {
+                    if (id == item.ID)
+                        return item.TENSACH;
+                }    
+            }
+            return null;
         }
     }
 }

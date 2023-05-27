@@ -5,26 +5,26 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="d1012c04adf2467d8dd61c9086b8d370" Name="Diagram1" ZoomLevel="73">
-        <EntityTypeShape EntityType="lmsDatabaseModel.ACCOUNT" Width="1.5" PointX="0.75" PointY="5.25" />
-        <EntityTypeShape EntityType="lmsDatabaseModel.BBFORM" Width="1.5" PointX="3" PointY="2.75" />
-        <EntityTypeShape EntityType="lmsDatabaseModel.BILL" Width="1.5" PointX="3" PointY="8.375" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.ACCOUNT" Width="1.5" PointX="0.75" PointY="5.5" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.BBFORM" Width="1.5" PointX="3" PointY="11.75" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.BILL" Width="1.5" PointX="3" PointY="2.75" />
         <EntityTypeShape EntityType="lmsDatabaseModel.BOOK" Width="1.5" PointX="3" PointY="15.125" />
-        <EntityTypeShape EntityType="lmsDatabaseModel.BuildVersion" Width="1.5" PointX="2.75" PointY="5.75" />
-        <EntityTypeShape EntityType="lmsDatabaseModel.CART" Width="1.5" PointX="6" PointY="6" />
-        <EntityTypeShape EntityType="lmsDatabaseModel.CTHD" Width="1.5" PointX="8.25" PointY="8.5" />
-        <EntityTypeShape EntityType="lmsDatabaseModel.DETAIIMPORT" Width="1.5" PointX="5.25" PointY="11.375" />
-        <EntityTypeShape EntityType="lmsDatabaseModel.DETAIL_BBFORM" Width="1.5" PointX="5.25" PointY="2.875" />
-        <EntityTypeShape EntityType="lmsDatabaseModel.ErrorLog" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="lmsDatabaseModel.IMPORT" Width="1.5" PointX="3" PointY="11.5" />
-        <AssociationConnector Association="lmsDatabaseModel.FK__BBFORM__MAKH__5F7E2DAC" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.BuildVersion" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.CART" Width="1.5" PointX="6" PointY="9.125" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.CTHD" Width="1.5" PointX="5.25" PointY="2.875" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.DETAIIMPORT" Width="1.5" PointX="5.25" PointY="5.75" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.DETAIL_BBFORM" Width="1.5" PointX="5.25" PointY="11.875" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.ErrorLog" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.IMPORT" Width="1.5" PointX="3" PointY="5.875" />
+        <AssociationConnector Association="lmsDatabaseModel.FK__BBFORM__MAKH__6CD828CA" />
         <AssociationConnector Association="lmsDatabaseModel.FK__BILL__MAKH__44CA3770" />
         <AssociationConnector Association="lmsDatabaseModel.FK__CART__MAKH__5224328E" />
         <AssociationConnector Association="lmsDatabaseModel.FK__IMPORT__MANV__4B7734FF" />
-        <AssociationConnector Association="lmsDatabaseModel.FK__DETAIL_BB__MAPHI__625A9A57" />
+        <AssociationConnector Association="lmsDatabaseModel.FK__DETAIL_BB__MAPHI__6FB49575" />
         <AssociationConnector Association="lmsDatabaseModel.FK__CTHD__MAHD__47A6A41B" />
         <AssociationConnector Association="lmsDatabaseModel.FK__CART__MASACH__51300E55" />
         <AssociationConnector Association="lmsDatabaseModel.FK__CTHD__MASACH__489AC854" />
-        <AssociationConnector Association="lmsDatabaseModel.FK__DETAIL_BB__MASAC__634EBE90" />
+        <AssociationConnector Association="lmsDatabaseModel.FK__DETAIL_BB__MASAC__70A8B9AE" />
         <AssociationConnector Association="lmsDatabaseModel.FK__DETAIIMPOR__SOHD__4E53A1AA" />
       </Diagram>
     </edmx:Diagrams>

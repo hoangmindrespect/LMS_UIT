@@ -16,6 +16,7 @@ namespace LibraryManagementSystem.Models.DataProvider
     {
         public int MAPHIEUMUON { get; set; }
         public int MASACH { get; set; }
+        public string TENSACH { get; set; }
         public Nullable<int> SOLUONG { get; set; }
     
         public virtual BBFORM BBFORM { get; set; }

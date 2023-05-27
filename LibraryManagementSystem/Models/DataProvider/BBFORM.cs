@@ -22,6 +22,8 @@ namespace LibraryManagementSystem.Models.DataProvider
     
         public int MAPHIEUMUON { get; set; }
         public Nullable<int> MAKH { get; set; }
+        public string MSSV { get; set; }
+        public string TENKH { get; set; }
         public System.DateTime NGAYMUON { get; set; }
         public Nullable<System.DateTime> NGAYHETHAN { get; set; }
     

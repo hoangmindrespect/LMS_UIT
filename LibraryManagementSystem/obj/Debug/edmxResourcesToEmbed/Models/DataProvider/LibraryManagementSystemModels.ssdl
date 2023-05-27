@@ -19,6 +19,8 @@
     </Key>
     <Property Name="MAPHIEUMUON" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MAKH" Type="int" />
+    <Property Name="MSSV" Type="varchar" MaxLength="50" />
+    <Property Name="TENKH" Type="nvarchar" MaxLength="50" />
     <Property Name="NGAYMUON" Type="smalldatetime" Nullable="false" />
     <Property Name="NGAYHETHAN" Type="smalldatetime" />
   </EntityType>
@@ -95,6 +97,7 @@
     </Key>
     <Property Name="MAPHIEUMUON" Type="int" Nullable="false" />
     <Property Name="MASACH" Type="int" Nullable="false" />
+    <Property Name="TENSACH" Type="nvarchar" MaxLength="50" />
     <Property Name="SOLUONG" Type="int" />
   </EntityType>
   <EntityType Name="ErrorLog">
@@ -120,7 +123,7 @@
     <Property Name="NGNHAP" Type="smalldatetime" Nullable="false" />
     <Property Name="TRIGIA" Type="money" />
   </EntityType>
-  <Association Name="FK__BBFORM__MAKH__5F7E2DAC">
+  <Association Name="FK__BBFORM__MAKH__6CD828CA">
     <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
     <End Role="BBFORM" Type="Self.BBFORM" Multiplicity="*" />
     <ReferentialConstraint>
@@ -204,7 +207,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__DETAIL_BB__MAPHI__625A9A57">
+  <Association Name="FK__DETAIL_BB__MAPHI__6FB49575">
     <End Role="BBFORM" Type="Self.BBFORM" Multiplicity="1" />
     <End Role="DETAIL_BBFORM" Type="Self.DETAIL_BBFORM" Multiplicity="*" />
     <ReferentialConstraint>
@@ -216,7 +219,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__DETAIL_BB__MASAC__634EBE90">
+  <Association Name="FK__DETAIL_BB__MASAC__70A8B9AE">
     <End Role="BOOK" Type="Self.BOOK" Multiplicity="1" />
     <End Role="DETAIL_BBFORM" Type="Self.DETAIL_BBFORM" Multiplicity="*" />
     <ReferentialConstraint>
@@ -252,7 +255,7 @@
     <EntitySet Name="DETAIL_BBFORM" EntityType="Self.DETAIL_BBFORM" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IMPORT" EntityType="Self.IMPORT" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__BBFORM__MAKH__5F7E2DAC" Association="Self.FK__BBFORM__MAKH__5F7E2DAC">
+    <AssociationSet Name="FK__BBFORM__MAKH__6CD828CA" Association="Self.FK__BBFORM__MAKH__6CD828CA">
       <End Role="ACCOUNT" EntitySet="ACCOUNT" />
       <End Role="BBFORM" EntitySet="BBFORM" />
     </AssociationSet>
@@ -280,11 +283,11 @@
       <End Role="IMPORT" EntitySet="IMPORT" />
       <End Role="DETAIIMPORT" EntitySet="DETAIIMPORT" />
     </AssociationSet>
-    <AssociationSet Name="FK__DETAIL_BB__MAPHI__625A9A57" Association="Self.FK__DETAIL_BB__MAPHI__625A9A57">
+    <AssociationSet Name="FK__DETAIL_BB__MAPHI__6FB49575" Association="Self.FK__DETAIL_BB__MAPHI__6FB49575">
       <End Role="BBFORM" EntitySet="BBFORM" />
       <End Role="DETAIL_BBFORM" EntitySet="DETAIL_BBFORM" />
     </AssociationSet>
-    <AssociationSet Name="FK__DETAIL_BB__MASAC__634EBE90" Association="Self.FK__DETAIL_BB__MASAC__634EBE90">
+    <AssociationSet Name="FK__DETAIL_BB__MASAC__70A8B9AE" Association="Self.FK__DETAIL_BB__MASAC__70A8B9AE">
       <End Role="BOOK" EntitySet="BOOK" />
       <End Role="DETAIL_BBFORM" EntitySet="DETAIL_BBFORM" />
     </AssociationSet>

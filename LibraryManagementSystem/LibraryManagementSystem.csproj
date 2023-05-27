@@ -182,9 +182,11 @@
     <Compile Include="ControlBar\UserControl1.xaml.cs">
       <DependentUpon>UserControl1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DTOs\BookBorrowForm.cs" />
     <Compile Include="DTOs\BookDTO.cs" />
     <Compile Include="DTOs\BookInBorrowDTO.cs" />
     <Compile Include="DTOs\ClientDTO.cs" />
+    <Compile Include="DTOs\DetailBookBorrowForm.cs" />
     <Compile Include="DTOs\ImportBook.cs" />
     <Compile Include="DTOs\UserDTO.cs" />
     <Compile Include="Models\DataProvider\ACCOUNT.cs">
@@ -239,6 +241,7 @@
     <Compile Include="Utils\Default.cs" />
     <Compile Include="Validtations\NotNullValidation.cs" />
     <Compile Include="ViewModel\AdminVM\BorrowBookVM\BorrowBookViewModel.cs" />
+    <Compile Include="ViewModel\AdminVM\BorrowBookVM\ManageBBFormViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\ImportBookVM\ImportViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\MainAdminViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\ManageBookVM\ManageBookViewModel.cs" />
@@ -289,6 +292,9 @@
     </Compile>
     <Compile Include="View\MainWindow\BorrowBook\ManageBorrowBookPage.xaml.cs">
       <DependentUpon>ManageBorrowBookPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainWindow\BorrowBook\ReturnBookPage.xaml.cs">
+      <DependentUpon>ReturnBookPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow\ImportBook\AddingWindow.xaml.cs">
       <DependentUpon>AddingWindow.xaml</DependentUpon>
@@ -388,6 +394,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainWindow\BorrowBook\ManageBorrowBookPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainWindow\BorrowBook\ReturnBookPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

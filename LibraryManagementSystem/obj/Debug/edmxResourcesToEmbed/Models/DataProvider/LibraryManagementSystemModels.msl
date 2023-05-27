@@ -20,6 +20,8 @@
         <MappingFragment StoreEntitySet="BBFORM">
           <ScalarProperty Name="NGAYHETHAN" ColumnName="NGAYHETHAN" />
           <ScalarProperty Name="NGAYMUON" ColumnName="NGAYMUON" />
+          <ScalarProperty Name="TENKH" ColumnName="TENKH" />
+          <ScalarProperty Name="MSSV" ColumnName="MSSV" />
           <ScalarProperty Name="MAKH" ColumnName="MAKH" />
           <ScalarProperty Name="MAPHIEUMUON" ColumnName="MAPHIEUMUON" />
         </MappingFragment>
@@ -96,6 +98,7 @@
       <EntityTypeMapping TypeName="lmsDatabaseModel.DETAIL_BBFORM">
         <MappingFragment StoreEntitySet="DETAIL_BBFORM">
           <ScalarProperty Name="SOLUONG" ColumnName="SOLUONG" />
+          <ScalarProperty Name="TENSACH" ColumnName="TENSACH" />
           <ScalarProperty Name="MASACH" ColumnName="MASACH" />
           <ScalarProperty Name="MAPHIEUMUON" ColumnName="MAPHIEUMUON" />
         </MappingFragment>
