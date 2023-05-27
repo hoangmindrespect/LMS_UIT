@@ -24,6 +24,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
@@ -222,7 +223,62 @@
             </DataGrid>
 
         </Grid>
-        
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1" Content="Import Book List"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                IsDefault="True"
+                                Width="150"
+                                Height="30"
+                                Margin="0 0 15 10"
+                                x:Name="btnImport"
+                                BorderBrush="#EEE8AA"
+                                Background="#EEE8AA"
+                                Foreground="Black"
+                                materialDesign:ButtonAssist.CornerRadius="8"
+                                Command="{Binding ImportFromExcel}"
+                                CommandParameter="{Binding ElementName=dtg_manage}"    
+                                >
+            </Button>
+            <Button Grid.Column="2" Content="Export Book List"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                IsDefault="True"
+                                Width="150"
+                                Height="30"
+                                Margin="0 0 15 10"
+                                x:Name="btnExport"
+                                BorderBrush="#EEE8AA"
+                                Background="#EEE8AA"
+                                Foreground="Black"
+                                materialDesign:ButtonAssist.CornerRadius="8"
+                                Command="{Binding ExportToExcel}"
+                                CommandParameter="{Binding ElementName=dtg_manage}"    
+                                >
+            </Button>
+            <Button Grid.Column="3" Content="Delete Book List"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                IsDefault="True"
+                                Width="150"
+                                Height="30"
+                                Margin="0 0 15 10"
+                                x:Name="btnDel"
+                                BorderBrush="#EEE8AA"
+                                Background="#EEE8AA"
+                                Foreground="Black"
+                                materialDesign:ButtonAssist.CornerRadius="8"
+                                Command="{Binding DeleteBookList}"
+                                CommandParameter="{Binding ElementName=dtg_manage}"    
+                                >
+            </Button>
+        </Grid>
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="Loaded">
                 <i:InvokeCommandAction Command="{Binding LoadManageBookData}"

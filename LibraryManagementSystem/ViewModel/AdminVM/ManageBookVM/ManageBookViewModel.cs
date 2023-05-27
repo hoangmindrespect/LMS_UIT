@@ -4,10 +4,14 @@ using LibraryManagementSystem.DTOs;
 using LibraryManagementSystem.Models.DataProvider;
 using LibraryManagementSystem.View.MainWindow.ManageBook;
 using LibraryManagementSystem.View.MessageBoxCus;
+using Microsoft.Win32;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Principal;
@@ -128,8 +132,11 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageBookVM
         public ICommand LoadManageBookData { get; set; }
         public ICommand Updating { get; set; }
         public ICommand DeletingBook { get; set; }
+        public ICommand DeleteBookList { get; set; }
         public ICommand EditingBook { get; set; }
         public ICommand ImportImageEditWindow { get; set; }
+        public ICommand ExportToExcel { get; set; }
+        public ICommand ImportFromExcel { get; set; }
         #endregion
 
         EdittingBookWindow window;
@@ -277,6 +284,191 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageBookVM
                     }
                     context.SaveChanges();
 
+                }
+            });
+            ExportToExcel = new RelayCommand<DataGrid>((p) => { return true; }, (p) =>
+            {
+                string filePath = "";
+                SaveFileDialog dialog = new SaveFileDialog();
+                dialog.Filter = "Excel|*.xlsx;*.xls";
+
+                if (dialog.ShowDialog() == true)
+                    filePath = dialog.FileName;
+
+                if (string.IsNullOrEmpty(filePath))
+                {
+                    MessageBox.Show("Duong dan sai");
+                    return;
+                }
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                try
+                {
+                    using (ExcelPackage excel = new ExcelPackage())
+                    {
+                        excel.Workbook.Worksheets.Add("List of Book");
+                        ExcelWorksheet ws = excel.Workbook.Worksheets[0];
+                        ws.Name = "List of Book";
+                        ws.Cells.Style.Font.Size = 11;
+                        ws.Cells.Style.Font.Name = "Times New Roman";
+                        string[] headerColumns = { "ID", "Book title", "Author's name", "Publisher", "Publication Year", "Genre", "Price", "Count" };
+
+                        int numOfColumns = headerColumns.Count();
+                        ws.Cells[1, 1].Value = "List of book - LMS Library";
+                        ws.Cells[1, 1, 1, numOfColumns].Merge = true;
+                        ws.Cells[1, 1, 1, numOfColumns].Style.Font.Bold = true;
+                        int colIndex = 1;
+                        int rowIndex = 2;
+
+                        //Tao các header trong excel
+                        foreach (string item in headerColumns)
+                        {
+                            var cell = ws.Cells[rowIndex, colIndex];
+                            //Set màu dòng header thành LightBlue
+                            var fill = cell.Style.Fill;
+                            fill.PatternType = ExcelFillStyle.Solid;
+                            fill.BackgroundColor.SetColor(System.Drawing.Color.LightBlue);
+                            //Chỉnh border
+                            var border = cell.Style.Border;
+                            border.Bottom.Style = border.Top.Style = border.Left.Style = border.Right.Style = ExcelBorderStyle.Thin;
+
+                            cell.Value = item;
+                            colIndex++;
+
+                        }
+
+                        //Thêm dữ liệu vào sheet
+                        foreach (BookDTO user in Listbookmanage)
+                        {
+                            colIndex = 1;
+                            rowIndex++;
+                            ws.Cells[rowIndex, colIndex++].Value = user.MaSach;
+                            ws.Cells[rowIndex, colIndex++].Value = user.TenSach;
+                            ws.Cells[rowIndex, colIndex++].Value = user.TacGia;
+                            ws.Cells[rowIndex, colIndex++].Value = user.NXB;
+                            ws.Cells[rowIndex, colIndex++].Value = user.NamXB;
+                            ws.Cells[rowIndex, colIndex++].Value = user.TheLoai;
+                            ws.Cells[rowIndex, colIndex++].Value = user.Gia;
+                            ws.Cells[rowIndex, colIndex++].Value = user.SoLuong;
+                        }
+                        for (int i = 1; i < headerColumns.Length; i++)
+                            ws.Column(i).Width = ws.Cells[3, i].Value.ToString().Length * 1.2 + 5;
+
+                        ws.Cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                        ws.Cells[1, 1, 2, headerColumns.Length].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        //Save
+                        Byte[] bin = excel.GetAsByteArray();
+                        File.WriteAllBytes(filePath, bin);
+                    }
+                    MessageBoxLMS msb = new MessageBoxLMS("Notification", "Export to Excel is successful!", MessageType.Accept, MessageButtons.OK);
+                    msb.ShowDialog();
+
+                }
+                catch (Exception e)
+                {
+                    MessageBoxLMS msb = new MessageBoxLMS("Warning", "Error - The file you selected maybe open.", MessageType.Error, MessageButtons.OK);
+                    msb.ShowDialog();
+                }
+
+            });
+
+            ImportFromExcel = new RelayCommand<DataGrid>((p) => { return true; }, (p) =>
+            {
+                string filePath = "";
+                OpenFileDialog dialog = new OpenFileDialog();
+                dialog.Filter = "Excel|*.xlsx;*.xls";
+                if (dialog.ShowDialog() == true)
+                    filePath = dialog.FileName;
+
+                if (string.IsNullOrEmpty(filePath))
+                {
+                    MessageBox.Show("Duong dan sai");
+                    return;
+                }
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                try
+                {
+                    using (ExcelPackage excel = new ExcelPackage(new FileInfo(dialog.FileName)))
+                    {
+                        ExcelWorksheet ws = excel.Workbook.Worksheets[0];
+                        int numOfRow = ws.Dimension.Rows;
+                        using (var context = new LMSEntities1())
+                        {
+                            for (int i = 2; i <= numOfRow; i++)
+                            {
+                                //int id = Int32.Parse(ws.Cells[i, 1].Value.ToString());
+                                string bookTitle = ws.Cells[i, 1].Value.ToString();
+                                string authorName = ws.Cells[i, 2].Value.ToString();
+                                string publisher = ws.Cells[i, 3].Value.ToString();
+                                int publicationYear = Int32.Parse(ws.Cells[i, 4].Value.ToString());
+                                string genre = ws.Cells[i, 5].Value.ToString();
+                                decimal price = decimal.Parse(ws.Cells[i, 6].Value.ToString());
+                                int count = Int32.Parse(ws.Cells[i, 7].Value.ToString());
+
+                                BOOK newBook = new BOOK();
+                                newBook.TENSACH = bookTitle;
+                                newBook.TACGIA = authorName;
+                                newBook.NHAXUATBAN = publisher;
+                                newBook.NAMXUATBAN = publicationYear;
+                                newBook.THELOAI = genre;
+                                newBook.GIA = price;
+                                newBook.SOLUONG = count;
+                                context.BOOKs.Add(newBook);
+                            }
+                            context.SaveChanges();
+                            Loaded(p);
+                        }
+                    }
+                    MessageBoxLMS msb = new MessageBoxLMS("Notification", "Successful import!", MessageType.Accept, MessageButtons.OK);
+                    msb.ShowDialog();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.ToString());
+                    MessageBoxLMS msb = new MessageBoxLMS("Warning", "Error - Cannot import data from the selected file.", MessageType.Error, MessageButtons.OK);
+                    msb.ShowDialog();
+                }
+            });
+
+            DeleteBookList = new RelayCommand<DataGrid>(
+            (p) =>
+            {
+                if (p.SelectedItems.Count > 1)
+                    return true;
+                return false;
+            }, (p) =>
+            {
+                List<string> bookList = new List<string>();
+                foreach (var item in p.SelectedItems)
+                    bookList.Add((item as BookDTO).MaSach.ToString());
+                using (var context = new LMSEntities1())
+                {
+                    SqlConnection connection = new SqlConnection(context.Database.Connection.ConnectionString);
+                    connection.Open();
+                    SqlCommand command = new SqlCommand();
+                    command.Connection = connection;
+                    string idList = string.Join(", ", bookList);
+                    MessageBoxLMS msb = new MessageBoxLMS("Warning", "Delete this list of book?", MessageType.Waitting, MessageButtons.YesNo);
+                    if (msb.ShowDialog() == true)
+                    {
+                        try
+                        {
+                            command.Parameters.AddWithValue("@idList", idList);
+                            command.CommandText = "delete from BOOK where ID in ( " + @idList + " )";
+                            context.SaveChanges();
+                            if (command.ExecuteNonQuery() != 0)
+                            {
+                                msb = new MessageBoxLMS("Notification", "Deleting is successful", MessageType.Accept, MessageButtons.OK);
+                                msb.ShowDialog();
+                                Loaded(p);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            //MessageBox.Show(ex.Message);
+                            msb = new MessageBoxLMS("Notification", "Cannot delete this list of book", MessageType.Error, MessageButtons.OK);
+                            msb.ShowDialog();
+                        }
+                    }
                 }
             });
         }

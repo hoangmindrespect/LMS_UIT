@@ -5,6 +5,7 @@
                     xmlns:viewmodel1.2="clr-namespace:LibraryManagementSystem.ViewModel.AdminVM.ManageBookVM"
                     xmlns:viewmodel1.3="clr-namespace:LibraryManagementSystem.ViewModel.AdminVM.ImportBookVM"
                     xmlns:viewmodel1.4="clr-namespace:LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM"
+                    xmlns:viewmodel1.5="clr-namespace:LibraryManagementSystem.ViewModel.AdminVM.ManageUserVM"
                     xmlns:viewmodel2="clr-namespace:LibraryManagementSystem.ViewModel.LoginVM"
                     xmlns:viewmodel1="clr-namespace:LibraryManagementSystem.ViewModel.AdminVM"
                     xmlns:viewmodel3="clr-namespace:LibraryManagementSystem.ViewModel.ClientVM"
@@ -19,6 +20,7 @@
     <viewmodel1.2:ManageBookViewModel  x:Key="ManageBookVM"/>
     <viewmodel1.3:ImportViewModel x:Key="ImportVM"/>
     <viewmodel1.4:BorrowBookViewModel x:Key="BorrowVM"/>
+    <viewmodel1.5:ManageUserViewModel x:Key="ManageUserVM"/>
     <viewmodel3.1:BuyBookViewModel x:Key="BuyBookVM"/>
     <as:BoolValueConverter x:Key="ConverterBoolValue"/>
 </ResourceDictionary>

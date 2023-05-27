@@ -4,6 +4,7 @@ using LibraryManagementSystem.View.MainWindow;
 using LibraryManagementSystem.View.MainWindow.BorrowBook;
 using LibraryManagementSystem.View.MainWindow.ImportBook;
 using LibraryManagementSystem.View.MainWindow.ManageBook;
+using LibraryManagementSystem.View.MainWindow.ManageUser;
 using LibraryManagementSystem.View.MainWindow.Statistical;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM
         #endregion
 
         public ICommand LoadStatisticalFirst { get; set; }
+        public ICommand LoadManageUser { get; set; }
         public ICommand LoadManageBook { get; set; }
         public ICommand LoadImportPage { get; set; }
         public ICommand LoadBorrowBookPage { get; set; }
@@ -48,7 +50,10 @@ namespace LibraryManagementSystem.ViewModel.AdminVM
             {
                 p.Content = new ManageBookPage();
             });
-
+            LoadManageUser = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            {
+                p.Content = new ManageUserPage();
+            });
             LoadImportPage = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
                 p.Content = new ImportBookPage();
