@@ -143,8 +143,12 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageUserVM
             DeleteUserList = new RelayCommand<DataGrid>(
             (p) => 
             {
-                if (p.SelectedItems.Count > 1)
-                    return true;
+                if(p != null)
+                {
+                    if (p.SelectedItems.Count > 1)
+                        return true;
+                    return false;
+                }
                 return false;
             },(p) =>
             {

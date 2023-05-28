@@ -224,7 +224,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM
                 p.Content = new ReturnBookPage();
             });
 
-            LoadReturnBook = new RelayCommand<ListView>((p) => { return true; }, (p) =>
+            LoadReturnBook = new RelayCommand<DataGrid>((p) => { return true; }, (p) =>
             {
                 ListReturnBook = new ObservableCollection<BookBorrowForm>();
                 using (var context = new LMSEntities1())
@@ -232,7 +232,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM
                     foreach (var item in context.BBFORMs)
                     {
                         BookBorrowForm a = new BookBorrowForm();
-                        a.ID = item.MAPHIEUMUON;
+                        a.ID = item.MAPHIEUMUON.ToString();
                         a.IDCus = (int)item.MAKH;
                         a.Name = item.TENKH;
                         a.MSSV = item.MSSV;
@@ -251,7 +251,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM
                         }
                         foreach (var item2 in context.DETAIL_BBFORM)
                         {
-                            if(item2.MAPHIEUMUON == a.ID)
+                            if(item2.MAPHIEUMUON.ToString() == a.ID)
                             {
                                 DetailBookBorrowForm b = new DetailBookBorrowForm();
                                 b.IDBook = item2.MASACH;
@@ -260,7 +260,8 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM
                                 b.Count = (int)item2.SOLUONG;
                                 a.list.Add(b);
                             }    
-                        }  
+                        }
+
                         ListReturnBook.Add(a);
                     }
                 }
@@ -268,10 +269,39 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM
                 p.ItemsSource = ListReturnBook;
             });
 
-            ReturnBook = new RelayCommand<ListView>((p) => { return true; }, (p) =>
+            ReturnBook = new RelayCommand<string>((p) => { return true; }, (p) =>
             {
-                BookBorrowForm a =p.SelectedItems[p.SelectedIndex] as BookBorrowForm;
-                
+                //Return book into library and delete form in database
+                using(var context = new LMSEntities1())
+                {
+                    foreach(var item in context.DETAIL_BBFORM)
+                    {
+                        if(p == item.MAPHIEUMUON.ToString())
+                        {
+                            PlusBook(item.MASACH, (int)item.SOLUONG);
+                            context.DETAIL_BBFORM.Remove(item);
+                        }    
+                    }
+
+                    foreach (var item in context.BBFORMs)
+                    {
+                        if (p == item.MAPHIEUMUON.ToString())
+                        {
+                           context.BBFORMs.Remove(item);
+                        }
+                    }
+                    context.SaveChanges();
+                }    
+
+                //Remove this form from ListReturnBook
+                foreach (var item in ListReturnBook)
+                {
+                    if(item.ID == p)
+                    {
+                        ListReturnBook.Remove(item);
+                        break;
+                    }    
+                }
             });
         }
 
@@ -332,5 +362,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM
             }
             return null;
         }
+
+
     }
 }

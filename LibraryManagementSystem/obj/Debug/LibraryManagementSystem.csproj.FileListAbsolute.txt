@@ -507,3 +507,15 @@ C:\CODE\zzzDoAnLMS\LMS_UIT_Khang\LibraryManagementSystem\bin\Debug\EPPlus.xml
 C:\CODE\zzzDoAnLMS\LMS_UIT_Khang\LibraryManagementSystem\bin\Debug\Microsoft.IO.RecyclableMemoryStream.xml
 C:\CODE\zzzDoAnLMS\LMS_UIT_Khang\LibraryManagementSystem\obj\Debug\View\MainWindow\ManageUser\EditingUserWindow.baml
 C:\CODE\zzzDoAnLMS\LMS_UIT_Khang\LibraryManagementSystem\obj\Debug\View\MainWindow\ManageUser\ManageUserPage.baml
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\EPPlus.dll
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\EPPlus.Interfaces.dll
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\EPPlus.System.Drawing.dll
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\EPPlus.xml
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\Microsoft.IO.RecyclableMemoryStream.xml
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\BorrowBook\ReturnBookPage.g.cs
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\ManageUser\EditingUserWindow.g.cs
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\ManageUser\ManageUserPage.g.cs
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\BorrowBook\ReturnBookPage.baml
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\ManageUser\EditingUserWindow.baml
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\ManageUser\ManageUserPage.baml
