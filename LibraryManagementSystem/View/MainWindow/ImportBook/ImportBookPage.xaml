@@ -345,7 +345,7 @@
                             <Label x:Name="label4"
                                    FontWeight="Bold"
                                    
-                                    Content="Minh " 
+                                    Content="{Binding NameAdmin}" 
                                     HorizontalAlignment="Left"
                                     Height="auto" 
                                     Margin="0 20 10 0"
@@ -369,7 +369,7 @@
 
                             <Label x:Name="label6"
                                    FontWeight="Bold"
-                                    Content="1/1/2023" 
+                                    Content="{Binding ToDay}" 
                                     HorizontalAlignment="Left" 
                                     Height="auto" 
                                     Margin="0 20 0 0"
@@ -420,7 +420,7 @@
                                     FontWeight="Bold"
                                     Width="auto" FontSize="15" 
                                     Foreground="#DDF9F9F9">
-                                <TextBlock Text="một trăm bảy mươi tám nghìn" TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding IntoText}" TextWrapping="Wrap"/>
                             </Label>
                         </DockPanel>
                         <Separator Height="2" Width="200" Margin="0 20 0 0" Background="#342A20"/>

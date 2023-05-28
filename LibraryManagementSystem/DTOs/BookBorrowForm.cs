@@ -19,6 +19,7 @@ namespace LibraryManagementSystem.DTOs
         public string DayEnd { get; set; }
         public bool Collected { get; set; }
         public string ColorBack { get; set; }
+        public Decimal PenaltyFee { get; set; }
         public ObservableCollection<DetailBookBorrowForm> list { get; set; }
     }
 }

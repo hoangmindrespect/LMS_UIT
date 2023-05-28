@@ -199,11 +199,17 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageBookVM
                 NamXuatBan = item.NamXB.ToString();
                 Gia = item.Gia.ToString();
                 MoTa = item.MoTa.ToString();
-                TheLoai = item.TheLoai.ToString();
+                TheLoai = null;
+                
 
-                if (string.IsNullOrEmpty(item.ImageSource)) { }
+                if (string.IsNullOrEmpty(item.ImageSource))
+                {
+                    ImgSource = null;
+                    TheLoai = item.TheLoai;
+                }
                 else
                 {
+                    TheLoai = item.TheLoai;
                     ImgSource = item.ImageSource.ToString();
                     //Load ảnh hiện tai lên trang chỉnh sửa
                     BitmapImage img = new BitmapImage();
@@ -260,19 +266,28 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageBookVM
                         {
                             try
                             {
-                                book.TENSACH = TenSach;
-                                book.TACGIA = TacGia;
-                                book.NHAXUATBAN = NhaXuatBan;
-                                book.NAMXUATBAN = int.Parse(NamXuatBan);
-                                book.MOTA = MoTa;
-                                book.THELOAI = TheLoai;
-                                book.GIA = decimal.Parse(Gia);
-                                book.IMAGESOURCE = ImgSource;
-                                book.SOLUONG = int.Parse(SoLuong);
+                                if (!string.IsNullOrEmpty(TenSach) && !string.IsNullOrEmpty(TacGia) && !string.IsNullOrEmpty(NhaXuatBan) && !string.IsNullOrEmpty(NamXuatBan) && !string.IsNullOrEmpty(MoTa) && !string.IsNullOrEmpty(MoTa) && !string.IsNullOrEmpty(Gia) && !string.IsNullOrEmpty(ImgSource) && !string.IsNullOrEmpty(SoLuong))
+                                {
 
-                                MessageBoxLMS msb = new MessageBoxLMS("Notification", "Edit book successfull", MessageType.Accept, MessageButtons.OK);
-                                msb.ShowDialog();
-                                break;
+                                    book.TENSACH = TenSach;
+                                    book.TACGIA = TacGia;
+                                    book.NHAXUATBAN = NhaXuatBan;
+                                    book.NAMXUATBAN = int.Parse(NamXuatBan);
+                                    book.MOTA = MoTa;
+                                    book.THELOAI = TheLoai;
+                                    book.GIA = decimal.Parse(Gia);
+                                    book.IMAGESOURCE = ImgSource;
+                                    book.SOLUONG = int.Parse(SoLuong);
+
+                                    MessageBoxLMS msb = new MessageBoxLMS("Notification", "Edit book successfull", MessageType.Accept, MessageButtons.OK);
+                                    msb.ShowDialog();
+                                    break;
+                                }    
+                                else
+                                {
+                                    MessageBoxLMS msb = new MessageBoxLMS("Notification", "Some fields still empty", MessageType.Accept, MessageButtons.OK);
+                                    msb.ShowDialog();
+                                }    
                             }
                             catch
                             {
@@ -285,6 +300,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageBookVM
                     context.SaveChanges();
 
                 }
+                p.Close();
             });
             ExportToExcel = new RelayCommand<DataGrid>((p) => { return true; }, (p) =>
             {

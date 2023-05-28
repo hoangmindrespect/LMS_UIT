@@ -81,6 +81,27 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ImportBookVM
             get { return _triGiaChu; }
             set { _triGiaChu = value; OnPropertyChanged(); }
         }
+
+        private string _nameAdmin;
+        public string NameAdmin
+        {
+            get { return _nameAdmin; }
+            set { _nameAdmin = value; OnPropertyChanged(); }
+        }
+
+        private string _toDay;
+        public string ToDay
+        {
+            get { return _toDay; }
+            set { _toDay = value; OnPropertyChanged(); }
+        }
+
+        private string _intoText;
+        public string IntoText
+        {
+            get { return _intoText; }
+            set { _intoText = value; OnPropertyChanged(); }
+        }
         #endregion
         public ICommand OpenAddingWindow {get; set;}
         public ICommand AddBookToImportDTG { get; set; }
@@ -101,6 +122,8 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ImportBookVM
             {
                 p.ItemsSource = LoginRegisViewModel.listbook;
                 LoginRegisViewModel.import_dtg = p;
+
+                ToDay = DateTime.Now.ToShortDateString();
             });
 
             //Thêm mặt hàng vào ds nhập
@@ -110,21 +133,21 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ImportBookVM
                 {
                     if ((TriGiaHoaDon + int.Parse(SoLuong) * int.Parse(GiaNhap)) > 1000000000)
                     {
-                        MessageBoxLMS msb = new MessageBoxLMS("Lỗi", "Trị giá của hóa đơn không vượt quá 1 tỷ", MessageType.Error, MessageButtons.OK);
+                        MessageBoxLMS msb = new MessageBoxLMS("Error", "Your order cost must be under 1 billion", MessageType.Error, MessageButtons.OK);
                         msb.ShowDialog();
                     }
                     else
                     {
                         LoginRegisViewModel.listbook.Add(new ImportBook{ TenSach = TenMatHang, SoLuong = int.Parse(SoLuong), GiaNhap = int.Parse(GiaNhap), GiaBan = int.Parse(GiaBan), NhaXuatBan = NhaXuatBan, TacGia = TacGia });
                         TriGiaHoaDon += int.Parse(SoLuong) * int.Parse(GiaNhap);
-                        TriGiaChu = So_chu(TriGiaHoaDon);
+                        IntoText = So_chu(TriGiaHoaDon);
                         TenMatHang = SoLuong = GiaNhap = GiaBan = TacGia = NhaXuatBan = null;
                         p.Close();
                     }
                 }
                 else
                 {
-                    MessageBoxLMS msb = new MessageBoxLMS("Lỗi", "Điền vào đầy đủ các thông tin trên", MessageType.Error, MessageButtons.OK);
+                    MessageBoxLMS msb = new MessageBoxLMS("Error", "Some fields are empty", MessageType.Error, MessageButtons.OK);
                     msb.ShowDialog();
                 }
             });
@@ -134,6 +157,8 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ImportBookVM
             {
                 ImportBook book = LoginRegisViewModel.import_dtg.SelectedItems[0] as ImportBook;
                 LoginRegisViewModel.listbook.Remove(book);
+                CapNhatTriGia();
+                IntoText = So_chu(TriGiaHoaDon);
             });
 
             //Sửa mặt hàng trong danh sách nhập
@@ -148,6 +173,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ImportBookVM
             {
                 DataGridRow row = (DataGridRow)LoginRegisViewModel.import_dtg.ItemContainerGenerator.ContainerFromItem(LoginRegisViewModel.import_dtg.CurrentItem);
                 ShowCellsNormalTemplate(row, true);
+                CapNhatTriGia();
             });
 
             //Hủy thay đổi mặt hàng
@@ -161,7 +187,6 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ImportBookVM
             CreateOrder = new RelayCommand<DataGrid>((p) => { return true; }, (p) =>
             {
                 
-
             });
         }
 
@@ -218,14 +243,21 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ImportBookVM
         #region Cập nhật các thông số trong datagrid
         private void CapNhatTriGia()
         {
-            
+            TriGiaHoaDon = 0;
+            foreach (var item in LoginRegisViewModel.listbook)
+            {
+                if ((TriGiaHoaDon) > 1000000000)
+                {
+                    MessageBoxLMS msb = new MessageBoxLMS("Error", "Your order cost must be under 1  billion", MessageType.Error, MessageButtons.OK);
+                    msb.ShowDialog();
+                }
+                else
+                {
+                    TriGiaHoaDon += item.GiaNhap * item.SoLuong;
+                    IntoText = So_chu(TriGiaHoaDon);
+                }
+            }
         }
-
-        private void CapNhatSTT()
-        {
-            
-        }
-
         #endregion
 
         #region Đổi từ số sang chữ

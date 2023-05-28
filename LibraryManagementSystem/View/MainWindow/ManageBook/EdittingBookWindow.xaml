@@ -229,32 +229,18 @@
                                     materialDesign:HintAssist.Hint="Genre"
                                     Margin="10 10 10 10"
                                     Text="{Binding TheLoai}"
-                                    SelectedItem="{Binding TheLoai}"
                                     Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                                        <ComboBoxItem>
-                                            Chính trị
-                                        </ComboBoxItem>
-                                        <ComboBoxItem>
-                                            Khoa học
-                                        </ComboBoxItem>
-                                        <ComboBoxItem>
-                                            Kinh tế
-                                        </ComboBoxItem>
-                                        <ComboBoxItem>
-                                            Văn học
-                                        </ComboBoxItem>
-                                        <ComboBoxItem>
-                                            Lịch sử
-                                        </ComboBoxItem>
-                                        <ComboBoxItem>
-                                            Tiểu thuyết
-                                        </ComboBoxItem>
-                                        <ComboBoxItem>
-                                            Tâm lý
-                                        </ComboBoxItem>
-                                        <ComboBoxItem>
-                                            Trinh thám
-                                </ComboBoxItem>
+                                <ComboBox.ItemsSource>
+                                    <x:Array Type="{x:Type ComboBoxItem}">
+                                        <ComboBoxItem Content="Chính trị – Pháp luật" />
+                                        <ComboBoxItem Content="Khoa học công nghệ – Kinh tế" />
+                                        <ComboBoxItem Content="Văn hóa xã hội – Lịch sử" />
+                                        <ComboBoxItem Content="Giáo trình" />
+                                        <ComboBoxItem Content="Truyện, tiểu thuyết" />
+                                        <ComboBoxItem Content="Tâm lý, tâm linh, tôn giáo" />
+                                        <ComboBoxItem Content="Sách thiếu nhi" />
+                                    </x:Array>
+                                </ComboBox.ItemsSource>
                             </ComboBox>
 
                             <Label Margin="10 -10 10 0"

@@ -113,15 +113,24 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM
              {
                  using (var context = new LMSEntities1())
                  {
-                     if (!string.IsNullOrEmpty(ID))
+                     try
                      {
-                         Name = (from s in context.ACCOUNTs where s.MSSV == ID select s.FULLNAME).FirstOrDefault();
-                         IDClass = (from s in context.ACCOUNTs where s.MSSV == ID select s.IDCLASS).FirstOrDefault();
+                         if (!string.IsNullOrEmpty(ID))
+                         {
+                             Name = (from s in context.ACCOUNTs where s.MSSV == ID select s.FULLNAME).FirstOrDefault();
+                             IDClass = (from s in context.ACCOUNTs where s.MSSV == ID select s.IDCLASS).FirstOrDefault();
+
+                             StartDay = DateTime.Now.ToShortDateString();
+                             DueDay = DateTime.Now.AddDays(30).ToShortDateString();
+
+                         }
+                     }
+                     catch
+                     {
+                         MessageBoxLMS msb = new MessageBoxLMS("Notice", "Can not find any studen with this ID", MessageType.Accept, MessageButtons.OK);
+                         msb.ShowDialog();
                      }
                  }
-
-                 StartDay = DateTime.Now.ToShortDateString();
-                 DueDay = DateTime.Now.AddDays(30).ToShortDateString();
              });
 
             LoadBookBorrow = new RelayCommand<ListView>((p) => { return true; }, (p) =>
