@@ -126,6 +126,15 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageBookVM
             get { return _isLoading; }
             set { _isLoading = value; OnPropertyChanged(); }
         }
+
+        
+
+        private string _colorWord;
+        public string ColorWord
+        {
+            get { return _colorWord; }
+            set { _colorWord = value; OnPropertyChanged(); }
+        }
         #endregion
 
         #region Icommand
@@ -499,19 +508,35 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageBookVM
             {
                 foreach (var item in context.BOOKs)
                 {
-
-                    BookDTO book = new BookDTO();
-                    book.MaSach = item.ID;
-                    book.TenSach = item.TENSACH;
-                    book.TacGia = item.TACGIA;
-                    book.SoLuong = (int)item.SOLUONG;
-                    book.Gia = (int)item.GIA;
-                    book.NXB = item.NHAXUATBAN;
-                    book.NamXB = (int)item.NAMXUATBAN;
-                    book.TheLoai = item.THELOAI;
-                    book.MoTa = item.MOTA;
-                    book.ImageSource = item.IMAGESOURCE;
-                    Listbookmanage.Add(book);
+                    // trường hợp không đầy đủ thông tin
+                   if(string.IsNullOrEmpty(item.IMAGESOURCE))
+                    {
+                        BookDTO book = new BookDTO();
+                        book.MaSach = item.ID;
+                        book.TenSach = item.TENSACH;
+                        book.TacGia = item.TACGIA;
+                        book.SoLuong = (int)item.SOLUONG;
+                        book.Gia = (int)item.GIA;
+                        book.NXB = item.NHAXUATBAN;
+                        book.ColorBack = "#E89895";
+                        Listbookmanage.Add(book);
+                    }  
+                   else // trường hợp đầy  đủ thông tin
+                    {
+                        BookDTO book = new BookDTO();
+                        book.MaSach = item.ID;
+                        book.TenSach = item.TENSACH;
+                        book.TacGia = item.TACGIA;
+                        book.SoLuong = (int)item.SOLUONG;
+                        book.Gia = (int)item.GIA;
+                        book.NXB = item.NHAXUATBAN;
+                        book.NamXB = (int)item.NAMXUATBAN;
+                        book.TheLoai = item.THELOAI;
+                        book.MoTa = item.MOTA;
+                        book.ImageSource = item.IMAGESOURCE;
+                        book.ColorBack = "#FFFFFF";
+                        Listbookmanage.Add(book);
+                    }    
                 }
             }            
         }

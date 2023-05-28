@@ -255,7 +255,6 @@
     <Compile Include="Utils\Default.cs" />
     <Compile Include="Validtations\NotNullValidation.cs" />
     <Compile Include="ViewModel\AdminVM\BorrowBookVM\BorrowBookViewModel.cs" />
-    <Compile Include="ViewModel\AdminVM\BorrowBookVM\ManageBBFormViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\ImportBookVM\ImportViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\MainAdminViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\ManageBookVM\ManageBookViewModel.cs" />

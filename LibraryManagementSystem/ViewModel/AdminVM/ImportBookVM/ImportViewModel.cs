@@ -12,6 +12,8 @@ using LibraryManagementSystem.View.MainWindow.ImportBook;
 using System.Collections.ObjectModel;
 using LibraryManagementSystem.DTOs;
 using LibraryManagementSystem.ViewModel.LoginVM;
+using LibraryManagementSystem.Models.DataProvider;
+using DocumentFormat.OpenXml.Drawing.ChartDrawing;
 
 namespace LibraryManagementSystem.ViewModel.AdminVM.ImportBookVM
 {
@@ -81,6 +83,12 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ImportBookVM
             get { return _triGiaChu; }
             set { _triGiaChu = value; OnPropertyChanged(); }
         }
+        private int _idAdmin;
+        public int IdAdmin
+        {
+            get { return _idAdmin; }
+            set { _idAdmin = value; OnPropertyChanged(); }
+        }    
 
         private string _nameAdmin;
         public string NameAdmin
@@ -124,6 +132,11 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ImportBookVM
                 LoginRegisViewModel.import_dtg = p;
 
                 ToDay = DateTime.Now.ToShortDateString();
+                using(var context = new  LMSEntities1())
+                {
+                    NameAdmin = (from s in context.ACCOUNTs where LoginRegisViewModel.username == s.USERNAME select s.FULLNAME).FirstOrDefault();
+                    IdAdmin = (from s in context.ACCOUNTs where LoginRegisViewModel.username == s.USERNAME select s.ID).FirstOrDefault();
+                }    
             });
 
             //Thêm mặt hàng vào ds nhập
@@ -187,6 +200,48 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ImportBookVM
             CreateOrder = new RelayCommand<DataGrid>((p) => { return true; }, (p) =>
             {
                 
+                using(var context = new LMSEntities1())
+                {
+                    // đầu tiên là tạo phiếu nhập hàng trước
+                    IMPORT a = new IMPORT();
+                    a.MANV = IdAdmin;
+                    a.TRIGIA = TriGiaHoaDon;
+                    a.NGNHAP = DateTime.Now;
+                    context.IMPORTs.Add(a);
+                    context.SaveChanges();
+
+                    // Tiếp theo là tạo chi tiết từng phiếu nhập ha
+                    foreach(var item in LoginRegisViewModel.listbook)
+                    {
+                        //thêm thong tin vào chi tiết phiếu
+                        DETAIIMPORT b = new DETAIIMPORT();
+                        b.SOHD = a.SOHD;
+                        b.TENSACH = item.TenSach;
+                        b.NXB = item.NhaXuatBan;
+                        b.TACGIA = item.TacGia;
+                        b.SL = item.SoLuong;
+                        b.GIANHAP = item.GiaNhap;
+                        b.GIABAN = item.GiaBan;
+                        context.DETAIIMPORTs.Add(b);
+
+                        // đồng thời tạo sách với thông tin không đầy đủ trong tràng quản lý
+                        // kiểm tra xem nếu tên sách, nhà xuất bản, năm xuất bản đã có => cộng só lượng vào, ngược lại thì tạo sách mới
+                        BOOK c = new BOOK();
+                        c.TENSACH = item.TenSach;
+                        c.NHAXUATBAN = item.NhaXuatBan;
+                        c.TACGIA = item.TacGia;
+                        c.SOLUONG = item.SoLuong;
+                        c.GIA = item.GiaBan;
+                        context.BOOKs.Add(c);
+
+                    }    
+                    context.SaveChanges();
+                    NameAdmin = ToDay = IntoText = null; TriGiaHoaDon = 0;
+                    LoginRegisViewModel.listbook = null;
+                }
+                MessageBoxLMS msb = new MessageBoxLMS("Notification", "Import successfully", MessageType.Accept, MessageButtons.OK);
+                msb.ShowDialog();
+
             });
         }
 

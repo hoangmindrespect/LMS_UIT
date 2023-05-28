@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Drawing.Diagrams;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,5 +19,8 @@ namespace LibraryManagementSystem.DTOs
         public int SoLuong { get; set; }
         public string TheLoai { get; set; }
         public string NXB { get; set; }
+
+        public string ColorBack { get; set; }
+        
     }
 }

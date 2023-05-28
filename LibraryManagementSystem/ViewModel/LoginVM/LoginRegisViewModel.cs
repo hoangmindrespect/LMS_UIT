@@ -131,7 +131,7 @@ namespace LibraryManagementSystem.ViewModel.LoginVM
             }
             set { _usernamereg = value; OnPropertyChanged(); }
         }
-
+        public static string username;
         #endregion
 
         #region ICommand
@@ -154,7 +154,7 @@ namespace LibraryManagementSystem.ViewModel.LoginVM
         #region temVar
         public ForgotPasswordPage fgpp;
         #endregion
-
+      
         public LoginRegisViewModel()
         {
             LoadLoginPage = new RelayCommand<Frame>((p) => { return true; }, (p) =>
@@ -301,7 +301,7 @@ namespace LibraryManagementSystem.ViewModel.LoginVM
 
                             login.Close();
                         }
-                        
+                        username = UserName;
                     }
                     else if (Password != pas)
                     {
@@ -405,5 +405,6 @@ namespace LibraryManagementSystem.ViewModel.LoginVM
             smtpClient.Send(mailMessage);
         }
 
+          
     }
 }
