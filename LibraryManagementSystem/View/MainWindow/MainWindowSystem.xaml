@@ -93,7 +93,7 @@
                                             </StackPanel>
                                         </Button>
 
-                                        <Button Style="{StaticResource menuButton}" >
+                                        <Button Style="{StaticResource menuButton}" Command="{Binding LoadManageUser}" CommandParameter="{Binding ElementName=mainFrame}" >
                                             <StackPanel Orientation="Horizontal">
                                                 <materialDesign:PackIcon Kind="AccountMultiple"  Margin="5 0 0 0"/>
                                                 <TextBlock Text="Manage user" Margin="10 0 0 0" VerticalAlignment="Center"/>
