@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LibraryManagementSystem.View.MainClientWindow.BuyBookPage"
+             xmlns:i = "http://schemas.microsoft.com/expression/2010/interactivity"
+             
              mc:Ignorable="d" Name="item"
              >
     <Grid Background="#E5E9EA" Margin="0 15 0 0" HorizontalAlignment="Center">
@@ -25,14 +27,27 @@
 
         <TextBlock Grid.Column="1" Text="{Binding Path=Title,ElementName=item}" FontWeight="SemiBold" FontSize="16" VerticalAlignment="Center"/>
         <TextBlock Grid.Column="1" Text="{Binding Path=Ref,ElementName=item}" Foreground="#909090" FontSize="11" VerticalAlignment="Center" Margin="0 38 0 0"/>
+        <!--<TextBlock x:Name="idTxt" Grid.Column="2" Text="{Binding Path=ID,ElementName=item}" Foreground="#909090" FontSize="11" VerticalAlignment="Center" Margin="0 38 0 0"/>-->
         <TextBlock Grid.Column="3" Text="{Binding Count,ElementName=item}" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16"/>
 
         <StackPanel Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left">
             <Button Style="{StaticResource buttonCounter}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding PlusCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                   CommandParameter="{Binding PlusCommandParameter, ElementName=item}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <Image Source="/Resource/BuyBook/add.png"/>
             </Button>
 
             <Button Style="{StaticResource buttonCounter}" Margin="0 5 0 0">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding MinusCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                   CommandParameter="{Binding MinusCommandParameter, ElementName=item}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <Image Source="/Resource/BuyBook/low.png"/>
             </Button>
         </StackPanel>
@@ -40,6 +55,12 @@
         <TextBlock Grid.Column="5" Text="{Binding Path=Price,ElementName=item}" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="16"/>
 
         <Button Style="{StaticResource buttonDelete}" Grid.Column="6">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <i:InvokeCommandAction Command="{Binding DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                   CommandParameter="{Binding DeleteCommandParameter, ElementName=item}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <Image Source="/Resource/BuyBook/remove.png" Width="18" Style="{StaticResource icon}"/>
         </Button>
     </Grid>

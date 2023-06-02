@@ -2,9 +2,11 @@
 using LibraryManagementSystem.DTOs;
 using LibraryManagementSystem.Models.DataProvider;
 using LibraryManagementSystem.View.MainClientWindow.BuyBookPage;
+using LibraryManagementSystem.View.MessageBoxCus;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +19,7 @@ using System.Windows.Threading;
 
 namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
 {
-    public class BuyBookViewModel:BaseViewModel
+    public class BuyBookViewModel : BaseViewModel
     {
         #region Property
         private BookDTO _SelectedItem;
@@ -26,26 +28,117 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
             get { return _SelectedItem; }
             set { _SelectedItem = value; OnPropertyChanged(); }
         }
+
+        private BookDTO _SelectedItemCart;
+        public BookDTO SelectedItemCart
+        {
+            get { return _SelectedItemCart; }
+            set { _SelectedItemCart = value; OnPropertyChanged(); }
+        }
+
+        private int _SelectedItemCartID;
+        public int SelectedItemCartID
+        {
+            get { return _SelectedItemCartID; }
+            set { _SelectedItemCartID = value; OnPropertyChanged(); }
+        }
+
         private int _quantity;
         public int Quantity
         {
             get { return this._quantity; }
             set { this._quantity = value; OnPropertyChanged(); }
         }
+
+        private long _totalValueForOneBookID;
+        public long TotalValueForOneBookID
+        {
+            get { return this._totalValueForOneBookID; }
+            set { this._totalValueForOneBookID = value; OnPropertyChanged(); }
+        }
+
+        private decimal _totalCartvalue;
+        public decimal TotalCartValue
+        {
+            get { return this._totalCartvalue; }
+            set { this._totalCartvalue = value; OnPropertyChanged(); }
+        }
+
+        private long _totalShow;
+        public long TotalShow
+        {
+            get { return this._totalShow; }
+            set { this._totalShow = value; OnPropertyChanged(); }
+        }
+
+        private int _orderID;
+        public int OrderID
+        {
+            get { return _orderID; }
+            set { _orderID = value; OnPropertyChanged(); }
+        }
+
+        private string _orderName;
+        public string OrderName
+        {
+            get { return _orderName; }
+            set { _orderName = value; OnPropertyChanged(); }
+        }
+
+        private string _email;
+        public string Email
+        {
+            get { return _email; }
+            set { _email = value; OnPropertyChanged(); }
+        }
+
+        private string _address;
+        public string Address
+        {
+            get { return _address; }
+            set { _address = value; OnPropertyChanged(); }
+        }
+
+        private string _phonenumber;
+        public string PhoneNumber
+        {
+            get { return _phonenumber; }
+            set { _phonenumber = value; OnPropertyChanged(); }
+        }
         #endregion
 
         public ObservableCollection<BookDTO> Books = new ObservableCollection<BookDTO>();
+        public ObservableCollection<BookDTO> BooksInCart = new ObservableCollection<BookDTO>();
 
+        #region Command
         public ICommand LoadBuyBookPage { get; set; }
         public ICommand LoadBook { get; set; }
         public ICommand LoadNews { get; set; }
         public ICommand PreImage { get; set; }
         public ICommand NextImage { get; set; }
-        public ICommand LoadShoppingCart { get; set; }
         public ICommand BackToShopping { get; set; }
         public ICommand LoadDetails { get; set; }
         public ICommand PlusCommand { get; set; }
         public ICommand MinusCommand { get; set; }
+        public ICommand CloseDetailBook { get; set; }
+        public ICommand AddToCart { get; set; }
+        public ICommand LoadShoppingCart { get; set; }
+        public ICommand LoadCart { get; set; }
+        public ICommand ChangeSelectedItem { get; set; }
+        public ICommand DeleteBookInCart { get; set; }
+        public ICommand PlusQuantityBookInCart { get; set; }
+        public ICommand MinusQuantityBookInCart { get; set; }
+        public ICommand GetBookNow { get; set; }
+        public ICommand ClosePurchasePage { get; set; }
+        public ICommand BuyBookInCart { get; set; }
+        public ICommand CompleteOrder { get; set; }
+
+
+        //2 command nay de t test thoi, dung quan tam
+        public ICommand ShowOrder_Test { get; set; }
+        public ICommand DeleteAllOrder_Test { get; set; }
+        #endregion
+
         #region tempVar
         private List<string> imagePaths;
         private int currentImageIndex = 0;
@@ -65,26 +158,23 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                 #region Load book to card
                 using (var context = new LMSEntities1())
                 {
-                    
                     foreach (var item in context.BOOKs)
                     {
                         BookDTO book = new BookDTO();
+                        book.MaSach = item.ID;
                         book.TenSach = item.TENSACH;
                         book.TacGia = item.TACGIA;
                         book.NXB = item.NHAXUATBAN;
                         book.SoLuong = (int)item.SOLUONG;
                         book.Gia = (decimal)item.GIA;
                         book.ImageSource = item.IMAGESOURCE;
-                        book.NamXB = (int)item.NAMXUATBAN;
+                        if (item.NAMXUATBAN.HasValue)
+                            book.NamXB = (int)item.NAMXUATBAN;
                         Books.Add(book);
                     }
                 }
-
                 p.ItemsSource = Books;
-                
-
-            #endregion
-            
+                #endregion
             });
 
             LoadNews = new RelayCommand<Image>((p) => { return p != null; }, (p) =>
@@ -136,7 +226,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
 
                     timer.Start();
                 };
-                    #endregion
+                #endregion
             });
 
             PreImage = new RelayCommand<Image>((p) => { return p != null; }, (p) =>
@@ -153,7 +243,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                 }
             });
 
-            NextImage = new RelayCommand<Image>((p) => { return p != null; }, (p) => 
+            NextImage = new RelayCommand<Image>((p) => { return p != null; }, (p) =>
             {
                 if (currentImageIndex < 2)
                 {
@@ -167,9 +257,150 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                 }
             });
 
+            LoadDetails = new RelayCommand<ListBox>((p) => { return p != null; }, (p) =>
+            {
+                Quantity = 1;
+                DetailsBook w = new DetailsBook(SelectedItem);
+                w.ShowDialog();
+            });
+
+            PlusCommand = new RelayCommand<object>((p) => { if (Quantity < SelectedItem.SoLuong) return true; return false; }, (p) =>
+            {
+                Quantity++;
+            });
+
+            MinusCommand = new RelayCommand<object>((p) => { if (Quantity > 0) return true; return false; }, (p) =>
+            {
+                Quantity--;
+            });
+
+            CloseDetailBook = new RelayCommand<Window>((p) => { return p != null; }, (p) =>
+            {
+                p.Close();
+            });
+
+            AddToCart = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                try
+                {
+                    using (var context = new LMSEntities1())
+                    {
+                        CART cart = new CART();
+                        cart.MAKH = 1;
+                        cart.MASACH = SelectedItem.MaSach;
+                        cart.SOLUONGHT = Quantity;
+                        context.CARTs.Add(cart);
+                        context.SaveChanges();
+                    }
+                    MessageBoxLMS msb = new MessageBoxLMS("Notification", "Successful add this book to your cart!", MessageType.Accept, MessageButtons.OK);
+                    msb.ShowDialog();
+                }
+                catch
+                {
+                    MessageBoxLMS msb = new MessageBoxLMS("Warning", "Error - This book is already in cart!.", MessageType.Error, MessageButtons.OK);
+                    msb.ShowDialog();
+                }
+            });
+
             LoadShoppingCart = new RelayCommand<object>((p) => { return p != null; }, (p) =>
             {
                 MainClientViewModel.main_frame_client.Content = new ShoppingCartPage();
+            });
+
+            LoadCart = new RelayCommand<ListBox>((p) => { return p != null; }, (p) =>
+            {
+                LoadBookInCart(p);
+            });
+
+            ChangeSelectedItem = new RelayCommand<ListBox>((p) => { return true; }, (p) =>
+            {
+                if (p.SelectedIndex != -1)
+                    SelectedItemCartID = p.SelectedIndex;
+            });
+
+            DeleteBookInCart = new RelayCommand<ListBox>((p) => { return p.SelectedItem != null; }, (p) =>
+            {
+                string masach = (p.SelectedItem as BookDTO).MaSach.ToString();
+                using (var context = new LMSEntities1())
+                {
+                    SqlConnection connection = new SqlConnection(context.Database.Connection.ConnectionString);
+                    connection.Open();
+                    SqlCommand command = new SqlCommand();
+                    command.Connection = connection;
+                    command.Parameters.AddWithValue("@masach", masach);
+                    MessageBoxLMS msb = new MessageBoxLMS("Warning", "Delete this book?", MessageType.Waitting, MessageButtons.YesNo);
+                    if (msb.ShowDialog() == true)
+                    {
+                        try
+                        {
+                            command.CommandText = "delete from CART where MASACH = @masach";
+                            context.SaveChanges();
+                            if (command.ExecuteNonQuery() != 0)
+                            {
+                                msb = new MessageBoxLMS("Notification", "Deleting is successful", MessageType.Accept, MessageButtons.OK);
+                                msb.ShowDialog();
+                                LoadBookInCart(p);
+                            }
+                        }
+                        catch
+                        {
+                            msb = new MessageBoxLMS("Notification", "Cannot delete this user", MessageType.Error, MessageButtons.OK);
+                            msb.ShowDialog();
+                        }
+                    }
+                }
+                LoadBookInCart(p);
+
+            });
+
+            PlusQuantityBookInCart = new RelayCommand<ListBox>((p) => { return p.SelectedItem != null; }, (p) =>
+            {
+                int masach = (p.SelectedItem as BookDTO).MaSach;
+                int maxQuantity = 0;
+                using (var context = new LMSEntities1())
+                {
+                    foreach (var item in context.BOOKs)
+                    {
+                        if (item.ID == masach)
+                        {
+                            maxQuantity = item.SOLUONG ?? 0;
+                            break;
+                        }
+                    }
+                    foreach (var item in context.CARTs)
+                    {
+                        if (item.MASACH == masach && item.SOLUONGHT < maxQuantity)
+                        {
+                            item.SOLUONGHT++;
+                            break;
+                        }
+                        if (item.MASACH == masach && item.SOLUONGHT == maxQuantity)
+                        {
+                            MessageBoxLMS msb = new MessageBoxLMS("Notification", "The maximum amount has been reached", MessageType.Accept, MessageButtons.OK);
+                            msb.ShowDialog();
+                        }
+                    }
+                    context.SaveChanges();
+                }
+                LoadBookInCart(p);
+
+            });
+
+            MinusQuantityBookInCart = new RelayCommand<ListBox>((p) => { return p.SelectedItem != null; }, (p) =>
+            {
+                int masach = (p.SelectedItem as BookDTO).MaSach;
+                using (var context = new LMSEntities1())
+                {
+                    foreach (var item in context.CARTs)
+                    {
+
+                        if (item.MASACH == masach && item.SOLUONGHT > 0)
+                            item.SOLUONGHT--;
+                    }
+                    context.SaveChanges();
+                }
+                LoadBookInCart(p);
+
             });
 
             BackToShopping = new RelayCommand<object>((p) => { return p != null; }, (p) =>
@@ -177,22 +408,214 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                 MainClientViewModel.main_frame_client.Content = new BuyBookPage();
             });
 
-            LoadDetails = new RelayCommand<ListBox>((p) => { return p != null; }, (p) =>
+            GetBookNow = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                DetailsBook w = new DetailsBook(SelectedItem);
-                w.Show();
+                TotalValueForOneBookID = (long)(SelectedItem.Gia * Quantity);
+                TotalShow = TotalValueForOneBookID;
+                PurchasePage w = new PurchasePage("GetBookNow");
+                w.ShowDialog();
             });
 
-            PlusCommand = new RelayCommand<object>((p) => { return p != null; }, (p) =>
+            BuyBookInCart = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                MessageBox.Show("CC");
-                Quantity++;
+
+                TotalShow = (long)TotalCartValue;
+                PurchasePage w = new PurchasePage("BuyBookInCart");
+                w.ShowDialog();
             });
 
-            MinusCommand = new RelayCommand<object>((p) => { return p != null; }, (p) =>
+            ClosePurchasePage = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                Quantity--;
+                p.Close();
+            });      
+
+            CompleteOrder = new RelayCommand<string>((p) => { return p != null; }, (p) =>
+            {
+                if (p == "GetBookNow")
+                {
+                    int id;
+                    MessageBoxLMS msb = new MessageBoxLMS("Notification", "Do you really want to complete the order?", MessageType.Accept, MessageButtons.YesNo);
+                    if (msb.ShowDialog() == true)
+                    {
+                        try
+                        {
+                            using (var context = new LMSEntities1())
+                            {
+                                ORDER_BOOKS order = new ORDER_BOOKS();
+                                order.orderName = OrderName;
+                                order.orderEmail = Email;
+                                order.orderPhone = PhoneNumber;
+                                order.orderAddress = Address;
+                                order.totalValue = TotalValueForOneBookID;
+                                context.ORDER_BOOKS.Add(order);
+                                context.SaveChanges();
+                                id = order.orderID;
+                            }
+                            using (var context = new LMSEntities1())
+                            {
+                                ORDER_DETAIL detail = new ORDER_DETAIL();
+                                detail.orderID = id;
+                                detail.bookID = Int32.Parse(SelectedItem.MaSach.ToString());
+                                detail.quantity = Quantity;
+                                context.ORDER_DETAIL.Add(detail);
+                                context.SaveChanges();
+                            }
+                            msb = new MessageBoxLMS("Notification", "Successfull complete your order", MessageType.Error, MessageButtons.OK);
+                            msb.ShowDialog();
+                        }
+                        catch
+                        {
+                            msb = new MessageBoxLMS("Notification", "Cannot complete your order", MessageType.Error, MessageButtons.OK);
+                            msb.ShowDialog();
+                        }
+                    }
+                }
+                else
+                {
+                    int id;
+                    MessageBoxLMS msb = new MessageBoxLMS("Notification", "Do you really want to complete the order?", MessageType.Accept, MessageButtons.YesNo);
+                    if (msb.ShowDialog() == true)
+                    {
+                        try
+                        {
+                            using (var context = new LMSEntities1())
+                            {
+                                ORDER_BOOKS order = new ORDER_BOOKS();
+                                order.orderName = OrderName;
+                                order.orderEmail = Email;
+                                order.orderPhone = PhoneNumber;
+                                order.orderAddress = Address;
+                                order.totalValue = TotalCartValue;
+                                context.ORDER_BOOKS.Add(order);
+                                context.SaveChanges();
+                                id = order.orderID;
+                            }
+                            using (var context = new LMSEntities1())
+                            {
+                                foreach (BookDTO item in BooksInCart)
+                                {
+                                    ORDER_DETAIL detail = new ORDER_DETAIL();
+                                    detail.orderID = id;
+                                    detail.bookID = Int32.Parse(item.MaSach.ToString());
+                                    detail.quantity = item.SoLuong;
+                                    context.ORDER_DETAIL.Add(detail);
+                                    context.SaveChanges();
+                                }
+                            }
+                            msb = new MessageBoxLMS("Notification", "Successfull complete your order", MessageType.Error, MessageButtons.OK);
+                            msb.ShowDialog();
+                        }
+                        catch
+                        {
+                            msb = new MessageBoxLMS("Notification", "Cannot complete your order", MessageType.Error, MessageButtons.OK);
+                            msb.ShowDialog();
+                        }
+                    }
+                }
+
             });
+
+            //Test
+            ShowOrder_Test = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                using (var context = new LMSEntities1())
+                {
+                    foreach (var order in context.ORDER_BOOKS)
+                    {
+                        MessageBox.Show("Ma Don Hang: " + order.orderID.ToString());
+                        MessageBox.Show("Ten: " + order.orderName);
+                        MessageBox.Show("Tong gia tri: " + order.totalValue);
+
+                        foreach (var detail in context.ORDER_DETAIL)
+                        {
+                            if (order.orderID == detail.orderID)
+                            {
+                                MessageBox.Show("Chi Tiet Ma Don Hang So " + detail.orderID.ToString());
+                                MessageBox.Show("Ma Sach: " + detail.bookID.ToString());
+                                MessageBox.Show("So luong: " + detail.quantity.ToString());
+                            }
+                        }
+                    }
+                }
+            });
+
+            DeleteAllOrder_Test = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                using (var context = new LMSEntities1())
+                {
+                    SqlConnection connection = new SqlConnection(context.Database.Connection.ConnectionString);
+                    connection.Open();
+                    SqlCommand command = new SqlCommand();
+                    command.Connection = connection;
+                    MessageBoxLMS msb = new MessageBoxLMS("Warning", "Delete this order?", MessageType.Waitting, MessageButtons.YesNo);
+                    if (msb.ShowDialog() == true)
+                    {
+                        try
+                        {
+                            command.CommandText = "delete from ORDER_DETAIL";
+                            context.SaveChanges();
+                            if (command.ExecuteNonQuery() != 0)
+                            {
+                                msb = new MessageBoxLMS("Notification", "Deleting is successful", MessageType.Accept, MessageButtons.OK);
+                                msb.ShowDialog();
+                            }
+                            command.CommandText = "delete from ORDER_BOOKS";
+                            context.SaveChanges();
+                            if (command.ExecuteNonQuery() != 0)
+                            {
+                                msb = new MessageBoxLMS("Notification", "Deleting is successful", MessageType.Accept, MessageButtons.OK);
+                                msb.ShowDialog();
+                            }
+                            command.CommandText = "DBCC CHECKIDENT ('ORDER_BOOKS', RESEED, 0)";
+                            command.ExecuteNonQuery();
+                        }
+                        catch
+                        {
+                            msb = new MessageBoxLMS("Notification", "Cannot delete this order", MessageType.Error, MessageButtons.OK);
+                            msb.ShowDialog();
+                        }
+                    }
+                }
+            });
+        }
+
+        public void LoadBookInCart(ListBox p)
+        {
+            BooksInCart.Clear();
+            using (var context = new LMSEntities1())
+            {
+                foreach (var item in context.CARTs)
+                {
+                    foreach (var book in context.BOOKs)
+                    {
+                        if (item.MASACH == book.ID)
+                        {
+                            BookDTO bookInCart = new BookDTO();
+                            bookInCart.MaSach = book.ID;
+                            bookInCart.TenSach = book.TENSACH;
+                            bookInCart.TacGia = book.TACGIA;
+                            bookInCart.NXB = book.NHAXUATBAN;
+                            bookInCart.SoLuong = (int)item.SOLUONGHT;
+                            bookInCart.Gia = (decimal)book.GIA * (int)item.SOLUONGHT;
+                            bookInCart.ImageSource = book.IMAGESOURCE;
+                            bookInCart.NamXB = (int)book.NAMXUATBAN;
+                            BooksInCart.Add(bookInCart);
+                        }
+                    }
+                }
+            }
+            CountTotalCartValue();
+            p.ItemsSource = BooksInCart;
+            p.SelectedIndex = SelectedItemCartID;
+        }
+
+        public void CountTotalCartValue()
+        {
+            TotalCartValue = 0;
+            foreach (BookDTO item in BooksInCart)
+            {
+                TotalCartValue += item.Gia;
+            }
         }
         private void ShowImage(int i, Image imageControl)
         {

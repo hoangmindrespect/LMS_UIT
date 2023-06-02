@@ -248,7 +248,7 @@
                         <i:InvokeCommandAction Command="{Binding LoadBook}"
                                        CommandParameter="{Binding ElementName=ListViewProducts}" />
                     </i:EventTrigger>
-                    <i:EventTrigger EventName="PreviewMouseDown">
+                    <i:EventTrigger EventName="MouseLeftButtonUp">
                         <i:InvokeCommandAction Command="{Binding LoadDetails}"
                                        CommandParameter="{Binding ElementName=ListViewProducts}" />
 

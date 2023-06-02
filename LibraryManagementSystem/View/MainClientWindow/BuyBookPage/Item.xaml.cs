@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM;
 
 namespace LibraryManagementSystem.View.MainClientWindow.BuyBookPage
 {
@@ -77,5 +78,52 @@ namespace LibraryManagementSystem.View.MainClientWindow.BuyBookPage
         }
 
         public static readonly DependencyProperty PriceProperty = DependencyProperty.Register("Price", typeof(string), typeof(Item));
+
+        public ICommand DeleteCommand
+        {
+            get { return (ICommand)GetValue(DeleteCommandProperty); }
+            set { SetValue(DeleteCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty DeleteCommandProperty = DependencyProperty.Register("DeleteCommand", typeof(ICommand), typeof(Item), new PropertyMetadata(null));
+
+        public object DeleteCommandParameter
+        {
+            get { return (object)GetValue(DeleteCommandParameterProperty); }
+            set { SetValue(DeleteCommandParameterProperty, value); }
+        }
+
+        public static readonly DependencyProperty DeleteCommandParameterProperty = DependencyProperty.Register("DeleteCommandParameter", typeof(object), typeof(Item));
+
+        public ICommand PlusCommand
+        {
+            get { return (ICommand)GetValue(PlusCommandProperty); }
+            set { SetValue(PlusCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty PlusCommandProperty = DependencyProperty.Register("PlusCommand", typeof(ICommand), typeof(Item), new PropertyMetadata(null));
+        public object PlusCommandParameter
+        {
+            get { return (object)GetValue(PlusCommandParameterProperty); }
+            set { SetValue(PlusCommandParameterProperty, value); }
+        }
+
+        public static readonly DependencyProperty PlusCommandParameterProperty = DependencyProperty.Register("PlusCommandParameter", typeof(object), typeof(Item));
+
+        public ICommand MinusCommand
+        {
+            get { return (ICommand)GetValue(MinusCommandProperty); }
+            set { SetValue(MinusCommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty MinusCommandProperty = DependencyProperty.Register("MinusCommand", typeof(ICommand), typeof(Item), new PropertyMetadata(null));
+        public object MinusCommandParameter
+        {
+            get { return (object)GetValue(MinusCommandParameterProperty); }
+            set { SetValue(MinusCommandParameterProperty, value); }
+        }
+
+        public static readonly DependencyProperty MinusCommandParameterProperty = DependencyProperty.Register("MinusCommandParameter", typeof(object), typeof(Item));
+
     }
 }
