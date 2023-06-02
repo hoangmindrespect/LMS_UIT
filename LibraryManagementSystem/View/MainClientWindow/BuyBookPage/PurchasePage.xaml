@@ -1,0 +1,165 @@
+﻿<Window x:Class="LibraryManagementSystem.View.MainClientWindow.BuyBookPage.PurchasePage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LibraryManagementSystem.View.MainClientWindow.BuyBookPage"
+        mc:Ignorable="d"
+        Name="Page"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        DataContext="{StaticResource BuyBookVM}"
+        Background="Transparent"
+        Title="PurchasePage" Height="450" Width="750">
+    <Border BorderThickness="0.5"
+            BorderBrush="Black"
+            CornerRadius="15"
+            Background="white">
+        <Grid Margin="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Cursor="Hand"
+                           Height="30"
+                           Grid.Row="0"
+                           Width="30"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           x:Name="lbl">
+                    <materialDesign:PackIcon Kind="ArrowLeft"
+                                         x:Name="CloseBtn"
+                                         Height="26"
+                                         Width="26"/>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding ClosePurchasePage}"
+                                                       CommandParameter="{Binding ElementName=Page}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Label>
+
+                <Grid Grid.Column="1" Margin="10">
+                    <StackPanel>
+                        <TextBox
+                                    x:Name="FullName_txb"
+                                    FontSize="14"
+                                    SelectionBrush="#4E443A"
+                                    BorderBrush="#4E443A"
+                                    Foreground="#4E443A"
+                                    CaretBrush="#4E443A"
+                                    materialDesign:TextFieldAssist.UnderlineBrush="#4E443A"
+                                    materialDesign:HintAssist.Foreground="#4E443A"
+                                    materialDesign:HintAssist.Hint="Full Name"
+                                    Text="{Binding OrderName}"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                        <Label  Margin="10 -10 10 0"
+                                    x:Name="Error1"
+                                    Height="20"
+                                    FontSize="9.5"
+                                    FontFamily="UVN Viet Sach"
+                                    Content=""
+                                    Foreground="Red" />
+
+
+                        <TextBox
+                                    x:Name="Phone_txb"
+                                    FontSize="14"
+                                    materialDesign:HintAssist.Hint="Phone Number"
+                                    SelectionBrush="#4E443A"
+                                    BorderBrush="#4E443A"
+                                    Foreground="#4E443A"
+                                    CaretBrush="#4E443A"
+                                    materialDesign:TextFieldAssist.UnderlineBrush="#4E443A"
+                                    materialDesign:HintAssist.Foreground="#4E443A"
+                                    Text="{Binding PhoneNumber}"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+
+                        <Label Margin="10 -10 10 0"
+                                    x:Name="Error3"
+                                    Height="20"
+                                    FontSize="9.5"
+                                    FontFamily="UVN Viet Sach"
+                                    Content=""
+                                    Foreground="Red"/>
+
+                        <TextBox
+                                    x:Name="Email_txb"
+                                    FontSize="14"
+                                    materialDesign:HintAssist.Hint="Email Address"
+                                    SelectionBrush="#4E443A"
+                                    BorderBrush="#4E443A"
+                                    Foreground="#4E443A"
+                                    CaretBrush="#4E443A"
+                                    materialDesign:TextFieldAssist.UnderlineBrush="#4E443A"
+                                    materialDesign:HintAssist.Foreground="#4E443A"
+                                    Text="{Binding Email}"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                        <Label Margin="10 -10 10 0"
+                                    x:Name="Error4"
+                                    Height="20"
+                                    FontSize="9.5"
+                                    FontFamily="UVN Viet Sach"
+                                    Content=""
+                                    Foreground="Red"/>
+
+                        <TextBox    Margin="0 5 0 20"
+                                    TextWrapping="Wrap"
+                                    VerticalAlignment="Stretch"
+                                    MinWidth="280"
+                                    AcceptsReturn="True"
+                                    VerticalScrollBarVisibility="Auto"
+                                    SpellCheck.IsEnabled="True"
+                                    Text="{Binding Address}"
+                                    materialDesign:HintAssist.Hint="Address Delivery"
+                                    Height="80">
+                        </TextBox>
+                        <Label Margin="10 -10 10 0"
+                                    x:Name="Error5"
+                                    Height="20"
+                                    FontSize="9.5"
+                                    FontFamily="UVN Viet Sach"
+                                    Content=""
+                                    Foreground="Red"/>
+                        
+                        <TextBlock x:Name="statusTb" Visibility="Hidden" ></TextBlock>
+                        
+                        <!--<Button Width="50" Command="{Binding ShowOrder_Test}" CommandParameter="{Binding ElementName=Page}"></Button>
+                        <Button Width="50" Background="Black" Command="{Binding DeleteAllOrder_Test}" CommandParameter="{Binding ElementName=Page}"></Button>-->
+                        
+                        <Border BorderThickness="0.5"
+                                Width="auto" 
+                                BorderBrush="Black" 
+                                HorizontalAlignment="Right" 
+                                Margin="0 0 -40 0" Padding="10">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock FontSize="15" Text="Total pay" HorizontalAlignment="Center"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <TextBlock FontSize="26" Text="{Binding TotalShow}"/>
+                                    <TextBlock FontSize="20" VerticalAlignment="Bottom" Text="VND" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <Button Width="200" Content="Complete Order" 
+                                Style="{StaticResource MaterialDesignRaisedLightButton}" 
+                                Background="#FFAB6913"
+                                Command="{Binding CompleteOrder}"
+                                CommandParameter="{Binding ElementName=statusTb, Path=Text}"
+                                />
+                    </StackPanel>
+
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

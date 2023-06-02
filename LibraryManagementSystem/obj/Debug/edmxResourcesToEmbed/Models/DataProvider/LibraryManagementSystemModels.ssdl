@@ -12,6 +12,7 @@
     <Property Name="MSSV" Type="varchar" MaxLength="20" />
     <Property Name="ROLE" Type="int" />
     <Property Name="IDCLASS" Type="varchar" MaxLength="20" />
+    <Property Name="TRIGIAGIOHANG" Type="money" />
   </EntityType>
   <EntityType Name="BBFORM">
     <Key>
@@ -122,6 +123,26 @@
     <Property Name="MANV" Type="int" />
     <Property Name="NGNHAP" Type="smalldatetime" Nullable="false" />
     <Property Name="TRIGIA" Type="money" />
+  </EntityType>
+  <EntityType Name="ORDER_BOOKS">
+    <Key>
+      <PropertyRef Name="orderID" />
+    </Key>
+    <Property Name="orderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="orderName" Type="varchar" MaxLength="100" />
+    <Property Name="orderPhone" Type="varchar" MaxLength="20" />
+    <Property Name="orderEmail" Type="varchar" MaxLength="100" />
+    <Property Name="orderAddress" Type="varchar" MaxLength="200" />
+    <Property Name="totalValue" Type="money" />
+  </EntityType>
+  <EntityType Name="ORDER_DETAIL">
+    <Key>
+      <PropertyRef Name="orderID" />
+      <PropertyRef Name="bookID" />
+    </Key>
+    <Property Name="orderID" Type="int" Nullable="false" />
+    <Property Name="bookID" Type="int" Nullable="false" />
+    <Property Name="quantity" Type="int" />
   </EntityType>
   <Association Name="FK__BBFORM__MAKH__6CD828CA">
     <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
@@ -243,6 +264,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__ORDER_DET__bookI__793DFFAF">
+    <End Role="BOOK" Type="Self.BOOK" Multiplicity="1" />
+    <End Role="ORDER_DETAIL" Type="Self.ORDER_DETAIL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BOOK">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ORDER_DETAIL">
+        <PropertyRef Name="bookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ORDER_DET__order__7849DB76">
+    <End Role="ORDER_BOOKS" Type="Self.ORDER_BOOKS" Multiplicity="1" />
+    <End Role="ORDER_DETAIL" Type="Self.ORDER_DETAIL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ORDER_BOOKS">
+        <PropertyRef Name="orderID" />
+      </Principal>
+      <Dependent Role="ORDER_DETAIL">
+        <PropertyRef Name="orderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="lmsDatabaseModelStoreContainer">
     <EntitySet Name="ACCOUNT" EntityType="Self.ACCOUNT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BBFORM" EntityType="Self.BBFORM" Schema="dbo" store:Type="Tables" />
@@ -255,6 +300,8 @@
     <EntitySet Name="DETAIL_BBFORM" EntityType="Self.DETAIL_BBFORM" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IMPORT" EntityType="Self.IMPORT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ORDER_BOOKS" EntityType="Self.ORDER_BOOKS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ORDER_DETAIL" EntityType="Self.ORDER_DETAIL" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__BBFORM__MAKH__6CD828CA" Association="Self.FK__BBFORM__MAKH__6CD828CA">
       <End Role="ACCOUNT" EntitySet="ACCOUNT" />
       <End Role="BBFORM" EntitySet="BBFORM" />
@@ -294,6 +341,14 @@
     <AssociationSet Name="FK__IMPORT__MANV__4B7734FF" Association="Self.FK__IMPORT__MANV__4B7734FF">
       <End Role="ACCOUNT" EntitySet="ACCOUNT" />
       <End Role="IMPORT" EntitySet="IMPORT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ORDER_DET__bookI__793DFFAF" Association="Self.FK__ORDER_DET__bookI__793DFFAF">
+      <End Role="BOOK" EntitySet="BOOK" />
+      <End Role="ORDER_DETAIL" EntitySet="ORDER_DETAIL" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ORDER_DET__order__7849DB76" Association="Self.FK__ORDER_DET__order__7849DB76">
+      <End Role="ORDER_BOOKS" EntitySet="ORDER_BOOKS" />
+      <End Role="ORDER_DETAIL" EntitySet="ORDER_DETAIL" />
     </AssociationSet>
   </EntityContainer>
 </Schema>
