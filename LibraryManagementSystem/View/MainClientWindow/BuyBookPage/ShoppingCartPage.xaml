@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LibraryManagementSystem.View.MainClientWindow.BuyBookPage"
       mc:Ignorable="d" 
-      Name="cart"
+      x:Name="cart"
       xmlns:uc="clr-namespace:LibraryManagementSystem.View.MainClientWindow.BuyBookPage"
       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
       TextElement.FontWeight="Regular"
@@ -35,39 +35,62 @@
         </StackPanel>
 
         <!--Products-->
+
         <ScrollViewer Grid.Row="1">
-            <ItemsControl  ItemsSource="{Binding Books}" x:Name="ListViewProducts" VerticalAlignment="Center" HorizontalAlignment="Center" >
-                <ItemsControl.ItemTemplate>
+            <ListBox ItemsSource="{Binding BooksInCart}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectedItemCart, UpdateSourceTrigger=PropertyChanged}" x:Name="ListViewProducts" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                     KeyboardNavigation.TabNavigation="Continue" KeyboardNavigation.DirectionalNavigation="Continue">
+                <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <uc:Item Source ="{Binding ImageSource}" Title="{Binding TenSach}" Ref="available" Count="{Binding SoLuong}" Price="{Binding Gia}"/>
+                        <uc:Item Source="{Binding ImageSource}" Title="{Binding TenSach}" Ref="available"
+                         Count="{Binding SoLuong}" Price="{Binding Gia}" 
+                         DeleteCommand="{Binding DataContext.DeleteBookInCart, ElementName=cart}"
+                         DeleteCommandParameter="{Binding ElementName=ListViewProducts}"
+                         PlusCommand="{Binding DataContext.PlusQuantityBookInCart, ElementName=cart}"
+                         PlusCommandParameter="{Binding ElementName=ListViewProducts}"
+                         MinusCommand="{Binding DataContext.MinusQuantityBookInCart, ElementName=cart}"        
+                         MinusCommandParameter="{Binding ElementName=ListViewProducts}"/>
                     </DataTemplate>
-                </ItemsControl.ItemTemplate>
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
+                </ListBox.ItemTemplate>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding ChangeSelectedItem}"
+                                                       CommandParameter="{Binding ElementName=ListViewProducts}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ListBox>
+
         </ScrollViewer>
-        
+
         <!--Bottom Section-->
         <Grid Grid.Row="2" Margin="80 40 150 40">
-            <Button Style="{StaticResource buttonBack}" Command="{Binding BackToShopping}" CommandParameter="{Binding ElementName=cart}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" Style="{StaticResource buttonBack}" Command="{Binding BackToShopping}" CommandParameter="{Binding ElementName=cart}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resource/Buybook/left.png" Width="20"/>
                     <TextBlock Text="Back to Shop" VerticalAlignment="Center" Margin="15 0 0 0"/>
                 </StackPanel>
             </Button>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <TextBlock Text="Subtotal :" FontSize="16"/>
-                <TextBlock Text="195.00 USD" FontWeight="SemiBold" FontSize="16" Margin="30 0 0 0"/>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <TextBlock Text="Total :" FontSize="16"/>
+                <TextBlock Text="{Binding TotalCartValue, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="SemiBold" FontSize="16" Margin="30 0 0 0"/>
             </StackPanel>
+            <Button Grid.Row="1" Width="200" Content="Buy Now" 
+                                
+                                Style="{StaticResource MaterialDesignRaisedLightButton}" 
+                                Background="#FFAB6913"
+                                Command="{Binding BuyBookInCart}"
+                                CommandParameter="{Binding ElementName=Error1}"
+                                />
         </Grid>
+
     </Grid>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadBook}"
+            <i:InvokeCommandAction Command="{Binding LoadCart}"
                                        CommandParameter="{Binding ElementName=ListViewProducts}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>

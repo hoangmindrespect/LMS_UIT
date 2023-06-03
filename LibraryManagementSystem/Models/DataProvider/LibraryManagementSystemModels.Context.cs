@@ -36,5 +36,7 @@ namespace LibraryManagementSystem.Models.DataProvider
         public virtual DbSet<DETAIL_BBFORM> DETAIL_BBFORM { get; set; }
         public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
         public virtual DbSet<IMPORT> IMPORTs { get; set; }
+        public virtual DbSet<ORDER_BOOKS> ORDER_BOOKS { get; set; }
+        public virtual DbSet<ORDER_DETAIL> ORDER_DETAIL { get; set; }
     }
 }

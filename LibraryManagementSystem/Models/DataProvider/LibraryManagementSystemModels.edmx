@@ -17,6 +17,7 @@
           <Property Name="MSSV" Type="varchar" MaxLength="20" />
           <Property Name="ROLE" Type="int" />
           <Property Name="IDCLASS" Type="varchar" MaxLength="20" />
+          <Property Name="TRIGIAGIOHANG" Type="money" />
         </EntityType>
         <EntityType Name="BBFORM">
           <Key>
@@ -127,6 +128,26 @@
           <Property Name="MANV" Type="int" />
           <Property Name="NGNHAP" Type="smalldatetime" Nullable="false" />
           <Property Name="TRIGIA" Type="money" />
+        </EntityType>
+        <EntityType Name="ORDER_BOOKS">
+          <Key>
+            <PropertyRef Name="orderID" />
+          </Key>
+          <Property Name="orderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="orderName" Type="varchar" MaxLength="100" />
+          <Property Name="orderPhone" Type="varchar" MaxLength="20" />
+          <Property Name="orderEmail" Type="varchar" MaxLength="100" />
+          <Property Name="orderAddress" Type="varchar" MaxLength="200" />
+          <Property Name="totalValue" Type="money" />
+        </EntityType>
+        <EntityType Name="ORDER_DETAIL">
+          <Key>
+            <PropertyRef Name="orderID" />
+            <PropertyRef Name="bookID" />
+          </Key>
+          <Property Name="orderID" Type="int" Nullable="false" />
+          <Property Name="bookID" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" />
         </EntityType>
         <Association Name="FK__BBFORM__MAKH__6CD828CA">
           <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
@@ -248,6 +269,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ORDER_DET__bookI__793DFFAF">
+          <End Role="BOOK" Type="Self.BOOK" Multiplicity="1" />
+          <End Role="ORDER_DETAIL" Type="Self.ORDER_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BOOK">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ORDER_DETAIL">
+              <PropertyRef Name="bookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ORDER_DET__order__7849DB76">
+          <End Role="ORDER_BOOKS" Type="Self.ORDER_BOOKS" Multiplicity="1" />
+          <End Role="ORDER_DETAIL" Type="Self.ORDER_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDER_BOOKS">
+              <PropertyRef Name="orderID" />
+            </Principal>
+            <Dependent Role="ORDER_DETAIL">
+              <PropertyRef Name="orderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="lmsDatabaseModelStoreContainer">
           <EntitySet Name="ACCOUNT" EntityType="Self.ACCOUNT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BBFORM" EntityType="Self.BBFORM" Schema="dbo" store:Type="Tables" />
@@ -260,6 +305,8 @@
           <EntitySet Name="DETAIL_BBFORM" EntityType="Self.DETAIL_BBFORM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IMPORT" EntityType="Self.IMPORT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDER_BOOKS" EntityType="Self.ORDER_BOOKS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDER_DETAIL" EntityType="Self.ORDER_DETAIL" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__BBFORM__MAKH__6CD828CA" Association="Self.FK__BBFORM__MAKH__6CD828CA">
             <End Role="ACCOUNT" EntitySet="ACCOUNT" />
             <End Role="BBFORM" EntitySet="BBFORM" />
@@ -300,6 +347,14 @@
             <End Role="ACCOUNT" EntitySet="ACCOUNT" />
             <End Role="IMPORT" EntitySet="IMPORT" />
           </AssociationSet>
+          <AssociationSet Name="FK__ORDER_DET__bookI__793DFFAF" Association="Self.FK__ORDER_DET__bookI__793DFFAF">
+            <End Role="BOOK" EntitySet="BOOK" />
+            <End Role="ORDER_DETAIL" EntitySet="ORDER_DETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ORDER_DET__order__7849DB76" Association="Self.FK__ORDER_DET__order__7849DB76">
+            <End Role="ORDER_BOOKS" EntitySet="ORDER_BOOKS" />
+            <End Role="ORDER_DETAIL" EntitySet="ORDER_DETAIL" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -317,6 +372,8 @@
           <EntitySet Name="DETAIL_BBFORM" EntityType="lmsDatabaseModel.DETAIL_BBFORM" />
           <EntitySet Name="ErrorLogs" EntityType="lmsDatabaseModel.ErrorLog" />
           <EntitySet Name="IMPORTs" EntityType="lmsDatabaseModel.IMPORT" />
+          <EntitySet Name="ORDER_BOOKS" EntityType="lmsDatabaseModel.ORDER_BOOKS" />
+          <EntitySet Name="ORDER_DETAIL" EntityType="lmsDatabaseModel.ORDER_DETAIL" />
           <AssociationSet Name="FK__BBFORM__MAKH__6CD828CA" Association="lmsDatabaseModel.FK__BBFORM__MAKH__6CD828CA">
             <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
             <End Role="BBFORM" EntitySet="BBFORMs" />
@@ -353,9 +410,17 @@
             <End Role="BOOK" EntitySet="BOOKs" />
             <End Role="DETAIL_BBFORM" EntitySet="DETAIL_BBFORM" />
           </AssociationSet>
+          <AssociationSet Name="FK__ORDER_DET__bookI__793DFFAF" Association="lmsDatabaseModel.FK__ORDER_DET__bookI__793DFFAF">
+            <End Role="BOOK" EntitySet="BOOKs" />
+            <End Role="ORDER_DETAIL" EntitySet="ORDER_DETAIL" />
+          </AssociationSet>
           <AssociationSet Name="FK__DETAIIMPOR__SOHD__4E53A1AA" Association="lmsDatabaseModel.FK__DETAIIMPOR__SOHD__4E53A1AA">
             <End Role="IMPORT" EntitySet="IMPORTs" />
             <End Role="DETAIIMPORT" EntitySet="DETAIIMPORTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ORDER_DET__order__7849DB76" Association="lmsDatabaseModel.FK__ORDER_DET__order__7849DB76">
+            <End Role="ORDER_BOOKS" EntitySet="ORDER_BOOKS" />
+            <End Role="ORDER_DETAIL" EntitySet="ORDER_DETAIL" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="ACCOUNT">
@@ -370,6 +435,7 @@
           <Property Name="MSSV" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="ROLE" Type="Int32" />
           <Property Name="IDCLASS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TRIGIAGIOHANG" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="BBFORMs" Relationship="lmsDatabaseModel.FK__BBFORM__MAKH__6CD828CA" FromRole="ACCOUNT" ToRole="BBFORM" />
           <NavigationProperty Name="BILLs" Relationship="lmsDatabaseModel.FK__BILL__MAKH__44CA3770" FromRole="ACCOUNT" ToRole="BILL" />
           <NavigationProperty Name="CARTs" Relationship="lmsDatabaseModel.FK__CART__MAKH__5224328E" FromRole="ACCOUNT" ToRole="CART" />
@@ -416,6 +482,7 @@
           <NavigationProperty Name="CARTs" Relationship="lmsDatabaseModel.FK__CART__MASACH__51300E55" FromRole="BOOK" ToRole="CART" />
           <NavigationProperty Name="CTHDs" Relationship="lmsDatabaseModel.FK__CTHD__MASACH__489AC854" FromRole="BOOK" ToRole="CTHD" />
           <NavigationProperty Name="DETAIL_BBFORM" Relationship="lmsDatabaseModel.FK__DETAIL_BB__MASAC__70A8B9AE" FromRole="BOOK" ToRole="DETAIL_BBFORM" />
+          <NavigationProperty Name="ORDER_DETAIL" Relationship="lmsDatabaseModel.FK__ORDER_DET__bookI__793DFFAF" FromRole="BOOK" ToRole="ORDER_DETAIL" />
         </EntityType>
         <EntityType Name="BuildVersion">
           <Key>
@@ -500,6 +567,29 @@
           <Property Name="TRIGIA" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="ACCOUNT" Relationship="lmsDatabaseModel.FK__IMPORT__MANV__4B7734FF" FromRole="IMPORT" ToRole="ACCOUNT" />
           <NavigationProperty Name="DETAIIMPORTs" Relationship="lmsDatabaseModel.FK__DETAIIMPOR__SOHD__4E53A1AA" FromRole="IMPORT" ToRole="DETAIIMPORT" />
+        </EntityType>
+        <EntityType Name="ORDER_BOOKS">
+          <Key>
+            <PropertyRef Name="orderID" />
+          </Key>
+          <Property Name="orderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="orderName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="orderPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="orderEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="orderAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="totalValue" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="ORDER_DETAIL" Relationship="lmsDatabaseModel.FK__ORDER_DET__order__7849DB76" FromRole="ORDER_BOOKS" ToRole="ORDER_DETAIL" />
+        </EntityType>
+        <EntityType Name="ORDER_DETAIL">
+          <Key>
+            <PropertyRef Name="orderID" />
+            <PropertyRef Name="bookID" />
+          </Key>
+          <Property Name="orderID" Type="Int32" Nullable="false" />
+          <Property Name="bookID" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" />
+          <NavigationProperty Name="BOOK" Relationship="lmsDatabaseModel.FK__ORDER_DET__bookI__793DFFAF" FromRole="ORDER_DETAIL" ToRole="BOOK" />
+          <NavigationProperty Name="ORDER_BOOKS" Relationship="lmsDatabaseModel.FK__ORDER_DET__order__7849DB76" FromRole="ORDER_DETAIL" ToRole="ORDER_BOOKS" />
         </EntityType>
         <Association Name="FK__BBFORM__MAKH__6CD828CA">
           <End Type="lmsDatabaseModel.ACCOUNT" Role="ACCOUNT" Multiplicity="0..1" />
@@ -609,6 +699,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ORDER_DET__bookI__793DFFAF">
+          <End Type="lmsDatabaseModel.BOOK" Role="BOOK" Multiplicity="1" />
+          <End Type="lmsDatabaseModel.ORDER_DETAIL" Role="ORDER_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BOOK">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ORDER_DETAIL">
+              <PropertyRef Name="bookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__DETAIIMPOR__SOHD__4E53A1AA">
           <End Type="lmsDatabaseModel.IMPORT" Role="IMPORT" Multiplicity="1" />
           <End Type="lmsDatabaseModel.DETAIIMPORT" Role="DETAIIMPORT" Multiplicity="*" />
@@ -621,6 +723,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ORDER_DET__order__7849DB76">
+          <End Type="lmsDatabaseModel.ORDER_BOOKS" Role="ORDER_BOOKS" Multiplicity="1" />
+          <End Type="lmsDatabaseModel.ORDER_DETAIL" Role="ORDER_DETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDER_BOOKS">
+              <PropertyRef Name="orderID" />
+            </Principal>
+            <Dependent Role="ORDER_DETAIL">
+              <PropertyRef Name="orderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -630,6 +744,7 @@
           <EntitySetMapping Name="ACCOUNTs">
             <EntityTypeMapping TypeName="lmsDatabaseModel.ACCOUNT">
               <MappingFragment StoreEntitySet="ACCOUNT">
+                <ScalarProperty Name="TRIGIAGIOHANG" ColumnName="TRIGIAGIOHANG" />
                 <ScalarProperty Name="IDCLASS" ColumnName="IDCLASS" />
                 <ScalarProperty Name="ROLE" ColumnName="ROLE" />
                 <ScalarProperty Name="MSSV" ColumnName="MSSV" />
@@ -752,6 +867,27 @@
                 <ScalarProperty Name="NGNHAP" ColumnName="NGNHAP" />
                 <ScalarProperty Name="MANV" ColumnName="MANV" />
                 <ScalarProperty Name="SOHD" ColumnName="SOHD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDER_BOOKS">
+            <EntityTypeMapping TypeName="lmsDatabaseModel.ORDER_BOOKS">
+              <MappingFragment StoreEntitySet="ORDER_BOOKS">
+                <ScalarProperty Name="totalValue" ColumnName="totalValue" />
+                <ScalarProperty Name="orderAddress" ColumnName="orderAddress" />
+                <ScalarProperty Name="orderEmail" ColumnName="orderEmail" />
+                <ScalarProperty Name="orderPhone" ColumnName="orderPhone" />
+                <ScalarProperty Name="orderName" ColumnName="orderName" />
+                <ScalarProperty Name="orderID" ColumnName="orderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDER_DETAIL">
+            <EntityTypeMapping TypeName="lmsDatabaseModel.ORDER_DETAIL">
+              <MappingFragment StoreEntitySet="ORDER_DETAIL">
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="bookID" ColumnName="bookID" />
+                <ScalarProperty Name="orderID" ColumnName="orderID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

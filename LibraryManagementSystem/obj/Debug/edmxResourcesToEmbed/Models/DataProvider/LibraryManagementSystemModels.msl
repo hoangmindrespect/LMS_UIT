@@ -4,6 +4,7 @@
     <EntitySetMapping Name="ACCOUNTs">
       <EntityTypeMapping TypeName="lmsDatabaseModel.ACCOUNT">
         <MappingFragment StoreEntitySet="ACCOUNT">
+          <ScalarProperty Name="TRIGIAGIOHANG" ColumnName="TRIGIAGIOHANG" />
           <ScalarProperty Name="IDCLASS" ColumnName="IDCLASS" />
           <ScalarProperty Name="ROLE" ColumnName="ROLE" />
           <ScalarProperty Name="MSSV" ColumnName="MSSV" />
@@ -126,6 +127,27 @@
           <ScalarProperty Name="NGNHAP" ColumnName="NGNHAP" />
           <ScalarProperty Name="MANV" ColumnName="MANV" />
           <ScalarProperty Name="SOHD" ColumnName="SOHD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ORDER_BOOKS">
+      <EntityTypeMapping TypeName="lmsDatabaseModel.ORDER_BOOKS">
+        <MappingFragment StoreEntitySet="ORDER_BOOKS">
+          <ScalarProperty Name="totalValue" ColumnName="totalValue" />
+          <ScalarProperty Name="orderAddress" ColumnName="orderAddress" />
+          <ScalarProperty Name="orderEmail" ColumnName="orderEmail" />
+          <ScalarProperty Name="orderPhone" ColumnName="orderPhone" />
+          <ScalarProperty Name="orderName" ColumnName="orderName" />
+          <ScalarProperty Name="orderID" ColumnName="orderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ORDER_DETAIL">
+      <EntityTypeMapping TypeName="lmsDatabaseModel.ORDER_DETAIL">
+        <MappingFragment StoreEntitySet="ORDER_DETAIL">
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="bookID" ColumnName="bookID" />
+          <ScalarProperty Name="orderID" ColumnName="orderID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

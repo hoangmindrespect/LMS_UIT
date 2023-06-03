@@ -43,11 +43,13 @@
                            VerticalAlignment="Top"
                            x:Name="lbl">
                         <materialDesign:PackIcon Kind="ArrowLeft"
+                                                 x:Name="CloseBtn"
                                          Height="26"
-                                         Width="26" />
+                                         Width="26"/>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseLeftButtonUp">
-                                <i:InvokeCommandAction Command="{Binding CloseDetailBook}"/>
+                                <i:InvokeCommandAction Command="{Binding CloseDetailBook}"
+                                                       CommandParameter="{Binding ElementName=DetailBookServiceML}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </Label>
@@ -83,7 +85,7 @@
                             </Grid>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseLeftButtonDown">
-                                    <i:InvokeCommandAction Command="{Binding MinusCommand}" />
+                                    <i:InvokeCommandAction Command="{Binding MinusCommand}" CommandParameter="{Binding ElementName=lblMinus}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Border>
@@ -127,7 +129,7 @@
                             </Grid>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseLeftButtonDown">
-                                    <i:InvokeCommandAction Command="{Binding PlusCommand}"/>
+                                    <i:InvokeCommandAction Command="{Binding PlusCommand}" CommandParameter="{Binding ElementName=lblPlus}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Border>
@@ -145,7 +147,7 @@
                                     Width="183"
                                     Margin="5,0,0,0">
 
-                                    <Button Style="{StaticResource buttonBack}" Command="{Binding BackToShopping}" CommandParameter="{Binding ElementName=cart}">
+                                    <Button Style="{StaticResource buttonBack}" Command="{Binding AddToCart}" CommandParameter="{Binding ElementName=cart}">
                                         <StackPanel Orientation="Horizontal">
                                             <materialDesign:PackIcon Kind="CartArrowDown" FontWeight="Light"
                                                      Width="25"
@@ -176,9 +178,9 @@
                                     Height="50"
                                     Width="140"
                                     Margin="5,0,0,0">
-                                    
 
-                                    <Button Style="{StaticResource buttonBack}" Command="{Binding BackToShopping}" CommandParameter="{Binding ElementName=cart}">
+
+                                    <Button Style="{StaticResource buttonBack}" Command="{Binding GetBookNow}" CommandParameter="{Binding ElementName=DetailBookServiceML}">
                                         <StackPanel Orientation="Horizontal">
                                             <materialDesign:PackIcon Kind="Shopping"
                                                      Width="25"
@@ -203,7 +205,7 @@
 
                 <!--Bên phải-->
                 <StackPanel Grid.Column="1">
-                    <TextBlock Text="{Binding BookCurrent.TenSach}"
+                    <TextBlock Text="{Binding SelectedItem.TenSach}"
                                FontSize="20"
                                Foreground="#3f2016"
                                FontWeight="Bold"
@@ -211,7 +213,7 @@
                                TextAlignment="Left"
                                HorizontalAlignment="Center"
                                TextWrapping="Wrap"
-                               Margin="10,2,10,0"/>
+                               Margin="10,2,50,10"/>
 
                     <StackPanel Orientation ="Horizontal"
                                 Margin="10,5,0,0">

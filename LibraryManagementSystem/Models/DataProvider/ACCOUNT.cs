@@ -31,6 +31,7 @@ namespace LibraryManagementSystem.Models.DataProvider
         public string MSSV { get; set; }
         public Nullable<int> ROLE { get; set; }
         public string IDCLASS { get; set; }
+        public Nullable<decimal> TRIGIAGIOHANG { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BBFORM> BBFORMs { get; set; }

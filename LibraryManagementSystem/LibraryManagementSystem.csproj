@@ -251,6 +251,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LibraryManagementSystemModels.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataProvider\ORDER_BOOKS.cs">
+      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataProvider\ORDER_DETAIL.cs">
+      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ConverterValue\BoolValueConverter.cs" />
     <Compile Include="Utils\Default.cs" />
     <Compile Include="Validtations\NotNullValidation.cs" />
@@ -291,6 +297,9 @@
     </Compile>
     <Compile Include="View\MainClientWindow\BuyBookPage\Item.xaml.cs">
       <DependentUpon>Item.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainClientWindow\BuyBookPage\PurchasePage.xaml.cs">
+      <DependentUpon>PurchasePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainClientWindow\BuyBookPage\ShoppingCartPage.xaml.cs">
       <DependentUpon>ShoppingCartPage.xaml</DependentUpon>
@@ -396,6 +405,10 @@
     <Page Include="View\MainClientWindow\BuyBookPage\Item.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainClientWindow\BuyBookPage\PurchasePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\MainClientWindow\BuyBookPage\ShoppingCartPage.xaml">
       <SubType>Designer</SubType>
