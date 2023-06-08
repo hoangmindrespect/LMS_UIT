@@ -128,13 +128,13 @@
                                 BorderThickness="1">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon 
-                                    Kind="ArrowUpThick" 
+                                    Kind="{Binding icon1}" 
                                     Foreground="White"
                                     Margin="08 0 0 0"
                                     Width="28"
                                     Height="28"
                                     />
-                                <Label Content="5%"
+                                <Label Content="{Binding increaseIncome}"
                                    FontSize="17"
                                    Margin="-7 0 0 0"
                                    VerticalContentAlignment="Center"
@@ -190,13 +190,13 @@
                                 BorderThickness="1">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon 
-                                    Kind="ArrowUpThick" 
+                                    Kind="{Binding icon2}" 
                                     Foreground="White"
                                     Margin="08 0 0 0"
                                     Width="28"
                                     Height="28"
                                     />
-                                <Label Content="10%"
+                                <Label Content="{Binding increaseSpending}"
                                    FontSize="17"
                                    Margin="-7 0 0 0"
                                    VerticalContentAlignment="Center"
@@ -252,13 +252,13 @@
                                 BorderThickness="1">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon 
-                                    Kind="ArrowDownThick" 
+                                    Kind="{Binding icon3}" 
                                     Foreground="White"
                                     Margin="8 0 0 0"
                                     Width="28"
                                     Height="28"
                                     />
-                                <Label Content="10%"
+                                <Label Content="{Binding increaseProfit}"
                                    FontSize="17"
                                    Margin="-7 0 0 0"
                                    VerticalContentAlignment="Center"

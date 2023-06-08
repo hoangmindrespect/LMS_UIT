@@ -13,6 +13,7 @@ using System.Globalization;
 using System.Windows;
 using DocumentFormat.OpenXml.Bibliography;
 using Haley.Utils;
+using DocumentFormat.OpenXml.Drawing.Spreadsheet;
 
 namespace LibraryManagementSystem.ViewModel.AdminVM.StatisticalVM
 {
@@ -89,12 +90,53 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.StatisticalVM
             set { _totalProfit = value; OnPropertyChanged(); }
         }
 
+        private string _increaseIncome;
+        public string increaseIncome
+        {
+            get { return _increaseIncome; }
+            set { _increaseIncome = value; OnPropertyChanged(); }
+        }
+
+        private string _increaseSpending;
+        public string increaseSpending
+        {
+            get { return _increaseSpending; }
+            set { _increaseSpending = value; OnPropertyChanged(); }
+        }
+
+        private string _increaseProfit;
+        public string increaseProfit
+        {
+            get { return _increaseProfit; }
+            set { _increaseProfit = value; OnPropertyChanged(); }
+        }
+
+        private string _icon1;
+        public string icon1
+        {
+            get { return _icon1; }
+            set { _icon1 = value; OnPropertyChanged(); }
+        }
+
+        private string _icon2;
+        public string icon2
+        {
+            get { return _icon2; }
+            set { _icon2 = value; OnPropertyChanged(); }
+        }
+
+        private string _icon3;
+        public string icon3
+        {
+            get { return _icon3; }
+            set { _icon3 = value; OnPropertyChanged(); }
+        }
         List<decimal> statisCollectionIncomeYear; // 12 giá trị
-        List<decimal> statisCollectionIncomeMonth; // 31 giá trị
+        List<decimal> statisCollectionIncomeMonth; // 4 giá trị
         List<decimal> statisCollectionSpendingYear; // 12 giá trị
-        List<decimal> statisCollectionSpendingMonth; // 31 giá trị
+        List<decimal> statisCollectionSpendingMonth; // 4 giá trị
         List<decimal> statisCollectionProfitYear; // 12 giá trị
-        List<decimal> statisCollectionProfitMonth; // 31 giá trị
+        List<decimal> statisCollectionProfitMonth; // 4 giá trị
         #endregion
 
         #region Command
@@ -103,7 +145,6 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.StatisticalVM
         #endregion
         public StatisticalViewModel()
         {
-            
             FirstLoad();
             LoadMonth = new RelayCommand<ComboBox>((p) => { return true; }, (p) =>
             {
@@ -142,6 +183,52 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.StatisticalVM
                     TotalProfit = "-" + decimal.Round(profit, 0).ToString("C0").Replace("(", "").Replace(")", "").Replace("$", "₫");
                 }
 
+                // so sánh so với năm trước với năm hiện tại.
+                int _year = int.Parse(Year);
+                decimal iyear = getTotalIncomeYear(_year);
+                decimal preIyear = getTotalIncomeYear(_year - 1);
+                decimal syear = getTotalSpendingYear(_year);
+                decimal preSyear = getTotalSpendingYear(_year - 1);
+                decimal pyear = Math.Abs((getTotalIncomeYear(_year) - getTotalSpendingYear(_year)));
+                decimal prePyear = Math.Abs((getTotalIncomeYear(_year - 1) - getTotalSpendingYear(_year - 1)));
+                
+                if(preIyear  == 0)
+                {
+                    increaseIncome = "100";
+                }
+                else
+                {
+                    increaseIncome = decimal.Round(iyear / preIyear, 2).ToString();
+                }
+
+                if (preSyear == 0)
+                    increaseSpending = "100";
+                else
+                {
+                    increaseSpending = decimal.Round(syear / preSyear, 2).ToString();
+                }
+
+                if(prePyear == 0)
+                    increaseProfit = "100";
+                else
+                {
+                    increaseProfit = decimal.Round(pyear / prePyear, 2).ToString();
+                }
+
+                if (decimal.Parse(increaseIncome) > 1)
+                    icon1 = "ArrowUpThick";
+                else
+                    icon1 = "ArrowDownThick";
+
+                if (decimal.Parse(increaseSpending) > 1)
+                    icon2 = "ArrowUpThick";
+                else
+                    icon2 = "ArrowDownThick";
+
+                if (decimal.Parse(increaseProfit) > 1)
+                    icon3 = "ArrowUpThick";
+                else
+                    icon3 = "ArrowDownThick";
             });
 
             LoadAfterChooseMonth = new RelayCommand<ComboBox>((p) => { return true; }, (p) =>
@@ -162,15 +249,72 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.StatisticalVM
                 {
                     TotalProfit = "-" + decimal.Round(profit, 0).ToString("C0").Replace("(", "").Replace(")", "").Replace("$", "₫");
                 }
-                int az = int.Parse(Month.Substring(6, 1));
-                LoadChartMonth(int.Parse(Year), az);
+                int _mon = int.Parse(Month.Substring(6, 1));
+                LoadChartMonth(int.Parse(Year), _mon);
+
+                int _year = int.Parse(Year);
+                int _preMon = 0;
+                int _preYear = 0;
+                if (_mon == 1)
+                {
+                    _preMon = 12;
+                    _preYear = _year - 1;
+                }
+                else
+                {
+                    _preMon = _mon - 1;
+                    _preYear = _year;
+                }
+
+                // so sánh so với tháng trước tháng hiện tại.
+                decimal imonth = getTotalIncomeMonth(_year, _mon);
+                decimal preImonth = getTotalIncomeMonth(_preYear, _preMon);
+                decimal smonth = getTotalSpendingMonth(_year, _mon);
+                decimal preSmonth = getTotalSpendingMonth(_preYear, _preMon);
+                decimal pmonth = Math.Abs((getTotalIncomeMonth(_year, _mon) - getTotalSpendingMonth(_year, _mon)));
+                decimal prePmonth = Math.Abs(getTotalIncomeMonth(_preYear, _preMon) - getTotalSpendingMonth(_preYear, _preMon));
+
+                if (preImonth == 0)
+                    increaseIncome = "100";
+                else
+                {
+                    increaseIncome = decimal.Round(imonth / preImonth, 2).ToString();
+                }
+
+                if (preSmonth == 0)
+                    increaseSpending = "100";
+                else
+                {
+                    increaseSpending = decimal.Round(smonth / preSmonth, 2).ToString();
+                }
+
+                if(prePmonth == 0)
+                    increaseProfit = "100";
+                else
+                {
+                    increaseProfit = decimal.Round(pmonth / prePmonth, 2).ToString();
+                }
+
+                if (decimal.Parse(increaseIncome) > 1)
+                    icon1 = "ArrowUpThick";
+                else
+                    icon1 = "ArrowDownThick";
+
+                if (decimal.Parse(increaseSpending) > 1)
+                    icon2 = "ArrowUpThick";
+                else
+                    icon2 = "ArrowDownThick";
+
+                if (decimal.Parse(increaseProfit) > 1)
+                    icon3 = "ArrowUpThick";
+                else
+                    icon3 = "ArrowDownThick";
             });
 
         }
 
         public void FirstLoad()
         {
-            MessageBox.Show((getTotalIncomeWeek(2023, 6, 1).ToString()));
             TotalIncome = (decimal.Round(getTotalIncomeMonth(DateTime.Now.Year, DateTime.Now.Month), 0)).ToString("C0").Replace("$", "₫");
             TotalSpending = (decimal.Round(getTotalSpendingMonth(DateTime.Now.Year,DateTime.Now.Month), 0)).ToString("C0").Replace("$", "₫");
             decimal profit = getTotalIncomeMonth(DateTime.Now.Year,DateTime.Now.Month) - getTotalSpendingMonth(DateTime.Now.Year,DateTime.Now.Month);
@@ -202,6 +346,28 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.StatisticalVM
                 CollectionMonth.Add("tháng " + i.ToString());
             }
             Month = "tháng " + now.Month.ToString();
+            
+            
+            // so sánh so với tháng trước tháng hiện tại.
+            increaseIncome = decimal.Round(getTotalIncomeMonth(DateTime.Now.Year, DateTime.Now.Month) / (getTotalIncomeMonth(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month)), 2).ToString();
+            increaseSpending = decimal.Round((getTotalSpendingMonth(DateTime.Now.Year, DateTime.Now.Month) / getTotalSpendingMonth(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month)), 2).ToString();
+            increaseProfit = decimal.Round( Math.Abs((getTotalIncomeMonth(DateTime.Now.Year, DateTime.Now.Month) - getTotalSpendingMonth(DateTime.Now.Year, DateTime.Now.Month)) / (getTotalIncomeMonth(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month) - getTotalSpendingMonth(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month))), 2).ToString();
+
+            //handle arrow
+            if (decimal.Parse(increaseIncome) > 1)
+                icon1 = "ArrowUpThick";
+            else
+                icon1 = "ArrowDownThick";
+
+            if (decimal.Parse(increaseSpending) > 1)
+                icon2 = "ArrowUpThick";
+            else
+                icon2 = "ArrowDownThick";
+
+            if (decimal.Parse(increaseProfit) > 1)
+                icon3 = "ArrowUpThick";
+            else
+                icon3 = "ArrowDownThick";
         }
 
         public void LoadChartYear(int year)
@@ -240,6 +406,8 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.StatisticalVM
             };
             Labels = new[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
             YFormatter = value => value.ToString("C0").Replace("$", "VND");
+
+
         }   
         
         public void LoadChartMonth(int year, int month)
