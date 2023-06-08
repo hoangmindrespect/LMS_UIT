@@ -4,20 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d1012c04adf2467d8dd61c9086b8d370" Name="Diagram1" ZoomLevel="73">
-        <EntityTypeShape EntityType="lmsDatabaseModel.ACCOUNT" Width="1.5" PointX="0.75" PointY="1.125" />
-        <EntityTypeShape EntityType="lmsDatabaseModel.BBFORM" Width="1.5" PointX="0.75" PointY="10.5" />
-        <EntityTypeShape EntityType="lmsDatabaseModel.BILL" Width="1.5" PointX="3.75" PointY="0.75" />
-        <EntityTypeShape EntityType="lmsDatabaseModel.BOOK" Width="1.5" PointX="0.75" PointY="6" />
-        <EntityTypeShape EntityType="lmsDatabaseModel.BuildVersion" Width="1.5" PointX="5.75" PointY="2" />
-        <EntityTypeShape EntityType="lmsDatabaseModel.CART" Width="1.5" PointX="3" PointY="3.875" />
-        <EntityTypeShape EntityType="lmsDatabaseModel.CTHD" Width="1.5" PointX="6" PointY="6.875" />
-        <EntityTypeShape EntityType="lmsDatabaseModel.DETAIIMPORT" Width="1.5" PointX="5.25" PointY="12.75" />
-        <EntityTypeShape EntityType="lmsDatabaseModel.DETAIL_BBFORM" Width="1.5" PointX="3" PointY="6.75" />
-        <EntityTypeShape EntityType="lmsDatabaseModel.ErrorLog" Width="1.5" PointX="7.75" PointY="2" />
-        <EntityTypeShape EntityType="lmsDatabaseModel.IMPORT" Width="1.5" PointX="3" PointY="13" />
-        <EntityTypeShape EntityType="lmsDatabaseModel.ORDER_BOOKS" Width="1.5" PointX="0.75" PointY="14.625" />
-        <EntityTypeShape EntityType="lmsDatabaseModel.ORDER_DETAIL" Width="1.5" PointX="4.625" PointY="9.875" />
+      <Diagram DiagramId="d1012c04adf2467d8dd61c9086b8d370" Name="Diagram1" ZoomLevel="98">
+        <EntityTypeShape EntityType="lmsDatabaseModel.ACCOUNT" Width="1.5" PointX="1.5" PointY="12.125" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.BBFORM" Width="1.5" PointX="0.75" PointY="20.5" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.BILL" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.BOOK" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.BuildVersion" Width="1.5" PointX="5.75" PointY="1" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.CART" Width="1.5" PointX="6" PointY="5.875" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.CTHD" Width="1.5" PointX="3" PointY="2.875" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.DETAIIMPORT" Width="1.5" PointX="6" PointY="12.625" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.DETAIL_BBFORM" Width="1.5" PointX="3" PointY="8.75" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.ErrorLog" Width="1.5" PointX="7.75" PointY="1" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.IMPORT" Width="1.5" PointX="3.75" PointY="12.75" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.ORDER_BOOKS" Width="1.5" PointX="0.75" PointY="16.5" />
+        <EntityTypeShape EntityType="lmsDatabaseModel.ORDER_DETAIL" Width="1.5" PointX="3" PointY="5.875" />
         <AssociationConnector Association="lmsDatabaseModel.FK__BBFORM__MAKH__6CD828CA" />
         <AssociationConnector Association="lmsDatabaseModel.FK__BILL__MAKH__44CA3770" />
         <AssociationConnector Association="lmsDatabaseModel.FK__CART__MAKH__5224328E" />

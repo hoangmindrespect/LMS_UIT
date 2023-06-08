@@ -8,6 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using LibraryManagementSystem.Models.DataProvider;
+using System.Globalization;
+using System.Windows;
+using DocumentFormat.OpenXml.Bibliography;
+using Haley.Utils;
 
 namespace LibraryManagementSystem.ViewModel.AdminVM.StatisticalVM
 {
@@ -63,17 +68,46 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.StatisticalVM
             set { _month = value; OnPropertyChanged(); }
         }
 
+        private string _totalIncome;
+        public string TotalIncome
+        {
+            get { return _totalIncome; }
+            set { _totalIncome = value; OnPropertyChanged(); }
+        }
+
+        private string _totalSpending;
+        public string TotalSpending
+        {
+            get { return _totalSpending; }
+            set { _totalSpending = value; OnPropertyChanged(); }
+        }
+
+        private string _totalProfit;
+        public string TotalProfit
+        {
+            get { return _totalProfit; }
+            set { _totalProfit = value; OnPropertyChanged(); }
+        }
+
+        List<decimal> statisCollectionIncomeYear; // 12 giá trị
+        List<decimal> statisCollectionIncomeMonth; // 31 giá trị
+        List<decimal> statisCollectionSpendingYear; // 12 giá trị
+        List<decimal> statisCollectionSpendingMonth; // 31 giá trị
+        List<decimal> statisCollectionProfitYear; // 12 giá trị
+        List<decimal> statisCollectionProfitMonth; // 31 giá trị
         #endregion
 
         #region Command
-        public ICommand LoadYear { get; set; }
+        public ICommand LoadAfterChooseMonth { get; set; }
         public ICommand LoadMonth { get; set; }
         #endregion
         public StatisticalViewModel()
         {
+            
             FirstLoad();
             LoadMonth = new RelayCommand<ComboBox>((p) => { return true; }, (p) =>
             {
+                LoadChartYear(int.Parse(Year));
                 DateTime now = DateTime.Now;
                 Year = p.SelectedItem.ToString();
                 Month = null;
@@ -94,37 +128,63 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.StatisticalVM
                         CollectionMonth.Add("tháng " + i.ToString());
                     }
                 }
+
+                // Khi chọn năm, hiển thị theo năm, lúc này ô tháng vẫn còn trống
+                TotalIncome = (decimal.Round(getTotalIncomeYear(int.Parse(Year)), 0)).ToString("C0").Replace("$", "₫");
+                TotalSpending = (decimal.Round(getTotalSpendingYear(int.Parse(Year)), 0)).ToString("C0").Replace("$", "₫");
+                decimal profit = getTotalIncomeYear(int.Parse(Year)) - getTotalSpendingYear(int.Parse(Year));
+                if (profit >= 0)
+                {
+                    TotalProfit = decimal.Round(profit, 0).ToString("C0").Replace("$", "₫");
+                }
+                else
+                {
+                    TotalProfit = "-" + decimal.Round(profit, 0).ToString("C0").Replace("(", "").Replace(")", "").Replace("$", "₫");
+                }
+
+            });
+
+            LoadAfterChooseMonth = new RelayCommand<ComboBox>((p) => { return true; }, (p) =>
+            {
+                //chọn tháng sau đó load các giá trị trên 3 panel
+                if (string.IsNullOrEmpty(Month))
+                    return;
+
+                int tmp = int.Parse(Month.Substring(6, 1));
+                TotalIncome = (decimal.Round(getTotalIncomeMonth(int.Parse(Year), tmp), 0)).ToString("C0").Replace("$", "₫");
+                TotalSpending = (decimal.Round(getTotalSpendingMonth(int.Parse(Year), tmp), 0)).ToString("C0").Replace("$", "₫");
+                decimal profit = getTotalIncomeMonth(int.Parse(Year), tmp) - getTotalSpendingMonth(int.Parse(Year), tmp);
+                if (profit >= 0)
+                {
+                    TotalProfit = decimal.Round(profit, 0).ToString("C0").Replace("$", "₫");
+                }
+                else
+                {
+                    TotalProfit = "-" + decimal.Round(profit, 0).ToString("C0").Replace("(", "").Replace(")", "").Replace("$", "₫");
+                }
+                int az = int.Parse(Month.Substring(6, 1));
+                LoadChartMonth(int.Parse(Year), az);
             });
 
         }
 
         public void FirstLoad()
         {
+            MessageBox.Show((getTotalIncomeWeek(2023, 6, 1).ToString()));
+            TotalIncome = (decimal.Round(getTotalIncomeMonth(DateTime.Now.Year, DateTime.Now.Month), 0)).ToString("C0").Replace("$", "₫");
+            TotalSpending = (decimal.Round(getTotalSpendingMonth(DateTime.Now.Year,DateTime.Now.Month), 0)).ToString("C0").Replace("$", "₫");
+            decimal profit = getTotalIncomeMonth(DateTime.Now.Year,DateTime.Now.Month) - getTotalSpendingMonth(DateTime.Now.Year,DateTime.Now.Month);
+            if(profit >= 0)
+            {
+                TotalProfit = decimal.Round(profit, 0).ToString("C0").Replace("$", "₫");
+            }
+            else
+            {
+                TotalProfit = "-" + decimal.Round(profit, 0).ToString("C0").Replace("(", "").Replace(")", "").Replace("$", "₫");
+            }
 
             // Load statistical
-            SeriesCollection = new SeriesCollection
-            {
-                new LineSeries
-                {
-                    Title = "Income",
-                    Values = new ChartValues<double> { 400, 600, 500,500  }
-                },
-                new LineSeries
-                {
-                    Title = "Spending",
-                    Values = new ChartValues<double> { 600, 700, 300, 40 },
-                    PointGeometry = null
-                },
-                new LineSeries
-                {
-                    Title = "Profit",
-                    Values = new ChartValues<double> { 400,200,300,600 },
-                    PointGeometry = DefaultGeometries.Square,
-                    PointGeometrySize = 15
-                }
-            };
-            Labels = new[] { "week 1", "week 2", "week 3", "week 4" };
-            YFormatter = value => value.ToString("C");
+            LoadChartMonth(DateTime.Now.Year, DateTime.Now.Month);
 
             //Load  year first
             DateTime now = DateTime.Now;
@@ -143,5 +203,199 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.StatisticalVM
             }
             Month = "tháng " + now.Month.ToString();
         }
+
+        public void LoadChartYear(int year)
+        {
+            statisCollectionIncomeYear = new List<decimal>();
+            statisCollectionProfitYear = new List<decimal>();
+            statisCollectionSpendingYear = new List<decimal>();
+            for(int i = 1; i <= 12; i++)
+            {
+                statisCollectionIncomeYear.Add(getTotalIncomeMonth(year, i));
+                statisCollectionSpendingYear.Add(getTotalSpendingMonth(year, i));
+                statisCollectionProfitYear.Add(getTotalIncomeMonth(year, i) - getTotalSpendingMonth(year, i));
+            }
+
+            // Load statistical
+            SeriesCollection = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Title = "Income",
+                    Values = new ChartValues<decimal> (statisCollectionIncomeYear)
+                },
+                new LineSeries
+                {
+                    Title = "Spending",
+                    Values = new ChartValues<decimal> (statisCollectionSpendingYear),
+                    PointGeometry = null
+                },
+                new LineSeries
+                {
+                    Title = "Profit",
+                    Values = new ChartValues<decimal> (statisCollectionProfitYear),
+                    PointGeometry = DefaultGeometries.Square,
+                    PointGeometrySize = 15
+                }
+            };
+            Labels = new[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+            YFormatter = value => value.ToString("C0").Replace("$", "VND");
+        }   
+        
+        public void LoadChartMonth(int year, int month)
+        {
+            statisCollectionIncomeMonth = new List<decimal>();
+            statisCollectionSpendingMonth = new List<decimal>();
+            statisCollectionProfitMonth = new List<decimal>();
+            for(int i = 1; i <= 4; i++)
+            {
+                statisCollectionIncomeMonth.Add(getTotalIncomeWeek(year, month, i));
+                statisCollectionSpendingMonth.Add(getTotalSpendingWeek(year, month, i));
+                statisCollectionProfitMonth.Add(getTotalIncomeWeek(year, month, i) - getTotalSpendingWeek(year, month, i));
+            }
+
+            // Load statistical
+            SeriesCollection = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Title = "Income",
+                    Values = new ChartValues<decimal> (statisCollectionIncomeMonth)
+                },
+                new LineSeries
+                {
+                    Title = "Spending",
+                    Values = new ChartValues<decimal> (statisCollectionSpendingMonth),
+                    PointGeometry = null
+                },
+                new LineSeries
+                {
+                    Title = "Profit",
+                    Values = new ChartValues<decimal> (statisCollectionProfitMonth),
+                    PointGeometry = DefaultGeometries.Square,
+                    PointGeometrySize = 15
+                }
+            };
+            Labels = new[] { "week 1", "week 2", "week 3", "week 4"};
+            YFormatter = value => value.ToString("C0").Replace("$", "VND");
+        }
+        public decimal getTotalIncomeYear(int year)
+        {
+            decimal result = 0;
+            using(var context = new LMSEntities1())
+            {
+                var billList = context.ORDER_BOOKS.Where(b => b.orderDate.Year == year);
+
+                if (billList.ToList().Count != 0)
+                {
+                    result = (decimal)billList.Sum(b => b.totalValue);
+                }
+            }
+            return result;
+        }    
+
+        public decimal getTotalIncomeMonth(int year, int month)
+        {
+            decimal result = 0;
+            using (var context = new LMSEntities1())
+            {
+                var billList = context.ORDER_BOOKS.Where(b => b.orderDate.Month == month && b.orderDate.Year == year);
+
+                if (billList.ToList().Count != 0)
+                {
+                    result = (decimal)billList.Sum(b => b.totalValue);
+                }
+            }
+            return result;
+        }
+
+        public decimal getTotalIncomeWeek(int year, int month, int week)
+        {
+            decimal result = 0;
+            using (var context = new LMSEntities1())
+            {
+                int start = 0; int end = 0;
+                if(week == 1)
+                {
+                    start = 1; end = 7;
+                }   
+                else if(week == 2)
+                {
+                    start = 8; end = 14;
+                }    
+                else if(week == 3)
+                {
+                    start = 15; end = 21;
+                }
+                else if(week == 4)
+                {
+                    start = 22; end = 31;
+                }
+
+                for(int i = start; i <= end; i++)
+                {
+                    var billList = context.ORDER_BOOKS.Where(b => b.orderDate.Year == year && b.orderDate.Month == month && b.orderDate.Day == i);
+
+                    if (billList.ToList().Count != 0)
+                    {
+                        result += (decimal)billList.Sum(b => b.totalValue);
+                    }
+                }    
+            }
+            return result;
+        }
+        public decimal getTotalSpendingYear(int year)
+        {
+            decimal result = 0;
+            using (var context = new LMSEntities1())
+            {
+                var billList = context.IMPORTs.Where(b => b.NGNHAP.Year == year);
+
+                if (billList.ToList().Count != 0)
+                {
+                    result = (decimal)billList.Sum(b => b.TRIGIA);
+                }
+            }
+            return result;
+        }
+
+        public decimal getTotalSpendingMonth(int year,int month)
+        {
+            decimal result = 0;
+            using (var context = new LMSEntities1())
+            {
+                var billList = context.IMPORTs.Where(b => b.NGNHAP.Month == month && b.NGNHAP.Year == year);
+
+                if (billList.ToList().Count != 0)
+                {
+                    result = (decimal)billList.Sum(b => b.TRIGIA);
+                }
+            }
+            return result;
+        }
+
+        public decimal getTotalSpendingWeek(int year, int month, int week)
+        {
+            decimal result = 0;
+            using (var context = new LMSEntities1())
+            {
+                int count = 0;
+                if (week == 4)
+                    count = 10;
+                else
+                    count = 7;
+                for (int i = 1; i <= count; i++)
+                {
+                    var billList = context.IMPORTs.Where(b => b.NGNHAP.Year == year && b.NGNHAP.Month == month && b.NGNHAP.Day == i);
+
+                    if (billList.ToList().Count != 0)
+                    {
+                        result += (decimal)billList.Sum(b => b.TRIGIA);
+                    }
+                }
+            }
+            return result;
+        }
     }
+  
 }

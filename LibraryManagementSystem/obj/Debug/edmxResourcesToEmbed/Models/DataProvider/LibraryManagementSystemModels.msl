@@ -133,6 +133,7 @@
     <EntitySetMapping Name="ORDER_BOOKS">
       <EntityTypeMapping TypeName="lmsDatabaseModel.ORDER_BOOKS">
         <MappingFragment StoreEntitySet="ORDER_BOOKS">
+          <ScalarProperty Name="orderDate" ColumnName="orderDate" />
           <ScalarProperty Name="totalValue" ColumnName="totalValue" />
           <ScalarProperty Name="orderAddress" ColumnName="orderAddress" />
           <ScalarProperty Name="orderEmail" ColumnName="orderEmail" />

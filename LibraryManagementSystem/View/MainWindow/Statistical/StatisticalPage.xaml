@@ -69,6 +69,12 @@
                           Padding="5"
                           materialDesign:HintAssist.Hint="Choose month"
                           HorizontalAlignment="Left">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding LoadAfterChooseMonth}"
+                                               CommandParameter="{Binding ElementName=filter2}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                     </ComboBox>
                 </StackPanel>
                 
@@ -104,7 +110,7 @@
                         </Label>
 
                         <Label x:Name="label3"
-                           Content="450 000 000 VNĐ" 
+                           Content="{Binding TotalIncome}" 
                            HorizontalAlignment="Left" 
                            Height="auto"
                            Margin="10 -95 0 0"
@@ -167,7 +173,7 @@
                         </Label>
 
                         <Label x:Name="label4"
-                           Content="450 000 000 VNĐ" 
+                           Content="{Binding TotalSpending}" 
                            HorizontalAlignment="Left" 
                            Height="auto"
                            Margin="10 -70 0 0"
@@ -230,7 +236,7 @@
                         </Label>
 
                         <Label x:Name="label5"
-                           Content="450 000 000 VNĐ" 
+                           Content="{Binding TotalProfit}" 
                            HorizontalAlignment="Left" 
                            Height="auto"
                            Margin="10 -70 0 0"

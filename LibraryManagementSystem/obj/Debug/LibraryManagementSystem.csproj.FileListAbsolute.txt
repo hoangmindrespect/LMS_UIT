@@ -521,3 +521,5 @@ C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\ManageUser\ManageUserPage.baml
 C:\CODE\zzzDoAnLMS\LMS_UIT_Khang\LibraryManagementSystem\obj\Debug\View\MainClientWindow\BuyBookPage\PurchasePage.g.cs
 C:\CODE\zzzDoAnLMS\LMS_UIT_Khang\LibraryManagementSystem\obj\Debug\View\MainClientWindow\BuyBookPage\PurchasePage.baml
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainClientWindow\BuyBookPage\PurchasePage.g.cs
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainClientWindow\BuyBookPage\PurchasePage.baml

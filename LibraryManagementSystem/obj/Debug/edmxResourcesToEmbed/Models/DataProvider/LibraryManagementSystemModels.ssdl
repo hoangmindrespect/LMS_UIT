@@ -129,11 +129,12 @@
       <PropertyRef Name="orderID" />
     </Key>
     <Property Name="orderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="orderName" Type="varchar" MaxLength="100" />
+    <Property Name="orderName" Type="nvarchar" MaxLength="100" />
     <Property Name="orderPhone" Type="varchar" MaxLength="20" />
     <Property Name="orderEmail" Type="varchar" MaxLength="100" />
-    <Property Name="orderAddress" Type="varchar" MaxLength="200" />
+    <Property Name="orderAddress" Type="nvarchar" MaxLength="100" />
     <Property Name="totalValue" Type="money" />
+    <Property Name="orderDate" Type="smalldatetime" Nullable="false" />
   </EntityType>
   <EntityType Name="ORDER_DETAIL">
     <Key>
