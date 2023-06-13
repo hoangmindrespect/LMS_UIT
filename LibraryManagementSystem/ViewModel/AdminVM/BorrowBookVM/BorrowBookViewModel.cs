@@ -101,7 +101,8 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM
                         book.SoLuong = (int)item.SOLUONG;
                         book.Gia = (decimal)item.GIA;
                         book.ImageSource = item.IMAGESOURCE;
-                        book.NamXB = (int)item.NAMXUATBAN;
+                        if(item.NAMXUATBAN != null)
+                            book.NamXB = (int)item.NAMXUATBAN;
                         book.MaSach = (int)item.ID;
                         Books.Add(book);                    }
                 }

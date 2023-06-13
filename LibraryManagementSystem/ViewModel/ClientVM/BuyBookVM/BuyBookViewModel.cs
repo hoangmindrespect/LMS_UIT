@@ -22,6 +22,14 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
     public class BuyBookViewModel : BaseViewModel
     {
         #region Property
+
+        private string _AccountID;
+        public string AccountID
+        {
+            get { return _AccountID; }
+            set { _AccountID = value; OnPropertyChanged(); }
+        }
+
         private BookDTO _SelectedItem;
         public BookDTO SelectedItem
         {
@@ -150,7 +158,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
             Quantity = 1;
             LoadBuyBookPage = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
             {
-                p.Content = new BuyBookPage();
+                p.Content = new BuyBookPage(AccountID);
             });
 
             LoadBook = new RelayCommand<ItemsControl>((p) => { return p != null; }, (p) =>
@@ -286,7 +294,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                     using (var context = new LMSEntities1())
                     {
                         CART cart = new CART();
-                        cart.MAKH = 1;
+                        cart.MAKH = Int32.Parse(AccountID);
                         cart.MASACH = SelectedItem.MaSach;
                         cart.SOLUONGHT = Quantity;
                         context.CARTs.Add(cart);
@@ -328,12 +336,13 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                     SqlCommand command = new SqlCommand();
                     command.Connection = connection;
                     command.Parameters.AddWithValue("@masach", masach);
+                    command.Parameters.AddWithValue("@makhachhang", AccountID);
                     MessageBoxLMS msb = new MessageBoxLMS("Warning", "Delete this book?", MessageType.Waitting, MessageButtons.YesNo);
                     if (msb.ShowDialog() == true)
                     {
                         try
                         {
-                            command.CommandText = "delete from CART where MASACH = @masach";
+                            command.CommandText = "delete from CART where MAKH = @makhachhang and MASACH = @masach";
                             context.SaveChanges();
                             if (command.ExecuteNonQuery() != 0)
                             {
@@ -369,16 +378,20 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                     }
                     foreach (var item in context.CARTs)
                     {
-                        if (item.MASACH == masach && item.SOLUONGHT < maxQuantity)
+                        if(item.MAKH == Int32.Parse(AccountID))
                         {
-                            item.SOLUONGHT++;
-                            break;
-                        }
-                        if (item.MASACH == masach && item.SOLUONGHT == maxQuantity)
-                        {
-                            MessageBoxLMS msb = new MessageBoxLMS("Notification", "The maximum amount has been reached", MessageType.Accept, MessageButtons.OK);
-                            msb.ShowDialog();
-                        }
+                            if (item.MASACH == masach && item.SOLUONGHT < maxQuantity)
+                            {
+                                item.SOLUONGHT++;
+                                break;
+                            }
+                            if (item.MASACH == masach && item.SOLUONGHT == maxQuantity)
+                            {
+                                MessageBoxLMS msb = new MessageBoxLMS("Notification", "The maximum amount has been reached", MessageType.Accept, MessageButtons.OK);
+                                msb.ShowDialog();
+                                break;
+                            }
+                        }                                                
                     }
                     context.SaveChanges();
                 }
@@ -393,9 +406,12 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                 {
                     foreach (var item in context.CARTs)
                     {
-
-                        if (item.MASACH == masach && item.SOLUONGHT > 0)
-                            item.SOLUONGHT--;
+                        if (item.MAKH == Int32.Parse(AccountID))
+                        {
+                            if (item.MASACH == masach && item.SOLUONGHT > 0)
+                                item.SOLUONGHT--;
+                            break;
+                        }                      
                     }
                     context.SaveChanges();
                 }
@@ -405,7 +421,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
 
             BackToShopping = new RelayCommand<object>((p) => { return p != null; }, (p) =>
             {
-                MainClientViewModel.main_frame_client.Content = new BuyBookPage();
+                MainClientViewModel.main_frame_client.Content = new BuyBookPage(AccountID);
             });
 
             GetBookNow = new RelayCommand<Window>((p) => { return true; }, (p) =>
@@ -447,6 +463,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                                 order.orderPhone = PhoneNumber;
                                 order.orderAddress = Address;
                                 order.totalValue = TotalValueForOneBookID;
+                                order.orderDate = DateTime.Now;
                                 context.ORDER_BOOKS.Add(order);
                                 context.SaveChanges();
                                 id = order.orderID;
@@ -486,6 +503,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                                 order.orderPhone = PhoneNumber;
                                 order.orderAddress = Address;
                                 order.totalValue = TotalCartValue;
+                                order.orderDate = DateTime.Now;
                                 context.ORDER_BOOKS.Add(order);
                                 context.SaveChanges();
                                 id = order.orderID;
@@ -586,22 +604,25 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
             {
                 foreach (var item in context.CARTs)
                 {
-                    foreach (var book in context.BOOKs)
+                    if(item.MAKH == Int32.Parse(AccountID))
                     {
-                        if (item.MASACH == book.ID)
+                        foreach (var book in context.BOOKs)
                         {
-                            BookDTO bookInCart = new BookDTO();
-                            bookInCart.MaSach = book.ID;
-                            bookInCart.TenSach = book.TENSACH;
-                            bookInCart.TacGia = book.TACGIA;
-                            bookInCart.NXB = book.NHAXUATBAN;
-                            bookInCart.SoLuong = (int)item.SOLUONGHT;
-                            bookInCart.Gia = (decimal)book.GIA * (int)item.SOLUONGHT;
-                            bookInCart.ImageSource = book.IMAGESOURCE;
-                            bookInCart.NamXB = (int)book.NAMXUATBAN;
-                            BooksInCart.Add(bookInCart);
+                            if (item.MASACH == book.ID)
+                            {
+                                BookDTO bookInCart = new BookDTO();
+                                bookInCart.MaSach = book.ID;
+                                bookInCart.TenSach = book.TENSACH;
+                                bookInCart.TacGia = book.TACGIA;
+                                bookInCart.NXB = book.NHAXUATBAN;
+                                bookInCart.SoLuong = (int)item.SOLUONGHT;
+                                bookInCart.Gia = (decimal)book.GIA * (int)item.SOLUONGHT;
+                                bookInCart.ImageSource = book.IMAGESOURCE;
+                                bookInCart.NamXB = (int)book.NAMXUATBAN;
+                                BooksInCart.Add(bookInCart);
+                            }
                         }
-                    }
+                    }                 
                 }
             }
             CountTotalCartValue();

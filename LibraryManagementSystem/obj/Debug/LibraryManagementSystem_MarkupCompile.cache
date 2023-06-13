@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\
+C:\CODE\zDoAnLMS_Main\LMS_UIT_Khang\LibraryManagementSystem\obj\Debug\
 LibraryManagementSystem
 none
 false
 DEBUG;TRACE
-C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\App.xaml
-291932878051
-3-2087984864
-69-2074559449
-62635873897
+C:\CODE\zDoAnLMS_Main\LMS_UIT_Khang\LibraryManagementSystem\App.xaml
+29-666385703
+3-2000001927
+69-294201495
+62-1910032851
 ControlBar\ControlBar__NoneResize.xaml;ControlBar\UserControl1.xaml;MainWindow.xaml;ResourceXAML\MainResource.xaml;View\Login\CreateNewPass.xaml;View\Login\ForgotPasswordPage.xaml;View\Login\loginpage.xaml;View\Login\loginwindow.xaml;View\Login\RegisterWindow.xaml;View\Login\VertificationPage.xaml;View\MainClientWindow\BuyBookPage\BuyBookPage.xaml;View\MainClientWindow\BuyBookPage\DetailsBook.xaml;View\MainClientWindow\BuyBookPage\Item.xaml;View\MainClientWindow\BuyBookPage\PurchasePage.xaml;View\MainClientWindow\BuyBookPage\ShoppingCartPage.xaml;View\MainClientWindow\MainClientWindow.xaml;View\MainWindow\BorrowBook\BorrowBookPage.xaml;View\MainWindow\BorrowBook\Item2.xaml;View\MainWindow\BorrowBook\ManageBorrowBookPage.xaml;View\MainWindow\BorrowBook\ReturnBookPage.xaml;View\MainWindow\ImportBook\AddingWindow.xaml;View\MainWindow\ImportBook\ImportBookPage.xaml;View\MainWindow\MainWindowSystem.xaml;View\MainWindow\ManageBook\EdittingBookWindow.xaml;View\MainWindow\ManageBook\ManageBookPage.xaml;View\MainWindow\ManageUser\EditingUserWindow.xaml;View\MainWindow\ManageUser\ManageUserPage.xaml;View\MainWindow\Statistical\StatisticalPage.xaml;View\MessageBoxCus\MessageBoxLMS.xaml;
 
 False
