@@ -134,11 +134,12 @@
             <PropertyRef Name="orderID" />
           </Key>
           <Property Name="orderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="orderName" Type="varchar" MaxLength="100" />
+          <Property Name="orderName" Type="nvarchar" MaxLength="100" />
           <Property Name="orderPhone" Type="varchar" MaxLength="20" />
           <Property Name="orderEmail" Type="varchar" MaxLength="100" />
-          <Property Name="orderAddress" Type="varchar" MaxLength="200" />
+          <Property Name="orderAddress" Type="nvarchar" MaxLength="100" />
           <Property Name="totalValue" Type="money" />
+          <Property Name="orderDate" Type="smalldatetime" Nullable="false" />
         </EntityType>
         <EntityType Name="ORDER_DETAIL">
           <Key>
@@ -573,11 +574,12 @@
             <PropertyRef Name="orderID" />
           </Key>
           <Property Name="orderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="orderName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="orderName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="orderPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="orderEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="orderAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="orderAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="totalValue" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="orderDate" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="ORDER_DETAIL" Relationship="lmsDatabaseModel.FK__ORDER_DET__order__7849DB76" FromRole="ORDER_BOOKS" ToRole="ORDER_DETAIL" />
         </EntityType>
         <EntityType Name="ORDER_DETAIL">
@@ -873,6 +875,7 @@
           <EntitySetMapping Name="ORDER_BOOKS">
             <EntityTypeMapping TypeName="lmsDatabaseModel.ORDER_BOOKS">
               <MappingFragment StoreEntitySet="ORDER_BOOKS">
+                <ScalarProperty Name="orderDate" ColumnName="orderDate" />
                 <ScalarProperty Name="totalValue" ColumnName="totalValue" />
                 <ScalarProperty Name="orderAddress" ColumnName="orderAddress" />
                 <ScalarProperty Name="orderEmail" ColumnName="orderEmail" />

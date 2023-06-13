@@ -296,7 +296,8 @@ namespace LibraryManagementSystem.ViewModel.LoginVM
                         }  
                         else if(role == 1)
                         {
-                            MainClientWindow w = new MainClientWindow();
+                            string AccountID = (from s in context.ACCOUNTs where s.USERNAME == UserName && s.USERPASS == Password select s.ID).FirstOrDefault().ToString();
+                            MainClientWindow w = new MainClientWindow(AccountID);
                             w.Show();
 
                             login.Close();

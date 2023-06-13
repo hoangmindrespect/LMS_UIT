@@ -19,9 +19,10 @@ namespace LibraryManagementSystem.View.MainClientWindow
     /// </summary>
     public partial class MainClientWindow : Window
     {
-        public MainClientWindow()
+        public MainClientWindow(string AccountID)
         {
             InitializeComponent();
+            idTb.Text = AccountID;
         }
     }
 }

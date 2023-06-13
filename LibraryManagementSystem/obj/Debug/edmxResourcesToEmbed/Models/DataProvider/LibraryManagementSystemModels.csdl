@@ -213,11 +213,12 @@
       <PropertyRef Name="orderID" />
     </Key>
     <Property Name="orderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="orderName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="orderName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="orderPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="orderEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="orderAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="orderAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="totalValue" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="orderDate" Type="DateTime" Nullable="false" Precision="0" />
     <NavigationProperty Name="ORDER_DETAIL" Relationship="lmsDatabaseModel.FK__ORDER_DET__order__7849DB76" FromRole="ORDER_BOOKS" ToRole="ORDER_DETAIL" />
   </EntityType>
   <EntityType Name="ORDER_DETAIL">

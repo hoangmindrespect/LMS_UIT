@@ -69,6 +69,12 @@
                           Padding="5"
                           materialDesign:HintAssist.Hint="Choose month"
                           HorizontalAlignment="Left">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding LoadAfterChooseMonth}"
+                                               CommandParameter="{Binding ElementName=filter2}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                     </ComboBox>
                 </StackPanel>
                 
@@ -104,7 +110,7 @@
                         </Label>
 
                         <Label x:Name="label3"
-                           Content="450 000 000 VNĐ" 
+                           Content="{Binding TotalIncome}" 
                            HorizontalAlignment="Left" 
                            Height="auto"
                            Margin="10 -95 0 0"
@@ -122,13 +128,13 @@
                                 BorderThickness="1">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon 
-                                    Kind="ArrowUpThick" 
+                                    Kind="{Binding icon1}" 
                                     Foreground="White"
                                     Margin="08 0 0 0"
                                     Width="28"
                                     Height="28"
                                     />
-                                <Label Content="5%"
+                                <Label Content="{Binding increaseIncome}"
                                    FontSize="17"
                                    Margin="-7 0 0 0"
                                    VerticalContentAlignment="Center"
@@ -167,7 +173,7 @@
                         </Label>
 
                         <Label x:Name="label4"
-                           Content="450 000 000 VNĐ" 
+                           Content="{Binding TotalSpending}" 
                            HorizontalAlignment="Left" 
                            Height="auto"
                            Margin="10 -70 0 0"
@@ -184,13 +190,13 @@
                                 BorderThickness="1">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon 
-                                    Kind="ArrowUpThick" 
+                                    Kind="{Binding icon2}" 
                                     Foreground="White"
                                     Margin="08 0 0 0"
                                     Width="28"
                                     Height="28"
                                     />
-                                <Label Content="10%"
+                                <Label Content="{Binding increaseSpending}"
                                    FontSize="17"
                                    Margin="-7 0 0 0"
                                    VerticalContentAlignment="Center"
@@ -230,7 +236,7 @@
                         </Label>
 
                         <Label x:Name="label5"
-                           Content="450 000 000 VNĐ" 
+                           Content="{Binding TotalProfit}" 
                            HorizontalAlignment="Left" 
                            Height="auto"
                            Margin="10 -70 0 0"
@@ -246,13 +252,13 @@
                                 BorderThickness="1">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon 
-                                    Kind="ArrowDownThick" 
+                                    Kind="{Binding icon3}" 
                                     Foreground="White"
                                     Margin="8 0 0 0"
                                     Width="28"
                                     Height="28"
                                     />
-                                <Label Content="10%"
+                                <Label Content="{Binding increaseProfit}"
                                    FontSize="17"
                                    Margin="-7 0 0 0"
                                    VerticalContentAlignment="Center"
