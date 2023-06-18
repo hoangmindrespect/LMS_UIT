@@ -114,6 +114,13 @@
                                             </StackPanel>
                                         </Button>
 
+                                        <Button Style="{StaticResource menuButton}" Command="{Binding LoadListOrders}" CommandParameter="{Binding ElementName=mainFrame}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <materialDesign:PackIcon Kind="Paper"  Margin="5 0 0 0"/>
+                                                <TextBlock Text="Orders" Margin="10 0 0 0" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Button>
+
                                         <Button Style="{StaticResource menuButton}" Command="{Binding LoadManageBorrowBookPage}" CommandParameter="{Binding ElementName=mainFrame}" >
                                             <StackPanel Orientation="Horizontal">
                                                 <materialDesign:PackIcon Kind="Settings"  Margin="5 0 0 0"/>

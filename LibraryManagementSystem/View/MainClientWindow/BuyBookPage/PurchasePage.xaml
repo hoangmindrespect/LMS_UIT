@@ -12,42 +12,53 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True"
+        xmlns:uc="clr-namespace:LibraryManagementSystem.ControlBar"
         DataContext="{StaticResource BuyBookVM}"
         Background="Transparent"
-        Title="PurchasePage" Height="450" Width="750">
-    <Border BorderThickness="0.5"
-            BorderBrush="Black"
-            CornerRadius="15"
-            Background="white">
-        <Grid Margin="10">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="100"/>
-                </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Cursor="Hand"
-                           Height="30"
-                           Grid.Row="0"
-                           Width="30"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top"
-                           x:Name="lbl">
-                    <materialDesign:PackIcon Kind="ArrowLeft"
-                                         x:Name="CloseBtn"
-                                         Height="26"
-                                         Width="26"/>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeftButtonUp">
-                            <i:InvokeCommandAction Command="{Binding ClosePurchasePage}"
-                                                       CommandParameter="{Binding ElementName=Page}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Label>
+        
+        Title=" " Height="550" Width="850">
+    <Border CornerRadius="10" Background="#ffffff" BorderBrush="#4E443A" BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-                <Grid Grid.Column="1" Margin="10">
-                    <StackPanel>
-                        <TextBox
+            <!--user control-->
+            <Grid Grid.Row="0">
+                <uc:ControlBar__NoneResize Tag="{Binding Title, ElementName=Page}"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Label Content="    SHIPPING INFORMATION"
+                               Background="Gray"
+                               VerticalContentAlignment="Center"
+                               HorizontalContentAlignment="Left"
+                               FontSize="17"
+                               
+                               FontWeight="Bold"
+                               Margin="30 5 50 5"/>
+                    </Grid>
+
+                    <Grid Grid.Row="01">
+                        <TextBox    Margin="30 5 50 5"
                                     x:Name="FullName_txb"
                                     FontSize="14"
                                     SelectionBrush="#4E443A"
@@ -56,23 +67,16 @@
                                     CaretBrush="#4E443A"
                                     materialDesign:TextFieldAssist.UnderlineBrush="#4E443A"
                                     materialDesign:HintAssist.Foreground="#4E443A"
-                                    materialDesign:HintAssist.Hint="Full Name"
+                                    materialDesign:HintAssist.Hint="    Full Name"
                                     Text="{Binding OrderName}"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                    </Grid>
 
-                        <Label  Margin="10 -10 10 0"
-                                    x:Name="Error1"
-                                    Height="20"
-                                    FontSize="9.5"
-                                    FontFamily="UVN Viet Sach"
-                                    Content=""
-                                    Foreground="Red" />
-
-
-                        <TextBox
+                    <Grid Grid.Row="2">
+                        <TextBox    Margin="30 5 50 5"
                                     x:Name="Phone_txb"
                                     FontSize="14"
-                                    materialDesign:HintAssist.Hint="Phone Number"
+                                    materialDesign:HintAssist.Hint="    Phone Number"
                                     SelectionBrush="#4E443A"
                                     BorderBrush="#4E443A"
                                     Foreground="#4E443A"
@@ -81,20 +85,13 @@
                                     materialDesign:HintAssist.Foreground="#4E443A"
                                     Text="{Binding PhoneNumber}"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                    </Grid>
 
-
-                        <Label Margin="10 -10 10 0"
-                                    x:Name="Error3"
-                                    Height="20"
-                                    FontSize="9.5"
-                                    FontFamily="UVN Viet Sach"
-                                    Content=""
-                                    Foreground="Red"/>
-
-                        <TextBox
+                    <Grid Grid.Row="3">
+                        <TextBox    Margin="30 5 50 5"
                                     x:Name="Email_txb"
                                     FontSize="14"
-                                    materialDesign:HintAssist.Hint="Email Address"
+                                    materialDesign:HintAssist.Hint="    Email Address"
                                     SelectionBrush="#4E443A"
                                     BorderBrush="#4E443A"
                                     Foreground="#4E443A"
@@ -103,61 +100,84 @@
                                     materialDesign:HintAssist.Foreground="#4E443A"
                                     Text="{Binding Email}"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                    </Grid>
 
-                        <Label Margin="10 -10 10 0"
-                                    x:Name="Error4"
-                                    Height="20"
-                                    FontSize="9.5"
-                                    FontFamily="UVN Viet Sach"
-                                    Content=""
-                                    Foreground="Red"/>
+                    <Grid Grid.Row="4">
+                        <Label Content="    SHIPPING OPTION"
+                               Background="Gray"
+                               VerticalContentAlignment="Center"
+                               HorizontalContentAlignment="Left"
+                               FontSize="17"
+                               FontWeight="Bold"
+                               Margin="30 5 50 5"/>
+                    </Grid>
 
-                        <TextBox    Margin="0 5 0 20"
-                                    TextWrapping="Wrap"
-                                    VerticalAlignment="Stretch"
-                                    MinWidth="280"
-                                    AcceptsReturn="True"
-                                    VerticalScrollBarVisibility="Auto"
-                                    SpellCheck.IsEnabled="True"
-                                    Text="{Binding Address}"
-                                    materialDesign:HintAssist.Hint="Address Delivery"
-                                    Height="80">
-                        </TextBox>
-                        <Label Margin="10 -10 10 0"
-                                    x:Name="Error5"
-                                    Height="20"
-                                    FontSize="9.5"
-                                    FontFamily="UVN Viet Sach"
-                                    Content=""
-                                    Foreground="Red"/>
-                        
+                    <Grid Grid.Row="5">
+                        <StackPanel>
+                            <CheckBox Content="2 - 5 day works"
+                                  IsChecked="True"
+                                  Margin="30 5 50 5"
+                                  
+                                  Foreground="Black"
+                                  BorderBrush="Black"
+                                  VerticalContentAlignment="Center"
+                                  HorizontalContentAlignment="Left"
+                                  FontSize="13">
+                            </CheckBox>
+
+                            <CheckBox Content="2 hours"
+                                  Margin="30 5 50 5"
+                                  IsEnabled="False"
+                                  Foreground="Black"
+                                  BorderBrush="Black"
+                                  VerticalContentAlignment="Center"
+                                  HorizontalContentAlignment="Left"
+                                  FontSize="13">
+                            </CheckBox>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="1" 
+                      Margin="20 0 20 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0"  Background="Gray">
+                        <Label Content="    Detail" 
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               FontSize="17"
+                               FontWeight="Bold"/>
+                        <Rectangle Height="1" Width="auto" Fill="Black" VerticalAlignment="Bottom"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Background="Gray"/>
+                    <Grid Grid.Row="2" Background="Gray"/>
+                    <Grid Grid.Row="3" Background="Gray"/>
+                    <Grid Grid.Row="4" Background="Gray"/>
+                    <Grid Grid.Row="5">
+                        <DockPanel >
+                            <Label Content="Total:" FontSize="15" Margin="5 20 0 0" DockPanel.Dock="Left"/>
+                            <Label Content="{Binding TotalShow,StringFormat='₫{0:N0}'}" HorizontalAlignment="Right" Margin="5 20 0 0"/>
+                        </DockPanel>
+                    </Grid>
+                    
+                    <Grid Grid.Row="6">
                         <TextBlock x:Name="statusTb" Visibility="Hidden" ></TextBlock>
-                        
-                        <!--<Button Width="50" Command="{Binding ShowOrder_Test}" CommandParameter="{Binding ElementName=Page}"></Button>
-                        <Button Width="50" Background="Black" Command="{Binding DeleteAllOrder_Test}" CommandParameter="{Binding ElementName=Page}"></Button>-->
-                        
-                        <Border BorderThickness="0.5"
-                                Width="auto" 
-                                BorderBrush="Black" 
-                                HorizontalAlignment="Right" 
-                                Margin="0 0 -40 0" Padding="10">
-                            <StackPanel HorizontalAlignment="Center">
-                                <TextBlock FontSize="15" Text="Total pay" HorizontalAlignment="Center"/>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <TextBlock FontSize="26" Text="{Binding TotalShow}"/>
-                                    <TextBlock FontSize="20" VerticalAlignment="Bottom" Text="VND" />
-                                </StackPanel>
-                            </StackPanel>
-                        </Border>
-
-                        <Button Width="200" Content="Complete Order" 
+                        <Button Width="200" Content="Place order" 
                                 Style="{StaticResource MaterialDesignRaisedLightButton}" 
-                                Background="#FFAB6913"
+                                Background="#4E443A"
                                 Command="{Binding CompleteOrder}"
                                 CommandParameter="{Binding ElementName=statusTb, Path=Text}"
                                 />
-                    </StackPanel>
-
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>

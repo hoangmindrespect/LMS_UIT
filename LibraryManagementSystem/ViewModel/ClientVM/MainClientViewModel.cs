@@ -60,7 +60,6 @@ namespace LibraryManagementSystem.ViewModel.ClientVM
                 w.Show();
                 MainClientWindow pk = System.Windows.Application.Current.Windows.OfType<MainClientWindow>().FirstOrDefault();
                 pk.Close();
-
             });
         }
     }

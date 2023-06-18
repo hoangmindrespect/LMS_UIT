@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\CODE\zzzDoAnLMS\LMS_UIT_Khang\LibraryManagementSystem\obj\Debug\
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\
 LibraryManagementSystem
 none
 false
 DEBUG;TRACE
-C:\CODE\zzzDoAnLMS\LMS_UIT_Khang\LibraryManagementSystem\App.xaml
-29-666385703
-3-2000001927
-70-1136560862
-621508905324
-ControlBar\ControlBar__NoneResize.xaml;ControlBar\UserControl1.xaml;MainWindow.xaml;ResourceXAML\MainResource.xaml;View\Login\CreateNewPass.xaml;View\Login\ForgotPasswordPage.xaml;View\Login\loginpage.xaml;View\Login\loginwindow.xaml;View\Login\RegisterWindow.xaml;View\Login\VertificationPage.xaml;View\MainClientWindow\BuyBookPage\BuyBookPage.xaml;View\MainClientWindow\BuyBookPage\DetailsBook.xaml;View\MainClientWindow\BuyBookPage\Item.xaml;View\MainClientWindow\BuyBookPage\PurchasePage.xaml;View\MainClientWindow\BuyBookPage\ShoppingCartPage.xaml;View\MainClientWindow\MainClientWindow.xaml;View\MainWindow\BorrowBook\BorrowBookPage.xaml;View\MainWindow\BorrowBook\Item2.xaml;View\MainWindow\BorrowBook\ManageBorrowBookPage.xaml;View\MainWindow\BorrowBook\ReturnBookPage.xaml;View\MainWindow\ImportBook\AddingWindow.xaml;View\MainWindow\ImportBook\ImportBookPage.xaml;View\MainWindow\MainWindowSystem.xaml;View\MainWindow\ManageBook\EdittingBookWindow.xaml;View\MainWindow\ManageBook\ManageBookPage.xaml;View\MainWindow\ManageUser\EditingUserWindow.xaml;View\MainWindow\ManageUser\ManageUserPage.xaml;View\MainWindow\Statistical\StatisticalPage.xaml;View\MessageBoxCus\MessageBoxLMS.xaml;
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\App.xaml
+3058332947
+3-2087984864
+712000463377
+62635873897
+ControlBar\ControlBar__NoneResize.xaml;ControlBar\UserControl1.xaml;MainWindow.xaml;ResourceXAML\MainResource.xaml;View\Login\CreateNewPass.xaml;View\Login\ForgotPasswordPage.xaml;View\Login\loginpage.xaml;View\Login\loginwindow.xaml;View\Login\RegisterWindow.xaml;View\Login\VertificationPage.xaml;View\MainClientWindow\BuyBookPage\BuyBookPage.xaml;View\MainClientWindow\BuyBookPage\DetailsBook.xaml;View\MainClientWindow\BuyBookPage\Item.xaml;View\MainClientWindow\BuyBookPage\PurchasePage.xaml;View\MainClientWindow\BuyBookPage\ShoppingCartPage.xaml;View\MainClientWindow\MainClientWindow.xaml;View\MainWindow\BorrowBook\BorrowBookPage.xaml;View\MainWindow\BorrowBook\Item2.xaml;View\MainWindow\BorrowBook\ManageBorrowBookPage.xaml;View\MainWindow\BorrowBook\ReturnBookPage.xaml;View\MainWindow\ImportBook\AddingWindow.xaml;View\MainWindow\ImportBook\ImportBookPage.xaml;View\MainWindow\MainWindowSystem.xaml;View\MainWindow\ManageBook\EdittingBookWindow.xaml;View\MainWindow\ManageBook\ManageBookPage.xaml;View\MainWindow\ManageOrders\ManageOrderPage.xaml;View\MainWindow\ManageUser\EditingUserWindow.xaml;View\MainWindow\ManageUser\ManageUserPage.xaml;View\MainWindow\Statistical\StatisticalPage.xaml;View\MessageBoxCus\MessageBoxLMS.xaml;
 
-False
+True
 

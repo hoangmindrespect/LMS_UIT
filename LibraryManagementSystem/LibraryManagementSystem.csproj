@@ -334,6 +334,9 @@
     <Compile Include="View\MainWindow\ManageBook\ManageBookPage.xaml.cs">
       <DependentUpon>ManageBookPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\MainWindow\ManageOrders\ManageOrderPage.xaml.cs">
+      <DependentUpon>ManageOrderPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainWindow\ManageUser\EditingUserWindow.xaml.cs">
       <DependentUpon>EditingUserWindow.xaml</DependentUpon>
     </Compile>
@@ -451,6 +454,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainWindow\ManageBook\ManageBookPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainWindow\ManageOrders\ManageOrderPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -4,6 +4,7 @@ using LibraryManagementSystem.View.MainWindow;
 using LibraryManagementSystem.View.MainWindow.BorrowBook;
 using LibraryManagementSystem.View.MainWindow.ImportBook;
 using LibraryManagementSystem.View.MainWindow.ManageBook;
+using LibraryManagementSystem.View.MainWindow.ManageOrders;
 using LibraryManagementSystem.View.MainWindow.ManageUser;
 using LibraryManagementSystem.View.MainWindow.Statistical;
 using System;
@@ -33,6 +34,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM
         public ICommand LoadManageBook { get; set; }
         public ICommand LoadImportPage { get; set; }
         public ICommand LoadBorrowBookPage { get; set; }
+        public ICommand LoadListOrders { get; set; }
         public ICommand Logout { get; set; }
         public MainAdminViewModel()
         {
@@ -62,6 +64,11 @@ namespace LibraryManagementSystem.ViewModel.AdminVM
             LoadBorrowBookPage = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
                 p.Content = new ManageBorrowBookPage();
+            });
+
+            LoadListOrders = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            {
+                p.Content = new ManageOrderPage();
             });
 
             Logout = new RelayCommand<object>((p) => { return true; }, (p) =>

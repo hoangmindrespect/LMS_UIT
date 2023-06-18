@@ -79,47 +79,25 @@
 
                                     <!--Menu Buttons-->
                                     <StackPanel DockPanel.Dock="Top" >
-                                        <Button Style="{StaticResource menuButton}" Command="{Binding LoadBuyBookPage}" CommandParameter="{Binding ElementName=mainFrame}">
+                                        <Button Style="{StaticResource menuButton}" Command="{Binding LoadBuyBookFirst}" CommandParameter="{Binding ElementName=mainFrame}">
                                             <StackPanel Orientation="Horizontal">
                                                 <materialDesign:PackIcon Kind="ShoppingOutline" Margin="5 0 0 0"/>
                                                 <TextBlock Text="Shopping" Margin="10 0 0 0" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button>
+
                                         <Button Style="{StaticResource menuButton}" Command="{Binding LoadManageBook}" CommandParameter="{Binding ElementName=mainFrame}">
                                             <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="BookOpenPageVariant" Margin="5 0 0 0"/>
-                                                <TextBlock Text="Manage book" Margin="10 0 0 0" VerticalAlignment="Center"/>
+                                                <materialDesign:PackIcon Kind="BasketCheckOutline" Margin="5 0 0 0"/>
+                                                <TextBlock Text="My orders" Margin="10 0 0 0" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button>
-
-                                        <Button Style="{StaticResource menuButton}" >
+                                        <Button Style="{StaticResource menuButton}" Command="{Binding LoadManageBook}" CommandParameter="{Binding ElementName=mainFrame}">
                                             <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="AccountMultiple"  Margin="5 0 0 0"/>
-                                                <TextBlock Text="Manage user" Margin="10 0 0 0" VerticalAlignment="Center"/>
+                                                <materialDesign:PackIcon Kind="Settings" Margin="5 0 0 0"/>
+                                                <TextBlock Text="Setting" Margin="10 0 0 0" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button>
-
-                                        <Button Style="{StaticResource menuButton}" Command="{Binding LoadImportPage}" CommandParameter="{Binding ElementName=mainFrame}">
-                                            <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="Import"  Margin="5 0 0 0"/>
-                                                <TextBlock Text="Import book" Margin="10 0 0 0" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </Button>
-
-                                        <Button Style="{StaticResource menuButton}">
-                                            <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="CreditCard"  Margin="5 0 0 0"/>
-                                                <TextBlock Text="Wallet" Margin="10 0 0 0" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </Button>
-
-                                        <Button Style="{StaticResource menuButton}">
-                                            <StackPanel Orientation="Horizontal">
-                                                <materialDesign:PackIcon Kind="MessageText"  Margin="5 0 0 0"/>
-                                                <TextBlock Text="Messages" Margin="10 0 0 0" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </Button>
-                                    
                                     </StackPanel>
                                 <TextBlock x:Name="idTb" Text="{Binding AccountID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Visibility="Hidden" ></TextBlock>
                                         

@@ -69,7 +69,19 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
         public decimal TotalCartValue
         {
             get { return this._totalCartvalue; }
-            set { this._totalCartvalue = value; OnPropertyChanged(); }
+            set { this._totalCartvalue = value;
+                if (TotalCartValue != 0)
+                    CanCheckout = true;
+                else
+                    CanCheckout = false;
+                OnPropertyChanged(); }
+        }
+
+        private string _totalCartvalueStr;
+        public string TotalCartValueStr
+        {
+            get { return this._totalCartvalueStr; }
+            set { this._totalCartvalueStr = value; OnPropertyChanged(); }
         }
 
         private long _totalShow;
@@ -112,6 +124,13 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
         {
             get { return _phonenumber; }
             set { _phonenumber = value; OnPropertyChanged(); }
+        }
+
+        private bool _canCheckout;
+        public bool CanCheckout
+        {
+            get { return _canCheckout; }
+            set { _canCheckout = value; OnPropertyChanged(); }
         }
         #endregion
 
@@ -163,7 +182,8 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
 
             LoadBook = new RelayCommand<ItemsControl>((p) => { return p != null; }, (p) =>
             {
-                #region Load book to card
+                #region Load book
+                Books = new ObservableCollection<BookDTO>();
                 using (var context = new LMSEntities1())
                 {
                     foreach (var item in context.BOOKs)
@@ -520,7 +540,23 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                                     context.SaveChanges();
                                 }
                             }
-                            msb = new MessageBoxLMS("Notification", "Successfull complete your order", MessageType.Error, MessageButtons.OK);
+                            //MessageBox.Show(AccountID);
+                            using (var context = new LMSEntities1())
+                            {
+                                foreach (var item in context.CARTs)
+                                {
+                                    if (item.MAKH == int.Parse(AccountID))
+                                    {
+                                        context.CARTs.Remove(item);
+                                        break;
+                                    }
+                                }
+                                context.SaveChanges();
+
+                            }
+                            BooksInCart.Clear();
+                            TotalCartValueStr = "₫0";
+                            msb = new MessageBoxLMS("Notification", "Successful complete your order", MessageType.Error, MessageButtons.OK);
                             msb.ShowDialog();
                         }
                         catch
@@ -637,6 +673,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
             {
                 TotalCartValue += item.Gia;
             }
+            TotalCartValueStr = Decimal.Round(TotalCartValue, 0).ToString("C0").Replace("$", "₫");
         }
         private void ShowImage(int i, Image imageControl)
         {
