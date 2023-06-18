@@ -28,9 +28,10 @@ namespace LibraryManagementSystem.View.MainClientWindow.BuyBookPage
     /// Interaction logic for BuyBookPage.xaml
     /// </summary>
     public partial class BuyBookPage : System.Windows.Controls.Page
-    {   public BuyBookPage()
+    {   public BuyBookPage(string AccountID)
         {
             InitializeComponent();
+            idTb.Text = AccountID;
         }
 
         private void StackPanel_MouseEnter(object sender, MouseEventArgs e)

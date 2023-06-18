@@ -207,7 +207,8 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageBookVM
                 NhaXuatBan = item.NXB;
                 NamXuatBan = item.NamXB.ToString();
                 Gia = item.Gia.ToString();
-                MoTa = item.MoTa.ToString();
+                if(item.MoTa != null)
+                    MoTa = item.MoTa.ToString();
                 TheLoai = null;
                 
 
