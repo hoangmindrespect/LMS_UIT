@@ -14,6 +14,7 @@
         TextElement.FontSize="13"
         WindowStyle="None"
         xmlns:i = "http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:as ="clr-namespace:LibraryManagementSystem.Utils.ConverterValue"
         Background="Transparent"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
@@ -46,7 +47,7 @@
                                     materialDesign:TextFieldAssist.UnderlineBrush="#4E443A"
                                     materialDesign:HintAssist.Foreground="#4E443A"
                                     materialDesign:HintAssist.Hint="Title"
-                                    Text="{Binding TenMatHang}"
+                                    Text="{Binding TenMatHang, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                     Margin="10 10 10 10"/>
 
@@ -116,14 +117,13 @@
                                     Text="{Binding SoLuong}"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                     Margin="10 10 10 10"/>
-
-                    <Label Margin="10 -10 10 0"
-                                    x:Name="Error4"
-                                    Height="20"
-                                    FontSize="9.5"
-                                    FontFamily="UVN Viet Sach"
-                                    Content=""
-                                    Foreground="Red"/>
+                    <TextBlock Text="You need to enter a number!"
+                                        Margin="10 0 0 0"        
+                                        Foreground="#FFF44336"
+                                        FontWeight="DemiBold" 
+                                        HorizontalAlignment="Left"
+                                        FontSize="12"
+                                        Visibility="{Binding IsInvalidSoLuong, Converter={StaticResource ConverterBoolValue}}"/>
 
                     <TextBox
                                     x:Name="SoLuong_txb"
@@ -138,14 +138,14 @@
                                     Text ="{Binding GiaNhap}"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                     Margin="10 10 10 10"/>
+                    <TextBlock Text="You need to enter a number!"
+                                        Margin="10 0 0 0"        
+                                        Foreground="#FFF44336"
+                                        FontWeight="DemiBold" 
+                                        HorizontalAlignment="Left"
+                                        FontSize="12"
+                                        Visibility="{Binding IsInvalidGiaNhap, Converter={StaticResource ConverterBoolValue}}"/>
 
-                    <Label Margin="10 -10 10 0"
-                                    x:Name="Error5"
-                                    Height="20"
-                                    FontSize="9.5"
-                                    FontFamily="UVN Viet Sach"
-                                    Content=""
-                                    Foreground="Red"/>
 
                     <TextBox
                                     x:Name="Gia_txb"
@@ -160,14 +160,13 @@
                                     Text="{Binding GiaBan}"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                     Margin="10 10 10 10"/>
-
-                    <Label Margin="10 -10 10 0"
-                                    x:Name="Error6"
-                                    Height="20"
-                                    FontSize="9.5"
-                                    FontFamily="UVN Viet Sach"
-                                    Content=""
-                                    Foreground="Red"/>
+                    <TextBlock Text="You need to enter a number!"
+                                        Margin="10 0 0 0"        
+                                        Foreground="#FFF44336"
+                                        FontWeight="DemiBold" 
+                                        HorizontalAlignment="Left"
+                                        FontSize="12"
+                                        Visibility="{Binding IsInvalidGiaBan, Converter={StaticResource ConverterBoolValue}}"/>
 
                     <materialDesign:Badged HorizontalAlignment="Center"
                                            Margin="0 30 0 0"
@@ -181,7 +180,7 @@
                                     Command="{Binding AddBookToImportDTG}"
                                     CommandParameter="{Binding ElementName=addwindow}">
                             Add
-                            
+
                         </Button>
                     </materialDesign:Badged>
                 </StackPanel>

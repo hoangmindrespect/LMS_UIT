@@ -132,6 +132,14 @@ namespace LibraryManagementSystem.ViewModel.LoginVM
             set { _usernamereg = value; OnPropertyChanged(); }
         }
         public static string username;
+
+
+        private bool _IsInvalidPasswordReg;
+        public bool IsInvalidPasswordReg
+        {
+            get { return _IsInvalidPasswordReg; }
+            set { _IsInvalidPasswordReg = value; OnPropertyChanged(); }
+        }
         #endregion
 
         #region ICommand
@@ -330,7 +338,7 @@ namespace LibraryManagementSystem.ViewModel.LoginVM
 
             RegisterLMS = new RelayCommand<Label>((p) => { return true; }, async (p) =>
             {
-                IsNullNameReg = IsNullEmailReg = IsNullUserReg = IsNullPasswordReg = false;
+                IsNullNameReg = IsNullEmailReg = IsNullUserReg = IsNullPasswordReg = IsInvalidPasswordReg = false;
 
                 if (string.IsNullOrEmpty(FullNameReg)) IsNullNameReg = true;
                 if (string.IsNullOrEmpty(EmailReg)) IsNullEmailReg = true;
@@ -338,6 +346,9 @@ namespace LibraryManagementSystem.ViewModel.LoginVM
                 if (string.IsNullOrEmpty(PasswordReg)) IsNullPasswordReg = true;
 
                 if (IsNullNameReg || IsNullEmailReg || IsNullUserReg || IsNullPasswordReg) return;
+
+                if (PasswordReg.Length < 8 || !HasNumber(PasswordReg) || !HasSpecialCharacter(PasswordReg) || !HasUppercaseCharacter(PasswordReg)) IsInvalidPasswordReg = true;
+                if (IsInvalidPasswordReg) return;
 
                 string match = @"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*";
                 Regex reg = new Regex(match);
@@ -406,6 +417,21 @@ namespace LibraryManagementSystem.ViewModel.LoginVM
             smtpClient.Send(mailMessage);
         }
 
-          
+        private bool HasNumber(string input)
+        {
+            return input.Any(c => char.IsDigit(c));
+        }
+
+        private bool HasSpecialCharacter(string input)
+        {
+            string specialChars = @"!@#$%^&*()-_=+[{]}\|;:'"",<.>/?";
+            return input.Any(c => specialChars.Contains(c));
+        }
+
+        private bool HasUppercaseCharacter(string input)
+        {
+            return input.Any(c => char.IsUpper(c));
+        }
+
     }
 }
