@@ -6,6 +6,7 @@
                     xmlns:viewmodel1.3="clr-namespace:LibraryManagementSystem.ViewModel.AdminVM.ImportBookVM"
                     xmlns:viewmodel1.4="clr-namespace:LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM"
                     xmlns:viewmodel1.5="clr-namespace:LibraryManagementSystem.ViewModel.AdminVM.ManageUserVM"
+                    xmlns:viewmodel1.6="clr-namespace:LibraryManagementSystem.ViewModel.AdminVM.ManageOrderClients"
                     xmlns:viewmodel2="clr-namespace:LibraryManagementSystem.ViewModel.LoginVM"
                     xmlns:viewmodel1="clr-namespace:LibraryManagementSystem.ViewModel.AdminVM"
                     xmlns:viewmodel3="clr-namespace:LibraryManagementSystem.ViewModel.ClientVM"
@@ -23,6 +24,7 @@
     <viewmodel1.3:ImportViewModel x:Key="ImportVM"/>
     <viewmodel1.4:BorrowBookViewModel x:Key="BorrowVM"/>
     <viewmodel1.5:ManageUserViewModel x:Key="ManageUserVM"/>
+    <viewmodel1.6:ManageOrderClientsViewModel x:Key="ManageOrderClients"/>
     <viewmodel3.1:BuyBookViewModel x:Key="BuyBookVM"/>
     <viewmodel3.2:ManageOrdersViewModel x:Key="ManageOrdersVM"/>
     <viewmodel3.3:SettingClientViewModel x:Key="SettingClientVM"/>

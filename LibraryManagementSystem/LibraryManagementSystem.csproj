@@ -265,6 +265,7 @@
     <Compile Include="ViewModel\AdminVM\ImportBookVM\ImportViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\MainAdminViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\ManageBookVM\ManageBookViewModel.cs" />
+    <Compile Include="ViewModel\AdminVM\ManageOrderClients\ManageOrderClientsViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\ManageUserVM\ManageUserViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\StatisticalVM\StatisticalViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />

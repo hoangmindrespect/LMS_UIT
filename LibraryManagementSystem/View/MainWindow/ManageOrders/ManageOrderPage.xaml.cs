@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +25,17 @@ namespace LibraryManagementSystem.View.MainWindow.ManageOrders
         {
             InitializeComponent();
         }
+        private void Card_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Card a = sender as Card;
+            a.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#948F89"));
+        }
+
+        private void Card_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Card a = sender as Card;
+            a.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFFF"));
+        }
     }
+
 }

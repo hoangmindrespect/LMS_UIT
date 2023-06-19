@@ -5,10 +5,91 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LibraryManagementSystem.View.MainWindow.ManageOrders"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      DataContext="{StaticResource ManageOrderClients}"
+      xmlns:uc="clr-namespace:LibraryManagementSystem.ControlBar"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      TextElement.FontWeight="Regular"
+      TextElement.FontSize="13"
+      TextOptions.TextFormattingMode="Ideal"
+      TextOptions.TextRenderingMode="Auto"
+      FontFamily="{DynamicResource MaterialDesignFont}"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:i = "http://schemas.microsoft.com/expression/2010/interactivity"
+      Background="Transparent"
+      d:DesignHeight="626" d:DesignWidth="967"
       Title="ManageOrderPage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Horizontal" Margin=" 20 0 0 0">
+                <Label Content="Order Creation Date"
+                       VerticalAlignment="Center"
+                       FontSize="17" 
+                       Margin="10 0 0 0"
+                       FontWeight="Bold"/>
+
+                <Label Content="Status"
+                       VerticalAlignment="Center"
+                       FontSize="17" 
+                       Margin="70 0 0 0"
+                       FontWeight="Bold"/>
+
+                <Label Content="Products"
+                       VerticalAlignment="Center"
+                       FontSize="17" 
+                       Margin="80 0 0 0"
+                       FontWeight="Bold"/>
+
+                <Label Content="Delivery Address"
+                       VerticalAlignment="Center"
+                       FontSize="17" 
+                       Margin="270 0 0 0"
+                       FontWeight="Bold"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding Orders}"  Name="ordersList">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <materialDesign:Card Background="#ffffff" Height="auto" Margin="20 0 20 20" MouseEnter="Card_MouseEnter" MouseLeave="Card_MouseLeave">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Margin="20 0 0 0" Text="{Binding OrderDate}" FontSize="15" VerticalAlignment="Center" Padding="0 30 0 30" Width="200"/>
+                                    <TextBlock Margin="20 0 0 0" Text="{Binding OrderStatus}" FontSize="15" VerticalAlignment="Center" Width="100" Foreground="GreenYellow"/>
+                                    <Expander Margin="20 0 0 0" Header="Details..." HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="Transparent" Width="350">
+                                        <ListView ItemsSource="{Binding Details}" Margin="10" Name="details">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <!-- Các thành phần khác trong mỗi dòng của ListView -->
+                                                        <TextBlock Text="{Binding TenSach}" Width="200" VerticalAlignment="Center" TextWrapping="Wrap" Margin="10 0 0 0"/>
+                                                        <TextBlock Text="Quantity:" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                                        <Label Content="{Binding SoLuong}" Width="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2 0 0 0"/>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </Expander>
+                                    <TextBlock Margin="20 0 0 0" Text="{Binding Address}" FontSize="15" VerticalAlignment="Center" TextWrapping="Wrap" Width="200" />
+
+                                </StackPanel>
+                            </materialDesign:Card>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Loaded">
+                    <i:InvokeCommandAction Command="{Binding Loaded}"
+                                       CommandParameter="{Binding ElementName=ordersList}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Grid>
     </Grid>
 </Page>

@@ -186,7 +186,6 @@ C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\ControlBar\User
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\ControlBar\UserControl1.baml
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\Statistical\StatisticalPage.g.cs
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\Statistical\StatisticalPage.baml
-C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\LiveCharts.dll
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\LiveCharts.Wpf.dll
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\LiveCharts.pdb
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\bin\Debug\LiveCharts.xml
