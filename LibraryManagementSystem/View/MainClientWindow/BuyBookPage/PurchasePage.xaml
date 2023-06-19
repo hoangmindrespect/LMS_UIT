@@ -9,6 +9,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:as ="clr-namespace:LibraryManagementSystem.Utils.ConverterValue"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True"
@@ -61,7 +62,8 @@
                     </Grid>
 
                     <Grid Grid.Row="01">
-                        <TextBox    Margin="50 5 70 5"
+                        <StackPanel>
+                            <TextBox    Margin="50 5 70 5"
                                     x:Name="FullName_txb"
                                     FontSize="14"
                                     SelectionBrush="#4E443A"
@@ -73,10 +75,21 @@
                                     materialDesign:HintAssist.Hint="Full Name"
                                     Text="{Binding OrderName}"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                            <TextBlock Text="Please enter your name!"
+                                        Margin="50 0 0 0"
+                                        Foreground="#FFF44336"
+                                        FontWeight="DemiBold" 
+                                        HorizontalAlignment="Left"
+                                        FontSize="12"
+                                        Visibility="{Binding IsNullNameOrderForm, Converter={StaticResource ConverterBoolValue}}"/>
+                        </StackPanel>
+                        
                     </Grid>
 
                     <Grid Grid.Row="2">
-                        <TextBox    Margin="50 5 70 5"
+                        <StackPanel>
+                            <TextBox    Margin="50 5 70 5"
                                     x:Name="Phone_txb"
                                     FontSize="14"
                                     materialDesign:HintAssist.Hint="Phone Number"
@@ -88,10 +101,21 @@
                                     materialDesign:HintAssist.Foreground="#4E443A"
                                     Text="{Binding PhoneNumber}"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                            <TextBlock Text="Please enter your phone number!"
+                                        Margin="50 0 0 0"
+                                         Foreground="#FFF44336"
+                                         FontWeight="DemiBold" 
+                                            HorizontalAlignment="Left"
+                                        FontSize="12"
+                           Visibility="{Binding IsNullPhoneOrderForm, Converter={StaticResource ConverterBoolValue}}"/>
+                        </StackPanel>
+                        
                     </Grid>
 
                     <Grid Grid.Row="3">
-                        <TextBox    Margin="50 5 70 5"
+                        <StackPanel>
+                            <TextBox    Margin="50 5 70 5"
                                     x:Name="Email_txb"
                                     FontSize="14"
                                     materialDesign:HintAssist.Hint="Email Address"
@@ -103,10 +127,21 @@
                                     materialDesign:HintAssist.Foreground="#4E443A"
                                     Text="{Binding Email}"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                            <TextBlock Text="Please enter your email address!"
+                                       Margin="50 0 0 0"
+                           Foreground="#FFF44336"
+                           FontWeight="DemiBold" 
+                           HorizontalAlignment="Left"
+                           FontSize="12"
+                           Visibility="{Binding IsNullEmailOrderForm, Converter={StaticResource ConverterBoolValue}}"/>
+                        </StackPanel>
+                        
                     </Grid>
 
                     <Grid Grid.Row="4">
-                        <TextBox    Margin="50 5 70 5"
+                        <StackPanel>
+                            <TextBox    Margin="50 5 70 5"
                                     
                                     FontSize="14"
                                     materialDesign:HintAssist.Hint="Delivery Address"
@@ -118,6 +153,16 @@
                                     materialDesign:HintAssist.Foreground="#4E443A"
                                     Text="{Binding Address}"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+
+                            <TextBlock Text="Please enter your delivery address!"
+                                         Foreground="#FFF44336"
+                                         Margin="50 0 0 0"
+                                         FontWeight="DemiBold" 
+                                            HorizontalAlignment="Left"
+                                            FontSize="12"
+                                         Visibility="{Binding IsNullAddressOrderForm, Converter={StaticResource ConverterBoolValue}}"/>
+                        </StackPanel>
+                       
                     </Grid>
 
                     <Grid Grid.Row="5">
