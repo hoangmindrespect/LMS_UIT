@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibraryManagementSystem.View.MainWindow.ManageBook"
         mc:Ignorable="d"
+        xmlns:as ="clr-namespace:LibraryManagementSystem.Utils.ConverterValue"
         xmlns:uc="clr-namespace:LibraryManagementSystem.ControlBar"
         AllowsTransparency="True"
         DataContext="{StaticResource ManageBookVM}"
@@ -132,18 +133,18 @@
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                     Margin="10 10 10 10"/>
 
-                            <Label Margin="10 -10 10 0"
-                                    x:Name="Error4"
-                                    Height="20"
-                                    FontSize="9.5"
-                                    FontFamily="UVN Viet Sach"
-                                    Content=""
-                                    Foreground="Red"/>
+                            <TextBlock Text="You need to enter a number!"
+                                        Margin="10 0 0 0"        
+                                        Foreground="#FFF44336"
+                                        FontWeight="DemiBold" 
+                                        HorizontalAlignment="Left"
+                                        FontSize="12"
+                                        Visibility="{Binding IsInvalidYear, Converter={StaticResource ConverterBoolValue}}"/>
 
                             <TextBox
                                     x:Name="SoLuong_txb"
                                     FontSize="14"
-                                    materialDesign:HintAssist.Hint="Số lượng trong kho"
+                                    materialDesign:HintAssist.Hint="Quantity in stock"
                                     SelectionBrush="#4E443A"
                                     BorderBrush="#4E443A"
                                     Foreground="#4E443A"
@@ -154,6 +155,13 @@
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                     Margin="10 10 10 10"/>
 
+                            <TextBlock Text="You need to enter a number!"
+                                        Margin="10 0 0 0"        
+                                        Foreground="#FFF44336"
+                                        FontWeight="DemiBold" 
+                                        HorizontalAlignment="Left"
+                                        FontSize="12"
+                                        Visibility="{Binding IsInvalidQuantity, Converter={StaticResource ConverterBoolValue}}"/>
                             <Label Margin="10 -10 10 0"
                                     x:Name="Error5"
                                     Height="20"
@@ -176,13 +184,13 @@
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                                     Margin="10 10 10 10"/>
 
-                            <Label Margin="10 -10 10 0"
-                                    x:Name="Error6"
-                                    Height="20"
-                                    FontSize="9.5"
-                                    FontFamily="UVN Viet Sach"
-                                    Content=""
-                                    Foreground="Red"/>
+                            <TextBlock Text="You need to enter a number!"
+                                        Margin="10 0 0 0"        
+                                        Foreground="#FFF44336"
+                                        FontWeight="DemiBold" 
+                                        HorizontalAlignment="Left"
+                                        FontSize="12"
+                                        Visibility="{Binding IsInvalidPrice, Converter={StaticResource ConverterBoolValue}}"/>
 
                             <TextBox
                                     x:Name="MoTa_txb"
