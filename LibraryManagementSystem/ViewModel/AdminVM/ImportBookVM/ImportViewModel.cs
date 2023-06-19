@@ -110,6 +110,29 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ImportBookVM
             get { return _intoText; }
             set { _intoText = value; OnPropertyChanged(); }
         }
+
+        #region constraint
+        private bool _IsInvalidSoLuong;
+        public bool IsInvalidSoLuong
+        {
+            get { return _IsInvalidSoLuong; }
+            set { _IsInvalidSoLuong = value; OnPropertyChanged(); }
+        }
+
+        private bool _IsInvalidGiaNhap;
+        public bool IsInvalidGiaNhap
+        {
+            get { return _IsInvalidGiaNhap; }
+            set { _IsInvalidGiaNhap = value; OnPropertyChanged(); }
+        }
+
+        private bool _IsInvalidGiaBan;
+        public bool IsInvalidGiaBan
+        {
+            get { return _IsInvalidGiaBan; }
+            set { _IsInvalidGiaBan = value; OnPropertyChanged(); }
+        }
+        #endregion
         #endregion
         public ICommand OpenAddingWindow {get; set;}
         public ICommand AddBookToImportDTG { get; set; }
@@ -142,8 +165,16 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ImportBookVM
             //Thêm mặt hàng vào ds nhập
             AddBookToImportDTG = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-                if (TenMatHang != null && NhaXuatBan != null && TacGia != null && GiaNhap != null && GiaBan != null && SoLuong != null)
+                if (!string.IsNullOrEmpty(TenMatHang) && !string.IsNullOrEmpty(NhaXuatBan) && !string.IsNullOrEmpty(TacGia) && !string.IsNullOrEmpty(GiaNhap) && !string.IsNullOrEmpty(GiaBan) && !string.IsNullOrEmpty(SoLuong))
                 {
+                    IsInvalidSoLuong = IsInvalidGiaBan = IsInvalidGiaNhap = false;
+
+                    int parsedSoLuong, parsedGiaNhap, parsedGiaBan;
+                    if (!int.TryParse(SoLuong, out parsedSoLuong)) IsInvalidSoLuong = true;
+                    if (!int.TryParse(GiaNhap, out parsedGiaNhap)) IsInvalidGiaNhap = true;
+                    if (!int.TryParse(GiaBan, out parsedGiaBan)) IsInvalidGiaBan = true;
+                    if (IsInvalidGiaBan || IsInvalidSoLuong || IsInvalidGiaNhap) return;
+
                     if ((TriGiaHoaDon + int.Parse(SoLuong) * int.Parse(GiaNhap)) > 1000000000)
                     {
                         MessageBoxLMS msb = new MessageBoxLMS("Error", "Your order cost must be under 1 billion", MessageType.Error, MessageButtons.OK);
@@ -151,7 +182,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ImportBookVM
                     }
                     else
                     {
-                        LoginRegisViewModel.listbook.Add(new ImportBook{ TenSach = TenMatHang, SoLuong = int.Parse(SoLuong), GiaNhap = int.Parse(GiaNhap), GiaBan = int.Parse(GiaBan), NhaXuatBan = NhaXuatBan, TacGia = TacGia });
+                        LoginRegisViewModel.listbook.Add(new ImportBook { TenSach = TenMatHang, SoLuong = int.Parse(SoLuong), GiaNhap = int.Parse(GiaNhap), GiaBan = int.Parse(GiaBan), NhaXuatBan = NhaXuatBan, TacGia = TacGia });
                         TriGiaHoaDon += int.Parse(SoLuong) * int.Parse(GiaNhap);
                         IntoText = So_chu(TriGiaHoaDon);
                         TenMatHang = SoLuong = GiaNhap = GiaBan = TacGia = NhaXuatBan = null;

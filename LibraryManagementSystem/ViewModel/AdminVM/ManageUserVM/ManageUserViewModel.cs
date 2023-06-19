@@ -31,7 +31,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageUserVM
         }
 
         private string _id;
-        public string ID 
+        public string ID
         {
             get { return _id; }
             set { _id = value; OnPropertyChanged(); }
@@ -110,7 +110,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageUserVM
             {
                 UserDTO item = p.Items[p.SelectedIndex] as UserDTO;
                 string makhachhang = item.ID.ToString();
-                using(var context = new LMSEntities1())
+                using (var context = new LMSEntities1())
                 {
                     SqlConnection connection = new SqlConnection(context.Database.Connection.ConnectionString);
                     connection.Open();
@@ -136,27 +136,27 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageUserVM
                             msb = new MessageBoxLMS("Notification", "Cannot delete this user", MessageType.Error, MessageButtons.OK);
                             msb.ShowDialog();
                         }
-                    }                                      
+                    }
                 }
 
             });
 
             DeleteUserList = new RelayCommand<DataGrid>(
-            (p) => 
+            (p) =>
             {
-                if(p != null)
+                if (p != null)
                 {
                     if (p.SelectedItems.Count > 1)
                         return true;
                     return false;
                 }
                 return false;
-            },(p) =>
+            }, (p) =>
             {
                 List<string> userList = new List<string>();
-                foreach(var item in p.SelectedItems)
+                foreach (var item in p.SelectedItems)
                     userList.Add((item as UserDTO).ID.ToString());
-                using(var context = new LMSEntities1())
+                using (var context = new LMSEntities1())
                 {
                     SqlConnection connection = new SqlConnection(context.Database.Connection.ConnectionString);
                     connection.Open();
@@ -169,7 +169,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageUserVM
                         try
                         {
                             command.Parameters.AddWithValue("@idList", idList);
-                            command.CommandText = "delete from ACCOUNT where ID in ( " + @idList +" )";
+                            command.CommandText = "delete from ACCOUNT where ID in ( " + @idList + " )";
                             context.SaveChanges();
                             if (command.ExecuteNonQuery() != 0)
                             {
@@ -258,7 +258,8 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageUserVM
 
                 if (string.IsNullOrEmpty(filePath))
                 {
-                    MessageBox.Show("Duong dan sai");
+                    MessageBoxLMS msb = new MessageBoxLMS("Notification", "Please enter the path!", MessageType.Accept, MessageButtons.OK);
+                    msb.ShowDialog();
                     return;
                 }
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -278,10 +279,10 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageUserVM
                         ws.Cells[1, 1, 1, numOfColumns].Merge = true;
                         ws.Cells[1, 1, 1, numOfColumns].Style.Font.Bold = true;
                         int colIndex = 1;
-                        int rowIndex = 2; 
+                        int rowIndex = 2;
 
                         //Tao các header trong excel
-                        foreach(string item in headerColumns)
+                        foreach (string item in headerColumns)
                         {
                             var cell = ws.Cells[rowIndex, colIndex];
                             //Set màu dòng header thành LightBlue
@@ -299,7 +300,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageUserVM
                         }
 
                         //Thêm dữ liệu vào sheet
-                        foreach(UserDTO user in ListUserManage)
+                        foreach (UserDTO user in ListUserManage)
                         {
                             colIndex = 1;
                             rowIndex++;
@@ -325,56 +326,57 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageUserVM
 
             });
 
-                ImportFromExcel = new RelayCommand<DataGrid>((p) => { return true; }, (p) =>
-                {
-                    string filePath = "";
-                    OpenFileDialog dialog = new OpenFileDialog();
-                    dialog.Filter = "Excel|*.xlsx;*.xls";
-                    if (dialog.ShowDialog() == true)
-                        filePath = dialog.FileName;
+            ImportFromExcel = new RelayCommand<DataGrid>((p) => { return true; }, (p) =>
+            {
+                string filePath = "";
+                OpenFileDialog dialog = new OpenFileDialog();
+                dialog.Filter = "Excel|*.xlsx;*.xls";
+                if (dialog.ShowDialog() == true)
+                    filePath = dialog.FileName;
 
-                    if (string.IsNullOrEmpty(filePath))
+                if (string.IsNullOrEmpty(filePath))
+                {
+                    MessageBoxLMS msb = new MessageBoxLMS("Notification", "Please enter the path!", MessageType.Accept, MessageButtons.OK);
+                    msb.ShowDialog();
+                    return;
+                }
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                try
+                {
+                    using (ExcelPackage excel = new ExcelPackage(new FileInfo(dialog.FileName)))
                     {
-                        MessageBox.Show("Duong dan sai");
-                        return;
-                    }
-                    ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-                    try
-                    {
-                        using (ExcelPackage excel = new ExcelPackage(new FileInfo(dialog.FileName)))
+                        ExcelWorksheet ws = excel.Workbook.Worksheets[0];
+                        int numOfRow = ws.Dimension.Rows;
+                        using (var context = new LMSEntities1())
                         {
-                            ExcelWorksheet ws = excel.Workbook.Worksheets[0];
-                            int numOfRow = ws.Dimension.Rows;
-                            using (var context = new LMSEntities1())
+                            for (int i = 2; i <= numOfRow; i++)
                             {
-                                for (int i = 2; i <= numOfRow; i++)
+                                string fullName = ws.Cells[i, 1].Value.ToString();
+                                string emailAddress = ws.Cells[i, 2].Value.ToString();
+                                if (!String.IsNullOrEmpty(fullName) && !String.IsNullOrEmpty(emailAddress))
                                 {
-                                    string fullName = ws.Cells[i, 1].Value.ToString();
-                                    string emailAddress = ws.Cells[i, 2].Value.ToString();
-                                    if (!String.IsNullOrEmpty(fullName) && !String.IsNullOrEmpty(emailAddress))
-                                    {
-                                        ACCOUNT newAccount = new ACCOUNT();
-                                        newAccount.FULLNAME = fullName;
-                                        newAccount.EMAILADDRESS = emailAddress;
-                                        newAccount.USERNAME = ws.Cells[i, 3].Value.ToString();
-                                        newAccount.USERPASS = ws.Cells[i, 4].Value.ToString();
-                                        newAccount.ROLE = 1;
-                                        context.ACCOUNTs.Add(newAccount);
-                                    }
+                                    ACCOUNT newAccount = new ACCOUNT();
+                                    newAccount.FULLNAME = fullName;
+                                    newAccount.EMAILADDRESS = emailAddress;
+                                    newAccount.USERNAME = ws.Cells[i, 3].Value.ToString();
+                                    newAccount.USERPASS = ws.Cells[i, 4].Value.ToString();
+                                    newAccount.ROLE = 1;
+                                    context.ACCOUNTs.Add(newAccount);
                                 }
-                                context.SaveChanges();
-                                Loaded(p);
                             }
+                            context.SaveChanges();
+                            Loaded(p);
                         }
-                        MessageBoxLMS msb = new MessageBoxLMS("Notification", "Successful import!", MessageType.Accept, MessageButtons.OK);
-                        msb.ShowDialog();
                     }
-                    catch
-                    {
-                        MessageBoxLMS msb = new MessageBoxLMS("Warning", "Error - Cannot import data from the selected file.", MessageType.Error, MessageButtons.OK);
-                        msb.ShowDialog();
-                    }
-                });
+                    MessageBoxLMS msb = new MessageBoxLMS("Notification", "Successful import!", MessageType.Accept, MessageButtons.OK);
+                    msb.ShowDialog();
+                }
+                catch
+                {
+                    MessageBoxLMS msb = new MessageBoxLMS("Warning", "Error - Cannot import data from the selected file.", MessageType.Error, MessageButtons.OK);
+                    msb.ShowDialog();
+                }
+            });
         }
 
         public void Loaded(DataGrid p)
@@ -387,7 +389,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageUserVM
                     UserDTO user = new UserDTO();
                     user.ID = item.ID;
                     user.FullName = item.FULLNAME;
-                    user.EmailAddress = item.EMAILADDRESS;                                  
+                    user.EmailAddress = item.EMAILADDRESS;
                     ListUserManage.Add(user);
                 }
             }

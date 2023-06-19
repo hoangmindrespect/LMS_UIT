@@ -135,6 +135,27 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageBookVM
             get { return _colorWord; }
             set { _colorWord = value; OnPropertyChanged(); }
         }
+
+        private bool _IsInvalidYear;
+        public bool IsInvalidYear
+        {
+            get { return _IsInvalidYear; }
+            set { _IsInvalidYear = value; OnPropertyChanged(); }
+        }
+
+        private bool _IsInvalidQuantity;
+        public bool IsInvalidQuantity
+        {
+            get { return _IsInvalidQuantity; }
+            set { _IsInvalidQuantity = value; OnPropertyChanged(); }
+        }
+
+        private bool _IsInvalidPrice;
+        public bool IsInvalidPrice
+        {
+            get { return _IsInvalidPrice; }
+            set { _IsInvalidPrice = value; OnPropertyChanged(); }
+        }
         #endregion
 
         #region Icommand
@@ -270,15 +291,21 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageBookVM
                 string ID = EdittingBookWindow.masach;
                 using (var context = new LMSEntities1())
                 {
-                    foreach(var book in context.BOOKs)
+                    foreach (var book in context.BOOKs)
                     {
-                        if(book.ID == int.Parse(ID))
+                        if (book.ID == int.Parse(ID))
                         {
                             try
                             {
                                 if (!string.IsNullOrEmpty(TenSach) && !string.IsNullOrEmpty(TacGia) && !string.IsNullOrEmpty(NhaXuatBan) && !string.IsNullOrEmpty(NamXuatBan) && !string.IsNullOrEmpty(MoTa) && !string.IsNullOrEmpty(MoTa) && !string.IsNullOrEmpty(Gia) && !string.IsNullOrEmpty(ImgSource) && !string.IsNullOrEmpty(SoLuong))
                                 {
+                                    IsInvalidYear = IsInvalidQuantity = IsInvalidPrice = false;
+                                    int parsedQuantity, parsedPrice, parsedYear;
+                                    if (!int.TryParse(NamXuatBan, out parsedYear)) IsInvalidYear = true;
+                                    if (!int.TryParse(SoLuong, out parsedQuantity)) IsInvalidQuantity = true;
+                                    if (!int.TryParse(Gia, out parsedPrice)) IsInvalidPrice = true;
 
+                                    if (IsInvalidYear || IsInvalidQuantity || IsInvalidPrice) return;
                                     book.TENSACH = TenSach;
                                     book.TACGIA = TacGia;
                                     book.NHAXUATBAN = NhaXuatBan;
@@ -291,26 +318,27 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageBookVM
 
                                     MessageBoxLMS msb = new MessageBoxLMS("Notification", "Edit book successfull", MessageType.Accept, MessageButtons.OK);
                                     msb.ShowDialog();
+                                    p.Close();
                                     break;
-                                }    
+                                }
                                 else
                                 {
                                     MessageBoxLMS msb = new MessageBoxLMS("Notification", "Some fields still empty", MessageType.Accept, MessageButtons.OK);
                                     msb.ShowDialog();
-                                }    
+                                }
                             }
                             catch
                             {
-                                MessageBoxLMS msb = new MessageBoxLMS("Warning", "Cannot connect to server", MessageType.Error, MessageButtons.OK);
+                                MessageBoxLMS msb = new MessageBoxLMS("Warning", "Cannot connect to server!", MessageType.Error, MessageButtons.OK);
                                 msb.ShowDialog();
                                 break;
                             }
-                        }    
+                        }
                     }
                     context.SaveChanges();
 
                 }
-                p.Close();
+                //p.Close();
             });
             ExportToExcel = new RelayCommand<DataGrid>((p) => { return true; }, (p) =>
             {

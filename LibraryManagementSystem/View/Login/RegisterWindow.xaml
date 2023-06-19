@@ -160,18 +160,27 @@
                     </i:Interaction.Triggers>
                 </PasswordBox>
             </StackPanel>
-            <TextBlock Text="Vui lòng nhập mật khẩu"
+            <TextBlock Text="Please enter a password"
                            Foreground="#FFF44336"
                            FontWeight="DemiBold"
                            Margin="0,2,65,0"
                            HorizontalAlignment="Right"
                            FontSize="12"
                            Visibility="{Binding IsNullPasswordReg, Converter={StaticResource ConverterBoolValue}}"/>
+            <TextBlock Text="Password must have at least 8 characters, at least 1 digit, 1 uppercase letter and 1 special character!"
+                           Foreground="#FFF44336"
+                           FontWeight="DemiBold"
+                           Margin="40 -15 0 0"
+                           HorizontalAlignment="Center"
+                           FontSize="12"
+                           Width="250"
+                       TextWrapping="Wrap"
+                           Visibility="{Binding IsInvalidPasswordReg, Converter={StaticResource ConverterBoolValue}}"/>
 
             <!-- Phần bấm nút -->
             <StackPanel Orientation = "Vertical"
                     HorizontalAlignment="Center"
-                        Margin="0 10 0 0">
+                        Margin="0 -5 0 0">
                 <!-- Đã có tài khoản -->
 
                 <StackPanel Orientation="Horizontal" 
