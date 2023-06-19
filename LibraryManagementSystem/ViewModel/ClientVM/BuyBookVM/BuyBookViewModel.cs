@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -139,6 +140,36 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
             get { return _toDay; }
             set { _toDay = value; OnPropertyChanged(); }
         }
+
+        #region Constrain
+        private bool _IsNullNameOrderForm;
+        public bool IsNullNameOrderForm
+        {
+            get { return _IsNullNameOrderForm; }
+            set { _IsNullNameOrderForm = value; OnPropertyChanged(); }
+        }
+
+        private bool _IsNullPhoneOrderForm;
+        public bool IsNullPhoneOrderForm
+        {
+            get { return _IsNullPhoneOrderForm; }
+            set { _IsNullPhoneOrderForm = value; OnPropertyChanged(); }
+        }
+
+        private bool _IsNullEmailOrderForm;
+        public bool IsNullEmailOrderForm
+        {
+            get { return _IsNullEmailOrderForm; }
+            set { _IsNullEmailOrderForm = value; OnPropertyChanged(); }
+        }
+
+        private bool _IsNullAddressOrderForm;
+        public bool IsNullAddressOrderForm
+        {
+            get { return _IsNullAddressOrderForm; }
+            set { _IsNullAddressOrderForm = value; OnPropertyChanged(); }
+        }
+        #endregion
         #endregion
 
         public ObservableCollection<BookDTO> Books = new ObservableCollection<BookDTO>();
@@ -491,120 +522,146 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
 
             CompleteOrder = new RelayCommand<string>((p) => { return p != null; }, (p) =>
             {
-                if(string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Address) || string.IsNullOrEmpty(OrderName) || string.IsNullOrEmpty(PhoneNumber))
-                {
-                    MessageBoxLMS msb = new MessageBoxLMS("Notification", "Please fill into your shipping information!", MessageType.Accept, MessageButtons.OK);
-                    msb.ShowDialog();
-                    return;
-                }    
+                IsNullNameOrderForm = IsNullEmailOrderForm = IsNullPhoneOrderForm = IsNullAddressOrderForm = false;
 
-                if (p == "GetBookNow")
+                if (string.IsNullOrEmpty(OrderName)) IsNullNameOrderForm = true;
+                if (string.IsNullOrEmpty(Email)) IsNullEmailOrderForm = true;
+                if (string.IsNullOrEmpty(PhoneNumber)) IsNullPhoneOrderForm = true;
+                if (string.IsNullOrEmpty(Address)) IsNullAddressOrderForm = true;
+
+                if (IsNullNameOrderForm || IsNullEmailOrderForm || IsNullPhoneOrderForm || IsNullAddressOrderForm) return;
+
+                string match = @"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*";
+                Regex reg = new Regex(match);
+
+                if (reg.IsMatch(Email) == false)
                 {
-                    int id;
-                    MessageBoxLMS msb = new MessageBoxLMS("Notification", "Do you really want to complete the order?", MessageType.Accept, MessageButtons.YesNo);
-                    if (msb.ShowDialog() == true)
-                    {
-                        try
-                        {
-                            using (var context = new LMSEntities1())
-                            {
-                                ORDER_BOOKS order = new ORDER_BOOKS();
-                                order.orderCusId = int.Parse(AccountID);
-                                order.orderName = OrderName;
-                                order.orderEmail = Email;
-                                order.orderPhone = PhoneNumber;
-                                order.orderAddress = Address;
-                                order.totalValue = TotalValueForOneBookID;
-                                order.orderDate = DateTime.Now;
-                                context.ORDER_BOOKS.Add(order);
-                                context.SaveChanges();
-                                id = order.orderID;
-                            }
-                            using (var context = new LMSEntities1())
-                            {
-                                ORDER_DETAIL detail = new ORDER_DETAIL();
-                                detail.orderID = id;
-                                detail.bookID = Int32.Parse(SelectedItem.MaSach.ToString());
-                                detail.quantity = Quantity;
-                                context.ORDER_DETAIL.Add(detail);
-                                context.SaveChanges();
-                            }
-                            
-                          msb = new MessageBoxLMS("Notification", "Order Successful", MessageType.Accept, MessageButtons.OK);
-                          msb.ShowDialog();
-                          Application.Current.Windows.OfType<PurchasePage>().FirstOrDefault().Close();
-                          SelectedItem = null;
-                        }
-                        catch
-                        {
-                            msb = new MessageBoxLMS("Error", "Checkout Failed!", MessageType.Accept, MessageButtons.OK);
-                            CanCheckout = false;
-                            msb.ShowDialog();
-                        }
-                    }
+                    MessageBoxLMS ms = new MessageBoxLMS("Thông báo", "Email address is not valid!", MessageType.Error, MessageButtons.OK);
+                    ms.ShowDialog();
+                    return;
                 }
                 else
                 {
-                    int id;
-                    MessageBoxLMS msb = new MessageBoxLMS("Notification", "Do you really want to complete the order?", MessageType.Accept, MessageButtons.YesNo);
-                    if (msb.ShowDialog() == true)
+                    match = @"^(\+[0-9]{1,3}[- ]?)?([0-9]{10})$";
+                    reg = new Regex(match);
+                    if (!reg.IsMatch(PhoneNumber))
                     {
-                        try
+                        MessageBoxLMS ms = new MessageBoxLMS("Thông báo", "Phone number is not valid!", MessageType.Error, MessageButtons.OK);
+                        ms.ShowDialog();
+                        return;
+                    }
+                    else
+                    {
+                        if (p == "GetBookNow")
                         {
-                            using (var context = new LMSEntities1())
+                            int id;
+                            MessageBoxLMS msb = new MessageBoxLMS("Notification", "Do you really want to complete the order?", MessageType.Accept, MessageButtons.YesNo);
+                            if (msb.ShowDialog() == true)
                             {
-                                ORDER_BOOKS order = new ORDER_BOOKS();
-                                order.orderCusId = int.Parse(AccountID);
-                                order.orderName = OrderName;
-                                order.orderEmail = Email;
-                                order.orderPhone = PhoneNumber;
-                                order.orderAddress = Address;
-                                order.totalValue = TotalCartValue;
-                                order.orderDate = DateTime.Now;
-                                context.ORDER_BOOKS.Add(order);
-                                context.SaveChanges();
-                                id = order.orderID;
-                            }
-                            using (var context = new LMSEntities1())
-                            {
-                                foreach (BookDTO item in BooksInCart)
+                                try
                                 {
-                                    ORDER_DETAIL detail = new ORDER_DETAIL();
-                                    detail.orderID = id;
-                                    detail.bookID = Int32.Parse(item.MaSach.ToString());
-                                    detail.quantity = item.SoLuong;
-                                    context.ORDER_DETAIL.Add(detail);
-                                    context.SaveChanges();
-                                }
-                            }
-                            //MessageBox.Show(AccountID);
-                            using (var context = new LMSEntities1())
-                            {
-                                foreach (var item in context.CARTs)
-                                {
-                                    if (item.MAKH == int.Parse(AccountID))
+                                    using (var context = new LMSEntities1())
                                     {
-                                        context.CARTs.Remove(item);
-                                        break;
+                                        ORDER_BOOKS order = new ORDER_BOOKS();
+                                        order.orderCusId = int.Parse(AccountID);
+                                        order.orderName = OrderName;
+                                        order.orderEmail = Email;
+                                        order.orderPhone = PhoneNumber;
+                                        order.orderAddress = Address;
+                                        order.totalValue = TotalValueForOneBookID;
+                                        order.orderDate = DateTime.Now;
+                                        context.ORDER_BOOKS.Add(order);
+                                        context.SaveChanges();
+                                        id = order.orderID;
                                     }
-                                }
-                                context.SaveChanges();
+                                    using (var context = new LMSEntities1())
+                                    {
+                                        ORDER_DETAIL detail = new ORDER_DETAIL();
+                                        detail.orderID = id;
+                                        detail.bookID = Int32.Parse(SelectedItem.MaSach.ToString());
+                                        detail.quantity = Quantity;
+                                        context.ORDER_DETAIL.Add(detail);
+                                        context.SaveChanges();
+                                    }
 
+                                    msb = new MessageBoxLMS("Notification", "Order Successful", MessageType.Accept, MessageButtons.OK);
+                                    msb.ShowDialog();
+                                    Application.Current.Windows.OfType<PurchasePage>().FirstOrDefault().Close();
+                                    SelectedItem = null;
+                                }
+                                catch
+                                {
+                                    msb = new MessageBoxLMS("Error", "Checkout Failed!", MessageType.Accept, MessageButtons.OK);
+                                    CanCheckout = false;
+                                    msb.ShowDialog();
+                                }
                             }
-                            BooksInCart.Clear();
-                            TotalCartValueStr = "₫0";
-                            msb = new MessageBoxLMS("Notification", "Order Successful", MessageType.Error, MessageButtons.OK);
-                            msb.ShowDialog();
-                            Application.Current.Windows.OfType<PurchasePage>().FirstOrDefault().Close();
-                            CanCheckout = false;
                         }
-                        catch
+                        else
                         {
-                            msb = new MessageBoxLMS("Error", "Checkout Failed!", MessageType.Error, MessageButtons.OK);
-                            msb.ShowDialog();
+                            int id;
+                            MessageBoxLMS msb = new MessageBoxLMS("Notification", "Do you really want to complete the order?", MessageType.Accept, MessageButtons.YesNo);
+                            if (msb.ShowDialog() == true)
+                            {
+                                try
+                                {
+                                    using (var context = new LMSEntities1())
+                                    {
+                                        ORDER_BOOKS order = new ORDER_BOOKS();
+                                        order.orderCusId = int.Parse(AccountID);
+                                        order.orderName = OrderName;
+                                        order.orderEmail = Email;
+                                        order.orderPhone = PhoneNumber;
+                                        order.orderAddress = Address;
+                                        order.totalValue = TotalCartValue;
+                                        order.orderDate = DateTime.Now;
+                                        context.ORDER_BOOKS.Add(order);
+                                        context.SaveChanges();
+                                        id = order.orderID;
+                                    }
+                                    using (var context = new LMSEntities1())
+                                    {
+                                        foreach (BookDTO item in BooksInCart)
+                                        {
+                                            ORDER_DETAIL detail = new ORDER_DETAIL();
+                                            detail.orderID = id;
+                                            detail.bookID = Int32.Parse(item.MaSach.ToString());
+                                            detail.quantity = item.SoLuong;
+                                            context.ORDER_DETAIL.Add(detail);
+                                            context.SaveChanges();
+                                        }
+                                    }
+                                    //MessageBox.Show(AccountID);
+                                    using (var context = new LMSEntities1())
+                                    {
+                                        foreach (var item in context.CARTs)
+                                        {
+                                            if (item.MAKH == int.Parse(AccountID))
+                                            {
+                                                context.CARTs.Remove(item);
+                                                break;
+                                            }
+                                        }
+                                        context.SaveChanges();
+
+                                    }
+                                    BooksInCart.Clear();
+                                    TotalCartValueStr = "₫0";
+                                    msb = new MessageBoxLMS("Notification", "Order Successful", MessageType.Error, MessageButtons.OK);
+                                    msb.ShowDialog();
+                                    Application.Current.Windows.OfType<PurchasePage>().FirstOrDefault().Close();
+                                    CanCheckout = false;
+                                }
+                                catch
+                                {
+                                    msb = new MessageBoxLMS("Error", "Checkout Failed!", MessageType.Error, MessageButtons.OK);
+                                    msb.ShowDialog();
+                                }
+                            }
                         }
                     }
                 }
+                
 
             });
 

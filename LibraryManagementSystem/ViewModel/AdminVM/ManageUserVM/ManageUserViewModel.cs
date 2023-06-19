@@ -12,6 +12,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -202,20 +203,37 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageUserVM
             UpdatingUser = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                 int id = EditingUserWindow.id;
-                using(var context = new LMSEntities1())
+                using (var context = new LMSEntities1())
                 {
-                    foreach(var user in context.ACCOUNTs)
+                    foreach (var user in context.ACCOUNTs)
                     {
-                        if(id == user.ID)
+                        if (id == user.ID)
                         {
                             try
                             {
-                                user.FULLNAME = FullName;
-                                user.EMAILADDRESS = EmailAddress;
-                                MessageBoxLMS msb = new MessageBoxLMS("Notification", "Updating is successful!", MessageType.Accept, MessageButtons.OK);
-                                msb.ShowDialog();
-                                p.Hide();
-                                break;
+                                if (!string.IsNullOrEmpty(FullName) && !string.IsNullOrEmpty(EmailAddress))
+                                {
+                                    string match = @"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*";
+                                    Regex reg = new Regex(match);
+
+                                    if (reg.IsMatch(EmailAddress) == false)
+                                    {
+                                        MessageBoxLMS ms = new MessageBoxLMS("Thông báo", "Email address is not valid!", MessageType.Error, MessageButtons.OK);
+                                        ms.ShowDialog();
+                                        return;
+                                    }
+                                    user.FULLNAME = FullName;
+                                    user.EMAILADDRESS = EmailAddress;
+                                    MessageBoxLMS msb = new MessageBoxLMS("Notification", "Updating is successful!", MessageType.Accept, MessageButtons.OK);
+                                    msb.ShowDialog();
+                                    p.Hide();
+                                    break;
+                                }
+                                else
+                                {
+                                    MessageBoxLMS msb = new MessageBoxLMS("Notification", "Some fields still empty", MessageType.Accept, MessageButtons.OK);
+                                    msb.ShowDialog();
+                                }
                             }
                             catch
                             {
