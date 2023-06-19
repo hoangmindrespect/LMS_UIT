@@ -673,3 +673,7 @@ C:\CODE\zDoAnLMS_Main\LMS_UIT_Khang\LibraryManagementSystem\obj\Debug\LibraryMan
 C:\CODE\zDoAnLMS_Main\LMS_UIT_Khang\LibraryManagementSystem\obj\Debug\LibraryManagementSystem.pdb
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\ManageOrders\ManageOrderPage.g.cs
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\ManageOrders\ManageOrderPage.baml
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainClientWindow\ManageCusOrders\ManageCusOrders.g.cs
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainClientWindow\ManageCusOrders\ManageCusOrders.baml
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainClientWindow\ClientSettings\ClientSettingPage.g.cs
+C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainClientWindow\ClientSettings\ClientSettingPage.baml

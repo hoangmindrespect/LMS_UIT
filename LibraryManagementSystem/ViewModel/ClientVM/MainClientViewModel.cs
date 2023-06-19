@@ -4,6 +4,8 @@ using LibraryManagementSystem.Models.DataProvider;
 using LibraryManagementSystem.View.Login;
 using LibraryManagementSystem.View.MainClientWindow;
 using LibraryManagementSystem.View.MainClientWindow.BuyBookPage;
+using LibraryManagementSystem.View.MainClientWindow.ClientSettings;
+using LibraryManagementSystem.View.MainClientWindow.ManageCusOrders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +42,8 @@ namespace LibraryManagementSystem.ViewModel.ClientVM
 
         #region ICommand
         public ICommand LoadBuyBookFirst { get; set; }
+        public ICommand LoadMyOderPage { get; set; }
+        public ICommand LoadSettingClientPage { get; set; }
         public ICommand Logout { get; set; }
         #endregion
 
@@ -54,12 +58,20 @@ namespace LibraryManagementSystem.ViewModel.ClientVM
                 main_frame_client = p;
             });
 
+            LoadMyOderPage = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
+            {
+                p.Content = new ManageCusOrders();
+            });
+
+            LoadSettingClientPage = new RelayCommand<Frame>((p) => { return p != null; }, (p) =>
+            {
+                p.Content = new ClientSettingPage();
+            });
             Logout = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 loginwindow w = new loginwindow();
                 w.Show();
-                MainClientWindow pk = System.Windows.Application.Current.Windows.OfType<MainClientWindow>().FirstOrDefault();
-                pk.Close();
+                System.Windows.Application.Current.Windows.OfType<MainClientWindow>().FirstOrDefault().Close(); ;
             });
         }
     }

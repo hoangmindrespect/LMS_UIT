@@ -269,6 +269,8 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ClientVM\BuyBookVM\BuyBookViewModel.cs" />
     <Compile Include="ViewModel\ClientVM\MainClientViewModel.cs" />
+    <Compile Include="ViewModel\ClientVM\ManageOrderVM\ManageOrdersViewModel.cs" />
+    <Compile Include="ViewModel\ClientVM\SettingClient\SettingClientViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
     <Compile Include="ViewModel\LoginVM\LoginRegisViewModel.cs" />
     <Compile Include="View\Login\CreateNewPass.xaml.cs">
@@ -304,8 +306,14 @@
     <Compile Include="View\MainClientWindow\BuyBookPage\ShoppingCartPage.xaml.cs">
       <DependentUpon>ShoppingCartPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\MainClientWindow\ClientSettings\ClientSettingPage.xaml.cs">
+      <DependentUpon>ClientSettingPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainClientWindow\MainClientWindow.xaml.cs">
       <DependentUpon>MainClientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainClientWindow\ManageCusOrders\ManageCusOrders.xaml.cs">
+      <DependentUpon>ManageCusOrders.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow\BorrowBook\BorrowBookPage.xaml.cs">
       <DependentUpon>BorrowBookPage.xaml</DependentUpon>
@@ -417,7 +425,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\MainClientWindow\ClientSettings\ClientSettingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainClientWindow\MainClientWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MainClientWindow\ManageCusOrders\ManageCusOrders.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -541,6 +557,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resource\SettingClient\flag.png" />
     <Resource Include="Resource\BuyBook\add.png" />
     <Resource Include="Resource\BuyBook\left.png" />
     <Resource Include="Resource\BorrowBook\borrow.png" />

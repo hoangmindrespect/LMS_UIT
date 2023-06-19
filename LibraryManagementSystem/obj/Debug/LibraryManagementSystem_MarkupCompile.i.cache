@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Hoang\Desktop\LMS_UIT\LibraryManagementSystem\App.xaml
-3058332947
+32-1536571039
 3-2087984864
-712000463377
+752034807013
 62635873897
-ControlBar\ControlBar__NoneResize.xaml;ControlBar\UserControl1.xaml;MainWindow.xaml;ResourceXAML\MainResource.xaml;View\Login\CreateNewPass.xaml;View\Login\ForgotPasswordPage.xaml;View\Login\loginpage.xaml;View\Login\loginwindow.xaml;View\Login\RegisterWindow.xaml;View\Login\VertificationPage.xaml;View\MainClientWindow\BuyBookPage\BuyBookPage.xaml;View\MainClientWindow\BuyBookPage\DetailsBook.xaml;View\MainClientWindow\BuyBookPage\Item.xaml;View\MainClientWindow\BuyBookPage\PurchasePage.xaml;View\MainClientWindow\BuyBookPage\ShoppingCartPage.xaml;View\MainClientWindow\MainClientWindow.xaml;View\MainWindow\BorrowBook\BorrowBookPage.xaml;View\MainWindow\BorrowBook\Item2.xaml;View\MainWindow\BorrowBook\ManageBorrowBookPage.xaml;View\MainWindow\BorrowBook\ReturnBookPage.xaml;View\MainWindow\ImportBook\AddingWindow.xaml;View\MainWindow\ImportBook\ImportBookPage.xaml;View\MainWindow\MainWindowSystem.xaml;View\MainWindow\ManageBook\EdittingBookWindow.xaml;View\MainWindow\ManageBook\ManageBookPage.xaml;View\MainWindow\ManageOrders\ManageOrderPage.xaml;View\MainWindow\ManageUser\EditingUserWindow.xaml;View\MainWindow\ManageUser\ManageUserPage.xaml;View\MainWindow\Statistical\StatisticalPage.xaml;View\MessageBoxCus\MessageBoxLMS.xaml;
+ControlBar\ControlBar__NoneResize.xaml;ControlBar\UserControl1.xaml;MainWindow.xaml;ResourceXAML\MainResource.xaml;View\Login\CreateNewPass.xaml;View\Login\ForgotPasswordPage.xaml;View\Login\loginpage.xaml;View\Login\loginwindow.xaml;View\Login\RegisterWindow.xaml;View\Login\VertificationPage.xaml;View\MainClientWindow\BuyBookPage\BuyBookPage.xaml;View\MainClientWindow\BuyBookPage\DetailsBook.xaml;View\MainClientWindow\BuyBookPage\Item.xaml;View\MainClientWindow\BuyBookPage\PurchasePage.xaml;View\MainClientWindow\BuyBookPage\ShoppingCartPage.xaml;View\MainClientWindow\ClientSettings\ClientSettingPage.xaml;View\MainClientWindow\MainClientWindow.xaml;View\MainClientWindow\ManageCusOrders\ManageCusOrders.xaml;View\MainWindow\BorrowBook\BorrowBookPage.xaml;View\MainWindow\BorrowBook\Item2.xaml;View\MainWindow\BorrowBook\ManageBorrowBookPage.xaml;View\MainWindow\BorrowBook\ReturnBookPage.xaml;View\MainWindow\ImportBook\AddingWindow.xaml;View\MainWindow\ImportBook\ImportBookPage.xaml;View\MainWindow\MainWindowSystem.xaml;View\MainWindow\ManageBook\EdittingBookWindow.xaml;View\MainWindow\ManageBook\ManageBookPage.xaml;View\MainWindow\ManageOrders\ManageOrderPage.xaml;View\MainWindow\ManageUser\EditingUserWindow.xaml;View\MainWindow\ManageUser\ManageUserPage.xaml;View\MainWindow\Statistical\StatisticalPage.xaml;View\MessageBoxCus\MessageBoxLMS.xaml;
 
 True
 

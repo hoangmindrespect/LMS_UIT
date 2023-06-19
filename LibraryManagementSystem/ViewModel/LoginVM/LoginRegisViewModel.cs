@@ -24,7 +24,7 @@ namespace LibraryManagementSystem.ViewModel.LoginVM
         #region Property
         public static DataGrid import_dtg;
         public static ObservableCollection<ImportBook> listbook = new ObservableCollection<ImportBook>();
-
+        //public static string UserNameThisAccount;
         private string _userName;
         public string UserName
         {

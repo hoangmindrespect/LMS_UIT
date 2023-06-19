@@ -21,6 +21,7 @@ namespace LibraryManagementSystem.Models.DataProvider
             this.BILLs = new HashSet<BILL>();
             this.CARTs = new HashSet<CART>();
             this.IMPORTs = new HashSet<IMPORT>();
+            this.ORDER_BOOKS = new HashSet<ORDER_BOOKS>();
         }
     
         public int ID { get; set; }
@@ -32,6 +33,9 @@ namespace LibraryManagementSystem.Models.DataProvider
         public Nullable<int> ROLE { get; set; }
         public string IDCLASS { get; set; }
         public Nullable<decimal> TRIGIAGIOHANG { get; set; }
+        public string ADDRESSS { get; set; }
+        public string GENDER { get; set; }
+        public string PHONENUMBER { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BBFORM> BBFORMs { get; set; }
@@ -41,5 +45,7 @@ namespace LibraryManagementSystem.Models.DataProvider
         public virtual ICollection<CART> CARTs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IMPORT> IMPORTs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ORDER_BOOKS> ORDER_BOOKS { get; set; }
     }
 }

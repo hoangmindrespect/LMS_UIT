@@ -86,13 +86,13 @@
                                             </StackPanel>
                                         </Button>
 
-                                        <Button Style="{StaticResource menuButton}" Command="{Binding LoadManageBook}" CommandParameter="{Binding ElementName=mainFrame}">
+                                        <Button Style="{StaticResource menuButton}" Command="{Binding LoadMyOderPage}" CommandParameter="{Binding ElementName=mainFrame}">
                                             <StackPanel Orientation="Horizontal">
                                                 <materialDesign:PackIcon Kind="BasketCheckOutline" Margin="5 0 0 0"/>
                                                 <TextBlock Text="My orders" Margin="10 0 0 0" VerticalAlignment="Center"/>
                                             </StackPanel>
                                         </Button>
-                                        <Button Style="{StaticResource menuButton}" Command="{Binding LoadManageBook}" CommandParameter="{Binding ElementName=mainFrame}">
+                                        <Button Style="{StaticResource menuButton}" Command="{Binding LoadSettingClientPage}" CommandParameter="{Binding ElementName=mainFrame}">
                                             <StackPanel Orientation="Horizontal">
                                                 <materialDesign:PackIcon Kind="Settings" Margin="5 0 0 0"/>
                                                 <TextBlock Text="Setting" Margin="10 0 0 0" VerticalAlignment="Center"/>

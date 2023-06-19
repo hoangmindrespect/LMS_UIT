@@ -84,8 +84,8 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
             set { this._totalCartvalueStr = value; OnPropertyChanged(); }
         }
 
-        private long _totalShow;
-        public long TotalShow
+        private decimal _totalShow;
+        public decimal TotalShow
         {
             get { return this._totalShow; }
             set { this._totalShow = value; OnPropertyChanged(); }
@@ -132,11 +132,20 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
             get { return _canCheckout; }
             set { _canCheckout = value; OnPropertyChanged(); }
         }
+
+        private string _toDay;
+        public string ToDay
+        {
+            get { return _toDay; }
+            set { _toDay = value; OnPropertyChanged(); }
+        }
         #endregion
 
         public ObservableCollection<BookDTO> Books = new ObservableCollection<BookDTO>();
         public ObservableCollection<BookDTO> BooksInCart = new ObservableCollection<BookDTO>();
+        public  ObservableCollection<BookDTO> ListDetails = new ObservableCollection<BookDTO>();
 
+        Window _purchaseWindow = new Window();
         #region Command
         public ICommand LoadBuyBookPage { get; set; }
         public ICommand LoadBook { get; set; }
@@ -160,7 +169,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
         public ICommand BuyBookInCart { get; set; }
         public ICommand CompleteOrder { get; set; }
 
-
+        public ICommand LoadBrief { get; set; }
         //2 command nay de t test thoi, dung quan tam
         public ICommand ShowOrder_Test { get; set; }
         public ICommand DeleteAllOrder_Test { get; set; }
@@ -449,24 +458,46 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                 TotalValueForOneBookID = (long)(SelectedItem.Gia * Quantity);
                 TotalShow = TotalValueForOneBookID;
                 PurchasePage w = new PurchasePage("GetBookNow");
+                ToDay = DateTime.Now.ToShortDateString();
                 w.ShowDialog();
+                Application.Current.Windows.OfType<DetailsBook>().FirstOrDefault().Close();
             });
 
             BuyBookInCart = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-
                 TotalShow = (long)TotalCartValue;
                 PurchasePage w = new PurchasePage("BuyBookInCart");
+                ToDay = DateTime.Now.ToShortDateString();
                 w.ShowDialog();
             });
 
             ClosePurchasePage = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                 p.Close();
-            });      
+            });
+
+            LoadBrief = new RelayCommand<ListView>((p) => { return true; }, (p) =>
+            {
+                ListDetails = new ObservableCollection<BookDTO>();
+                if(SelectedItem != null)
+                {
+                ListDetails.Add(new BookDTO { TenSach = SelectedItem.TenSach, SoLuong = Quantity});
+                    p.ItemsSource = ListDetails;
+                    return;
+                }    
+                ListDetails = BooksInCart;
+                p.ItemsSource = ListDetails;
+            });
 
             CompleteOrder = new RelayCommand<string>((p) => { return p != null; }, (p) =>
             {
+                if(string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Address) || string.IsNullOrEmpty(OrderName) || string.IsNullOrEmpty(PhoneNumber))
+                {
+                    MessageBoxLMS msb = new MessageBoxLMS("Notification", "Please fill into your shipping information!", MessageType.Accept, MessageButtons.OK);
+                    msb.ShowDialog();
+                    return;
+                }    
+
                 if (p == "GetBookNow")
                 {
                     int id;
@@ -478,6 +509,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                             using (var context = new LMSEntities1())
                             {
                                 ORDER_BOOKS order = new ORDER_BOOKS();
+                                order.orderCusId = int.Parse(AccountID);
                                 order.orderName = OrderName;
                                 order.orderEmail = Email;
                                 order.orderPhone = PhoneNumber;
@@ -497,12 +529,16 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                                 context.ORDER_DETAIL.Add(detail);
                                 context.SaveChanges();
                             }
-                            msb = new MessageBoxLMS("Notification", "Successfull complete your order", MessageType.Error, MessageButtons.OK);
-                            msb.ShowDialog();
+                            
+                          msb = new MessageBoxLMS("Notification", "Order Successful", MessageType.Accept, MessageButtons.OK);
+                          msb.ShowDialog();
+                          Application.Current.Windows.OfType<PurchasePage>().FirstOrDefault().Close();
+                          SelectedItem = null;
                         }
                         catch
                         {
-                            msb = new MessageBoxLMS("Notification", "Cannot complete your order", MessageType.Error, MessageButtons.OK);
+                            msb = new MessageBoxLMS("Error", "Checkout Failed!", MessageType.Accept, MessageButtons.OK);
+                            CanCheckout = false;
                             msb.ShowDialog();
                         }
                     }
@@ -518,6 +554,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                             using (var context = new LMSEntities1())
                             {
                                 ORDER_BOOKS order = new ORDER_BOOKS();
+                                order.orderCusId = int.Parse(AccountID);
                                 order.orderName = OrderName;
                                 order.orderEmail = Email;
                                 order.orderPhone = PhoneNumber;
@@ -556,12 +593,14 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                             }
                             BooksInCart.Clear();
                             TotalCartValueStr = "₫0";
-                            msb = new MessageBoxLMS("Notification", "Successful complete your order", MessageType.Error, MessageButtons.OK);
+                            msb = new MessageBoxLMS("Notification", "Order Successful", MessageType.Error, MessageButtons.OK);
                             msb.ShowDialog();
+                            Application.Current.Windows.OfType<PurchasePage>().FirstOrDefault().Close();
+                            CanCheckout = false;
                         }
                         catch
                         {
-                            msb = new MessageBoxLMS("Notification", "Cannot complete your order", MessageType.Error, MessageButtons.OK);
+                            msb = new MessageBoxLMS("Error", "Checkout Failed!", MessageType.Error, MessageButtons.OK);
                             msb.ShowDialog();
                         }
                     }

@@ -4,6 +4,9 @@
     <EntitySetMapping Name="ACCOUNTs">
       <EntityTypeMapping TypeName="lmsDatabaseModel.ACCOUNT">
         <MappingFragment StoreEntitySet="ACCOUNT">
+          <ScalarProperty Name="PHONENUMBER" ColumnName="PHONENUMBER" />
+          <ScalarProperty Name="GENDER" ColumnName="GENDER" />
+          <ScalarProperty Name="ADDRESSS" ColumnName="ADDRESSS" />
           <ScalarProperty Name="TRIGIAGIOHANG" ColumnName="TRIGIAGIOHANG" />
           <ScalarProperty Name="IDCLASS" ColumnName="IDCLASS" />
           <ScalarProperty Name="ROLE" ColumnName="ROLE" />
@@ -133,6 +136,7 @@
     <EntitySetMapping Name="ORDER_BOOKS">
       <EntityTypeMapping TypeName="lmsDatabaseModel.ORDER_BOOKS">
         <MappingFragment StoreEntitySet="ORDER_BOOKS">
+          <ScalarProperty Name="orderCusId" ColumnName="orderCusId" />
           <ScalarProperty Name="orderDate" ColumnName="orderDate" />
           <ScalarProperty Name="totalValue" ColumnName="totalValue" />
           <ScalarProperty Name="orderAddress" ColumnName="orderAddress" />

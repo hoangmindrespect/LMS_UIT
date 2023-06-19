@@ -30,6 +30,10 @@
       <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
       <End Role="IMPORT" EntitySet="IMPORTs" />
     </AssociationSet>
+    <AssociationSet Name="FK__ORDER_BOO__order__0697FACD" Association="lmsDatabaseModel.FK__ORDER_BOO__order__0697FACD">
+      <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+      <End Role="ORDER_BOOKS" EntitySet="ORDER_BOOKS" />
+    </AssociationSet>
     <AssociationSet Name="FK__DETAIL_BB__MAPHI__6FB49575" Association="lmsDatabaseModel.FK__DETAIL_BB__MAPHI__6FB49575">
       <End Role="BBFORM" EntitySet="BBFORMs" />
       <End Role="DETAIL_BBFORM" EntitySet="DETAIL_BBFORM" />
@@ -76,10 +80,14 @@
     <Property Name="ROLE" Type="Int32" />
     <Property Name="IDCLASS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="TRIGIAGIOHANG" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ADDRESSS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="GENDER" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PHONENUMBER" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="BBFORMs" Relationship="lmsDatabaseModel.FK__BBFORM__MAKH__6CD828CA" FromRole="ACCOUNT" ToRole="BBFORM" />
     <NavigationProperty Name="BILLs" Relationship="lmsDatabaseModel.FK__BILL__MAKH__44CA3770" FromRole="ACCOUNT" ToRole="BILL" />
     <NavigationProperty Name="CARTs" Relationship="lmsDatabaseModel.FK__CART__MAKH__5224328E" FromRole="ACCOUNT" ToRole="CART" />
     <NavigationProperty Name="IMPORTs" Relationship="lmsDatabaseModel.FK__IMPORT__MANV__4B7734FF" FromRole="ACCOUNT" ToRole="IMPORT" />
+    <NavigationProperty Name="ORDER_BOOKS" Relationship="lmsDatabaseModel.FK__ORDER_BOO__order__0697FACD" FromRole="ACCOUNT" ToRole="ORDER_BOOKS" />
   </EntityType>
   <EntityType Name="BBFORM">
     <Key>
@@ -219,6 +227,8 @@
     <Property Name="orderAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="totalValue" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="orderDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="orderCusId" Type="Int32" />
+    <NavigationProperty Name="ACCOUNT" Relationship="lmsDatabaseModel.FK__ORDER_BOO__order__0697FACD" FromRole="ORDER_BOOKS" ToRole="ACCOUNT" />
     <NavigationProperty Name="ORDER_DETAIL" Relationship="lmsDatabaseModel.FK__ORDER_DET__order__7849DB76" FromRole="ORDER_BOOKS" ToRole="ORDER_DETAIL" />
   </EntityType>
   <EntityType Name="ORDER_DETAIL">
@@ -277,6 +287,18 @@
       </Principal>
       <Dependent Role="IMPORT">
         <PropertyRef Name="MANV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ORDER_BOO__order__0697FACD">
+    <End Type="lmsDatabaseModel.ACCOUNT" Role="ACCOUNT" Multiplicity="0..1" />
+    <End Type="lmsDatabaseModel.ORDER_BOOKS" Role="ORDER_BOOKS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ACCOUNT">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ORDER_BOOKS">
+        <PropertyRef Name="orderCusId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -1,0 +1,251 @@
+﻿<Page x:Class="LibraryManagementSystem.View.MainClientWindow.ClientSettings.ClientSettingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LibraryManagementSystem.View.MainClientWindow.ClientSettings"
+      mc:Ignorable="d" 
+      Name="setupwindow"
+      DataContext="{StaticResource SettingClientVM}"
+      xmlns:uc="clr-namespace:LibraryManagementSystem.ControlBar"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      TextElement.FontWeight="Regular"
+      TextElement.FontSize="13"
+      TextOptions.TextFormattingMode="Ideal"
+      TextOptions.TextRenderingMode="Auto"
+      FontFamily="{DynamicResource MaterialDesignFont}"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:i = "http://schemas.microsoft.com/expression/2010/interactivity"
+      Background="Transparent"
+      d:DesignHeight="626" d:DesignWidth="967"
+      Title="ClientSettingPage">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="2.0*"/>
+            <RowDefinition Height="0.7*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"  Background="#E8E8E8">
+            <DockPanel Margin="20 0 0 0">
+                <Ellipse Width="65" Height="65" HorizontalAlignment="Left" Fill="White"/>
+                <materialDesign:PackIcon Kind="AccountBox" Height="35" Width="35" Margin="-50 33 0 0"/>
+
+                <StackPanel Margin="30 0 0 0" VerticalAlignment="Center">
+                    <Label Content="My profile" FontSize="18" FontWeight="Bold"/>
+                    <Label Content="Here you can edit public information about yourself" FontSize="15" FontWeight="Thin"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resource/SettingClient/flag.png" Width="auto" Height="20" Stretch="Uniform" Margin="4 0 0 0" />
+                        <Label Content="Vietnamese"  FontSize="15" FontWeight="Thin"/>
+                    </StackPanel>
+                </StackPanel>
+            </DockPanel>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Border CornerRadius="30"
+                    BorderThickness="1"
+                    BorderBrush="Black"
+                    Margin="20 50"
+                    >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="AccountTieOutline" VerticalAlignment="Center" Margin="30 0 0 0" Width="30" Height="30"/>
+                                <Label Content="Full Name"  VerticalAlignment="Center" Margin="5 0 0 0" FontSize="15" FontWeight="Bold"/>
+                                <Border  Height="40" 
+                                         Width="250" 
+                                         CornerRadius="10"
+                                         Background="#E8E8E8" 
+                                         Margin="100 0 0 0" >
+                                    <TextBox Text="{Binding FullName}" 
+                                         FontSize="15"  
+                                         Margin="10 0 0 0"
+                                         CaretBrush="#4E443A"
+                                         SelectionBrush="#4E443A"
+                                         materialDesign:TextFieldAssist.UnderlineBrush="#4E443A"
+                                         BorderBrush="Transparent"/>
+                                </Border>
+                                <!--<Button Padding="0" Width="30" Background="Transparent" BorderBrush="Transparent" Margin="30 0 0 0">
+                                <materialDesign:PackIcon Kind="Rename" Padding="0" Width="20" Height="20" Foreground="Black"/>
+                            </Button>-->
+                            </StackPanel>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="GenderTransgender" VerticalAlignment="Center" Margin="30 0 0 0" Width="30" Height="30"/>
+                                <Label Content="Gender"  VerticalAlignment="Center" Margin="5 0 0 0" FontSize="15" FontWeight="Bold"/>
+                                <Border  Height="40" 
+                                         Width="250" 
+                                         CornerRadius="10"
+                                         Background="#E8E8E8" 
+                                         Margin="120 0 0 0" >
+                                    <TextBox Text="{Binding Gender}" 
+                                         FontSize="15"                                         
+                                         CaretBrush="#4E443A"
+                                         Margin="10 0 0 0"
+                                         SelectionBrush="#4E443A"
+                                         materialDesign:TextFieldAssist.UnderlineBrush="#4E443A"
+                                         BorderBrush="Transparent"/>
+                                </Border>
+                            </StackPanel>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Smartphone" VerticalAlignment="Center" Margin="30 0 0 0" Width="30" Height="30"/>
+                                <Label Content="Phone number"  VerticalAlignment="Center" Margin="5 0 0 0" FontSize="15" FontWeight="Bold"/>
+                                <Border  Height="40" 
+                                         Width="250" 
+                                         CornerRadius="10"
+                                         Background="#E8E8E8" 
+                                         Margin="70 0 0 0" >
+                                    <TextBox Text="{Binding PhoneNumber}" 
+                                         FontSize="15"                                         
+                                         CaretBrush="#4E443A"
+                                         Margin="10 0 0 0"
+                                         SelectionBrush="#4E443A"
+                                         materialDesign:TextFieldAssist.UnderlineBrush="#4E443A"
+                                         BorderBrush="Transparent"/>
+                                </Border>
+                            </StackPanel>
+                        </Grid>
+
+
+                        <Grid Grid.Row="3">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Email" VerticalAlignment="Center" Margin="30 0 0 0" Width="30" Height="30"/>
+                                <Label Content="Email"  VerticalAlignment="Center" Margin="5 0 0 0" FontSize="15" FontWeight="Bold"/>
+                                <Border  Height="40" 
+                                         Width="250" 
+                                         CornerRadius="10"
+                                         Background="#E8E8E8" 
+                                         Margin="130 0 0 0" >
+                                    <TextBox Text="{Binding Email}" 
+                                         FontSize="15"                                         
+                                         CaretBrush="#4E443A"
+                                         Margin="10 0 0 0"
+                                         SelectionBrush="#4E443A"
+                                         materialDesign:TextFieldAssist.UnderlineBrush="#4E443A"
+                                         BorderBrush="Transparent"/>
+                                </Border>
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Row="4">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="AddressMarker" VerticalAlignment="Center" Margin="30 0 0 0" Width="30" Height="30"/>
+                                <Label Content="Address"  VerticalAlignment="Center" Margin="5 0 0 0" FontSize="15" FontWeight="Bold"/>
+                                <Border  Height="40" 
+                                         Width="250" 
+                                         CornerRadius="10"
+                                         Background="#E8E8E8" 
+                                         Margin="110 0 0 0" >
+                                    <TextBox Text="{Binding Address}" 
+                                         FontSize="15"                                         
+                                         CaretBrush="#4E443A"
+                                         Margin="10 0 0 0"
+                                         SelectionBrush="#4E443A"
+                                         materialDesign:TextFieldAssist.UnderlineBrush="#4E443A"
+                                         BorderBrush="Transparent"/>
+                                </Border>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Border CornerRadius="30"
+                        Margin="20 50"
+                        BorderThickness="1" 
+                        BorderBrush="Black">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="01">
+                            <PasswordBox Width="300"
+                                         materialDesign:HintAssist.Foreground="#4E443A"
+                                         CaretBrush="#4E443A"
+                                         SelectionBrush="#4E443A"
+                                         materialDesign:TextFieldAssist.UnderlineBrush="#4E443A"
+                                         VerticalAlignment="Center"
+                                         materialDesign:HintAssist.Hint="Current passwword"
+                                         IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedPasswordFieldPasswordBoxEnabledComboBox}"
+                                         Style="{StaticResource MaterialDesignOutlinedPasswordBox}" />
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <PasswordBox Width="300"
+                                         CaretBrush="#4E443A"
+                                         materialDesign:HintAssist.Foreground="#4E443A"
+                                         SelectionBrush="#4E443A"
+                                         materialDesign:TextFieldAssist.UnderlineBrush="#4E443A"
+                                         VerticalAlignment="Center"
+                                         materialDesign:HintAssist.Hint="New passwword"
+                                         IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedPasswordFieldPasswordBoxEnabledComboBox}"
+                                         Style="{StaticResource MaterialDesignOutlinedPasswordBox}" />
+                        </Grid>
+                        <Grid Grid.Row="3">
+                            <PasswordBox Width="300" CaretBrush="#4E443A"
+                                         SelectionBrush="#4E443A"
+                                         materialDesign:HintAssist.Foreground="#4E443A"
+                                         materialDesign:TextFieldAssist.UnderlineBrush="#4E443A"
+                                         VerticalAlignment="Center"
+                                         materialDesign:HintAssist.Hint="Confirm passwword"
+                                         IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedPasswordFieldPasswordBoxEnabledComboBox}"
+                                         Style="{StaticResource MaterialDesignOutlinedPasswordBox}" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid
+                    Width="auto">
+                <Button Width="300"
+                        Height="50"
+                        Name="save"
+                        
+                        
+                        
+                        Background="#4E443A"
+                        VerticalAlignment="Top"
+                        BorderBrush="Transparent"
+                        Margin="618,18,49,0"
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                        IsEnabled="True"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        ToolTip="MaterialDesignRaisedButton with Round Corners">
+                    <TextBlock
+                        Text="Save changes" />
+                </Button>
+            </Grid>
+        </Grid>
+    </Grid>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Loaded}"
+                                           CommandParameter="{Binding ElementName=setupwindow}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+</Page>
