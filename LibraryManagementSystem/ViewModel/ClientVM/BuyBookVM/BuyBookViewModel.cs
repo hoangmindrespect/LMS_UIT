@@ -472,14 +472,15 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                         if (item.MAKH == Int32.Parse(AccountID))
                         {
                             if (item.MASACH == masach && item.SOLUONGHT > 0)
+                            {
                                 item.SOLUONGHT--;
-                            break;
-                        }                      
+                                break;
+                            }
+                        }
                     }
                     context.SaveChanges();
                 }
                 LoadBookInCart(p);
-
             });
 
             BackToShopping = new RelayCommand<object>((p) => { return p != null; }, (p) =>
@@ -577,7 +578,6 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                                         order.orderAddress = Address;
                                         order.totalValue = TotalValueForOneBookID;
                                         order.orderDate = DateTime.Now;
-                                        order.orderStatus = "Order Placed";
                                         context.ORDER_BOOKS.Add(order);
                                         context.SaveChanges();
                                         id = order.orderID;
@@ -589,12 +589,20 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                                         detail.bookID = Int32.Parse(SelectedItem.MaSach.ToString());
                                         detail.quantity = Quantity;
                                         context.ORDER_DETAIL.Add(detail);
+
+                                        foreach (var item in context.BOOKs)
+                                        {
+                                            if (item.ID == Int32.Parse(SelectedItem.MaSach.ToString()))
+                                            {
+                                                item.SOLUONG -= Quantity;
+                                                break;
+                                            }
+                                        }
                                         context.SaveChanges();
                                     }
 
                                     msb = new MessageBoxLMS("Notification", "Order Successful", MessageType.Accept, MessageButtons.OK);
                                     msb.ShowDialog();
-                                    IsGetInCart = IsGetNow = false;
                                     Application.Current.Windows.OfType<PurchasePage>().FirstOrDefault().Close();
                                     SelectedItem = null;
                                 }
@@ -624,7 +632,6 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                                         order.orderAddress = Address;
                                         order.totalValue = TotalCartValue;
                                         order.orderDate = DateTime.Now;
-                                        order.orderStatus = "Order Placed";
                                         context.ORDER_BOOKS.Add(order);
                                         context.SaveChanges();
                                         id = order.orderID;
@@ -638,19 +645,25 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                                             detail.bookID = Int32.Parse(item.MaSach.ToString());
                                             detail.quantity = item.SoLuong;
                                             context.ORDER_DETAIL.Add(detail);
+
+                                            foreach (var book in context.BOOKs)
+                                            {
+                                                if (book.ID == Int32.Parse(item.MaSach.ToString()))
+                                                {
+                                                    book.SOLUONG -= item.SoLuong;
+                                                    break;
+                                                }
+                                            }
                                             context.SaveChanges();
                                         }
                                     }
-                                    //MessageBox.Show(AccountID);
+
                                     using (var context = new LMSEntities1())
                                     {
                                         foreach (var item in context.CARTs)
                                         {
                                             if (item.MAKH == int.Parse(AccountID))
-                                            {
                                                 context.CARTs.Remove(item);
-                                                break;
-                                            }
                                         }
                                         context.SaveChanges();
 
@@ -659,7 +672,6 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                                     TotalCartValueStr = "₫0";
                                     msb = new MessageBoxLMS("Notification", "Order Successful", MessageType.Error, MessageButtons.OK);
                                     msb.ShowDialog();
-                                    IsGetInCart = IsGetNow = false;
                                     Application.Current.Windows.OfType<PurchasePage>().FirstOrDefault().Close();
                                     CanCheckout = false;
                                 }
@@ -672,8 +684,6 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                         }
                     }
                 }
-                
-
             });
 
             //Test
