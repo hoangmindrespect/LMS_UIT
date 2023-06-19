@@ -1,6 +1,7 @@
 ﻿using DocumentFormat.OpenXml.Drawing.Diagrams;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,8 +20,9 @@ namespace LibraryManagementSystem.DTOs
         public int SoLuong { get; set; }
         public string TheLoai { get; set; }
         public string NXB { get; set; }
-
         public string ColorBack { get; set; }
-        
+        //public ObservableCollection<BookDTO> list { get; set; }
+
+
     }
 }

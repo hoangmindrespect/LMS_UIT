@@ -139,6 +139,7 @@
     <Property Name="totalValue" Type="money" />
     <Property Name="orderDate" Type="smalldatetime" Nullable="false" />
     <Property Name="orderCusId" Type="int" />
+    <Property Name="orderStatus" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="ORDER_DETAIL">
     <Key>

@@ -141,6 +141,9 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
             set { _toDay = value; OnPropertyChanged(); }
         }
 
+        public bool IsGetNow;
+        public bool IsGetInCart;
+
         #region Constrain
         private bool _IsNullNameOrderForm;
         public bool IsNullNameOrderForm
@@ -489,6 +492,8 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                 TotalValueForOneBookID = (long)(SelectedItem.Gia * Quantity);
                 TotalShow = TotalValueForOneBookID;
                 PurchasePage w = new PurchasePage("GetBookNow");
+                IsGetNow = true;
+                IsGetInCart = false;
                 ToDay = DateTime.Now.ToShortDateString();
                 w.ShowDialog();
                 Application.Current.Windows.OfType<DetailsBook>().FirstOrDefault().Close();
@@ -499,6 +504,8 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                 TotalShow = (long)TotalCartValue;
                 PurchasePage w = new PurchasePage("BuyBookInCart");
                 ToDay = DateTime.Now.ToShortDateString();
+                IsGetNow = false;
+                IsGetInCart = true;
                 w.ShowDialog();
             });
 
@@ -510,9 +517,9 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
             LoadBrief = new RelayCommand<ListView>((p) => { return true; }, (p) =>
             {
                 ListDetails = new ObservableCollection<BookDTO>();
-                if(SelectedItem != null)
+                if(IsGetNow)
                 {
-                ListDetails.Add(new BookDTO { TenSach = SelectedItem.TenSach, SoLuong = Quantity});
+                    ListDetails.Add(new BookDTO { TenSach = SelectedItem.TenSach, SoLuong = Quantity});
                     p.ItemsSource = ListDetails;
                     return;
                 }    
@@ -570,6 +577,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                                         order.orderAddress = Address;
                                         order.totalValue = TotalValueForOneBookID;
                                         order.orderDate = DateTime.Now;
+                                        order.orderStatus = "Order Placed";
                                         context.ORDER_BOOKS.Add(order);
                                         context.SaveChanges();
                                         id = order.orderID;
@@ -586,6 +594,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
 
                                     msb = new MessageBoxLMS("Notification", "Order Successful", MessageType.Accept, MessageButtons.OK);
                                     msb.ShowDialog();
+                                    IsGetInCart = IsGetNow = false;
                                     Application.Current.Windows.OfType<PurchasePage>().FirstOrDefault().Close();
                                     SelectedItem = null;
                                 }
@@ -615,6 +624,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                                         order.orderAddress = Address;
                                         order.totalValue = TotalCartValue;
                                         order.orderDate = DateTime.Now;
+                                        order.orderStatus = "Order Placed";
                                         context.ORDER_BOOKS.Add(order);
                                         context.SaveChanges();
                                         id = order.orderID;
@@ -649,6 +659,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                                     TotalCartValueStr = "₫0";
                                     msb = new MessageBoxLMS("Notification", "Order Successful", MessageType.Error, MessageButtons.OK);
                                     msb.ShowDialog();
+                                    IsGetInCart = IsGetNow = false;
                                     Application.Current.Windows.OfType<PurchasePage>().FirstOrDefault().Close();
                                     CanCheckout = false;
                                 }

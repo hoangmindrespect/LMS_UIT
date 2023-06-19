@@ -228,6 +228,7 @@
     <Property Name="totalValue" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="orderDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="orderCusId" Type="Int32" />
+    <Property Name="orderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="ACCOUNT" Relationship="lmsDatabaseModel.FK__ORDER_BOO__order__0697FACD" FromRole="ORDER_BOOKS" ToRole="ACCOUNT" />
     <NavigationProperty Name="ORDER_DETAIL" Relationship="lmsDatabaseModel.FK__ORDER_DET__order__7849DB76" FromRole="ORDER_BOOKS" ToRole="ORDER_DETAIL" />
   </EntityType>

@@ -28,6 +28,7 @@ namespace LibraryManagementSystem.Models.DataProvider
         public Nullable<decimal> totalValue { get; set; }
         public System.DateTime orderDate { get; set; }
         public Nullable<int> orderCusId { get; set; }
+        public string orderStatus { get; set; }
     
         public virtual ACCOUNT ACCOUNT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -237,7 +237,6 @@ D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\bin\Debug\Haley.H
 D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\bin\Debug\Haley.IOC.dll
 D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\bin\Debug\Haley.MVVM.dll
 D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\bin\Debug\Haley.WPF.dll
-D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\bin\Debug\LiveCharts.dll
 D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\bin\Debug\LiveCharts.Wpf.dll
 D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\bin\Debug\MaterialDesignColors.dll
 D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\bin\Debug\MaterialDesignThemes.Wpf.dll
@@ -985,3 +984,21 @@ C:\CODE\zDoAnLMS_VeryNew\LMS_UIT_Khang\LibraryManagementSystem\obj\Debug\Library
 C:\CODE\zDoAnLMS_VeryNew\LMS_UIT_Khang\LibraryManagementSystem\obj\Debug\LibraryManagementSystem.csproj.CopyComplete
 C:\CODE\zDoAnLMS_VeryNew\LMS_UIT_Khang\LibraryManagementSystem\obj\Debug\LibraryManagementSystem.exe
 C:\CODE\zDoAnLMS_VeryNew\LMS_UIT_Khang\LibraryManagementSystem\obj\Debug\LibraryManagementSystem.pdb
+D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\bin\Debug\EPPlus.dll
+D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\bin\Debug\EPPlus.Interfaces.dll
+D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\bin\Debug\EPPlus.System.Drawing.dll
+D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\bin\Debug\Microsoft.IO.RecyclableMemoryStream.dll
+D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\bin\Debug\EPPlus.xml
+D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\bin\Debug\Microsoft.IO.RecyclableMemoryStream.xml
+D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainClientWindow\BuyBookPage\PurchasePage.g.cs
+D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainClientWindow\ClientSettings\ClientSettingPage.g.cs
+D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainClientWindow\ManageCusOrders\ManageCusOrders.g.cs
+D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\ManageOrders\ManageOrderPage.g.cs
+D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\ManageUser\EditingUserWindow.g.cs
+D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\ManageUser\ManageUserPage.g.cs
+D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainClientWindow\BuyBookPage\PurchasePage.baml
+D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainClientWindow\ClientSettings\ClientSettingPage.baml
+D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainClientWindow\ManageCusOrders\ManageCusOrders.baml
+D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\ManageOrders\ManageOrderPage.baml
+D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\ManageUser\EditingUserWindow.baml
+D:\Năm 2 HK2\Nhập môn CNPM\LMS_UIT\LibraryManagementSystem\obj\Debug\View\MainWindow\ManageUser\ManageUserPage.baml
