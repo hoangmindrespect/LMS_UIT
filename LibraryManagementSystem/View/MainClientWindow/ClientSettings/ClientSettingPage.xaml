@@ -175,6 +175,7 @@
 
                         <Grid Grid.Row="01">
                             <PasswordBox Width="300"
+                                         Name="pw1"
                                          materialDesign:HintAssist.Foreground="#4E443A"
                                          CaretBrush="#4E443A"
                                          SelectionBrush="#4E443A"
@@ -182,10 +183,18 @@
                                          VerticalAlignment="Center"
                                          materialDesign:HintAssist.Hint="Current passwword"
                                          IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedPasswordFieldPasswordBoxEnabledComboBox}"
-                                         Style="{StaticResource MaterialDesignOutlinedPasswordBox}" />
+                                         Style="{StaticResource MaterialDesignOutlinedPasswordBox}" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PasswordChanged">
+                                        <i:InvokeCommandAction Command="{Binding CurrentPassword}"
+                                           CommandParameter="{Binding ElementName=pw1}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </PasswordBox>
                         </Grid>
                         <Grid Grid.Row="2">
                             <PasswordBox Width="300"
+                                         Name="pw2"
                                          CaretBrush="#4E443A"
                                          materialDesign:HintAssist.Foreground="#4E443A"
                                          SelectionBrush="#4E443A"
@@ -193,17 +202,34 @@
                                          VerticalAlignment="Center"
                                          materialDesign:HintAssist.Hint="New passwword"
                                          IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedPasswordFieldPasswordBoxEnabledComboBox}"
-                                         Style="{StaticResource MaterialDesignOutlinedPasswordBox}" />
+                                         Style="{StaticResource MaterialDesignOutlinedPasswordBox}" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PasswordChanged">
+                                        <i:InvokeCommandAction Command="{Binding NewPassword}"
+                                           CommandParameter="{Binding ElementName=pw2}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </PasswordBox>
+                           
                         </Grid>
                         <Grid Grid.Row="3">
                             <PasswordBox Width="300" CaretBrush="#4E443A"
                                          SelectionBrush="#4E443A"
+                                         Name="pw3"
                                          materialDesign:HintAssist.Foreground="#4E443A"
                                          materialDesign:TextFieldAssist.UnderlineBrush="#4E443A"
                                          VerticalAlignment="Center"
                                          materialDesign:HintAssist.Hint="Confirm passwword"
                                          IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedPasswordFieldPasswordBoxEnabledComboBox}"
-                                         Style="{StaticResource MaterialDesignOutlinedPasswordBox}" />
+                                         Style="{StaticResource MaterialDesignOutlinedPasswordBox}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PasswordChanged">
+                                        <i:InvokeCommandAction Command="{Binding ConfirmPassword}"
+                                           CommandParameter="{Binding ElementName=pw3}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </PasswordBox>
+                            
                         </Grid>
                     </Grid>
                 </Border>

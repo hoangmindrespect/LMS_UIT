@@ -71,10 +71,34 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.SettingClient
                 OnPropertyChanged(); 
             }
         }
+
+        private string _pas;
+        public string Pas
+        {
+            get { return _pas; }
+            set { _pas = value; OnPropertyChanged(); }
+        }
+
+        private string _newPas;
+        public string NewPas
+        {
+            get { return _newPas; }
+            set { _newPas = value; OnPropertyChanged(); }
+        }
+
+        private string _conNewPas;
+        public string ConNewPas
+        {
+            get { return _conNewPas; }
+            set { _conNewPas = value; OnPropertyChanged(); }
+        }
         public ICommand Loaded { get; set; }
         public ICommand SaveChange { get; set; }
         public ICommand ChooseMale { get; set; }
         public ICommand ChooseFeMale { get; set; }
+        public ICommand CurrentPassword { get; set; }
+        public ICommand NewPassword { get; set; }
+        public ICommand ConfirmPassword { get; set; }
     public SettingClientViewModel() 
         { 
             Loaded = new RelayCommand<Page>((p) => { return p != null; }, (p) =>
@@ -104,6 +128,38 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.SettingClient
 
             SaveChange = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
+                //có thay đổi mật khẩu
+                if(!string.IsNullOrEmpty(Pas))
+                {
+                    if (string.IsNullOrWhiteSpace(NewPas) || string.IsNullOrEmpty(ConNewPas))
+                    {
+                        MessageBoxLMS msb = new MessageBoxLMS("Error", "This field cannot be empty!", MessageType.Accept, MessageButtons.OK);
+                        msb.ShowDialog();
+                        return;
+
+                    }
+                    else if (NewPas != ConNewPas)
+                    {
+                        MessageBoxLMS msb = new MessageBoxLMS("Error", "Password not matching!", MessageType.Accept, MessageButtons.OK);
+                        msb.ShowDialog();
+                        return;
+                    }
+                    else
+                    {
+                        using (var context = new LMSEntities1())
+                        {
+                            foreach (var item in context.ACCOUNTs)
+                            {
+                                if (item.USERNAME == LoginRegisViewModel.username)
+                                {
+                                    item.USERPASS = NewPas;
+                                    break;
+                                }
+                            }
+                            context.SaveChanges();
+                        }
+                    }
+                }
                 using (var context = new LMSEntities1())
                 {
                     foreach (var item in context.ACCOUNTs)
@@ -137,6 +193,21 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.SettingClient
             {
                 Male = false;
                 FeMale = true;
+            });
+
+            CurrentPassword = new RelayCommand<PasswordBox>((p) => { return true; }, (p) =>
+            {
+                Pas = p.Password;
+            });
+
+            NewPassword = new RelayCommand<PasswordBox>((p) => { return true; }, (p) =>
+            {
+                NewPas = p.Password;
+            });
+
+            ConfirmPassword = new RelayCommand<PasswordBox>((p) => { return true; }, (p) =>
+            {
+                ConNewPas = p.Password;
             });
         }
     }
