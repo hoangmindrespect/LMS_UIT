@@ -13,5 +13,7 @@ namespace LibraryManagementSystem.DTOs
         public string FullName { set; get; }
         public string EmailAddress { set; get; }
         public string Password { set; get; }
+        public string PhoneNumber { set; get; }
+
     }
 }

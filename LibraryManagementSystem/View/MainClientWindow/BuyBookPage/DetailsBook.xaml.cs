@@ -24,16 +24,24 @@ namespace LibraryManagementSystem.View.MainClientWindow.BuyBookPage
         public DetailsBook(BookDTO book)
         {
             InitializeComponent();
-            tg.Text = book.TacGia;
-            tl.Text = book.TheLoai;
-            nhaxb.Text = book.NXB;
-            namxb.Text = book.NamXB.ToString();
-            sl.Text = book.SoLuong.ToString();
+            if (book.TacGia != null)
+                tg.Text = book.TacGia;
+            if (book.TheLoai != null)
+                tl.Text = book.TheLoai;
+            if (book.NXB != null)
+                nhaxb.Text = book.NXB;
+            if (book.NamXB != null)
+                namxb.Text = book.NamXB.ToString();
+            if (book.SoLuong != null)
+                sl.Text = book.SoLuong.ToString();
             gia.Text =decimal.Round(book.Gia, 0).ToString().Replace('$', '₫');
+            if (book.MoTa != null)
+                mt.Text = book.MoTa.ToString();
             //if(!string.IsNullOrEmpty(book.MoTa))
             //    mt.Text = book.MoTa.ToString();
             //tl.Text = book.TheLoai.ToString();
-            img.Source = new BitmapImage(new Uri(book.ImageSource, UriKind.RelativeOrAbsolute));
+            if (book.ImageSource != null)
+                img.Source = new BitmapImage(new Uri(book.ImageSource, UriKind.RelativeOrAbsolute));
 
         }
     }

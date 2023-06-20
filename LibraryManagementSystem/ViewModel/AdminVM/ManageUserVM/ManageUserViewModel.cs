@@ -193,9 +193,12 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageUserVM
                 UserDTO item = p.Items[p.SelectedIndex] as UserDTO;
                 int id = item.ID;
                 EditingUserWindow window = new EditingUserWindow(id);
-                FullName = item.FullName.ToString();
-                EmailAddress = item.EmailAddress.ToString();
-                //SoDienThoai = item.SoDienThoai.ToString();
+                if (item.FullName != null)
+                    FullName = item.FullName.ToString();
+                if (item.EmailAddress != null)
+                    EmailAddress = item.EmailAddress.ToString();
+                if (item.PhoneNumber != null)
+                    PhoneNumber = item.PhoneNumber.ToString();
                 window.ShowDialog();
                 Loaded(p);
             });
@@ -211,7 +214,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageUserVM
                         {
                             try
                             {
-                                if (!string.IsNullOrEmpty(FullName) && !string.IsNullOrEmpty(EmailAddress))
+                                if (!string.IsNullOrEmpty(FullName) && !string.IsNullOrEmpty(EmailAddress) && !string.IsNullOrEmpty(PhoneNumber))
                                 {
                                     string match = @"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*";
                                     Regex reg = new Regex(match);
@@ -222,8 +225,19 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageUserVM
                                         ms.ShowDialog();
                                         return;
                                     }
+
+                                    match = @"^(\+[0-9]{1,3}[- ]?)?([0-9]{10})$";
+                                    reg = new Regex(match);
+                                    if (!reg.IsMatch(PhoneNumber))
+                                    {
+                                        MessageBoxLMS ms = new MessageBoxLMS("Thông báo", "Phone number is not valid!", MessageType.Error, MessageButtons.OK);
+                                        ms.ShowDialog();
+                                        return;
+                                    }
+
                                     user.FULLNAME = FullName;
                                     user.EMAILADDRESS = EmailAddress;
+                                    user.PHONENUMBER = PhoneNumber;
                                     MessageBoxLMS msb = new MessageBoxLMS("Notification", "Updating is successful!", MessageType.Accept, MessageButtons.OK);
                                     msb.ShowDialog();
                                     p.Hide();
@@ -390,6 +404,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageUserVM
                     user.ID = item.ID;
                     user.FullName = item.FULLNAME;
                     user.EmailAddress = item.EMAILADDRESS;
+                    user.PhoneNumber = item.PHONENUMBER;
                     ListUserManage.Add(user);
                 }
             }

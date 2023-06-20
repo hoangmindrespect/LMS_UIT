@@ -140,6 +140,20 @@ namespace LibraryManagementSystem.ViewModel.LoginVM
             get { return _IsInvalidPasswordReg; }
             set { _IsInvalidPasswordReg = value; OnPropertyChanged(); }
         }
+
+        private bool _IsTooShortUsernameReg;
+        public bool IsTooShortUsernameReg
+        {
+            get { return _IsTooShortUsernameReg; }
+            set { _IsTooShortUsernameReg = value; OnPropertyChanged(); }
+        }
+
+        private bool _IsDuplicateUsernameReg;
+        public bool IsDuplicateUsernameReg
+        {
+            get { return _IsDuplicateUsernameReg; }
+            set { _IsDuplicateUsernameReg = value; OnPropertyChanged(); }
+        }
         #endregion
 
         #region ICommand
@@ -338,7 +352,7 @@ namespace LibraryManagementSystem.ViewModel.LoginVM
 
             RegisterLMS = new RelayCommand<Label>((p) => { return true; }, async (p) =>
             {
-                IsNullNameReg = IsNullEmailReg = IsNullUserReg = IsNullPasswordReg = IsInvalidPasswordReg = false;
+                IsNullNameReg = IsNullEmailReg = IsNullUserReg = IsNullPasswordReg = IsInvalidPasswordReg = IsTooShortUsernameReg = IsDuplicateUsernameReg = false;
 
                 if (string.IsNullOrEmpty(FullNameReg)) IsNullNameReg = true;
                 if (string.IsNullOrEmpty(EmailReg)) IsNullEmailReg = true;
@@ -349,6 +363,9 @@ namespace LibraryManagementSystem.ViewModel.LoginVM
 
                 if (PasswordReg.Length < 8 || !HasNumber(PasswordReg) || !HasSpecialCharacter(PasswordReg) || !HasUppercaseCharacter(PasswordReg)) IsInvalidPasswordReg = true;
                 if (IsInvalidPasswordReg) return;
+
+                if (UsernameReg.Length < 8) IsTooShortUsernameReg = true;
+                if (IsTooShortUsernameReg) return;
 
                 string match = @"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*";
                 Regex reg = new Regex(match);

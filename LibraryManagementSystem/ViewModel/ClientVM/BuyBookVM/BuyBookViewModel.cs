@@ -239,6 +239,8 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                         book.TacGia = item.TACGIA;
                         book.NXB = item.NHAXUATBAN;
                         book.SoLuong = (int)item.SOLUONG;
+                        book.MoTa = item.MOTA;
+                        book.TheLoai = item.THELOAI;
                         book.Gia = (decimal)item.GIA;
                         book.ImageSource = item.IMAGESOURCE;
                         book.NamXB = (item.NAMXUATBAN).ToString();
@@ -333,7 +335,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
             {
                 Quantity = 1;
                 DetailsBook w = new DetailsBook(SelectedItem);
-                MessageBox.Show(SelectedItem.MoTa);
+                //MessageBox.Show(SelectedItem.MoTa);
                 w.ShowDialog();
             });
 
