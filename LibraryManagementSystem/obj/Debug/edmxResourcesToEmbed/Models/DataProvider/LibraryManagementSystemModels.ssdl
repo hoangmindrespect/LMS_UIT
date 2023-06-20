@@ -28,15 +28,6 @@
     <Property Name="NGAYMUON" Type="smalldatetime" Nullable="false" />
     <Property Name="NGAYHETHAN" Type="smalldatetime" />
   </EntityType>
-  <EntityType Name="BILL">
-    <Key>
-      <PropertyRef Name="MAHD" />
-    </Key>
-    <Property Name="MAHD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="NGHD" Type="smalldatetime" Nullable="false" />
-    <Property Name="MAKH" Type="int" />
-    <Property Name="TRIGIA" Type="money" />
-  </EntityType>
   <EntityType Name="BOOK">
     <Key>
       <PropertyRef Name="ID" />
@@ -69,15 +60,6 @@
     <Property Name="MASACH" Type="int" Nullable="false" />
     <Property Name="MAKH" Type="int" Nullable="false" />
     <Property Name="SOLUONGHT" Type="int" />
-  </EntityType>
-  <EntityType Name="CTHD">
-    <Key>
-      <PropertyRef Name="MAHD" />
-      <PropertyRef Name="MASACH" />
-    </Key>
-    <Property Name="MAHD" Type="int" Nullable="false" />
-    <Property Name="MASACH" Type="int" Nullable="false" />
-    <Property Name="SOLUONG" Type="int" />
   </EntityType>
   <EntityType Name="DETAIIMPORT">
     <Key>
@@ -139,7 +121,7 @@
     <Property Name="totalValue" Type="money" />
     <Property Name="orderDate" Type="smalldatetime" Nullable="false" />
     <Property Name="orderCusId" Type="int" />
-    <Property Name="orderStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="orderStatus" Type="int" />
   </EntityType>
   <EntityType Name="ORDER_DETAIL">
     <Key>
@@ -150,6 +132,14 @@
     <Property Name="bookID" Type="int" Nullable="false" />
     <Property Name="quantity" Type="int" />
   </EntityType>
+  <EntityType Name="STATUS_ORDER">
+    <Key>
+      <PropertyRef Name="statusId" />
+    </Key>
+    <Property Name="statusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="orderStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="COLOR" Type="varchar" MaxLength="20" />
+  </EntityType>
   <Association Name="FK__BBFORM__MAKH__6CD828CA">
     <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
     <End Role="BBFORM" Type="Self.BBFORM" Multiplicity="*" />
@@ -158,18 +148,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="BBFORM">
-        <PropertyRef Name="MAKH" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__BILL__MAKH__44CA3770">
-    <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
-    <End Role="BILL" Type="Self.BILL" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ACCOUNT">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="BILL">
         <PropertyRef Name="MAKH" />
       </Dependent>
     </ReferentialConstraint>
@@ -194,30 +172,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CART">
-        <PropertyRef Name="MASACH" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__CTHD__MAHD__47A6A41B">
-    <End Role="BILL" Type="Self.BILL" Multiplicity="1" />
-    <End Role="CTHD" Type="Self.CTHD" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="BILL">
-        <PropertyRef Name="MAHD" />
-      </Principal>
-      <Dependent Role="CTHD">
-        <PropertyRef Name="MAHD" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__CTHD__MASACH__489AC854">
-    <End Role="BOOK" Type="Self.BOOK" Multiplicity="1" />
-    <End Role="CTHD" Type="Self.CTHD" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="BOOK">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CTHD">
         <PropertyRef Name="MASACH" />
       </Dependent>
     </ReferentialConstraint>
@@ -282,6 +236,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__ORDER_BOO__order__0A688BB1">
+    <End Role="STATUS_ORDER" Type="Self.STATUS_ORDER" Multiplicity="0..1" />
+    <End Role="ORDER_BOOKS" Type="Self.ORDER_BOOKS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STATUS_ORDER">
+        <PropertyRef Name="statusId" />
+      </Principal>
+      <Dependent Role="ORDER_BOOKS">
+        <PropertyRef Name="orderStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__ORDER_DET__bookI__793DFFAF">
     <End Role="BOOK" Type="Self.BOOK" Multiplicity="1" />
     <End Role="ORDER_DETAIL" Type="Self.ORDER_DETAIL" Multiplicity="*" />
@@ -309,24 +275,19 @@
   <EntityContainer Name="lmsDatabaseModelStoreContainer">
     <EntitySet Name="ACCOUNT" EntityType="Self.ACCOUNT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BBFORM" EntityType="Self.BBFORM" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="BILL" EntityType="Self.BILL" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BOOK" EntityType="Self.BOOK" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BuildVersion" EntityType="Self.BuildVersion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CART" EntityType="Self.CART" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CTHD" EntityType="Self.CTHD" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DETAIIMPORT" EntityType="Self.DETAIIMPORT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DETAIL_BBFORM" EntityType="Self.DETAIL_BBFORM" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IMPORT" EntityType="Self.IMPORT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ORDER_BOOKS" EntityType="Self.ORDER_BOOKS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ORDER_DETAIL" EntityType="Self.ORDER_DETAIL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="STATUS_ORDER" EntityType="Self.STATUS_ORDER" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__BBFORM__MAKH__6CD828CA" Association="Self.FK__BBFORM__MAKH__6CD828CA">
       <End Role="ACCOUNT" EntitySet="ACCOUNT" />
       <End Role="BBFORM" EntitySet="BBFORM" />
-    </AssociationSet>
-    <AssociationSet Name="FK__BILL__MAKH__44CA3770" Association="Self.FK__BILL__MAKH__44CA3770">
-      <End Role="ACCOUNT" EntitySet="ACCOUNT" />
-      <End Role="BILL" EntitySet="BILL" />
     </AssociationSet>
     <AssociationSet Name="FK__CART__MAKH__5224328E" Association="Self.FK__CART__MAKH__5224328E">
       <End Role="ACCOUNT" EntitySet="ACCOUNT" />
@@ -335,14 +296,6 @@
     <AssociationSet Name="FK__CART__MASACH__51300E55" Association="Self.FK__CART__MASACH__51300E55">
       <End Role="BOOK" EntitySet="BOOK" />
       <End Role="CART" EntitySet="CART" />
-    </AssociationSet>
-    <AssociationSet Name="FK__CTHD__MAHD__47A6A41B" Association="Self.FK__CTHD__MAHD__47A6A41B">
-      <End Role="BILL" EntitySet="BILL" />
-      <End Role="CTHD" EntitySet="CTHD" />
-    </AssociationSet>
-    <AssociationSet Name="FK__CTHD__MASACH__489AC854" Association="Self.FK__CTHD__MASACH__489AC854">
-      <End Role="BOOK" EntitySet="BOOK" />
-      <End Role="CTHD" EntitySet="CTHD" />
     </AssociationSet>
     <AssociationSet Name="FK__DETAIIMPOR__SOHD__4E53A1AA" Association="Self.FK__DETAIIMPOR__SOHD__4E53A1AA">
       <End Role="IMPORT" EntitySet="IMPORT" />
@@ -362,6 +315,10 @@
     </AssociationSet>
     <AssociationSet Name="FK__ORDER_BOO__order__0697FACD" Association="Self.FK__ORDER_BOO__order__0697FACD">
       <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+      <End Role="ORDER_BOOKS" EntitySet="ORDER_BOOKS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ORDER_BOO__order__0A688BB1" Association="Self.FK__ORDER_BOO__order__0A688BB1">
+      <End Role="STATUS_ORDER" EntitySet="STATUS_ORDER" />
       <End Role="ORDER_BOOKS" EntitySet="ORDER_BOOKS" />
     </AssociationSet>
     <AssociationSet Name="FK__ORDER_DET__bookI__793DFFAF" Association="Self.FK__ORDER_DET__bookI__793DFFAF">

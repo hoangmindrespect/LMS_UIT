@@ -31,16 +31,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="BILLs">
-      <EntityTypeMapping TypeName="lmsDatabaseModel.BILL">
-        <MappingFragment StoreEntitySet="BILL">
-          <ScalarProperty Name="TRIGIA" ColumnName="TRIGIA" />
-          <ScalarProperty Name="MAKH" ColumnName="MAKH" />
-          <ScalarProperty Name="NGHD" ColumnName="NGHD" />
-          <ScalarProperty Name="MAHD" ColumnName="MAHD" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="BOOKs">
       <EntityTypeMapping TypeName="lmsDatabaseModel.BOOK">
         <MappingFragment StoreEntitySet="BOOK">
@@ -73,15 +63,6 @@
           <ScalarProperty Name="SOLUONGHT" ColumnName="SOLUONGHT" />
           <ScalarProperty Name="MAKH" ColumnName="MAKH" />
           <ScalarProperty Name="MASACH" ColumnName="MASACH" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CTHDs">
-      <EntityTypeMapping TypeName="lmsDatabaseModel.CTHD">
-        <MappingFragment StoreEntitySet="CTHD">
-          <ScalarProperty Name="SOLUONG" ColumnName="SOLUONG" />
-          <ScalarProperty Name="MASACH" ColumnName="MASACH" />
-          <ScalarProperty Name="MAHD" ColumnName="MAHD" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -154,6 +135,15 @@
           <ScalarProperty Name="quantity" ColumnName="quantity" />
           <ScalarProperty Name="bookID" ColumnName="bookID" />
           <ScalarProperty Name="orderID" ColumnName="orderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="STATUS_ORDER">
+      <EntityTypeMapping TypeName="lmsDatabaseModel.STATUS_ORDER">
+        <MappingFragment StoreEntitySet="STATUS_ORDER">
+          <ScalarProperty Name="COLOR" ColumnName="COLOR" />
+          <ScalarProperty Name="orderStatus" ColumnName="orderStatus" />
+          <ScalarProperty Name="statusId" ColumnName="statusId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

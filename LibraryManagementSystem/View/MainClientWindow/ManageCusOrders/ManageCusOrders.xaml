@@ -60,7 +60,7 @@
                         <materialDesign:Card Background="#ffffff" Height="auto" Margin="20 0 20 20" MouseEnter="Card_MouseEnter" MouseLeave="Card_MouseLeave">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Margin="20 0 0 0" Text="{Binding OrderDate}" FontSize="15" VerticalAlignment="Center" Padding="0 30 0 30" Width="200"/>
-                                <TextBlock Margin="20 0 0 0" Text="{Binding OrderStatus}" FontSize="15" VerticalAlignment="Center" Width="100" Foreground="GreenYellow"/>
+                                <TextBlock Margin="20 0 0 0" Text="{Binding OrderStatusDisplay}" FontSize="15" VerticalAlignment="Center" Width="100" Foreground="{Binding OrderStatusColor}"/>
                                 <Expander Margin="20 0 0 0" Header="Details..." HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="Transparent" Width="350">
                                     <ListView ItemsSource="{Binding Details}" Margin="10" Name="details">
                                         <ListView.ItemTemplate>

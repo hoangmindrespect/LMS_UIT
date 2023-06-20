@@ -226,9 +226,10 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageBookVM
                 TenSach = item.TenSach.ToString();
                 TacGia = item.TacGia.ToString();
                 NhaXuatBan = item.NXB;
-                NamXuatBan = item.NamXB.ToString();
                 Gia = item.Gia.ToString();
-                if(item.MoTa != null)
+                if (!string.IsNullOrEmpty(item.NamXB))
+                    NamXuatBan = item.NamXB.ToString();
+                if (!string.IsNullOrEmpty(MoTa))
                     MoTa = item.MoTa.ToString();
                 TheLoai = null;
                 
@@ -559,7 +560,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageBookVM
                         book.SoLuong = (int)item.SOLUONG;
                         book.Gia = (int)item.GIA;
                         book.NXB = item.NHAXUATBAN;
-                        book.NamXB = (int)item.NAMXUATBAN;
+                        book.NamXB = (item.NAMXUATBAN).ToString();
                         book.TheLoai = item.THELOAI;
                         book.MoTa = item.MOTA;
                         book.ImageSource = item.IMAGESOURCE;

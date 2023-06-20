@@ -231,6 +231,8 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                 {
                     foreach (var item in context.BOOKs)
                     {
+                        if (string.IsNullOrEmpty(item.IMAGESOURCE))
+                            continue;
                         BookDTO book = new BookDTO();
                         book.MaSach = item.ID;
                         book.TenSach = item.TENSACH;
@@ -239,8 +241,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                         book.SoLuong = (int)item.SOLUONG;
                         book.Gia = (decimal)item.GIA;
                         book.ImageSource = item.IMAGESOURCE;
-                        if (item.NAMXUATBAN.HasValue)
-                            book.NamXB = (int)item.NAMXUATBAN;
+                        book.NamXB = (item.NAMXUATBAN).ToString();
                         Books.Add(book);
                     }
                 }
@@ -332,6 +333,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
             {
                 Quantity = 1;
                 DetailsBook w = new DetailsBook(SelectedItem);
+                MessageBox.Show(SelectedItem.MoTa);
                 w.ShowDialog();
             });
 
@@ -578,6 +580,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                                         order.orderAddress = Address;
                                         order.totalValue = TotalValueForOneBookID;
                                         order.orderDate = DateTime.Now;
+                                        order.orderStatus = 1;
                                         context.ORDER_BOOKS.Add(order);
                                         context.SaveChanges();
                                         id = order.orderID;
@@ -632,6 +635,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                                         order.orderAddress = Address;
                                         order.totalValue = TotalCartValue;
                                         order.orderDate = DateTime.Now;
+                                        order.orderStatus = 1;
                                         context.ORDER_BOOKS.Add(order);
                                         context.SaveChanges();
                                         id = order.orderID;
@@ -771,7 +775,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                                 bookInCart.SoLuong = (int)item.SOLUONGHT;
                                 bookInCart.Gia = (decimal)book.GIA * (int)item.SOLUONGHT;
                                 bookInCart.ImageSource = book.IMAGESOURCE;
-                                bookInCart.NamXB = (int)book.NAMXUATBAN;
+                                bookInCart.NamXB = book.NAMXUATBAN.ToString();
                                 BooksInCart.Add(bookInCart);
                             }
                         }

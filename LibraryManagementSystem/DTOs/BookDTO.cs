@@ -13,7 +13,7 @@ namespace LibraryManagementSystem.DTOs
         public int MaSach { get; set; }
         public string TenSach { get; set; }
         public string TacGia { get; set; }
-        public int NamXB { get; set; }
+        public string NamXB { get; set; }
         public string MoTa { get; set; }
         public string ImageSource { get; set; }
         public decimal Gia { get; set; }

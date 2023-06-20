@@ -94,6 +94,8 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM
 
                     foreach (var item in context.BOOKs)
                     {
+                        if (string.IsNullOrEmpty(item.IMAGESOURCE))
+                            continue;
                         BookDTO book = new BookDTO();
                         book.TenSach = item.TENSACH;
                         book.TacGia = item.TACGIA;
@@ -101,10 +103,10 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM
                         book.SoLuong = (int)item.SOLUONG;
                         book.Gia = (decimal)item.GIA;
                         book.ImageSource = item.IMAGESOURCE;
-                        if(item.NAMXUATBAN != null)
-                            book.NamXB = (int)item.NAMXUATBAN;
+                        book.NamXB = item.NAMXUATBAN.ToString();
                         book.MaSach = (int)item.ID;
-                        Books.Add(book);                    }
+                        Books.Add(book);         
+                    }
                 }
 
                 p.ItemsSource = Books;                
@@ -120,7 +122,6 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.BorrowBookVM
                          {
                              Name = (from s in context.ACCOUNTs where s.MSSV == ID select s.FULLNAME).FirstOrDefault();
                              IDClass = (from s in context.ACCOUNTs where s.MSSV == ID select s.IDCLASS).FirstOrDefault();
-
                              StartDay = DateTime.Now.ToShortDateString();
                              DueDay = DateTime.Now.AddDays(30).ToShortDateString();
 

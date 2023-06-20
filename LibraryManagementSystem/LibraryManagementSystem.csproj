@@ -210,9 +210,6 @@
     <Compile Include="Models\DataProvider\BBFORM.cs">
       <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataProvider\BILL.cs">
-      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DataProvider\BOOK.cs">
       <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
     </Compile>
@@ -220,9 +217,6 @@
       <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataProvider\CART.cs">
-      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataProvider\CTHD.cs">
       <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataProvider\DETAIIMPORT.cs">
@@ -256,6 +250,9 @@
       <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataProvider\ORDER_DETAIL.cs">
+      <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataProvider\STATUS_ORDER.cs">
       <DependentUpon>LibraryManagementSystemModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Utils\ConverterValue\BoolValueConverter.cs" />

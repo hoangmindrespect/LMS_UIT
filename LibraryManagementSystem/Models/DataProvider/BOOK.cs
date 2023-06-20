@@ -18,7 +18,6 @@ namespace LibraryManagementSystem.Models.DataProvider
         public BOOK()
         {
             this.CARTs = new HashSet<CART>();
-            this.CTHDs = new HashSet<CTHD>();
             this.DETAIL_BBFORM = new HashSet<DETAIL_BBFORM>();
             this.ORDER_DETAIL = new HashSet<ORDER_DETAIL>();
         }
@@ -36,8 +35,6 @@ namespace LibraryManagementSystem.Models.DataProvider
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CART> CARTs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CTHD> CTHDs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETAIL_BBFORM> DETAIL_BBFORM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

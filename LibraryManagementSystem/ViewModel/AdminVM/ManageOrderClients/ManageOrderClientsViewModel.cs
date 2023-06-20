@@ -25,7 +25,6 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageOrderClients
            
             Loaded = new RelayCommand<ItemsControl>((p) => { return true; }, (p) =>
             {
-                //MessageBox.Show("Jo");
                 Orders = new ObservableCollection<OrderDTO>();
                 using (var context = new LMSEntities1())
                 {
@@ -39,7 +38,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageOrderClients
                         order.Email = item.orderEmail;
                         order.OrderDate = item.orderDate.ToLongDateString();
                         //order.CusId = (int)item.orderCusId;
-                        order.OrderStatus = item.orderStatus;
+                        //order.OrderStatus = item.orderStatus;
                         order.Details = new ObservableCollection<BookDTO>();
                         // thêm chi tiết sách
                         foreach (var item2 in context.ORDER_DETAIL)

@@ -27,16 +27,15 @@ namespace LibraryManagementSystem.Models.DataProvider
     
         public virtual DbSet<ACCOUNT> ACCOUNTs { get; set; }
         public virtual DbSet<BBFORM> BBFORMs { get; set; }
-        public virtual DbSet<BILL> BILLs { get; set; }
         public virtual DbSet<BOOK> BOOKs { get; set; }
         public virtual DbSet<BuildVersion> BuildVersions { get; set; }
         public virtual DbSet<CART> CARTs { get; set; }
-        public virtual DbSet<CTHD> CTHDs { get; set; }
         public virtual DbSet<DETAIIMPORT> DETAIIMPORTs { get; set; }
         public virtual DbSet<DETAIL_BBFORM> DETAIL_BBFORM { get; set; }
         public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
         public virtual DbSet<IMPORT> IMPORTs { get; set; }
         public virtual DbSet<ORDER_BOOKS> ORDER_BOOKS { get; set; }
         public virtual DbSet<ORDER_DETAIL> ORDER_DETAIL { get; set; }
+        public virtual DbSet<STATUS_ORDER> STATUS_ORDER { get; set; }
     }
 }

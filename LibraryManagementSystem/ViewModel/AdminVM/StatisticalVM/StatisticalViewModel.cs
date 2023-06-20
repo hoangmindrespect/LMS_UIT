@@ -212,7 +212,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.StatisticalVM
                     increaseProfit = "100";
                 else
                 {
-                    increaseProfit = decimal.Round(pyear / prePyear, 2).ToString();
+                    increaseProfit = decimal.Round((pyear - prePyear) / Math.Abs(prePyear), 2).ToString();
                 }
 
                 if (decimal.Parse(increaseIncome) > 1)
@@ -292,7 +292,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.StatisticalVM
                     increaseProfit = "100";
                 else
                 {
-                    increaseProfit = decimal.Round(pmonth / prePmonth, 2).ToString();
+                    increaseProfit = decimal.Round((pmonth - prePmonth) / Math.Abs(prePmonth), 2).ToString();
                 }
 
                 if (decimal.Parse(increaseIncome) > 1)
@@ -346,12 +346,25 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.StatisticalVM
                 CollectionMonth.Add("tháng " + i.ToString());
             }
             Month = "tháng " + now.Month.ToString();
-            
-            
+
+
             // so sánh so với tháng trước tháng hiện tại.
-            increaseIncome = decimal.Round(getTotalIncomeMonth(DateTime.Now.Year, DateTime.Now.Month) / (getTotalIncomeMonth(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month)), 2).ToString();
-            increaseSpending = decimal.Round((getTotalSpendingMonth(DateTime.Now.Year, DateTime.Now.Month) / getTotalSpendingMonth(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month)), 2).ToString();
-            increaseProfit = decimal.Round( Math.Abs((getTotalIncomeMonth(DateTime.Now.Year, DateTime.Now.Month) - getTotalSpendingMonth(DateTime.Now.Year, DateTime.Now.Month)) / (getTotalIncomeMonth(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month) - getTotalSpendingMonth(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month))), 2).ToString();
+            decimal imonth = getTotalIncomeMonth(DateTime.Now.Year, DateTime.Now.Month);
+            decimal preImonth = getTotalIncomeMonth(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month);
+            decimal smonth = getTotalSpendingMonth(DateTime.Now.Year, DateTime.Now.Month);
+            decimal preSmonth = getTotalSpendingMonth(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month);
+            decimal pmonth = getTotalIncomeMonth(DateTime.Now.Year, DateTime.Now.Month) - getTotalSpendingMonth(DateTime.Now.Year, DateTime.Now.Month);
+            decimal prePmonth = getTotalIncomeMonth(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month) - getTotalSpendingMonth(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month);
+
+            if (preImonth > 0)
+                increaseIncome = decimal.Round((imonth / preImonth), 2).ToString();
+            else
+                increaseIncome = "100";
+            if (preSmonth > 0)
+                increaseSpending = decimal.Round((smonth / preSmonth), 2).ToString();
+            else
+                increaseSpending = "100";
+            increaseProfit = decimal.Round(((pmonth - prePmonth)/Math.Abs(preSmonth)), 2).ToString();
 
             //handle arrow
             if (decimal.Parse(increaseIncome) > 1)

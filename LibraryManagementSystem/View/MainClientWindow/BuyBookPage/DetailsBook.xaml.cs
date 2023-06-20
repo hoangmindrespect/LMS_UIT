@@ -29,7 +29,10 @@ namespace LibraryManagementSystem.View.MainClientWindow.BuyBookPage
             nhaxb.Text = book.NXB;
             namxb.Text = book.NamXB.ToString();
             sl.Text = book.SoLuong.ToString();
-            gia.Text = book.Gia.ToString();
+            gia.Text =decimal.Round(book.Gia, 0).ToString().Replace('$', '₫');
+            //if(!string.IsNullOrEmpty(book.MoTa))
+            //    mt.Text = book.MoTa.ToString();
+            //tl.Text = book.TheLoai.ToString();
             img.Source = new BitmapImage(new Uri(book.ImageSource, UriKind.RelativeOrAbsolute));
 
         }

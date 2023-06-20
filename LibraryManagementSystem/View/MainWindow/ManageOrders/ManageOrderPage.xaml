@@ -27,40 +27,48 @@
 
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal" Margin=" 20 0 0 0">
-                <Label Content="Order Creation Date"
+                <Label Content="Client"
                        VerticalAlignment="Center"
                        FontSize="17" 
-                       Margin="10 0 0 0"
+                       Margin="15 0 0 0"
                        FontWeight="Bold"/>
-
-                <Label Content="Status"
+                <Label Content="Phone Number"
                        VerticalAlignment="Center"
                        FontSize="17" 
-                       Margin="70 0 0 0"
-                       FontWeight="Bold"/>
-
-                <Label Content="Products"
-                       VerticalAlignment="Center"
-                       FontSize="17" 
-                       Margin="80 0 0 0"
+                       Margin="135 0 0 0"
                        FontWeight="Bold"/>
 
                 <Label Content="Delivery Address"
                        VerticalAlignment="Center"
                        FontSize="17" 
-                       Margin="270 0 0 0"
+                       Margin="50 0 0 0"
                        FontWeight="Bold"/>
+                
+                <Label Content="Status"
+                       VerticalAlignment="Center"
+                       FontSize="17" 
+                       Margin="85 0 0 0"
+                       FontWeight="Bold"/>
+
+                <Label Content="Products"
+                       VerticalAlignment="Center"
+                       FontSize="17" 
+                       Margin="85 0 0 0"
+                       FontWeight="Bold"/>
+
             </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1">
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                 <ItemsControl ItemsSource="{Binding Orders}"  Name="ordersList">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <materialDesign:Card Background="#ffffff" Height="auto" Margin="20 0 20 20" MouseEnter="Card_MouseEnter" MouseLeave="Card_MouseLeave">
+                            <materialDesign:Card Background="#ffffff" Height="auto" Margin="20 0 20 20" MouseEnter="Card_MouseEnter" MouseLeave="Card_MouseLeave" BorderBrush="Transparent" BorderThickness="0">
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Margin="20 0 0 0" Text="{Binding OrderDate}" FontSize="15" VerticalAlignment="Center" Padding="0 30 0 30" Width="200"/>
+                                    <TextBlock Margin="20 0 0 0" Text="{Binding Name}" FontSize="15" VerticalAlignment="Center" Padding="0 30 0 30" Width="170"/>
+                                    <TextBlock Margin="20 0 0 0" Text="{Binding PhoneNumber}" FontSize="15" VerticalAlignment="Center" TextWrapping="Wrap" Width="150" />
+                                    <TextBlock Margin="20 0 0 0" Text="{Binding Address}" FontSize="15" VerticalAlignment="Center" TextWrapping="Wrap" Width="200" />
                                     <TextBlock Margin="20 0 0 0" Text="{Binding OrderStatus}" FontSize="15" VerticalAlignment="Center" Width="100" Foreground="GreenYellow"/>
                                     <Expander Margin="20 0 0 0" Header="Details..." HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="Transparent" Width="350">
                                         <ListView ItemsSource="{Binding Details}" Margin="10" Name="details">
@@ -76,8 +84,6 @@
                                             </ListView.ItemTemplate>
                                         </ListView>
                                     </Expander>
-                                    <TextBlock Margin="20 0 0 0" Text="{Binding Address}" FontSize="15" VerticalAlignment="Center" TextWrapping="Wrap" Width="200" />
-
                                 </StackPanel>
                             </materialDesign:Card>
                         </DataTemplate>

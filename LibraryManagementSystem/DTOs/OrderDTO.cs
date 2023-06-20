@@ -16,7 +16,10 @@ namespace LibraryManagementSystem.DTOs
         public string Email { get; set; }
         public int CusId { get; set; }
         public string OrderDate { get; set; }
-        public string OrderStatus { get; set; }
+        public int OrderStatus { get; set; }
+        public string OrderStatusColor { get; set; }
+        public string OrderStatusDisplay { get; set; }
+
         public ObservableCollection<BookDTO> Details { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CloudinaryDotNet.Actions;
+using DocumentFormat.OpenXml.Drawing.ChartDrawing;
 using LibraryManagementSystem.DTOs;
 using LibraryManagementSystem.Models.DataProvider;
 using LibraryManagementSystem.View.Login;
@@ -41,7 +42,9 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.ManageOrderVM
                             order.Email = item.orderEmail;
                             order.OrderDate = item.orderDate.ToLongDateString();
                             order.CusId = (int)item.orderCusId;
-                            order.OrderStatus = item.orderStatus;
+                            order.OrderStatus = (int)item.orderStatus;
+                            order.OrderStatusDisplay = (from s in context.STATUS_ORDER where s.statusId == (int)item.orderStatus select s.orderStatus).FirstOrDefault();
+                            order.OrderStatusColor = (from s in context.STATUS_ORDER where s.statusId == (int)item.orderStatus select s.COLOR).FirstOrDefault();
                             order.Details = new ObservableCollection<BookDTO>();
                             // thêm chi tiết sách
                             foreach (var item2 in context.ORDER_DETAIL)

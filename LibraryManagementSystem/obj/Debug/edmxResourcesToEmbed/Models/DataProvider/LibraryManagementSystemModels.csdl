@@ -3,24 +3,19 @@
   <EntityContainer Name="LMSEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="ACCOUNTs" EntityType="lmsDatabaseModel.ACCOUNT" />
     <EntitySet Name="BBFORMs" EntityType="lmsDatabaseModel.BBFORM" />
-    <EntitySet Name="BILLs" EntityType="lmsDatabaseModel.BILL" />
     <EntitySet Name="BOOKs" EntityType="lmsDatabaseModel.BOOK" />
     <EntitySet Name="BuildVersions" EntityType="lmsDatabaseModel.BuildVersion" />
     <EntitySet Name="CARTs" EntityType="lmsDatabaseModel.CART" />
-    <EntitySet Name="CTHDs" EntityType="lmsDatabaseModel.CTHD" />
     <EntitySet Name="DETAIIMPORTs" EntityType="lmsDatabaseModel.DETAIIMPORT" />
     <EntitySet Name="DETAIL_BBFORM" EntityType="lmsDatabaseModel.DETAIL_BBFORM" />
     <EntitySet Name="ErrorLogs" EntityType="lmsDatabaseModel.ErrorLog" />
     <EntitySet Name="IMPORTs" EntityType="lmsDatabaseModel.IMPORT" />
     <EntitySet Name="ORDER_BOOKS" EntityType="lmsDatabaseModel.ORDER_BOOKS" />
     <EntitySet Name="ORDER_DETAIL" EntityType="lmsDatabaseModel.ORDER_DETAIL" />
+    <EntitySet Name="STATUS_ORDER" EntityType="lmsDatabaseModel.STATUS_ORDER" />
     <AssociationSet Name="FK__BBFORM__MAKH__6CD828CA" Association="lmsDatabaseModel.FK__BBFORM__MAKH__6CD828CA">
       <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
       <End Role="BBFORM" EntitySet="BBFORMs" />
-    </AssociationSet>
-    <AssociationSet Name="FK__BILL__MAKH__44CA3770" Association="lmsDatabaseModel.FK__BILL__MAKH__44CA3770">
-      <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
-      <End Role="BILL" EntitySet="BILLs" />
     </AssociationSet>
     <AssociationSet Name="FK__CART__MAKH__5224328E" Association="lmsDatabaseModel.FK__CART__MAKH__5224328E">
       <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
@@ -38,17 +33,9 @@
       <End Role="BBFORM" EntitySet="BBFORMs" />
       <End Role="DETAIL_BBFORM" EntitySet="DETAIL_BBFORM" />
     </AssociationSet>
-    <AssociationSet Name="FK__CTHD__MAHD__47A6A41B" Association="lmsDatabaseModel.FK__CTHD__MAHD__47A6A41B">
-      <End Role="BILL" EntitySet="BILLs" />
-      <End Role="CTHD" EntitySet="CTHDs" />
-    </AssociationSet>
     <AssociationSet Name="FK__CART__MASACH__51300E55" Association="lmsDatabaseModel.FK__CART__MASACH__51300E55">
       <End Role="BOOK" EntitySet="BOOKs" />
       <End Role="CART" EntitySet="CARTs" />
-    </AssociationSet>
-    <AssociationSet Name="FK__CTHD__MASACH__489AC854" Association="lmsDatabaseModel.FK__CTHD__MASACH__489AC854">
-      <End Role="BOOK" EntitySet="BOOKs" />
-      <End Role="CTHD" EntitySet="CTHDs" />
     </AssociationSet>
     <AssociationSet Name="FK__DETAIL_BB__MASAC__70A8B9AE" Association="lmsDatabaseModel.FK__DETAIL_BB__MASAC__70A8B9AE">
       <End Role="BOOK" EntitySet="BOOKs" />
@@ -61,6 +48,10 @@
     <AssociationSet Name="FK__DETAIIMPOR__SOHD__4E53A1AA" Association="lmsDatabaseModel.FK__DETAIIMPOR__SOHD__4E53A1AA">
       <End Role="IMPORT" EntitySet="IMPORTs" />
       <End Role="DETAIIMPORT" EntitySet="DETAIIMPORTs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ORDER_BOO__order__0A688BB1" Association="lmsDatabaseModel.FK__ORDER_BOO__order__0A688BB1">
+      <End Role="STATUS_ORDER" EntitySet="STATUS_ORDER" />
+      <End Role="ORDER_BOOKS" EntitySet="ORDER_BOOKS" />
     </AssociationSet>
     <AssociationSet Name="FK__ORDER_DET__order__7849DB76" Association="lmsDatabaseModel.FK__ORDER_DET__order__7849DB76">
       <End Role="ORDER_BOOKS" EntitySet="ORDER_BOOKS" />
@@ -84,7 +75,6 @@
     <Property Name="GENDER" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="PHONENUMBER" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="BBFORMs" Relationship="lmsDatabaseModel.FK__BBFORM__MAKH__6CD828CA" FromRole="ACCOUNT" ToRole="BBFORM" />
-    <NavigationProperty Name="BILLs" Relationship="lmsDatabaseModel.FK__BILL__MAKH__44CA3770" FromRole="ACCOUNT" ToRole="BILL" />
     <NavigationProperty Name="CARTs" Relationship="lmsDatabaseModel.FK__CART__MAKH__5224328E" FromRole="ACCOUNT" ToRole="CART" />
     <NavigationProperty Name="IMPORTs" Relationship="lmsDatabaseModel.FK__IMPORT__MANV__4B7734FF" FromRole="ACCOUNT" ToRole="IMPORT" />
     <NavigationProperty Name="ORDER_BOOKS" Relationship="lmsDatabaseModel.FK__ORDER_BOO__order__0697FACD" FromRole="ACCOUNT" ToRole="ORDER_BOOKS" />
@@ -102,17 +92,6 @@
     <NavigationProperty Name="ACCOUNT" Relationship="lmsDatabaseModel.FK__BBFORM__MAKH__6CD828CA" FromRole="BBFORM" ToRole="ACCOUNT" />
     <NavigationProperty Name="DETAIL_BBFORM" Relationship="lmsDatabaseModel.FK__DETAIL_BB__MAPHI__6FB49575" FromRole="BBFORM" ToRole="DETAIL_BBFORM" />
   </EntityType>
-  <EntityType Name="BILL">
-    <Key>
-      <PropertyRef Name="MAHD" />
-    </Key>
-    <Property Name="MAHD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="NGHD" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="MAKH" Type="Int32" />
-    <Property Name="TRIGIA" Type="Decimal" Precision="19" Scale="4" />
-    <NavigationProperty Name="ACCOUNT" Relationship="lmsDatabaseModel.FK__BILL__MAKH__44CA3770" FromRole="BILL" ToRole="ACCOUNT" />
-    <NavigationProperty Name="CTHDs" Relationship="lmsDatabaseModel.FK__CTHD__MAHD__47A6A41B" FromRole="BILL" ToRole="CTHD" />
-  </EntityType>
   <EntityType Name="BOOK">
     <Key>
       <PropertyRef Name="ID" />
@@ -128,7 +107,6 @@
     <Property Name="MOTA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="IMAGESOURCE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="CARTs" Relationship="lmsDatabaseModel.FK__CART__MASACH__51300E55" FromRole="BOOK" ToRole="CART" />
-    <NavigationProperty Name="CTHDs" Relationship="lmsDatabaseModel.FK__CTHD__MASACH__489AC854" FromRole="BOOK" ToRole="CTHD" />
     <NavigationProperty Name="DETAIL_BBFORM" Relationship="lmsDatabaseModel.FK__DETAIL_BB__MASAC__70A8B9AE" FromRole="BOOK" ToRole="DETAIL_BBFORM" />
     <NavigationProperty Name="ORDER_DETAIL" Relationship="lmsDatabaseModel.FK__ORDER_DET__bookI__793DFFAF" FromRole="BOOK" ToRole="ORDER_DETAIL" />
   </EntityType>
@@ -151,17 +129,6 @@
     <Property Name="SOLUONGHT" Type="Int32" />
     <NavigationProperty Name="ACCOUNT" Relationship="lmsDatabaseModel.FK__CART__MAKH__5224328E" FromRole="CART" ToRole="ACCOUNT" />
     <NavigationProperty Name="BOOK" Relationship="lmsDatabaseModel.FK__CART__MASACH__51300E55" FromRole="CART" ToRole="BOOK" />
-  </EntityType>
-  <EntityType Name="CTHD">
-    <Key>
-      <PropertyRef Name="MAHD" />
-      <PropertyRef Name="MASACH" />
-    </Key>
-    <Property Name="MAHD" Type="Int32" Nullable="false" />
-    <Property Name="MASACH" Type="Int32" Nullable="false" />
-    <Property Name="SOLUONG" Type="Int32" />
-    <NavigationProperty Name="BILL" Relationship="lmsDatabaseModel.FK__CTHD__MAHD__47A6A41B" FromRole="CTHD" ToRole="BILL" />
-    <NavigationProperty Name="BOOK" Relationship="lmsDatabaseModel.FK__CTHD__MASACH__489AC854" FromRole="CTHD" ToRole="BOOK" />
   </EntityType>
   <EntityType Name="DETAIIMPORT">
     <Key>
@@ -228,8 +195,9 @@
     <Property Name="totalValue" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="orderDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="orderCusId" Type="Int32" />
-    <Property Name="orderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="orderStatus" Type="Int32" />
     <NavigationProperty Name="ACCOUNT" Relationship="lmsDatabaseModel.FK__ORDER_BOO__order__0697FACD" FromRole="ORDER_BOOKS" ToRole="ACCOUNT" />
+    <NavigationProperty Name="STATUS_ORDER" Relationship="lmsDatabaseModel.FK__ORDER_BOO__order__0A688BB1" FromRole="ORDER_BOOKS" ToRole="STATUS_ORDER" />
     <NavigationProperty Name="ORDER_DETAIL" Relationship="lmsDatabaseModel.FK__ORDER_DET__order__7849DB76" FromRole="ORDER_BOOKS" ToRole="ORDER_DETAIL" />
   </EntityType>
   <EntityType Name="ORDER_DETAIL">
@@ -243,6 +211,15 @@
     <NavigationProperty Name="BOOK" Relationship="lmsDatabaseModel.FK__ORDER_DET__bookI__793DFFAF" FromRole="ORDER_DETAIL" ToRole="BOOK" />
     <NavigationProperty Name="ORDER_BOOKS" Relationship="lmsDatabaseModel.FK__ORDER_DET__order__7849DB76" FromRole="ORDER_DETAIL" ToRole="ORDER_BOOKS" />
   </EntityType>
+  <EntityType Name="STATUS_ORDER">
+    <Key>
+      <PropertyRef Name="statusId" />
+    </Key>
+    <Property Name="statusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="orderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="COLOR" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ORDER_BOOKS" Relationship="lmsDatabaseModel.FK__ORDER_BOO__order__0A688BB1" FromRole="STATUS_ORDER" ToRole="ORDER_BOOKS" />
+  </EntityType>
   <Association Name="FK__BBFORM__MAKH__6CD828CA">
     <End Type="lmsDatabaseModel.ACCOUNT" Role="ACCOUNT" Multiplicity="0..1" />
     <End Type="lmsDatabaseModel.BBFORM" Role="BBFORM" Multiplicity="*" />
@@ -251,18 +228,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="BBFORM">
-        <PropertyRef Name="MAKH" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__BILL__MAKH__44CA3770">
-    <End Type="lmsDatabaseModel.ACCOUNT" Role="ACCOUNT" Multiplicity="0..1" />
-    <End Type="lmsDatabaseModel.BILL" Role="BILL" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ACCOUNT">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="BILL">
         <PropertyRef Name="MAKH" />
       </Dependent>
     </ReferentialConstraint>
@@ -315,18 +280,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CTHD__MAHD__47A6A41B">
-    <End Type="lmsDatabaseModel.BILL" Role="BILL" Multiplicity="1" />
-    <End Type="lmsDatabaseModel.CTHD" Role="CTHD" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="BILL">
-        <PropertyRef Name="MAHD" />
-      </Principal>
-      <Dependent Role="CTHD">
-        <PropertyRef Name="MAHD" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__CART__MASACH__51300E55">
     <End Type="lmsDatabaseModel.BOOK" Role="BOOK" Multiplicity="1" />
     <End Type="lmsDatabaseModel.CART" Role="CART" Multiplicity="*" />
@@ -335,18 +288,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CART">
-        <PropertyRef Name="MASACH" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__CTHD__MASACH__489AC854">
-    <End Type="lmsDatabaseModel.BOOK" Role="BOOK" Multiplicity="1" />
-    <End Type="lmsDatabaseModel.CTHD" Role="CTHD" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="BOOK">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CTHD">
         <PropertyRef Name="MASACH" />
       </Dependent>
     </ReferentialConstraint>
@@ -384,6 +325,18 @@
       </Principal>
       <Dependent Role="DETAIIMPORT">
         <PropertyRef Name="SOHD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ORDER_BOO__order__0A688BB1">
+    <End Type="lmsDatabaseModel.STATUS_ORDER" Role="STATUS_ORDER" Multiplicity="0..1" />
+    <End Type="lmsDatabaseModel.ORDER_BOOKS" Role="ORDER_BOOKS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="STATUS_ORDER">
+        <PropertyRef Name="statusId" />
+      </Principal>
+      <Dependent Role="ORDER_BOOKS">
+        <PropertyRef Name="orderStatus" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
