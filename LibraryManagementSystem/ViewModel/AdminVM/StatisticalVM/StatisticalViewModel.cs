@@ -189,43 +189,42 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.StatisticalVM
                 decimal preIyear = getTotalIncomeYear(_year - 1);
                 decimal syear = getTotalSpendingYear(_year);
                 decimal preSyear = getTotalSpendingYear(_year - 1);
-                decimal pyear = Math.Abs((getTotalIncomeYear(_year) - getTotalSpendingYear(_year)));
-                decimal prePyear = Math.Abs((getTotalIncomeYear(_year - 1) - getTotalSpendingYear(_year - 1)));
+                decimal pyear = (getTotalIncomeYear(_year) - getTotalSpendingYear(_year));
+                decimal prePyear = (getTotalIncomeYear(_year - 1) - getTotalSpendingYear(_year - 1));
                 
                 if(preIyear  == 0)
-                {
-                    increaseIncome = "100";
-                }
+                    increaseIncome = "";
                 else
-                {
-                    increaseIncome = decimal.Round(iyear / preIyear, 2).ToString();
-                }
+                    increaseIncome = decimal.Round((iyear - preIyear) / Math.Abs(preIyear), 2).ToString();
 
                 if (preSyear == 0)
-                    increaseSpending = "100";
+                    increaseSpending = "";
                 else
-                {
-                    increaseSpending = decimal.Round(syear / preSyear, 2).ToString();
-                }
+                    increaseSpending = decimal.Round((syear - preSyear) / Math.Abs(preSyear), 2).ToString();
 
-                if(prePyear == 0)
-                    increaseProfit = "100";
+
+                if (prePyear == 0)
+                    increaseProfit = "";
                 else
-                {
                     increaseProfit = decimal.Round((pyear - prePyear) / Math.Abs(prePyear), 2).ToString();
-                }
 
-                if (decimal.Parse(increaseIncome) > 1)
+                if(increaseIncome == "")
+                    icon1 = "ArrowUpThick";
+                else if (decimal.Parse(increaseIncome) > 0)
                     icon1 = "ArrowUpThick";
                 else
                     icon1 = "ArrowDownThick";
 
-                if (decimal.Parse(increaseSpending) > 1)
+                if(increaseSpending == "")
+                    icon2 = "ArrowUpThick";
+                else if (decimal.Parse(increaseSpending) > 0)
                     icon2 = "ArrowUpThick";
                 else
                     icon2 = "ArrowDownThick";
 
-                if (decimal.Parse(increaseProfit) > 1)
+                if(increaseProfit == "")
+                    icon3 = "ArrowUpThick";
+                else if (decimal.Parse(increaseProfit) > 0)
                     icon3 = "ArrowUpThick";
                 else
                     icon3 = "ArrowDownThick";
@@ -271,41 +270,41 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.StatisticalVM
                 decimal preImonth = getTotalIncomeMonth(_preYear, _preMon);
                 decimal smonth = getTotalSpendingMonth(_year, _mon);
                 decimal preSmonth = getTotalSpendingMonth(_preYear, _preMon);
-                decimal pmonth = Math.Abs((getTotalIncomeMonth(_year, _mon) - getTotalSpendingMonth(_year, _mon)));
-                decimal prePmonth = Math.Abs(getTotalIncomeMonth(_preYear, _preMon) - getTotalSpendingMonth(_preYear, _preMon));
+                decimal pmonth = getTotalIncomeMonth(_year, _mon) - getTotalSpendingMonth(_year, _mon);
+                decimal prePmonth = getTotalIncomeMonth(_preYear, _preMon) - getTotalSpendingMonth(_preYear, _preMon);
 
                 if (preImonth == 0)
-                    increaseIncome = "100";
+                    increaseIncome = "";
                 else
-                {
-                    increaseIncome = decimal.Round(imonth / preImonth, 2).ToString();
-                }
+                    increaseIncome = decimal.Round((imonth - preImonth) / Math.Abs(preImonth), 2).ToString();
 
                 if (preSmonth == 0)
-                    increaseSpending = "100";
+                    increaseSpending = "";
                 else
-                {
-                    increaseSpending = decimal.Round(smonth / preSmonth, 2).ToString();
-                }
+                    increaseSpending = decimal.Round((smonth - preSmonth) / Math.Abs(preSmonth), 2).ToString();
 
-                if(prePmonth == 0)
-                    increaseProfit = "100";
+                if (prePmonth == 0)
+                    increaseProfit = "";
                 else
-                {
                     increaseProfit = decimal.Round((pmonth - prePmonth) / Math.Abs(prePmonth), 2).ToString();
-                }
 
-                if (decimal.Parse(increaseIncome) > 1)
+                if(increaseIncome == "")
+                    icon1 = "ArrowUpThick";
+                else if (decimal.Parse(increaseIncome) > 0)
                     icon1 = "ArrowUpThick";
                 else
                     icon1 = "ArrowDownThick";
 
-                if (decimal.Parse(increaseSpending) > 1)
+                if(increaseSpending == "")
+                    icon2 = "ArrowUpThick";
+                else if (decimal.Parse(increaseSpending) > 0)
                     icon2 = "ArrowUpThick";
                 else
                     icon2 = "ArrowDownThick";
 
-                if (decimal.Parse(increaseProfit) > 1)
+                if(increaseProfit == "")
+                    icon3 = "ArrowUpThick";
+                else if (decimal.Parse(increaseProfit) > 0)
                     icon3 = "ArrowUpThick";
                 else
                     icon3 = "ArrowDownThick";
@@ -347,37 +346,63 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.StatisticalVM
             }
             Month = "tháng " + now.Month.ToString();
 
+            int _mon = int.Parse(Month.Substring(6, 1));
+            int _year = int.Parse(Year);
+            int _preMon = 0;
+            int _preYear = 0;
+            if (_mon == 1)
+            {
+                _preMon = 12;
+                _preYear = _year - 1;
+            }
+            else
+            {
+                _preMon = _mon - 1;
+                _preYear = _year;
+            }
 
             // so sánh so với tháng trước tháng hiện tại.
-            decimal imonth = getTotalIncomeMonth(DateTime.Now.Year, DateTime.Now.Month);
-            decimal preImonth = getTotalIncomeMonth(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month);
-            decimal smonth = getTotalSpendingMonth(DateTime.Now.Year, DateTime.Now.Month);
-            decimal preSmonth = getTotalSpendingMonth(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month);
-            decimal pmonth = getTotalIncomeMonth(DateTime.Now.Year, DateTime.Now.Month) - getTotalSpendingMonth(DateTime.Now.Year, DateTime.Now.Month);
-            decimal prePmonth = getTotalIncomeMonth(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month) - getTotalSpendingMonth(DateTime.Now.Year, DateTime.Now.AddMonths(-1).Month);
+            decimal imonth = getTotalIncomeMonth(_year, _mon);
+            decimal preImonth = getTotalIncomeMonth(_preYear, _preMon);
+            decimal smonth = getTotalSpendingMonth(_year, _mon);
+            decimal preSmonth = getTotalSpendingMonth(_preYear, _preMon);
+            decimal pmonth = getTotalIncomeMonth(_year, _mon) - getTotalSpendingMonth(_year, _mon);
+            decimal prePmonth = getTotalIncomeMonth(_preYear, _preMon) - getTotalSpendingMonth(_preYear, _preMon);
 
-            if (preImonth > 0)
-                increaseIncome = decimal.Round((imonth / preImonth), 2).ToString();
+            if (preImonth == 0)
+                increaseIncome = "";
             else
-                increaseIncome = "100";
-            if (preSmonth > 0)
-                increaseSpending = decimal.Round((smonth / preSmonth), 2).ToString();
+                increaseIncome = decimal.Round((imonth - preImonth) / Math.Abs(preImonth), 2).ToString();
+
+            if (preSmonth == 0)
+                increaseSpending = "";
             else
-                increaseSpending = "100";
-            increaseProfit = decimal.Round(((pmonth - prePmonth)/Math.Abs(preSmonth)), 2).ToString();
+                increaseSpending = decimal.Round((smonth - preSmonth) / Math.Abs(preSmonth), 2).ToString();
+
+            if (prePmonth == 0)
+                increaseProfit = "";
+            else
+                increaseProfit = decimal.Round((pmonth - prePmonth) / Math.Abs(prePmonth), 2).ToString();
+
 
             //handle arrow
-            if (decimal.Parse(increaseIncome) > 1)
+            if(increaseIncome == "")
+                icon1 = "ArrowUpThick";
+            else if (decimal.Parse(increaseIncome) > 0)
                 icon1 = "ArrowUpThick";
             else
                 icon1 = "ArrowDownThick";
 
-            if (decimal.Parse(increaseSpending) > 1)
+            if(increaseSpending == "")
+                icon2 = "ArrowUpThick";
+            else if (decimal.Parse(increaseSpending) > 0)
                 icon2 = "ArrowUpThick";
             else
                 icon2 = "ArrowDownThick";
 
-            if (decimal.Parse(increaseProfit) > 1)
+            if(increaseProfit == "")
+                icon3 = "ArrowUpThick";
+            else if (decimal.Parse(increaseProfit) > 0)
                 icon3 = "ArrowUpThick";
             else
                 icon3 = "ArrowDownThick";

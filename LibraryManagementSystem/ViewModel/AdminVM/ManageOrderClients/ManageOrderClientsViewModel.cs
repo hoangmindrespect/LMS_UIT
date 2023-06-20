@@ -1,4 +1,5 @@
-﻿using LibraryManagementSystem.DTOs;
+﻿using DocumentFormat.OpenXml.EMMA;
+using LibraryManagementSystem.DTOs;
 using LibraryManagementSystem.Models.DataProvider;
 using LibraryManagementSystem.ViewModel.LoginVM;
 using System;
@@ -18,12 +19,15 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageOrderClients
     {
         public ObservableCollection<OrderDTO> Orders = new ObservableCollection<OrderDTO>();
         public ObservableCollection<BookDTO> ListDetails = new ObservableCollection<BookDTO>();
+        ListView lv;
         public ICommand Loaded { get; set; }
         public ICommand LoadedDetails { get; set; }
+        public ICommand NextStep { get; set; }
+        public ICommand PreviousStep { get; set; }
         public ManageOrderClientsViewModel()
         {
            
-            Loaded = new RelayCommand<ItemsControl>((p) => { return true; }, (p) =>
+            Loaded = new RelayCommand<ListView>((p) => { return true; }, (p) =>
             {
                 Orders = new ObservableCollection<OrderDTO>();
                 using (var context = new LMSEntities1())
@@ -37,8 +41,10 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageOrderClients
                         order.PhoneNumber = item.orderPhone;
                         order.Email = item.orderEmail;
                         order.OrderDate = item.orderDate.ToLongDateString();
-                        //order.CusId = (int)item.orderCusId;
-                        //order.OrderStatus = item.orderStatus;
+                        order.CusId = (int)item.orderCusId;
+                        order.OrderStatus =  (int)item.orderStatus;
+                        order.OrderStatusDisplay = (from s in context.STATUS_ORDER where order.OrderStatus == s.statusId select s.orderStatus).FirstOrDefault();
+                        order.OrderStatusColor = (from s in context.STATUS_ORDER where order.OrderStatus == s.statusId select s.COLOR).FirstOrDefault();
                         order.Details = new ObservableCollection<BookDTO>();
                         // thêm chi tiết sách
                         foreach (var item2 in context.ORDER_DETAIL)
@@ -56,6 +62,49 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageOrderClients
                     }
                 }
                 p.ItemsSource = Orders;
+                lv = (ListView)p;
+            });
+
+            NextStep = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                OrderDTO order = lv.SelectedItem as OrderDTO;
+                using (var context = new LMSEntities1())
+                {
+                    foreach (var item in context.ORDER_BOOKS)
+                    {
+                        if (item.orderID == order.Id)
+                        {
+                            if (item.orderStatus == 4)
+                                return;
+                            else
+                                item.orderStatus += 1;
+                            break;
+                        }
+                    }
+                    context.SaveChanges();
+                }
+                Loaded.Execute(lv);
+            });
+
+            PreviousStep = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                OrderDTO order = lv.SelectedItem as OrderDTO;
+                using (var context = new LMSEntities1())
+                {
+                    foreach (var item in context.ORDER_BOOKS)
+                    {
+                        if (item.orderID == order.Id)
+                        {
+                            if (item.orderStatus == 1)
+                                return;
+                            else
+                                item.orderStatus -= 1;
+                            break;
+                        }
+                    }
+                    context.SaveChanges();
+                }
+                Loaded.Execute(lv);
             });
         }
     }

@@ -19,83 +19,119 @@
       d:DesignHeight="626" d:DesignWidth="967"
       Title="ManageOrderPage">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
-            <StackPanel Orientation="Horizontal" Margin=" 20 0 0 0">
-                <Label Content="Client"
+
+            <Grid Grid.Row="0">
+                <StackPanel Orientation="Horizontal" Margin=" 20 0 0 0">
+                    <Label Content="Client"
                        VerticalAlignment="Center"
                        FontSize="17" 
                        Margin="15 0 0 0"
                        FontWeight="Bold"/>
-                <Label Content="Phone Number"
+                    <Label Content="Phone Number"
                        VerticalAlignment="Center"
                        FontSize="17" 
                        Margin="135 0 0 0"
                        FontWeight="Bold"/>
 
-                <Label Content="Delivery Address"
+                    <Label Content="Delivery Address"
                        VerticalAlignment="Center"
                        FontSize="17" 
                        Margin="50 0 0 0"
                        FontWeight="Bold"/>
-                
-                <Label Content="Status"
+
+                    <Label Content="Status"
                        VerticalAlignment="Center"
                        FontSize="17" 
                        Margin="85 0 0 0"
                        FontWeight="Bold"/>
 
-                <Label Content="Products"
+                    <Label Content="Products"
                        VerticalAlignment="Center"
                        FontSize="17" 
                        Margin="85 0 0 0"
                        FontWeight="Bold"/>
 
-            </StackPanel>
-        </Grid>
+                </StackPanel>
+            </Grid>
 
-        <Grid Grid.Row="1">
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                <ItemsControl ItemsSource="{Binding Orders}"  Name="ordersList">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <materialDesign:Card Background="#ffffff" Height="auto" Margin="20 0 20 20" MouseEnter="Card_MouseEnter" MouseLeave="Card_MouseLeave" BorderBrush="Transparent" BorderThickness="0">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Margin="20 0 0 0" Text="{Binding Name}" FontSize="15" VerticalAlignment="Center" Padding="0 30 0 30" Width="170"/>
-                                    <TextBlock Margin="20 0 0 0" Text="{Binding PhoneNumber}" FontSize="15" VerticalAlignment="Center" TextWrapping="Wrap" Width="150" />
-                                    <TextBlock Margin="20 0 0 0" Text="{Binding Address}" FontSize="15" VerticalAlignment="Center" TextWrapping="Wrap" Width="200" />
-                                    <TextBlock Margin="20 0 0 0" Text="{Binding OrderStatus}" FontSize="15" VerticalAlignment="Center" Width="100" Foreground="GreenYellow"/>
+            <Grid Grid.Row="1">
+                <ListView ItemsSource="{Binding Orders}"  x:Name="orderList" >
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListViewItem">
+                                        <ContentPresenter />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <materialDesign:Card Background="#ffffff" Height="auto" Margin="20 0 20 20" MouseEnter="Card_MouseEnter" MouseLeave="Card_MouseLeave" BorderBrush="Transparent" BorderThickness="0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Margin="20 0 0 0" Text="{Binding Name}" FontSize="15" VerticalAlignment="Center" Padding="0 30 0 30" Width="170"/>
+                                        <TextBlock Margin="20 0 0 0" Text="{Binding PhoneNumber}" FontSize="15" VerticalAlignment="Center" TextWrapping="Wrap" Width="150" />
+                                        <TextBlock Margin="20 0 0 0" Text="{Binding Address}" FontSize="15" VerticalAlignment="Center" TextWrapping="Wrap" Width="200" />
+                                    <TextBlock Margin="20 0 0 0" Text="{Binding OrderStatusDisplay}" FontSize="15" VerticalAlignment="Center" Width="100" Foreground="{Binding OrderStatusColor}" TextWrapping="Wrap">
+                                        <TextBlock.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Header="Previous Step" 
+                                                         
+                                                          Command="{Binding PreviousStep, Source={StaticResource ManageOrderClients}}"
+                                                          VerticalContentAlignment="Center" 
+                                                          VerticalAlignment="Center">
+                                                    <MenuItem.Icon>
+                                                        <materialDesign:PackIcon Kind="ArrowLeftBold"/>
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
+                                                <MenuItem Header="Next Step" 
+                                                          VerticalContentAlignment="Center" 
+                                                          VerticalAlignment="Center"
+                                                          Command="{Binding NextStep, Source={StaticResource ManageOrderClients}}"
+                                                          >
+                                                    <MenuItem.Icon>
+                                                        <materialDesign:PackIcon Kind="ArrowRightBold"/>
+                                                    </MenuItem.Icon>
+                                                </MenuItem>
+                                            </ContextMenu>
+                                        </TextBlock.ContextMenu>
+                                    </TextBlock>
                                     <Expander Margin="20 0 0 0" Header="Details..." HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="Transparent" Width="350">
-                                        <ListView ItemsSource="{Binding Details}" Margin="10" Name="details">
-                                            <ListView.ItemTemplate>
-                                                <DataTemplate>
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <!-- Các thành phần khác trong mỗi dòng của ListView -->
-                                                        <TextBlock Text="{Binding TenSach}" Width="200" VerticalAlignment="Center" TextWrapping="Wrap" Margin="10 0 0 0"/>
-                                                        <TextBlock Text="Quantity:" VerticalAlignment="Center" TextWrapping="Wrap"/>
-                                                        <Label Content="{Binding SoLuong}" Width="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2 0 0 0"/>
-                                                    </StackPanel>
-                                                </DataTemplate>
-                                            </ListView.ItemTemplate>
-                                        </ListView>
-                                    </Expander>
-                                </StackPanel>
-                            </materialDesign:Card>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="Loaded">
-                    <i:InvokeCommandAction Command="{Binding Loaded}"
-                                       CommandParameter="{Binding ElementName=ordersList}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
+                                            <ListView ItemsSource="{Binding Details}" Margin="10" Name="details">
+                                                <ListView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <!-- Các thành phần khác trong mỗi dòng của ListView -->
+                                                            <TextBlock Text="{Binding TenSach}" Width="200" VerticalAlignment="Center" TextWrapping="Wrap" Margin="10 0 0 0"/>
+                                                            <TextBlock Text="Quantity:" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                                            <Label Content="{Binding SoLuong}" Width="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="2 0 0 0"/>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </ListView.ItemTemplate>
+                                            </ListView>
+                                        </Expander>
+                                    </StackPanel>
+                                </materialDesign:Card>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Loaded">
+                        <i:InvokeCommandAction Command="{Binding Loaded}"
+                                       CommandParameter="{Binding ElementName=orderList}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Grid>
         </Grid>
-    </Grid>
+    </ScrollViewer>
 </Page>
