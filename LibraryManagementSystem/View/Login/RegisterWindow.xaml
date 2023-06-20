@@ -16,7 +16,7 @@
         xmlns:as ="clr-namespace:LibraryManagementSystem.Utils.ConverterValue"
         DataContext="{StaticResource LoginRegisVM}"
         AllowsTransparency="True">
-    
+
     <Grid>
         <StackPanel Orientation="Vertical">
             <Label FontFamily="junegull"
@@ -59,7 +59,7 @@
                     </i:Interaction.Triggers>
                 </TextBox>
             </StackPanel>
-            <TextBlock Text="Vui lòng nhập họ tên"
+            <TextBlock Text="Please enter a full name!"
                            Foreground="#FFF44336"
                            FontWeight="DemiBold"
                            Margin="0,2,65,0"
@@ -90,7 +90,7 @@
                 </TextBox>
 
             </StackPanel>
-            <TextBlock Text="Vui lòng nhập email"
+            <TextBlock Text="Please enter a email address!"
                            Foreground="#FFF44336"
                            FontWeight="DemiBold"
                            Margin="0,2,65,0"
@@ -120,14 +120,27 @@
                     </materialDesign:HintAssist.Hint>
                 </TextBox>
             </StackPanel>
-            <TextBlock Text="Vui lòng nhập tên đăng nhập"
+            <TextBlock Text="Please enter a username!"
                            Foreground="#FFF44336"
                            FontWeight="DemiBold"
                            Margin="0,2,65,0"
                            HorizontalAlignment="Right"
                            FontSize="12"
                            Visibility="{Binding IsNullUserReg, Converter={StaticResource ConverterBoolValue}}"/>
-
+            <TextBlock Text="Password must have at least 8 characters!"
+                           Foreground="#FFF44336"
+                           FontWeight="DemiBold"
+                           Margin="0 -10 42 0"
+                           HorizontalAlignment="Right"
+                           FontSize="12"
+                           Visibility="{Binding IsTooShortUsernameReg, Converter={StaticResource ConverterBoolValue}}"/>
+            <TextBlock Text="That username is already in use!"
+                           Foreground="#FFF44336"
+                           FontWeight="DemiBold"
+                           Margin="0, -17,10,0"
+                           HorizontalAlignment="Center"
+                           FontSize="12"
+                           Visibility="{Binding IsDuplicateUsernameReg, Converter={StaticResource ConverterBoolValue}}"/>
             <StackPanel HorizontalAlignment="Center"
                         Margin="-10 10 0 0"
                     Orientation="Horizontal">
@@ -151,7 +164,7 @@
                     <materialDesign:HintAssist.Hint>
                         <TextBlock Foreground="#8B4513">Password</TextBlock>
                     </materialDesign:HintAssist.Hint>
-                    
+
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="PasswordChanged">
                             <i:InvokeCommandAction Command="{Binding PasswordRegChanged}" 
@@ -160,7 +173,7 @@
                     </i:Interaction.Triggers>
                 </PasswordBox>
             </StackPanel>
-            <TextBlock Text="Please enter a password"
+            <TextBlock Text="Please enter a password!"
                            Foreground="#FFF44336"
                            FontWeight="DemiBold"
                            Margin="0,2,65,0"

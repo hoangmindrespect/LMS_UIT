@@ -19,7 +19,7 @@
       Background="Transparent"
       d:DesignHeight="496" d:DesignWidth="767"
       Title="ManageUserPage">
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -95,12 +95,13 @@
                         <Setter Property="Margin" Value="15 0 0 0"/>
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
-                
+
                 <DataGrid.Columns>
                     <DataGridTextColumn  x:Name="c1" Header="ID" FontSize="12" Binding="{Binding ID}" Width="50"/>
                     <DataGridTextColumn  x:Name="c2" Header="Full Name" FontSize="12" Binding="{Binding FullName}" />
                     <DataGridTextColumn  x:Name="c3" Header="Email" FontSize="12" Binding="{Binding EmailAddress}"  />
-                 
+                    <DataGridTextColumn  x:Name="c4" Header="Phone Number" FontSize="12" Binding="{Binding PhoneNumber}"  />
+
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -261,7 +262,7 @@
                                 CommandParameter="{Binding ElementName=dtg_manage}"    
                                 >
             </Button>
-            
+
         </Grid>
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="Loaded">

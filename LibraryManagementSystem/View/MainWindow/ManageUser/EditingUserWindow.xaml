@@ -21,7 +21,7 @@
         Name="edituserwindow"
         ResizeMode="NoResize"        
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-        Height="250" Width="350">
+        Height="330" Width="350">
 
     <Border CornerRadius="20" Background="#ffffff" BorderBrush="Black" BorderThickness="1">
         <Grid>
@@ -80,6 +80,20 @@
                         FontFamily="UVN Viet Sach"
                         Content=""
                         Foreground="Red" />
+
+                    <TextBox
+                        x:Name="phonetxb"
+                        FontSize="14"
+                        SelectionBrush="#4E443A"
+                        BorderBrush="#4E443A"
+                        Foreground="#4E443A"
+                        CaretBrush="#4E443A"
+                        materialDesign:TextFieldAssist.UnderlineBrush="#4E443A"
+                        materialDesign:HintAssist.Foreground="#4E443A"
+                        materialDesign:HintAssist.Hint="Phone Number"
+                        Text="{Binding PhoneNumber}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                        Margin="10 10 10 10"/>
 
                     <Button
                         x:Name="update_btn"
