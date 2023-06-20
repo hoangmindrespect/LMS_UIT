@@ -585,12 +585,25 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.StatisticalVM
             decimal result = 0;
             using (var context = new LMSEntities1())
             {
-                int count = 0;
-                if (week == 4)
-                    count = 10;
-                else
-                    count = 7;
-                for (int i = 1; i <= count; i++)
+                int start = 0; int end = 0;
+                if (week == 1)
+                {
+                    start = 1; end = 7;
+                }
+                else if (week == 2)
+                {
+                    start = 8; end = 14;
+                }
+                else if (week == 3)
+                {
+                    start = 15; end = 21;
+                }
+                else if (week == 4)
+                {
+                    start = 22; end = 31;
+                }
+
+                for (int i = start; i <= end; i++)
                 {
                     var billList = context.IMPORTs.Where(b => b.NGNHAP.Year == year && b.NGNHAP.Month == month && b.NGNHAP.Day == i);
 

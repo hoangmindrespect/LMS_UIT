@@ -43,19 +43,19 @@
                     <Label Content="Delivery Address"
                        VerticalAlignment="Center"
                        FontSize="17" 
-                       Margin="50 0 0 0"
+                       Margin="30 0 0 0"
                        FontWeight="Bold"/>
 
                     <Label Content="Status"
                        VerticalAlignment="Center"
                        FontSize="17" 
-                       Margin="85 0 0 0"
+                       Margin="80 0 0 0"
                        FontWeight="Bold"/>
 
                     <Label Content="Products"
                        VerticalAlignment="Center"
                        FontSize="17" 
-                       Margin="85 0 0 0"
+                       Margin="150 0 0 0"
                        FontWeight="Bold"/>
 
                 </StackPanel>
@@ -80,9 +80,9 @@
                                 <materialDesign:Card Background="#ffffff" Height="auto" Margin="20 0 20 20" MouseEnter="Card_MouseEnter" MouseLeave="Card_MouseLeave" BorderBrush="Transparent" BorderThickness="0">
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Margin="20 0 0 0" Text="{Binding Name}" FontSize="15" VerticalAlignment="Center" Padding="0 30 0 30" Width="170"/>
-                                        <TextBlock Margin="20 0 0 0" Text="{Binding PhoneNumber}" FontSize="15" VerticalAlignment="Center" TextWrapping="Wrap" Width="150" />
+                                        <TextBlock Margin="20 0 0 0" Text="{Binding PhoneNumber}" FontSize="15" VerticalAlignment="Center" TextWrapping="Wrap" Width="130" />
                                         <TextBlock Margin="20 0 0 0" Text="{Binding Address}" FontSize="15" VerticalAlignment="Center" TextWrapping="Wrap" Width="200" />
-                                    <TextBlock Margin="20 0 0 0" Text="{Binding OrderStatusDisplay}" FontSize="15" VerticalAlignment="Center" Width="100" Foreground="{Binding OrderStatusColor}" TextWrapping="Wrap">
+                                    <TextBlock Margin="20 0 0 0" Text="{Binding OrderStatusDisplay}" FontSize="15" VerticalAlignment="Center" Width="150" Foreground="{Binding OrderStatusColor}" TextWrapping="Wrap">
                                         <TextBlock.ContextMenu>
                                             <ContextMenu>
                                                 <MenuItem Header="Previous Step" 

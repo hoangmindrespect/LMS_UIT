@@ -572,6 +572,7 @@
       <LastGenOutput>LibraryManagementSystemModels.cs</LastGenOutput>
     </Content>
     <Resource Include="Resource\BorrowBook\icon.png" />
+    <Content Include="Resource\BuyBook\lib.mov" />
     <Content Include="Resource\BuyBook\lib.mp4" />
     <Resource Include="Resource\BuyBook\low.png" />
     <Resource Include="Resource\BuyBook\remove.png" />

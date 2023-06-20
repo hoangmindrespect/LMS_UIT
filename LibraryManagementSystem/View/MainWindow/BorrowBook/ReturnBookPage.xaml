@@ -142,7 +142,7 @@
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Background="#C1FF72" BorderBrush="#699431" Foreground="#ffffff"
+                                <Button Background="#699431" BorderBrush="#699431" Foreground="#ffffff"
                                         Style="{StaticResource MaterialDesignPaperButton}"
                                         HorizontalAlignment="Left" Width="30" Height="30"
                                         Cursor="Hand" Padding="0"

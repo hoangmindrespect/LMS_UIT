@@ -251,57 +251,6 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
                 #endregion
             });
 
-            LoadNews = new RelayCommand<Image>((p) => { return p != null; }, (p) =>
-            {
-                #region Load news
-                a = p;
-                imagePaths = new List<string>()
-                {
-                    "/Resource/BuyBook/1.jpg",
-                    "/Resource/BuyBook/2.jpg",
-                    "/Resource/BuyBook/3.jpeg",
-                    "/Resource/BuyBook/4.png",
-                    "/Resource/BuyBook/5.jpeg"
-                };
-
-                int imageIndex = 0;
-
-                // Set the source of the Image control to the first image
-                p.Source = new BitmapImage(new Uri(imagePaths[imageIndex], UriKind.RelativeOrAbsolute));
-
-                // Start a timer to change the image every 5 seconds
-                DispatcherTimer timer = new DispatcherTimer();
-                timer.Interval = TimeSpan.FromSeconds(5);
-                timer.Tick += (s, e) =>
-                {
-                    // Increment the image index and loop back to the start if at the end
-                    imageIndex++;
-                    if (imageIndex >= imagePaths.Count)
-                    {
-                        imageIndex = 0;
-                    }
-
-                    // Apply transition effect
-                    DoubleAnimation fadeIn = new DoubleAnimation(0, 1, TimeSpan.FromSeconds(1));
-                    Storyboard.SetTarget(fadeIn, p);
-                    Storyboard.SetTargetProperty(fadeIn, new PropertyPath(UIElement.OpacityProperty));
-
-                    DoubleAnimation fadeOut = new DoubleAnimation(1, 0, TimeSpan.FromSeconds(1));
-                    Storyboard.SetTarget(fadeOut, p);
-                    Storyboard.SetTargetProperty(fadeOut, new PropertyPath(UIElement.OpacityProperty));
-
-                    Storyboard storyboard = new Storyboard();
-                    storyboard.Children.Add(fadeOut);
-                    storyboard.Children.Add(fadeIn);
-                    storyboard.Begin();
-
-                    // Set the source of the Image control to the next image
-                    p.Source = new BitmapImage(new Uri(imagePaths[imageIndex], UriKind.RelativeOrAbsolute));
-
-                    timer.Start();
-                };
-                #endregion
-            });
 
             PreImage = new RelayCommand<Image>((p) => { return p != null; }, (p) =>
             {
@@ -798,7 +747,7 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
             }
             TotalCartValueStr = Decimal.Round(TotalCartValue, 0).ToString("C0").Replace("$", "₫");
         }
-        private void ShowImage(int i, Image imageControl)
+        public void ShowImage(int i, Image imageControl)
         {
             // Load image from file and show in imageControl
             BitmapImage image = new BitmapImage();
@@ -806,17 +755,6 @@ namespace LibraryManagementSystem.ViewModel.ClientVM.BuyBookVM
             image.UriSource = new Uri(imagePaths[i], UriKind.RelativeOrAbsolute);
             image.EndInit();
             imageControl.Source = image;
-        }
-
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            // Show next image
-            currentImageIndex++;
-            if (currentImageIndex >= imagePaths.Count)
-            {
-                currentImageIndex = 0;
-            }
-            ShowImage(currentImageIndex, a);
         }
     }
 }
