@@ -42,6 +42,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageOrderClients
                         order.Email = item.orderEmail;
                         order.OrderDate = item.orderDate.ToLongDateString();
                         order.CusId = (int)item.orderCusId;
+                        order.OrderValue = (decimal.Round((decimal)item.totalValue, 0)).ToString("C0").Replace("$", "₫");
                         order.OrderStatus =  (int)item.orderStatus;
                         order.OrderStatusDisplay = (from s in context.STATUS_ORDER where order.OrderStatus == s.statusId select s.orderStatus).FirstOrDefault();
                         order.OrderStatusColor = (from s in context.STATUS_ORDER where order.OrderStatus == s.statusId select s.COLOR).FirstOrDefault();

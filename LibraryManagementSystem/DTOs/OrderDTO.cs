@@ -19,7 +19,7 @@ namespace LibraryManagementSystem.DTOs
         public int OrderStatus { get; set; }
         public string OrderStatusColor { get; set; }
         public string OrderStatusDisplay { get; set; }
-
+        public string OrderValue { get; set; }
         public ObservableCollection<BookDTO> Details { get; set; }
     }
 }

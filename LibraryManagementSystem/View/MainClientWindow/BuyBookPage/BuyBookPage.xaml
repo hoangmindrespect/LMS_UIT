@@ -77,7 +77,7 @@
                     <StackPanel>
                         <Border Name="vid" Background="#DFDCD7"  Width="317" Height="150" HorizontalAlignment="Center" Margin="-10 10 10 10">
                             <materialDesign:Card  Background="Transparent">
-                                <MediaElement Source="/Resource/BuyBook/lib.mov"
+                                <MediaElement Source="C:\Users\Hoang\Downloads\lib.mov"
                                       IsMuted="True"
                                       Name="media" 
                                               Margin="10"

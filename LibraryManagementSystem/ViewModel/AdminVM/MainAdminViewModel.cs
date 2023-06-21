@@ -7,6 +7,7 @@ using LibraryManagementSystem.View.MainWindow.ManageBook;
 using LibraryManagementSystem.View.MainWindow.ManageOrders;
 using LibraryManagementSystem.View.MainWindow.ManageUser;
 using LibraryManagementSystem.View.MainWindow.Statistical;
+using LibraryManagementSystem.ViewModel.LoginVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,6 +65,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM
             LoadBorrowBookPage = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
                 p.Content = new ManageBorrowBookPage();
+                LoginRegisViewModel.listbook = new System.Collections.ObjectModel.ObservableCollection<DTOs.ImportBook>();
             });
 
             LoadListOrders = new RelayCommand<Frame>((p) => { return true; }, (p) =>
