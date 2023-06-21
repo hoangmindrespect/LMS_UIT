@@ -127,7 +127,7 @@
                            HorizontalAlignment="Right"
                            FontSize="12"
                            Visibility="{Binding IsNullUserReg, Converter={StaticResource ConverterBoolValue}}"/>
-            <TextBlock Text="Password must have at least 8 characters!"
+            <TextBlock Text="Username must have at least 8 characters!"
                            Foreground="#FFF44336"
                            FontWeight="DemiBold"
                            Margin="0 -10 42 0"

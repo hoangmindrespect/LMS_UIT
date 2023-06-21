@@ -238,6 +238,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageUserVM
                                     user.FULLNAME = FullName;
                                     user.EMAILADDRESS = EmailAddress;
                                     user.PHONENUMBER = PhoneNumber;
+                                    FullName = EmailAddress = PhoneNumber = "";
                                     MessageBoxLMS msb = new MessageBoxLMS("Notification", "Updating is successful!", MessageType.Accept, MessageButtons.OK);
                                     msb.ShowDialog();
                                     p.Hide();
@@ -286,7 +287,7 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageUserVM
                         ws.Name = "List of User";
                         ws.Cells.Style.Font.Size = 11;
                         ws.Cells.Style.Font.Name = "Times New Roman";
-                        string[] headerColumns = { "Full Name", "Email" };
+                        string[] headerColumns = { "Full Name", "Email", "Phone Number"};
 
                         int numOfColumns = headerColumns.Count();
                         ws.Cells[1, 1].Value = "List of user - LMS Library";
@@ -320,8 +321,10 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageUserVM
                             rowIndex++;
                             ws.Cells[rowIndex, colIndex++].Value = user.FullName;
                             ws.Cells[rowIndex, colIndex++].Value = user.EmailAddress;
+                            ws.Cells[rowIndex, colIndex++].Value = user.PhoneNumber;
                         }
                         ws.Column(1).Width = 22;
+                        ws.Column(1).Width = 25;
                         ws.Column(2).Width = 30;
 
                         //Save
@@ -367,13 +370,15 @@ namespace LibraryManagementSystem.ViewModel.AdminVM.ManageUserVM
                             {
                                 string fullName = ws.Cells[i, 1].Value.ToString();
                                 string emailAddress = ws.Cells[i, 2].Value.ToString();
+                                string phoneNumber = ws.Cells[i, 3].Value.ToString();
                                 if (!String.IsNullOrEmpty(fullName) && !String.IsNullOrEmpty(emailAddress))
                                 {
                                     ACCOUNT newAccount = new ACCOUNT();
                                     newAccount.FULLNAME = fullName;
+                                    newAccount.PHONENUMBER = phoneNumber;
                                     newAccount.EMAILADDRESS = emailAddress;
-                                    newAccount.USERNAME = ws.Cells[i, 3].Value.ToString();
-                                    newAccount.USERPASS = ws.Cells[i, 4].Value.ToString();
+                                    newAccount.USERNAME = ws.Cells[i, 4].Value.ToString();
+                                    newAccount.USERPASS = ws.Cells[i, 5].Value.ToString();
                                     newAccount.ROLE = 1;
                                     context.ACCOUNTs.Add(newAccount);
                                 }
