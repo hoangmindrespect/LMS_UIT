@@ -14,6 +14,9 @@ namespace LibraryManagementSystem.DTOs
         public string EmailAddress { set; get; }
         public string Password { set; get; }
         public string PhoneNumber { set; get; }
+        public string StudentID { set; get; }
+        public string ClassID { set; get; }
+
 
     }
 }
