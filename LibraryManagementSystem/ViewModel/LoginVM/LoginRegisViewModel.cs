@@ -273,7 +273,7 @@ namespace LibraryManagementSystem.ViewModel.LoginVM
                         context.SaveChanges();
                     }
 
-                    MessageBoxLMS msb = new MessageBoxLMS("Thông báo", "Thay đổi mật khẩu thành công!", MessageType.Accept, MessageButtons.OK);
+                    MessageBoxLMS msb = new MessageBoxLMS("Thông báo", "Change password successfully!", MessageType.Accept, MessageButtons.OK);
                     msb.ShowDialog();
 
                     loginwindow login = Application.Current.Windows.OfType<loginwindow>().FirstOrDefault();
@@ -283,7 +283,7 @@ namespace LibraryManagementSystem.ViewModel.LoginVM
                 }
                 else
                 {
-                    MessageBoxLMS msb = new MessageBoxLMS("Lỗi", "Mất kết nối cơ sở dữ liệu", MessageType.Error, MessageButtons.OK);
+                    MessageBoxLMS msb = new MessageBoxLMS("Lỗi", "Lost database connection!", MessageType.Error, MessageButtons.OK);
                     msb.ShowDialog();
                 }
 
@@ -332,7 +332,7 @@ namespace LibraryManagementSystem.ViewModel.LoginVM
                     }
                     else
                     {
-                        MessageBoxLMS msb = new MessageBoxLMS("Lỗi", "Mất kết nối cơ sở dữ liệu!", MessageType.Error, MessageButtons.OK);
+                        MessageBoxLMS msb = new MessageBoxLMS("Lỗi", "Lost database connection!", MessageType.Error, MessageButtons.OK);
                         msb.ShowDialog();
                     }
 
@@ -372,7 +372,7 @@ namespace LibraryManagementSystem.ViewModel.LoginVM
 
                 if (reg.IsMatch(EmailReg) == false)
                 {
-                    MessageBoxLMS ms = new MessageBoxLMS("Thông báo", "Email không hợp lệ", MessageType.Error, MessageButtons.OK);
+                    MessageBoxLMS ms = new MessageBoxLMS("Thông báo", "Email address is not valid!", MessageType.Error, MessageButtons.OK);
                     ms.ShowDialog();
                     return;
                 }
@@ -392,7 +392,7 @@ namespace LibraryManagementSystem.ViewModel.LoginVM
                         RegisterWindow r = Application.Current.Windows.OfType<RegisterWindow>().FirstOrDefault();
                         r.Close();
 
-                        MessageBoxLMS ms = new MessageBoxLMS("Thông báo", "Đăng ký thành công", MessageType.Accept, MessageButtons.OK);
+                        MessageBoxLMS ms = new MessageBoxLMS("Thông báo", "Successful registration!", MessageType.Accept, MessageButtons.OK);
                         ms.ShowDialog();
                     }
                 }
